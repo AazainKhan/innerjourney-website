@@ -1,0 +1,38 @@
+<!-- Testimonials Component -->
+<section class="py-20 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-orange-50 via-gray-50 to-blue-50"></div>
+    <div class="absolute top-0 left-1/4 w-64 h-64 bg-orange-200/20 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 right-1/4 w-64 h-64 bg-blue-200/20 rounded-full blur-3xl"></div>
+    <div class="container mx-auto px-6 relative z-10">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl heading-secondary text-gray-900 mb-4">
+                What My <span class="text-carrot font-bold">Clients</span> Say
+            </h2>
+        </div>
+        <div class="testimonials-container">
+            <!-- Testimonial 1 -->
+            <div class="testimonial active">
+                <div class="max-w-4xl mx-auto text-center">
+                    <p class="text-lg md:text-2xl text-gray-800 leading-relaxed mb-8 font-medium relative px-4 md:px-16">
+                        <span class="absolute left-0 top-0 text-7xl text-orange-500 -mt-4 font-serif italic">"</span>
+                        I approached Shanila, overwhelmed with my current situation to navigate the complexities of my personal life. Her sessions guided me to explore and understand what would serve me best, bringing clarity and encouraging reflection on my mindset. Shanila's thought-provoking questions, delivered calmly, helped uncover hidden layers. The coaching sessions' strategies empowered me to achieve my goals, enabling confident decision-making. I am grateful for her insightful sessions.
+                        <span class="absolute right-0 bottom-0 text-7xl text-orange-500 -mb-4 font-serif italic">"</span>
+                    </p>
+                    <div class="text-lg text-gray-600 font-medium">
+                        — Shashidhar Bairapu, Learned Environmentalist Dubai
+                    </div>
+                </div>
+            </div>
+            <!-- Additional testimonials omitted for brevity; add more as needed -->
+        </div>
+        <!-- Testimonials navigation arrows (hidden on mobile) -->
+        <button id="testimonial-prev" aria-label="Previous testimonial" class="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-white/80 hover:bg-white text-azure border border-white/60 shadow-md items-center justify-center transition">
+            <i class="fas fa-chevron-left text-sm"></i>
+        </button>
+        <button id="testimonial-next" aria-label="Next testimonial" class="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-white/80 hover:bg-white text-azure border border-white/60 shadow-md items-center justify-center transition">
+            <i class="fas fa-chevron-right text-sm"></i>
+        </button>
+        <!-- Testimonials dots (mobile only) -->
+        <div id="testimonial-dots" class="flex justify-center mt-12 space-x-3 md:hidden"></div>
+    </div>
+</section>

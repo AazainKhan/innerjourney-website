@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shanila - Mindset and Clarity Coach | Transform Your Life</title>
+    <meta name="description" content="Transform your life with Shanila's expert Mindset and Clarity Coaching. Book your consultation today and start your journey to success.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300">
+        <div class="mx-auto px-2 md:px-6 py-6">
+            <div class="flex items-center justify-between gap-4 xl:gap-12">
+                <a href="#home" class="flex items-center space-x-2 hover:opacity-90 transition-opacity">
+                    <img src="images/logo_transparent.png" alt="Shanila Khan Mindset and Clarity Coaching Logo" class="h-14 w-auto">
+                    <div class="text-2xl heading-primary text-white">
+                        Shanila Khan
+                    </div>
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">Home</a>
+                    <a href="about.html" class="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">About</a>
+                    <a href="services.html" class="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">Services</a>
+                    <a href="blog.html" class="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">Blog</a>
+                    <a href="#podcast" class="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">Podcast</a>
+                    <a href="contact.html" class="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">Contact</a>
+                </div>
+                <button class="btn-azure btn-sm button-text hidden md:inline-flex">
+                    Book a Consultation
+                </button>
+                <div class="md:hidden mr-2">
+                    <button id="mobile-menu-btn" class="text-white text-2xl">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden bg-black bg-opacity-95 hidden">
+            <div class="px-6 py-4 space-y-4">
+                <a href="#home" class="block text-white hover:text-orange-400 transition-colors uppercase">Home</a>
+                <a href="about.html" class="block text-white hover:text-orange-400 transition-colors uppercase">About</a>
+                <a href="services.html" class="block text-white hover:text-orange-400 transition-colors uppercase">Services</a>
+                <a href="blog.html" class="block text-white hover:text-orange-400 transition-colors">Blog</a>
+                <a href="#podcast" class="block text-white hover:text-orange-400 transition-colors">Podcast</a>
+                <a href="contact.html" class="block text-white hover:text-orange-400 transition-colors">Contact</a>
+                <button class="w-full btn-azure button-text">
+                    Book a Consultation
+                </button>
+                <div class="flex justify-center mt-4 space-x-6">
+                    <a href="https://www.facebook.com/innerjourneywithshanila/" target="_blank" aria-label="Facebook" class="text-white text-2xl hover:text-orange-400">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="https://www.instagram.com/_.innerjourney_/" target="_blank" aria-label="Instagram" class="text-white text-2xl hover:text-orange-400">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCJbRrCiY4zXfojPTa17EKMg" target="_blank" aria-label="YouTube" class="text-white text-2xl hover:text-orange-400">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center overflow-hidden">
+        <!-- Animated background elements -->
+        <div class="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-orange-900/20 z-10"></div>
+        <div class="absolute inset-0 bg-cover bg-no-repeat md:bg-center" style="background-image: url('images/hero_img.jpg'); background-position: 20% top;"></div>
+        
+        <!-- Floating geometric shapes -->
+        <div class="absolute top-20 left-20 w-32 h-32 bg-orange-500/20 rounded-full blur-xl animate-pulse"></div>
+        <div class="absolute bottom-20 right-20 w-24 h-24 bg-[rgba(20,33,61,0.25)] rounded-full blur-xl animate-pulse delay-1000"></div>
+        <div class="absolute top-1/2 left-10 w-16 h-16 bg-white/10 rounded-full blur-lg animate-pulse delay-500"></div>
+        
+        <div class="container mx-auto px-6 relative z-20">
+            <div class="max-w-2xl ml-auto text-right mt-80 md:mt-0">
+
+                <h1 class="text-5xl md:text-7xl heading-primary text-white mb-6 leading-tight drop-shadow-2xl font-['Dancing_Script'] font-bold">
+                    Transform Your Journey!
+                </h1>
+                <p class="text-xl md:text-2xl body-text-light text-white/90 mb-8 leading-relaxed">
+                    Helping individuals to build and lead an empowered life with intentions and clarity for holistic success !                </p>
+                <div class="flex flex-col sm:flex-row gap-3 justify-end">
+                    <button class="btn-azure text-sm px-6 py-2 button-text">
+                        Start Your Journey
+                    </button>
+                    <button class="btn-azure-outline text-sm px-6 py-2 button-text">
+                        Learn More
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator (removed bouncing animation) -->
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 relative overflow-hidden">
+        <!-- Background pattern -->
+        <div class="absolute inset-0 bg-gradient-to-br from-orange-50 via-white to-blue-50"></div>
+        <div class="absolute top-0 right-0 w-96 h-96 bg-orange-200/30 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-blue-200/30 rounded-full blur-3xl"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-left mb-16">
+                <h2 class="text-4xl md:text-5xl heading-secondary text-gray-900 mb-4">
+                    Hi, I'm <span class="text-carrot font-bold">Shanila</span>
+                </h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full flex items-center justify-center">
+                            <i class="fas fa-star text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900">Certified Mindset and Clarity Coach</h3>
+                        </div>
+                    </div>
+                    
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        I'm an accomplished coach with a seven-year track record, possessing a deep understanding of coaching methodologies to help you achieve your personal and professional goals. Committed to continuous learning and known for my empathetic approach, I'll empower you to overcome challenges and unlock your potential. My dedicated coaching experience reflects my commitment to excellence and passion for positive change.
+                    </p>
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        I was trained by internationally acclaimed coach (Global Guru) Vikram Dhar, and my coaching approach is infused with a global perspective and proven methodologies that drive impactful transformations. I hold diverse credentials, including being a Master Practitioner in NLP, Certified Emotional Intelligence Practitioner, ICF qualified Associate Certified Coach, and Vedic Numerologist.
+                    </p>
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        My approach to coaching is to create synergy between your values and intentions without compromising your well-being. I seamlessly blend neuro-linguistic programming, emotional intelligence, and ancient numerological insights to help you navigate your path to success. With my extensive experience and commitment to empowering individuals, I can help you gain the awareness and clarity needed to lead an empowered life.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-4">
+
+                        <button class="btn-azure-outline font-semibold">
+                            Read More
+                        </button>
+                    </div>
+                </div>
+                <div class="relative fade-in-left">
+                    <div class="w-full h-[32rem] overflow-hidden shadow-2xl relative rounded-lg transform transition-all duration-1000 ease-out">
+                        <img src="images/about-image.jpg" 
+                             alt="Shanila - Mindset and Clarity Coach" 
+                             class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 relative overflow-hidden">
+        <!-- Background pattern -->
+        <div class="absolute inset-0 bg-gradient-to-br from-orange-50 via-gray-50 to-blue-50"></div>
+        <div class="absolute top-0 left-1/4 w-64 h-64 bg-orange-200/20 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 right-1/4 w-64 h-64 bg-blue-200/20 rounded-full blur-3xl"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl heading-secondary text-gray-900 mb-4">
+                    What My <span class="text-carrot font-bold">Clients</span> Say
+                </h2>
+            </div>
+            
+            <div class="testimonials-container">
+                <!-- Testimonial 1 -->
+                <div class="testimonial active">
+                    <div class="max-w-4xl mx-auto text-center">
+                        <p class="text-lg md:text-2xl text-gray-800 leading-relaxed mb-8 font-medium relative px-4 md:px-16">
+                            <span class="absolute left-0 top-0 text-7xl text-orange-500 -mt-4 font-serif italic">"</span>
+                            I approached Shanila, overwhelmed with my current situation to navigate the complexities of my personal life. Her sessions guided me to explore and understand what would serve me best, bringing clarity and encouraging reflection on my mindset. Shanila's thought-provoking questions, delivered calmly, helped uncover hidden layers. The coaching sessions' strategies empowered me to achieve my goals, enabling confident decision-making. I am grateful for her insightful sessions.
+                            <span class="absolute right-0 bottom-0 text-7xl text-orange-500 -mb-4 font-serif italic">"</span>
+                        </p>
+                        <div class="text-lg text-gray-600 font-medium">
+                            — Shashidhar Bairapu, Learned Environmentalist Dubai
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial">
+                    <div class="max-w-4xl mx-auto text-center">
+                        <p class="text-lg md:text-2xl text-gray-800 leading-relaxed mb-8 font-medium relative px-4 md:px-16">
+                            <span class="absolute left-0 top-0 text-7xl text-orange-500 -mt-4 font-serif italic">"</span>
+                            I had the privilege of receiving coaching from Shanila, who possesses a calm, confident, and engaging communication style. I was in a phase of self-doubt and job uncertainty, she guided me in reevaluating my strengths, encouraging healthy beliefs in restoring my confidence. Shanila skillfully provided support when needed and challenged my approach during key moments. Through her coaching, I embarked on a vigorous job search in my industry. Currently, working as a freelancer, striking a balance between family time and pursuing my passions. I highly recommend Shanila to individuals seeking a change in outlook, problem-solving, and action-taking.
+                            <span class="absolute right-0 bottom-0 text-7xl text-orange-500 -mb-4 font-serif italic">"</span>
+                        </p>
+                        <div class="text-lg text-gray-600 font-medium">
+                            — Shreyashi Das, Broadcast Designer USA
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="testimonial">
+                    <div class="max-w-4xl mx-auto text-center">
+                        <p class="text-lg md:text-2xl text-gray-800 leading-relaxed mb-8 font-medium relative px-4 md:px-16">
+                            <span class="absolute left-0 top-0 text-7xl text-orange-500 -mt-4 font-serif italic">"</span>
+                            During a challenging phase in my relationship with my partner and in-laws, I turned to Shanila for guidance. She provided a safe space, validating my emotions and offering a broader perspective. In moments of despair, her non-judgmental support allowed me to reflect on my values. Shanila's positive and encouraging approach brings out my positive energy, helping me understand myself better and explore solutions aligned with my values. I wish her continued success as a change agent, inspiring and supporting others to bring out their best.
+                            <span class="absolute right-0 bottom-0 text-7xl text-orange-500 -mb-4 font-serif italic">"</span>
+                        </p>
+                        <div class="text-lg text-gray-600 font-medium">
+                            — Jasmine, Student – Canada
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 4 -->
+                <div class="testimonial">
+                    <div class="max-w-4xl mx-auto text-center">
+                        <p class="text-lg md:text-2xl text-gray-800 leading-relaxed mb-8 font-medium relative px-4 md:px-16">
+                            <span class="absolute left-0 top-0 text-7xl text-orange-500 -mt-4 font-serif italic">"</span>
+                            I extend my heartfelt gratitude to Shanila for the strength and unwavering support she provided during an incredibly challenging period in my life. Diagnosed with Breast Cancer in April 2021, the prospect of a long and uncertain journey ahead was daunting. However, through Shanila's eye-opening sessions, I found the courage to navigate this journey, soothing internal turbulence and gaining a renewed perspective on my situation.
+                            <span class="absolute right-0 bottom-0 text-7xl text-orange-500 -mb-4 font-serif italic">"</span>
+                        </p>
+                        <div class="text-lg text-gray-600 font-medium">
+                            — Sapna R, Homemaker Dubai
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 5 -->
+                <div class="testimonial">
+                    <div class="max-w-4xl mx-auto text-center">
+                        <p class="text-lg md:text-2xl text-gray-800 leading-relaxed mb-8 font-medium relative px-4 md:px-16">
+                            <span class="absolute left-0 top-0 text-7xl text-orange-500 -mt-4 font-serif italic">"</span>
+                            With immense gratitude, I express my thanks to Shanila for significantly aiding in my healing journey. I contacted her during a grim phase after losing my parents to COVID-19, I was shattered and miserable, and the loss created a void within. Shanila's approach to addressing my anxiety and insecurities, along with her considerate, patient, yet challenging questions, allowed me to look deep into myself. Her sessions instilled confidence, encouraging me to own my behavior and gain a clearer perspective on ongoing issues. Her sessions helped me learn to respond to my needs with calmness and acceptance. I highly recommend her non-judgmental and patient coaching to those seeking support in challenging nonsupportive behaviour and outlook and taking action to become a better version of oneself.
+                            <span class="absolute right-0 bottom-0 text-7xl text-orange-500 -mb-4 font-serif italic">"</span>
+                        </p>
+                        <div class="text-lg text-gray-600 font-medium">
+                            — Stuti Saxena, Homemaker Dubai
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 6 -->
+                <div class="testimonial">
+                    <div class="max-w-4xl mx-auto text-center">
+                        <p class="text-lg md:text-2xl text-gray-800 leading-relaxed mb-8 font-medium relative px-4 md:px-16">
+                            <span class="absolute left-0 top-0 text-7xl text-orange-500 -mt-4 font-serif italic">"</span>
+                            I want to express my gratitude to Shanila for her guidance and help. My daughter had been unwell for almost a year and a half, and despite seeing numerous doctors, her condition was not improving. One of my friends suggested to contact Shanila. She took the details and the very next day on Zoom, she explained the reason for my daughter's illness and advised a few remedies. I felt at ease to know nothing serious to worry about, but she gave me an approximate timeline for my daughter's recovery. She asked not to worry, but to continue the medication. Since then, I have been in touch with her. I am impressed with her accurate readings for me and my family. She is positive and realistic with her approach. I highly recommend her numerology services to anyone in need of guidance.
+                            <span class="absolute right-0 bottom-0 text-7xl text-orange-500 -mb-4 font-serif italic">"</span>
+                        </p>
+                        <div class="text-lg text-gray-600 font-medium">
+                            — Afshan Rahim, Teacher - Calicut
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 7 -->
+                <div class="testimonial">
+                    <div class="max-w-4xl mx-auto text-center">
+                        <p class="text-lg md:text-2xl text-gray-800 leading-relaxed mb-8 font-medium relative px-4 md:px-16">
+                            <span class="absolute left-0 top-0 text-7xl text-orange-500 -mt-4 font-serif italic">"</span>
+                            I was overwhelmed and extremely disappointed with my life when I contacted Shanila. 17 years was a long time to stay in an unhealthy and chaotic married life. She did the readings of my husband and my numerology charts, and her findings indicated that our marriage would end in a few months, which turned out to be true when my husband told me he had met someone else and wanted to end the marriage. Shanila's predictions were accurate, and I separated in July 2017. As a single mother, I am now raising my daughter who is studying in the USA, and I am happy and grateful to have had Shanila as my guide. I highly recommend her to anyone facing tough times and in need of guidance and motivation. She is approachable and reliable.
+                            <span class="absolute right-0 bottom-0 text-7xl text-orange-500 -mb-4 font-serif italic">"</span>
+                        </p>
+                        <div class="text-lg text-gray-600 font-medium">
+                            — Sonali Sharma, Interior Designer – Dubai
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 8 -->
+                <div class="testimonial">
+                    <div class="max-w-4xl mx-auto text-center">
+                        <p class="text-lg md:text-2xl text-gray-800 leading-relaxed mb-8 font-medium relative px-4 md:px-16">
+                            <span class="absolute left-0 top-0 text-7xl text-orange-500 -mt-4 font-serif italic">"</span>
+                            In April 2023, I contacted Shanila after a friend from Dubai recommended her. I was planning to start a business in partnership but there were constant delays that were bothering me. Shanila asked for details about my partner and me and did a reading. She gave me the timeline and when things will start moving in that direction in October 2023. She also predicted that the business would open by mid-2024. I'm happy to report that we're opening in May 2024, and I'm glad I reached out to her. If you're feeling overwhelmed and demotivated, I highly recommend reaching out to Shanila for her guidance.
+                            <span class="absolute right-0 bottom-0 text-7xl text-orange-500 -mb-4 font-serif italic">"</span>
+                        </p>
+                        <div class="text-lg text-gray-600 font-medium">
+                            — Sabohi Nazar, Teacher - United Kingdom
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 9 -->
+                <div class="testimonial">
+                    <div class="max-w-4xl mx-auto text-center">
+                        <p class="text-lg md:text-2xl text-gray-800 leading-relaxed mb-8 font-medium relative px-4 md:px-16">
+                            <span class="absolute left-0 top-0 text-7xl text-orange-500 -mt-4 font-serif italic">"</span>
+                            It was 2015 when my husband and I were facing a difficult time in Dubai in our careers for quite some time. We were uncertain whether to stay in Dubai or to go back India or move to Canada. In the middle of this chaos, we sought assistance from Shanila mam who provided us with insights based on our DOB and name reading (numerology reading) and helped us plan for the coming years. Her readings were accurate and gave us hope for a great future. With her guidance, we gained clarity to plan our future. She told us there is a bright possibility of moving to Canada. And in 2017 it turned out to be the best decision of our lives when we reached Canada. Today, we celebrate our success and recognize how the challenges we faced contributed to our journey. I express eternal gratitude to Shanila mam whose intervention at that time turned the table around and we confidently stepped forward with our plan. I highly recommend her services in numerology.
+                            <span class="absolute right-0 bottom-0 text-7xl text-orange-500 -mb-4 font-serif italic">"</span>
+                        </p>
+                        <div class="text-lg text-gray-600 font-medium">
+                            — Hina Rohira, Elementary School Teacher, British Columbia - Canada
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Testimonials navigation arrows (hidden on mobile) -->
+            <button id="testimonial-prev" aria-label="Previous testimonial" class="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-white/80 hover:bg-white text-azure border border-white/60 shadow-md items-center justify-center transition">
+                <i class="fas fa-chevron-left text-sm"></i>
+            </button>
+            <button id="testimonial-next" aria-label="Next testimonial" class="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-white/80 hover:bg-white text-azure border border-white/60 shadow-md items-center justify-center transition">
+                <i class="fas fa-chevron-right text-sm"></i>
+            </button>
+
+            <!-- Testimonials dots (mobile only) -->
+            <div id="testimonial-dots" class="flex justify-center mt-12 space-x-3 md:hidden"></div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-platinum">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl heading-secondary text-oxford font-bold mb-4">
+                    My <span class="text-carrot font-bold">Services</span>
+                </h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                <!-- Career Coaching -->
+                <div class="service-card group">
+                    <div class="brand-gradient-orange p-8 rounded-2xl text-white h-full transition-all duration-500 transform group-hover:scale-105 shadow-xl">
+                        <div class="text-4xl mb-6"><i class="fas fa-chart-line"></i></div>
+                        <h3 class="text-2xl font-bold mb-4">Career Coaching</h3>
+                        <p class="text-white/90 mb-6">Navigate career transitions, unlock your professional potential, and achieve your goals with expert guidance.</p>
+                        <div class="service-details opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <ul class="text-white/80 text-sm mb-4 list-disc pl-4">
+                                <li>Career assessment & planning</li>
+                                <li>Interview & CV support</li>
+                                <li>Networking strategies</li>
+                                <li>Confidence building</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Clarity Coaching -->
+                <div class="service-card group">
+                    <div class="brand-gradient-oxford p-8 rounded-2xl text-white h-full transition-all duration-500 transform group-hover:scale-105 shadow-xl">
+                        <div class="text-4xl mb-6"><i class="fas fa-lightbulb"></i></div>
+                        <h3 class="text-2xl font-bold mb-4">Clarity Coaching</h3>
+                        <p class="text-white/90 mb-6">Gain clarity on your life direction, make empowered decisions, and move forward with confidence.</p>
+                        <div class="service-details opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <ul class="text-white/80 text-sm mb-4 list-disc pl-4">
+                                <li>Vision & goal setting</li>
+                                <li>Values alignment</li>
+                                <li>Decision-making support</li>
+                                <li>Personalized action plans</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Communication Coaching -->
+                <div class="service-card group">
+                    <div class="brand-gradient-orange p-8 rounded-2xl text-white h-full transition-all duration-500 transform group-hover:scale-105 shadow-xl">
+                        <div class="text-4xl mb-6"><i class="fas fa-comments"></i></div>
+                        <h3 class="text-2xl font-bold mb-4">Communication Coaching</h3>
+                        <p class="text-white/90 mb-6">Enhance your communication skills, resolve conflicts, and build stronger relationships in all areas of life.</p>
+                        <div class="service-details opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <ul class="text-white/80 text-sm mb-4 list-disc pl-4">
+                                <li>Effective communication</li>
+                                <li>Conflict resolution</li>
+                                <li>Emotional intelligence</li>
+                                <li>Trust building</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wellbeing Coaching -->
+                <div class="service-card group">
+                    <div class="brand-gradient-oxford p-8 rounded-2xl text-white h-full transition-all duration-500 transform group-hover:scale-105 shadow-xl">
+                        <div class="text-4xl mb-6"><i class="fas fa-heart"></i></div>
+                        <h3 class="text-2xl font-bold mb-4">Wellbeing Coaching</h3>
+                        <p class="text-white/90 mb-6">Achieve balance, reduce stress, and cultivate holistic wellbeing for a happier, healthier life.</p>
+                        <div class="service-details opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <ul class="text-white/80 text-sm mb-4 list-disc pl-4">
+                                <li>Stress management</li>
+                                <li>Self-care strategies</li>
+                                <li>Mindfulness practices</li>
+                                <li>Work-life balance</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Numerology -->
+                <div class="service-card group">
+                    <div class="brand-gradient-orange p-8 rounded-2xl text-white h-full transition-all duration-500 transform group-hover:scale-105 shadow-xl">
+                        <div class="text-4xl mb-6"><i class="fas fa-star"></i></div>
+                        <h3 class="text-2xl font-bold mb-4">Numerology</h3>
+                        <p class="text-white/90 mb-6">Numerology intertwines past, present, and future, offering a holistic lens for individuals to reflect on their life journey, comprehend current circumstances, and make proactive decisions, fostering a deeper understanding of their existence.
+                        </p>
+                        <div class="service-details opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <ul class="text-white/80 text-sm mb-4 list-disc pl-4">
+                                <li>Personal numerology reports</li>
+                                <li>Life path analysis</li>
+                                <li>Relationship compatibility</li>
+                                <li>Yearly forecasts</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 brand-gradient-azure">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
+                Ready to Transform Your Life?
+            </h2>
+            <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+                Take the first step towards the life you've always dreamed of. Book your consultation today and let's start your transformation journey together.
+            </p>
+            <button class="bg-white text-azure hover:bg-blue-50 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-azure border border-white/40">
+                Book Your Consultation
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-oxford text-platinum py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold text-orange-500 mb-4">Inner Journey with Shanila</h3>
+
+                    <p class="text-platinum">
+                        Helping individuals to build and lead an empowered life with intentions and clarity for holistic success!
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="link-muted transition-colors">Home</a></li>
+                        <li><a href="about.html" class="link-muted transition-colors">About</a></li>
+                        <li><a href="#services" class="link-muted transition-colors">Services</a></li>
+                        <li><a href="#contact" class="link-muted transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="link-muted transition-colors">Life Purpose Discovery</a></li>
+                        <li><a href="#" class="link-muted transition-colors">Career Transformation</a></li>
+                        <li><a href="#" class="link-muted transition-colors">Work-Life Balance</a></li>
+                        <li><a href="#" class="link-muted transition-colors">Relationship Coaching</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="https://www.facebook.com/innerjourneywithshanila/" class="link-muted transition-colors text-2xl" target="_blank" aria-label="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://www.instagram.com/_.innerjourney_/" class="link-muted transition-colors text-2xl" target="_blank" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.youtube.com/channel/UCJbRrCiY4zXfojPTa17EKMg" class="link-muted transition-colors text-2xl" target="_blank" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-white/10 mt-8 pt-8 text-center text-platinum/80">
+                <p>&copy; 2025 Shanila Khan. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
