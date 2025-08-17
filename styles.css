@@ -191,13 +191,24 @@ html {
     background-repeat: no-repeat;
 }
 
+/* Testimonials section wrapper */
+.testimonials-section-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonials-section-wrapper .container {
+    position: relative;
+    z-index: 10;
+}
+
 /* Testimonials */
 .testimonials-container {
     position: relative;
-    min-height: 400px;
-    padding: 40px 0 80px;
-    margin-bottom: 40px;
-    overflow: hidden;
+    min-height: 600px;
+    padding: 40px 20px 40px;
+    margin-bottom: 20px;
+    overflow: visible;
 }
 
 .testimonial {
@@ -210,7 +221,9 @@ html {
 }
 
 .testimonial.active {
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
     opacity: 1;
     transform: translateX(0);
     visibility: visible;
@@ -222,27 +235,6 @@ html {
 
 .testimonial.next {
     transform: translateX(100%);
-}
-
-.testimonial-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background-color: #d1d5db;
-    border: none;
-    margin: 0 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    padding: 0;
-}
-
-.testimonial-dot.active {
-    background-color: #ea9223;
-    transform: scale(1.2);
-}
-
-.testimonial-dot:hover {
-    background-color: #ea9223;
 }
 
 #testimonial-prev,
@@ -272,64 +264,74 @@ html {
 }
 
 #testimonial-prev {
-    left: 20px;
+    left: 10px;
 }
 
 #testimonial-next {
-    right: 20px;
+    right: 10px;
+}
+
+/* Testimonial dots specific styling */
+#testimonial-dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    z-index: 10;
+    padding: 20px 0;
+    position: relative;
+}
+
+#testimonial-dots .testimonial-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #d1d5db;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+#testimonial-dots .testimonial-dot.active {
+    background-color: #ea9223;
+    transform: scale(1.2);
+}
+
+#testimonial-dots .testimonial-dot:hover {
+    background-color: #ea9223;
 }
 
 /* Ensure proper spacing for mobile */
 @media (max-width: 768px) {
     .testimonials-container {
-        padding-bottom: 100px;
+        padding-bottom: 40px;
     }
     
     #testimonial-prev,
     #testimonial-next {
         display: none;
     }
-}
-
-.testimonial-dots {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    z-index: 10;
-    padding: 20px 0;
-    background: linear-gradient(to top, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 100%);
-}
-
-.testimonial {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.5s ease;
-    transform: translateY(20px);
-    padding: 0 15px;
-}
-
-.testimonial.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.testimonial-dot {
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.testimonial-dot.active {
-    background: var(--carrot-orange);
-    transform: scale(1.2);
+    
+    /* Position dots below testimonial content */
+    #testimonial-dots {
+        margin-top: 2rem;
+        padding: 1rem 0;
+        background: transparent;
+        position: relative;
+        z-index: 5;
+        clear: both;
+    }
+    
+    /* Ensure testimonials have enough bottom margin for dots */
+    .testimonial .max-w-3xl {
+        margin-bottom: 1rem;
+    }
+    
+    /* Add space between testimonials and dots */
+    .testimonials-container + div {
+        margin-top: 2rem;
+    }
 }
 
 /* Service Cards */
@@ -654,5 +656,30 @@ a:focus {
     body {
         color: black;
         background: white;
+    }
+}
+/* Center hero section for mobile widths */
+@media (max-width: 640px) {
+    #home {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    #home h1,
+    #home h2,
+    #home h3,
+    #home p,
+    #home img,
+    #home .btn-primary,
+    #home .btn-azure {
+        margin-left: auto !important;
+        margin-right: auto !important;
+        text-align: center !important;
+        display: block;
+        width: 100%;
+        max-width: 100%;
     }
 }

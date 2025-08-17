@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -24,7 +24,7 @@
         
         <div class="container mx-auto px-6 relative z-10">
             <div class="text-center max-w-4xl mx-auto">
-                <h1 class="text-5xl md:text-7xl heading-primary text-white mb-6 leading-tight drop-shadow-2xl">
+                <h1 class="text-5xl md:text-7xl heading-primary text-white mb-6 leading-tight drop-shadow-2xl font-['Dancing_Script'] font-bold">
                     Meet Shanila
                 </h1>
                 <p class="text-xl md:text-2xl body-text-light text-white/90 mb-8 leading-relaxed max-w-3xl mx-auto">
@@ -42,7 +42,7 @@
                 <div class="space-y-8">
                     <div>
                         <h2 class="text-4xl md:text-5xl heading-secondary text-gray-900 mb-6">
-                            From Struggle to <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-600">Success</span>
+                            Clarity, Mindset, and Transformation – My Story
                         </h2>
                     </div>
                     
@@ -70,11 +70,9 @@
                 </div>
                 
                 <div class="relative">
-                    <div class="w-full h-96 rounded-lg overflow-hidden shadow-2xl relative">
-                        <img src="images/about-image.jpg" 
-                             alt="Shanila's Journey" 
-                             class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                    <!-- Replace image with YouTube embed -->
+                    <div class="w-full h-96 rounded-lg overflow-hidden shadow-2xl relative flex items-center justify-center bg-black">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/l-9i_aFrrI8?si=jYmGhpYZwKLPh5ZB&amp;clip=UgkxIU9JKRh9xHPvGE-iocWYYbXnYUMpYuts&amp;clipt=EIq5ERjb1xQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="w-full h-full"></iframe>
                     </div>
                 </div>
             </div>
@@ -201,9 +199,6 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <div include-html="components/cta.html"></div>
-
     <!-- Footer -->
     <div include-html="components/footer.html"></div>
 
@@ -238,5 +233,7 @@
     }
     document.addEventListener("DOMContentLoaded", includeHTML);
     </script>
+</body>
+</html>
 </body>
 </html>

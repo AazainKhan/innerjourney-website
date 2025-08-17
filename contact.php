@@ -22,9 +22,18 @@ if (!$input) {
     $input = $_POST;
 }
 
-// Validate required fields
-$required_fields = ['name', 'email', 'phone', 'service', 'message'];
+// Validate required fields - handle both old contact form and new booking form
+$required_fields = [];
 $missing_fields = [];
+
+// Check if this is a booking form (has first-name field) or contact form (has name field)
+if (isset($input['first-name'])) {
+    // This is a booking form
+    $required_fields = ['first-name', 'last-name', 'email', 'phone', 'date', 'time', 'service'];
+} else {
+    // This is the old contact form
+    $required_fields = ['name', 'email', 'phone', 'message'];
+}
 
 foreach ($required_fields as $field) {
     if (empty($input[$field])) {
@@ -49,30 +58,62 @@ if (!filter_var($input['email'], FILTER_VALIDATE_EMAIL)) {
 }
 
 // Sanitize input data
-$name = htmlspecialchars(trim($input['name']), ENT_QUOTES, 'UTF-8');
-$email = filter_var(trim($input['email']), FILTER_SANITIZE_EMAIL);
-$phone = htmlspecialchars(trim($input['phone']), ENT_QUOTES, 'UTF-8');
-$service = htmlspecialchars(trim($input['service']), ENT_QUOTES, 'UTF-8');
-$message = htmlspecialchars(trim($input['message']), ENT_QUOTES, 'UTF-8');
-$preferred_time = isset($input['preferred_time']) ? htmlspecialchars(trim($input['preferred_time']), ENT_QUOTES, 'UTF-8') : '';
+if (isset($input['first-name'])) {
+    // This is a booking form
+    $firstName = htmlspecialchars(trim($input['first-name']), ENT_QUOTES, 'UTF-8');
+    $lastName = htmlspecialchars(trim($input['last-name']), ENT_QUOTES, 'UTF-8');
+    $name = $firstName . ' ' . $lastName;
+    $email = filter_var(trim($input['email']), FILTER_SANITIZE_EMAIL);
+    $phone = htmlspecialchars(trim($input['phone']), ENT_QUOTES, 'UTF-8');
+    $date = htmlspecialchars(trim($input['date']), ENT_QUOTES, 'UTF-8');
+    $time = htmlspecialchars(trim($input['time']), ENT_QUOTES, 'UTF-8');
+    $service = htmlspecialchars(trim($input['service']), ENT_QUOTES, 'UTF-8');
+    $message = isset($input['message']) ? htmlspecialchars(trim($input['message']), ENT_QUOTES, 'UTF-8') : '';
+} else {
+    // This is the old contact form
+    $name = htmlspecialchars(trim($input['name']), ENT_QUOTES, 'UTF-8');
+    $email = filter_var(trim($input['email']), FILTER_SANITIZE_EMAIL);
+    $phone = htmlspecialchars(trim($input['phone']), ENT_QUOTES, 'UTF-8');
+    $message = htmlspecialchars(trim($input['message']), ENT_QUOTES, 'UTF-8');
+}
 
 // Prepare email content
-$subject = "New Consultation Request from $name";
-$email_content = "
+if (isset($input['first-name'])) {
+    // This is a booking form
+    $subject = "New Consultation Booking from $name";
+    $email_content = "
+New consultation booking received:
+
+Name: $name
+Email: $email
+Phone: $phone
+Preferred Date: $date
+Preferred Time: $time
+Service: $service
+
+Additional Information:
+$message
+
+---
+This message was sent from the website booking form.
+";
+} else {
+    // This is the old contact form
+    $subject = "New Consultation Request from $name";
+    $email_content = "
 New consultation request received:
 
 Name: $name
 Email: $email
 Phone: $phone
-Service Interest: $service
-Preferred Time: $preferred_time
 
 Message:
 $message
 
 ---
-This message was sent from the Shanila Mindset and Clarity Coaching website contact form.
+This message was sent from the website contact form.
 ";
+}
 
 // Email headers
 $headers = [
@@ -83,31 +124,46 @@ $headers = [
 ];
 
 // Send email to admin
-$admin_email = 'admin@shanilalifecoaching.com'; // Change this to actual admin email
+$admin_email = 'info@innerjourney-with-shanila.com';
 $mail_sent = mail($admin_email, $subject, $email_content, implode("\r\n", $headers));
 
 // Send confirmation email to user
-$user_subject = "Thank you for your consultation request - Shanila Mindset and Clarity Coaching";
-$user_content = "
+if (isset($input['first-name'])) {
+    // This is a booking form
+    $user_subject = "Thank you for your consultation booking - Shanila Mindset and Clarity Coaching";
+    $user_content = "
 Dear $name,
 
-Thank you for reaching out to Shanila Mindset and Clarity Coaching! We have received your consultation request and are excited to help you on your transformation journey.
+Thank you for booking a consultation with me! I have received your booking request and am excited to work with you on your transformational journey.
 
-Here's a summary of your request:
-Service Interest: $service
-Preferred Time: $preferred_time
+Your booking details:
+- Preferred Date: $date
+- Preferred Time: $time
+- Service: $service
 
-We will review your message and get back to you within 24-48 hours to schedule your consultation.
+I will review your booking and get back to you within 24-48 hours to confirm your appointment time.
 
-In the meantime, feel free to explore our website to learn more about our services and approach.
 
 Best regards,
-The Shanila Mindset and Clarity Coaching Team
-
----
-Shanila Mindset and Clarity Coaching
-Transforming lives through expert guidance
+Shanila Khan
 ";
+} else {
+    // This is the old contact form
+    $user_subject = "Thank you for your consultation request - Shanila Mindset and Clarity Coaching";
+    $user_content = "
+Dear $name,
+
+Thank you for reaching out to me! I have received your consultation request and am excited to help you on your transformation journey.
+
+I will review your message and get back to you within 24-48 hours to schedule your consultation.
+
+
+Best regards,
+Shanila Khan
+
+
+";
+}
 
 $user_headers = [
     'From: noreply@shanilalifecoaching.com',
@@ -118,23 +174,42 @@ $user_headers = [
 $user_mail_sent = mail($email, $user_subject, $user_content, implode("\r\n", $user_headers));
 
 // Log the request (optional)
-$log_entry = date('Y-m-d H:i:s') . " - Consultation request from $name ($email) for $service\n";
+if (isset($input['first-name'])) {
+    $log_entry = date('Y-m-d H:i:s') . " - Consultation booking from $name ($email) - $service on $date at $time\n";
+} else {
+    $log_entry = date('Y-m-d H:i:s') . " - Consultation request from $name ($email)\n";
+}
 file_put_contents('consultation_requests.log', $log_entry, FILE_APPEND | LOCK_EX);
 
 // Prepare response
 if ($mail_sent) {
-    $response = [
-        'success' => true,
-        'message' => 'Thank you! Your consultation request has been received. We will contact you within 24-48 hours to schedule your session.',
-        'timestamp' => date('Y-m-d H:i:s')
-    ];
+    if (isset($input['first-name'])) {
+        $response = [
+            'success' => true,
+            'message' => 'Thank you! Your consultation booking has been received. I will contact you within 24-48 hours to confirm your appointment.',
+            'timestamp' => date('Y-m-d H:i:s')
+        ];
+    } else {
+        $response = [
+            'success' => true,
+            'message' => 'Thank you! Your consultation request has been received. I will contact you within 24-48 hours to schedule your session.',
+            'timestamp' => date('Y-m-d H:i:s')
+        ];
+    }
     
     http_response_code(200);
 } else {
-    $response = [
-        'error' => 'Failed to send consultation request. Please try again or contact us directly.',
-        'timestamp' => date('Y-m-d H:i:s')
-    ];
+    if (isset($input['first-name'])) {
+        $response = [
+            'error' => 'Failed to send consultation booking. Please try again or contact us directly.',
+            'timestamp' => date('Y-m-d H:i:s')
+        ];
+    } else {
+        $response = [
+            'error' => 'Failed to send consultation request. Please try again or contact us directly.',
+            'timestamp' => date('Y-m-d H:i:s')
+        ];
+    }
     
     http_response_code(500);
 }

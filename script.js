@@ -139,7 +139,12 @@ function initTestimonials() {
         const direction = newIndex > currentIndex ? 1 : -1;
         
         // Set up incoming and outgoing directions
-        newTestimonial.style.transform = `translateX(${direction * 100}%)`;
+        // Always use horizontal movement for testimonials
+        if (direction === 1) {
+            newTestimonial.style.transform = 'translateX(100%)'; // Next: from right
+        } else {
+            newTestimonial.style.transform = 'translateX(-100%)'; // Prev: from left
+        }
         newTestimonial.style.opacity = '0';
         newTestimonial.style.visibility = 'visible';
         
@@ -579,3 +584,211 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+// Booking Overlay Functionality
+function initBookingOverlay() {
+    console.log('Initializing booking overlay...');
+    
+    const overlay = document.getElementById('booking-overlay');
+    const bookingBtn = document.getElementById('booking-btn');
+    const mobileBookingBtn = document.getElementById('mobile-booking-btn');
+    const ctaBookingBtn = document.getElementById('cta-booking-btn');
+    const closeBtn = document.getElementById('close-booking-overlay');
+    const bookingForm = document.getElementById('booking-form');
+    
+    console.log('Elements found:', {
+        overlay: !!overlay,
+        bookingBtn: !!bookingBtn,
+        mobileBookingBtn: !!mobileBookingBtn,
+        ctaBookingBtn: !!ctaBookingBtn,
+        closeBtn: !!closeBtn,
+        bookingForm: !!bookingForm
+    });
+    
+    // Test if overlay is visible
+    if (overlay) {
+        console.log('Overlay element found, current classes:', overlay.className);
+        console.log('Overlay is hidden:', overlay.classList.contains('hidden'));
+    }
+    
+    // Set minimum date to today
+    const dateInput = document.getElementById('date');
+    if (dateInput) {
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        dateInput.min = `${yyyy}-${mm}-${dd}`;
+    }
+    
+    // Open overlay
+    function openOverlay() {
+        console.log('Opening overlay...');
+        if (overlay) {
+            overlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            overlay.classList.add('flex');
+            console.log('Overlay opened successfully');
+        } else {
+            console.error('Overlay element not found!');
+        }
+    }
+    
+    // Close overlay
+    function closeOverlay() {
+        overlay.classList.add('hidden');
+        overlay.classList.remove('flex');
+        document.body.style.overflow = 'auto';
+        // Reset form
+        if (bookingForm) {
+            bookingForm.reset();
+        }
+    }
+    
+    // Event listeners
+    if (bookingBtn) {
+        console.log('Adding click listener to booking button');
+        bookingBtn.addEventListener('click', function(e) {
+            console.log('Booking button clicked!');
+            openOverlay();
+        });
+    } else {
+        console.error('Booking button not found!');
+    }
+    
+    if (mobileBookingBtn) {
+        console.log('Adding click listener to mobile booking button');
+        mobileBookingBtn.addEventListener('click', function(e) {
+            console.log('Mobile booking button clicked!');
+            openOverlay();
+        });
+    } else {
+        console.error('Mobile booking button not found!');
+    }
+    
+    if (ctaBookingBtn) {
+        console.log('Adding click listener to CTA booking button');
+        ctaBookingBtn.addEventListener('click', function(e) {
+            console.log('CTA booking button clicked!');
+            openOverlay();
+        });
+    } else {
+        console.error('CTA booking button not found!');
+    }
+    
+    if (closeBtn) {
+        console.log('Adding click listener to close button');
+        closeBtn.addEventListener('click', function(e) {
+            console.log('Close button clicked!');
+            closeOverlay();
+        });
+    } else {
+        console.error('Close button not found!');
+    }
+    
+    // Close on overlay background click
+    if (overlay) {
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) {
+                closeOverlay();
+            }
+        });
+    }
+    
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && !overlay.classList.contains('hidden')) {
+            closeOverlay();
+        }
+    });
+    
+    // Form submission
+    if (bookingForm) {
+        bookingForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const submitText = submitBtn.querySelector('.submit-text');
+            const loadingText = submitBtn.querySelector('.loading-text');
+            
+            submitText.classList.add('hidden');
+            loadingText.classList.remove('hidden');
+            submitBtn.disabled = true;
+            
+            // Collect form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Send form data
+            fetch('contact.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    showNotification(result.message, 'success');
+                    closeOverlay();
+                } else {
+                    showNotification(result.error || 'Something went wrong. Please try again.', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showNotification('Network error. Please try again.', 'error');
+            })
+            .finally(() => {
+                // Reset button state
+                submitText.classList.remove('hidden');
+                loadingText.classList.add('hidden');
+                submitBtn.disabled = false;
+            });
+        });
+    }
+}
+
+// Global test function for debugging
+window.testBookingOverlay = function() {
+    console.log('Testing booking overlay...');
+    const overlay = document.getElementById('booking-overlay');
+    if (overlay) {
+        console.log('Overlay found, current classes:', overlay.className);
+        console.log('Is hidden:', overlay.classList.contains('hidden'));
+        overlay.classList.remove('hidden');
+        overlay.classList.add('flex');
+        console.log('Overlay should now be visible');
+    } else {
+        console.error('Overlay not found!');
+    }
+};
+
+// Global test function to check booking button state
+window.checkBookingButton = function() {
+    console.log('Checking booking button state...');
+    const bookingBtn = document.getElementById('booking-btn');
+    const mobileBookingBtn = document.getElementById('mobile-booking-btn');
+    const ctaBookingBtn = document.getElementById('cta-booking-btn');
+    
+    console.log('Desktop booking button:', bookingBtn);
+    console.log('Mobile booking button:', mobileBookingBtn);
+    console.log('CTA booking button:', ctaBookingBtn);
+    
+    if (bookingBtn) {
+        console.log('Desktop button classes:', bookingBtn.className);
+        console.log('Desktop button text:', bookingBtn.textContent);
+    }
+    
+    if (mobileBookingBtn) {
+        console.log('Mobile button classes:', mobileBookingBtn.className);
+        console.log('Mobile button text:', mobileBookingBtn.textContent);
+    }
+    
+    if (ctaBookingBtn) {
+        console.log('CTA button classes:', ctaBookingBtn.className);
+        console.log('CTA button text:', ctaBookingBtn.textContent);
+    }
+};

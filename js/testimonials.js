@@ -104,6 +104,12 @@ function initTestimonials() {
             
             dotsContainer.appendChild(dot);
         });
+        
+        // Add mobile-specific styling
+        if (window.innerWidth <= 768) {
+            dotsContainer.style.marginTop = '2rem';
+            dotsContainer.style.padding = '1rem 0';
+        }
     }
     
     // Update active dot
@@ -174,6 +180,14 @@ function initTestimonials() {
         // Add event listeners
         if (prevBtn) prevBtn.addEventListener('click', goToPrev);
         if (nextBtn) nextBtn.addEventListener('click', goToNext);
+        
+        // Handle window resize for mobile dots positioning
+        window.addEventListener('resize', function() {
+            if (window.innerWidth <= 768 && dotsContainer) {
+                dotsContainer.style.marginTop = '2rem';
+                dotsContainer.style.padding = '1rem 0';
+            }
+        });
         
         // Auto-rotate
         let autoRotate = setInterval(goToNext, 8000);
