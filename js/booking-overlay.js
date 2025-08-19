@@ -90,16 +90,9 @@ function initBookingOverlay() {
         }
     });
     
-    // Handle form submission
-    if (bookingForm) {
-        bookingForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            // Add your form submission logic here
-            console.log('Form submitted');
-            // Close the overlay after submission
-            closeOverlay();
-        });
-    }
+    // Handle form submission - Removed duplicate form submission handler
+    // The main form submission is now handled in script.js
+    // This prevents duplicate form submissions
 }
 
 // Initialize when DOM is fully loaded

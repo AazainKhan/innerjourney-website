@@ -101,22 +101,22 @@
                             <!-- Social Icons -->
                             <div class="flex space-x-6 mt-8 justify-start">
                                 <a href="https://www.facebook.com/innerjourneywithshanila/" class="transition-transform transform hover:scale-110" target="_blank" aria-label="Facebook">
-                                    <span class="inline-block w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-400 rounded-full flex items-center justify-center shadow-lg">
+                                    <span class="inline-block w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-400 rounded-lg flex items-center justify-center shadow-lg">
                                         <i class="fab fa-facebook text-white text-4xl"></i>
                                     </span>
                                 </a>
                                 <a href="https://www.instagram.com/_.innerjourney_/" class="transition-transform transform hover:scale-110" target="_blank" aria-label="Instagram">
-                                    <span class="inline-block w-16 h-16 bg-gradient-to-br from-pink-500 to-yellow-400 rounded-full flex items-center justify-center shadow-lg">
+                                    <span class="inline-block w-16 h-16 bg-gradient-to-br from-pink-500 to-yellow-400 rounded-lg flex items-center justify-center shadow-lg">
                                         <i class="fab fa-instagram text-white text-4xl"></i>
                                     </span>
                                 </a>
                                 <a href="https://www.youtube.com/channel/UCJbRrCiY4zXfojPTa17EKMg" class="transition-transform transform hover:scale-110" target="_blank" aria-label="YouTube">
-                                    <span class="inline-block w-16 h-16 bg-gradient-to-br from-red-600 to-red-400 rounded-full flex items-center justify-center shadow-lg">
+                                    <span class="inline-block w-16 h-16 bg-gradient-to-br from-red-600 to-red-400 rounded-lg flex items-center justify-center shadow-lg">
                                         <i class="fab fa-youtube text-white text-4xl"></i>
                                     </span>
                                 </a>
                                 <a href="https://api.whatsapp.com/send?phone=447387973382&" class="transition-transform transform hover:scale-110" target="_blank" aria-label="WhatsApp">
-                                    <span class="inline-block w-16 h-16 bg-gradient-to-br from-green-500 to-green-400 rounded-full flex items-center justify-center shadow-lg">
+                                    <span class="inline-block w-16 h-16 bg-gradient-to-br from-green-500 to-green-400 rounded-lg flex items-center justify-center shadow-lg">
                                         <i class="fab fa-whatsapp text-white text-4xl"></i>
                                     </span>
                                 </a>
@@ -276,57 +276,8 @@
                 initNavigation();
             }
             
-            // Handle contact form submission
-            const contactForm = document.getElementById('contact-form');
-            const formMessage = document.getElementById('form-message');
-            const submitBtn = contactForm ? contactForm.querySelector('button[type="submit"]') : null;
-            const submitText = document.getElementById('submit-text');
-            const submitSpinner = document.getElementById('submit-spinner');
-            
-            if (contactForm && submitBtn) {
-                contactForm.addEventListener('submit', async function(e) {
-                    e.preventDefault();
-                    
-                    // Show loading state
-                    submitBtn.disabled = true;
-                    submitText.textContent = 'Sending...';
-                    submitSpinner.classList.remove('hidden');
-                    formMessage.classList.add('hidden');
-                    
-                    try {
-                        const formData = new FormData(contactForm);
-                        const formObject = {};
-                        formData.forEach((value, key) => {
-                            formObject[key] = value;
-                        });
-                        
-                        const response = await fetch('contact.php', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify(formObject)
-                        });
-                        
-                        const data = await response.json();
-                        
-                        if (data.success) {
-                            showFormMessage(data.message, 'success');
-                            contactForm.reset();
-                        } else {
-                            showFormMessage(data.error || 'An error occurred. Please try again.', 'error');
-                        }
-                    } catch (error) {
-                        console.error('Error:', error);
-                        showFormMessage('An error occurred. Please try again.', 'error');
-                    } finally {
-                        // Reset button state
-                        submitBtn.disabled = false;
-                        submitText.textContent = 'Send!';
-                        submitSpinner.classList.add('hidden');
-                    }
-                });
-            }
+            // Form submission is now handled in script.js to prevent duplicate submissions
+            // The handler in script.js includes better error handling and submission tracking
             
             function showFormMessage(message, type) {
                 if (!formMessage) return;

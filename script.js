@@ -41,12 +41,12 @@ function includeHTML(callback) {
 document.addEventListener('DOMContentLoaded', function() {
     includeHTML();
     initBookingOverlay(); // Initialize booking overlay
-});
-document.addEventListener('DOMContentLoaded', function() {
+    
     // Initialize all functionality
     initTestimonials();
     initScrollAnimations();
     initServiceCards();
+    initContactForm(); // Initialize contact form
 });
 
 // Re-initialize navigation and mobile menu after components are loaded
@@ -59,9 +59,28 @@ document.addEventListener('componentsLoaded', function() {
 function initNavigation() {
     const navbar = document.getElementById('navbar');
     if (!navbar) return;
+
+    const scrollThreshold = 50; // Pixels to scroll before changing navbar
+
+    // Function to update navbar style based on scroll position
+    const updateNavbar = () => {
+        if (window.scrollY > scrollThreshold) {
+            if (!navbar.classList.contains('scrolled')) {
+                navbar.classList.add('scrolled');
+            }
+        } else {
+            if (navbar.classList.contains('scrolled')) {
+                navbar.classList.remove('scrolled');
+            }
+        }
+    };
+
+    // Set initial state on page load
+    updateNavbar();
+
+    // Add an efficient scroll listener
+    window.addEventListener('scroll', updateNavbar, { passive: true });
     
-    // Add scrolled class by default for better mobile experience
-    navbar.classList.add('scrolled');
     // Smooth scrolling for navigation links (only for internal anchor links)
     const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
     navLinks.forEach(link => {
@@ -318,11 +337,14 @@ function initMobileMenu() {
             closeMobileMenu();
         });
     }
-    // Overlay click support
+    // Overlay click support (only close if clicking outside menu content)
     const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
     if (mobileMenuOverlay) {
         mobileMenuOverlay.addEventListener('click', function(e) {
-            closeMobileMenu();
+            // Only close if clicking directly on the overlay, not inside menu content
+            if (e.target === mobileMenuOverlay) {
+                closeMobileMenu();
+            }
         });
     }
     
@@ -358,35 +380,109 @@ function initServiceCards() {
     });
 }
 
-// Form handling for consultation booking
+// Form handling for contact form
 function initContactForm() {
     const contactForm = document.getElementById('contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
+    if (!contactForm) return;
+    
+    // Remove any existing event listeners to prevent duplicates
+    const newForm = contactForm.cloneNode(true);
+    contactForm.parentNode.replaceChild(newForm, contactForm);
+    
+    // Add a data attribute to track if the form is being submitted
+    newForm.setAttribute('data-submitting', 'false');
+    
+    newForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        const submitButton = this.querySelector('button[type="submit"]');
+        const submitText = document.getElementById('submit-text');
+        const submitSpinner = document.getElementById('submit-spinner');
+        const formMessage = document.getElementById('form-message');
+        
+        // Prevent multiple submissions
+        if (this.getAttribute('data-submitting') === 'true') {
+            console.log('Form submission already in progress');
+            return;
+        }
+        
+        // Mark form as submitting
+        this.setAttribute('data-submitting', 'true');
+        
+        // Show loading state
+        submitButton.disabled = true;
+        submitText.textContent = 'Sending...';
+        submitSpinner.classList.remove('hidden');
+        formMessage.className = 'hidden';
+        
+        // Log the submission attempt
+        console.log('Form submission started at:', new Date().toISOString());
+        
+        try {
+            // Convert FormData to URL-encoded format
+            const formDataObj = {};
+            formData.forEach((value, key) => {
+                formDataObj[key] = value;
+            });
             
-            // Get form data
-            const formData = new FormData(this);
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const message = formData.get('message');
+            const response = await fetch('contact.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams(formDataObj).toString()
+            });
             
-            // Basic validation
-            if (!name || !email || !message) {
-                showNotification('Please fill in all fields', 'error');
-                return;
+            let result;
+            const contentType = response.headers.get('content-type');
+            
+            if (contentType && contentType.includes('application/json')) {
+                result = await response.json();
+            } else {
+                const text = await response.text();
+                throw new Error(`Expected JSON, got: ${text}`);
             }
             
-            if (!isValidEmail(email)) {
-                showNotification('Please enter a valid email address', 'error');
-                return;
+            if (result.success) {
+                formMessage.textContent = result.message || 'Thank you! Your message has been sent successfully.';
+                formMessage.className = 'bg-green-100 border border-green-400 text-green-700 p-4 mb-4 rounded-lg';
+                contactForm.reset();
+            } else {
+                formMessage.textContent = result.error || 'An error occurred. Please try again.';
+                formMessage.className = 'bg-red-100 border border-red-400 text-red-700 p-4 mb-4 rounded-lg';
+                
+                // Highlight missing fields if any
+                if (result.missing_fields && result.missing_fields.length > 0) {
+                    result.missing_fields.forEach(field => {
+                        const input = contactForm.querySelector(`[name="${field}"]`);
+                        if (input) {
+                            input.classList.add('border-red-500', 'ring-2', 'ring-red-200');
+                            input.addEventListener('input', function() {
+                                this.classList.remove('border-red-500', 'ring-2', 'ring-red-200');
+                            }, { once: true });
+                        }
+                    });
+                }
             }
             
-            // Simulate form submission
-            showNotification('Thank you! We\'ll get back to you soon.', 'success');
-            this.reset();
-        });
-    }
+        } catch (error) {
+            console.error('Error:', error);
+            formMessage.textContent = 'An error occurred while sending your message. Please try again later.';
+            formMessage.className = 'bg-red-100 border border-red-400 text-red-700 p-4 mb-4 rounded-lg';
+        } finally {
+            formMessage.classList.remove('hidden');
+            submitButton.disabled = false;
+            submitText.textContent = 'Send';
+            submitSpinner.classList.add('hidden');
+            
+            // Scroll to form message
+            formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            // Reset form submission state
+            this.setAttribute('data-submitting', 'false');
+        }
+    });
 }
 
 // Email validation
@@ -695,10 +791,27 @@ function initBookingOverlay() {
     
     // Form submission
     if (bookingForm) {
-        bookingForm.addEventListener('submit', function(e) {
+        // Remove any existing event listeners to prevent duplicates
+        const newBookingForm = bookingForm.cloneNode(true);
+        bookingForm.parentNode.replaceChild(newBookingForm, bookingForm);
+        
+        // Add a data attribute to track if the form is being submitted
+        newBookingForm.setAttribute('data-submitting', 'false');
+        
+        newBookingForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
+            // Prevent multiple submissions
+            if (this.getAttribute('data-submitting') === 'true') {
+                console.log('Booking form submission already in progress');
+                return;
+            }
+            
+            // Mark form as submitting
+            this.setAttribute('data-submitting', 'true');
+            
             // Show loading state
+            console.log('Booking form submission started at:', new Date().toISOString());
             const submitBtn = this.querySelector('button[type="submit"]');
             const submitText = submitBtn.querySelector('.submit-text');
             const loadingText = submitBtn.querySelector('.loading-text');

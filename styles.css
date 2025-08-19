@@ -443,13 +443,9 @@ html {
 }
 
 /* Mobile Menu */
+/* Mobile Menu Overlay and Close Button */
 #mobile-menu {
     transition: all 0.3s ease;
-    text-align: center;
-    padding: 2rem 0;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     position: fixed;
     top: 0;
     left: 0;
@@ -458,18 +454,58 @@ html {
     z-index: 40;
     height: 100vh;
     width: 100vw;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     display: flex;
-    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    transform: translateY(-100%);
     opacity: 0;
     pointer-events: none;
 }
 
 #mobile-menu.show {
-    transform: translateY(0);
     opacity: 1;
     pointer-events: auto;
+}
+
+.mobile-menu-overlay {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mobile-menu-content {
+    background: transparent;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.mobile-menu-close {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 2.5rem;
+    z-index: 10;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.mobile-menu-close:hover {
+    color: var(--carrot-orange);
+}
+.close-icon {
+    font-size: 2.5rem;
+    line-height: 1;
 }
 
 #mobile-menu a {
