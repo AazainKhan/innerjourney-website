@@ -1,0 +1,79 @@
+# Enable URL rewriting
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+    
+    # Redirect to HTTPS in production
+    # Uncomment these lines when deploying to production
+    # RewriteCond %{HTTPS} off
+    # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    
+    # Handle Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+# Local development settings - only applied when not in production
+<If "!env('APP_ENV') == 'production'">
+    # MAMP PHP FastCGI handler
+    <IfModule mod_fastcgi.c>
+        <FilesMatch \.php$>
+            SetHandler php-fastcgi
+        </FilesMatch>
+        Action php-fastcgi /fcgi-bin/php.fcgi virtual
+    </IfModule>
+    
+    # PHP settings for local development
+    <IfModule mod_php7.c>
+        php_flag mail.add_x_header On
+        php_flag mail.log /tmp/php_mail.log
+        php_value mail.log_max_len 1024
+        php_admin_value sendmail_path "/usr/local/bin/mailpit sendmail"
+    </IfModule>
+</If>
+
+# Production settings - applied when APP_ENV=production
+<If "env('APP_ENV') == 'production'">
+    # Disable directory browsing
+    Options -Indexes
+    
+    # Security headers
+    <IfModule mod_headers.c>
+        Header set X-Content-Type-Options "nosniff"
+        Header set X-XSS-Protection "1; mode=block"
+        Header set X-Frame-Options "SAMEORIGIN"
+        Header set Referrer-Policy "strict-origin-when-cross-origin"
+    </IfModule>
+    
+    # Compression
+    <IfModule mod_deflate.c>
+        AddOutputFilterByType DEFLATE text/plain
+        AddOutputFilterByType DEFLATE text/html
+        AddOutputFilterByType DEFLATE text/xml
+        AddOutputFilterByType DEFLATE text/css
+        AddOutputFilterByType DEFLATE application/xml
+        AddOutputFilterByType DEFLATE application/xhtml+xml
+        AddOutputFilterByType DEFLATE application/rss+xml
+        AddOutputFilterByType DEFLATE application/javascript
+        AddOutputFilterByType DEFLATE application/x-javascript
+    </IfModule>
+    
+    # Cache control
+    <IfModule mod_expires.c>
+        ExpiresActive On
+        ExpiresByType image/jpg "access plus 1 year"
+        ExpiresByType image/jpeg "access plus 1 year"
+        ExpiresByType image/gif "access plus 1 year"
+        ExpiresByType image/png "access plus 1 year"
+        ExpiresByType text/css "access plus 1 month"
+        ExpiresByType application/pdf "access plus 1 month"
+        ExpiresByType text/x-javascript "access plus 1 month"
+        ExpiresByType application/x-shockwave-flash "access plus 1 month"
+        ExpiresByType image/x-icon "access plus 1 year"
+        ExpiresDefault "access plus 2 days"
+    </IfModule>
+</If>

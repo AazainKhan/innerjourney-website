@@ -1,0 +1,54 @@
+<!-- Navigation Bar Component -->
+<nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300">
+    <div class="mx-auto px-2 md:px-6 py-6">
+        <div class="flex items-center justify-between gap-4 xl:gap-12">
+            <a href="index.html" class="flex items-center space-x-2 hover:opacity-90 transition-opacity">
+                <img src="images/logo_transparent.png" alt="Shanila Khan Mindset and Clarity Coaching Logo" class="h-14 w-auto">
+                <div class="text-2xl heading-primary text-white">
+                    Shanila Khan
+                </div>
+            </a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">Home</a>
+                <!-- <a href="about.html" class="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">About</a> -->
+                <!-- <a href="services.html" class="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">Services</a> -->
+                <!-- <a href="blog.html" class="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">Blog</a> -->
+                <a href="https://www.youtube.com/watch?v=l-9i_aFrrI8" target="_blank" class="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">Podcast</a>
+                <a href="contact.html" class="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">Contact</a>
+            </div>
+            <button id="booking-btn" class="booking-btn btn-azure btn-sm button-text hidden md:inline-flex">
+                Book a Consultation
+            </button>
+            <div class="md:hidden mr-2">
+                <button id="mobile-menu-btn" class="text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden bg-black bg-opacity-95 hidden">
+        <div class="px-6 py-4 space-y-4">
+            <a href="index.html" class="block text-white hover:text-orange-400 transition-colors uppercase">Home</a>
+            <a href="about.html" class="block text-white hover:text-orange-400 transition-colors uppercase">About</a>
+            <a href="services.html" class="block text-white hover:text-orange-400 transition-colors uppercase">Services</a>
+            <a href="testimonials.html" class="block text-white hover:text-orange-400 transition-colors uppercase">Testimonials</a>
+            <a href="https://www.youtube.com/watch?v=l-9i_aFrrI8" target="_blank" class="block text-white hover:text-orange-400 transition-colors">Podcast</a>
+            <a href="contact.html" class="block text-white hover:text-orange-400 transition-colors">Contact</a>
+            <button id="mobile-booking-btn" class="booking-btn w-full btn-azure button-text">
+                Book a Consultation
+            </button>
+            <div class="flex justify-center mt-4 space-x-6">
+                <a href="https://www.facebook.com/innerjourneywithshanila/" target="_blank" aria-label="Facebook" class="text-white text-2xl hover:text-orange-400">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://www.instagram.com/_.innerjourney_/" target="_blank" aria-label="Instagram" class="text-white text-2xl hover:text-orange-400">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.youtube.com/channel/UCJbRrCiY4zXfojPTa17EKMg" target="_blank" aria-label="YouTube" class="text-white text-2xl hover:text-orange-400">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

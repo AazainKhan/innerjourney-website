@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shanila - Mindset and Clarity Coach | Transform Your Journey</title>
+    <meta name="description" content="Transform your life with Shanila's expert Mindset and Clarity Coaching. Book A Consultation today and start your journey to success.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300">
+        <div class="mx-auto px-2 md:px-6 py-6">
+            <div class="flex items-center justify-between gap-4 xl:gap-12">
+                <a href="#home" class="flex items-center space-x-2 hover:opacity-90 transition-opacity">
+                    <img src="images/logo_transparent.png" alt="Shanila Khan Mindset and Clarity Coaching Logo" class="h-14 w-auto">
+                    <div class="text-2xl heading-primary text-white">
+                        Shanila Khan
+                    </div>
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">Home</a>
+                    <!-- <a href="about.html" class="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">About</a> -->
+                    <!-- <a href="services.html" class="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">Services</a> -->
+                    <!-- <a href="blog.html" class="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">Blog</a> -->
+                    <a href="https://www.youtube.com/watch?v=l-9i_aFrrI8" target="_blank" class="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">Podcast</a>
+                    <a href="contact.html" class="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">Contact</a>
+                </div>
+                <button id="booking-btn" class="btn-azure btn-sm button-text hidden md:inline-flex">
+                    Book a Consultation
+                </button>
+                <div class="md:hidden mr-2">
+                    <button id="mobile-menu-btn" class="text-white text-2xl">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden bg-black bg-opacity-95 hidden">
+            <div class="px-6 py-4 space-y-4">
+                <a href="#home" class="block text-white hover:text-orange-400 transition-colors uppercase">Home</a>
+                <a href="about.html" class="block text-white hover:text-orange-400 transition-colors uppercase">About</a>
+                <a href="services.html" class="block text-white hover:text-orange-400 transition-colors uppercase">Services</a>
+                <a href="blog.html" class="block text-white hover:text-orange-400 transition-colors">Blog</a>
+                <a href="https://www.youtube.com/watch?v=l-9i_aFrrI8" target="_blank" class="block text-white hover:text-orange-400 transition-colors">Podcast</a>
+                <a href="contact.html" class="block text-white hover:text-orange-400 transition-colors">Contact</a>
+                <button id="mobile-booking-btn" class="w-full btn-azure button-text">
+                    Book a Consultation
+                </button>
+                <div class="flex justify-center mt-4 space-x-6">
+                    <a href="https://www.facebook.com/innerjourneywithshanila/" target="_blank" aria-label="Facebook" class="text-white text-2xl hover:text-orange-400">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="https://www.instagram.com/_.innerjourney_/" target="_blank" aria-label="Instagram" class="text-white text-2xl hover:text-orange-400">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCJbRrCiY4zXfojPTa17EKMg" target="_blank" aria-label="YouTube" class="text-white text-2xl hover:text-orange-400">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center overflow-hidden">
+        <!-- Animated background elements -->
+        <div class="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-orange-900/20 z-10"></div>
+        <div class="absolute inset-0 bg-cover bg-no-repeat md:bg-center" style="background-image: url('images/hero_img.jpg'); background-position: 20% top;"></div>
+        
+        <!-- Floating geometric shapes -->
+        <div class="absolute top-20 left-20 w-32 h-32 bg-orange-500/20 rounded-full blur-xl animate-pulse"></div>
+        <div class="absolute bottom-20 right-20 w-24 h-24 bg-[rgba(20,33,61,0.25)] rounded-full blur-xl animate-pulse delay-1000"></div>
+        <div class="absolute top-1/2 left-10 w-16 h-16 bg-white/10 rounded-full blur-lg animate-pulse delay-500"></div>
+        
+        <div class="container mx-auto px-6 relative z-20">
+            <div class="max-w-2xl ml-auto text-right mt-80 md:mt-0">
+
+                <h1 class="text-5xl md:text-7xl heading-primary text-white mb-6 leading-tight drop-shadow-2xl font-['Dancing_Script'] font-bold">
+                    Transform Your Journey!
+                </h1>
+                <p class="text-xl md:text-2xl body-text-light text-white/90 mb-8 leading-relaxed">
+                    Helping individuals to build and lead an empowered life with intentions and clarity for holistic success !                </p>
+                <div class="flex flex-col sm:flex-row gap-3 justify-end">
+                    <button class="btn-azure text-sm px-6 py-2 button-text">
+                        Start Your Journey
+                    </button>
+                    <button class="btn-azure-outline text-sm px-6 py-2 button-text" id="learn-more-btn">
+                        Learn More
+                    </button>
+                </div>
+                <!-- Social Links from Footer -->
+                <div class="flex justify-end sm:justify-end justify-center mt-6 space-x-4">
+                    <a href="https://www.facebook.com/innerjourneywithshanila/" class="link-muted transition-colors text-2xl opacity-90 hover:opacity-100" target="_blank" aria-label="Facebook">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="https://www.instagram.com/_.innerjourney_/" class="link-muted transition-colors text-2xl opacity-90 hover:opacity-100" target="_blank" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCJbRrCiY4zXfojPTa17EKMg" class="link-muted transition-colors text-2xl opacity-90 hover:opacity-100" target="_blank" aria-label="YouTube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="https://api.whatsapp.com/send?phone=447387973382&" class="link-muted transition-colors text-2xl opacity-90 hover:opacity-100" target="_blank" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator (removed bouncing animation) -->
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 relative overflow-hidden">
+        <!-- Background pattern -->
+        <div class="absolute inset-0 bg-gradient-to-br from-orange-50 via-white to-blue-50"></div>
+        <div class="absolute top-0 right-0 w-96 h-96 bg-orange-200/30 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-blue-200/30 rounded-full blur-3xl"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-left mb-16">
+                <h2 class="text-4xl md:text-5xl heading-secondary text-gray-900 mb-4">
+                    Hi, I'm <span class="text-carrot font-bold">Shanila</span>
+                </h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full flex items-center justify-center">
+                            <i class="fas fa-star text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900">Certified Mindset and Clarity Coach</h3>
+                        </div>
+                    </div>
+                    
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        I'm an accomplished coach with a seven-year track record, possessing a deep understanding of coaching methodologies to help you achieve your personal and professional goals. Committed to continuous learning and known for my empathetic approach, I'll empower you to overcome challenges and unlock your potential. My dedicated coaching experience reflects my commitment to excellence and passion for positive change.
+                    </p>
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        I was trained by internationally acclaimed coach (Global Guru) Vikram Dhar, and my coaching approach is infused with a global perspective and proven methodologies that drive impactful transformations. I hold diverse credentials, including being a Master Practitioner in NLP, Certified Emotional Intelligence Practitioner, ICF qualified Associate Certified Coach, and Vedic Numerologist.
+                    </p>
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        My approach to coaching is to create synergy between your values and intentions without compromising your well-being. I seamlessly blend neuro-linguistic programming, emotional intelligence, and ancient numerological insights to help you navigate your path to success. With my extensive experience and commitment to empowering individuals, I can help you gain the awareness and clarity needed to lead an empowered life.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-4">
+
+                        <a href="about.html" class="btn-azure-outline font-semibold inline-block" style="text-align:center;">
+                            Read More
+                        </a>
+                    </div>
+                </div>
+                <div class="relative fade-in-left">
+                    <div class="w-full h-[32rem] overflow-hidden shadow-2xl relative rounded-lg transform transition-all duration-1000 ease-out">
+                        <img src="images/about-image.jpg" 
+                             alt="Shanila - Mindset and Clarity Coach" 
+                             class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 relative overflow-hidden">
+        <!-- Background pattern -->
+        <div class="absolute inset-0 bg-gradient-to-br from-orange-50 via-gray-50 to-blue-50"></div>
+        <div class="absolute top-0 left-1/4 w-64 h-64 bg-orange-200/20 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 right-1/4 w-64 h-64 bg-blue-200/20 rounded-full blur-3xl"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div id="testimonials-section"></div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-platinum">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl heading-secondary text-oxford font-bold mb-4">
+                    My <span class="text-carrot font-bold">Services</span>
+                </h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                <!-- Career Coaching -->
+                <div class="service-card group">
+                    <div class="brand-gradient-orange p-8 rounded-2xl text-white h-full transition-all duration-500 transform group-hover:scale-105 shadow-xl">
+                        <div class="text-4xl mb-6"><i class="fas fa-chart-line"></i></div>
+                        <h3 class="text-2xl font-bold mb-4">Career Coaching</h3>
+                        <p class="text-white/90 mb-6">Navigate career transitions, unlock your professional potential, and achieve your goals with expert guidance.</p>
+                        <div class="service-details opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <ul class="text-white/80 text-sm mb-4 list-disc pl-4">
+                                <li>Career assessment & planning</li>
+                                <li>Interview & CV support</li>
+                                <li>Networking strategies</li>
+                                <li>Confidence building</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Clarity Coaching -->
+                <div class="service-card group">
+                    <div class="brand-gradient-oxford p-8 rounded-2xl text-white h-full transition-all duration-500 transform group-hover:scale-105 shadow-xl">
+                        <div class="text-4xl mb-6"><i class="fas fa-lightbulb"></i></div>
+                        <h3 class="text-2xl font-bold mb-4">Clarity Coaching</h3>
+                        <p class="text-white/90 mb-6">Gain clarity on your life direction, make empowered decisions, and move forward with confidence.</p>
+                        <div class="service-details opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <ul class="text-white/80 text-sm mb-4 list-disc pl-4">
+                                <li>Vision & goal setting</li>
+                                <li>Values alignment</li>
+                                <li>Decision-making support</li>
+                                <li>Personalized action plans</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Communication Coaching -->
+                <div class="service-card group">
+                    <div class="brand-gradient-orange p-8 rounded-2xl text-white h-full transition-all duration-500 transform group-hover:scale-105 shadow-xl">
+                        <div class="text-4xl mb-6"><i class="fas fa-comments"></i></div>
+                        <h3 class="text-2xl font-bold mb-4">Communication Coaching</h3>
+                        <p class="text-white/90 mb-6">Enhance your communication skills, resolve conflicts, and build stronger relationships in all areas of life.</p>
+                        <div class="service-details opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <ul class="text-white/80 text-sm mb-4 list-disc pl-4">
+                                <li>Effective communication</li>
+                                <li>Conflict resolution</li>
+                                <li>Emotional intelligence</li>
+                                <li>Trust building</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wellbeing Coaching -->
+                <div class="service-card group">
+                    <div class="brand-gradient-oxford p-8 rounded-2xl text-white h-full transition-all duration-500 transform group-hover:scale-105 shadow-xl">
+                        <div class="text-4xl mb-6"><i class="fas fa-heart"></i></div>
+                        <h3 class="text-2xl font-bold mb-4">Wellbeing Coaching</h3>
+                        <p class="text-white/90 mb-6">Achieve balance, reduce stress, and cultivate holistic wellbeing for a happier, healthier life.</p>
+                        <div class="service-details opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <ul class="text-white/80 text-sm mb-4 list-disc pl-4">
+                                <li>Stress management</li>
+                                <li>Self-care strategies</li>
+                                <li>Mindfulness practices</li>
+                                <li>Work-life balance</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Numerology -->
+                <div class="service-card group">
+                    <div class="brand-gradient-orange p-8 rounded-2xl text-white h-full transition-all duration-500 transform group-hover:scale-105 shadow-xl">
+                        <div class="text-4xl mb-6"><i class="fas fa-star"></i></div>
+                        <h3 class="text-2xl font-bold mb-4">Numerology</h3>
+                        <p class="text-white/90 mb-6">Numerology intertwines past, present, and future, offering a holistic lens for individuals to reflect on their life journey, comprehend current circumstances, and make proactive decisions, fostering a deeper understanding of their existence.
+                        </p>
+                        <div class="service-details opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <ul class="text-white/80 text-sm mb-4 list-disc pl-4">
+                                <li>Personal numerology reports</li>
+                                <li>Life path analysis</li>
+                                <li>Relationship compatibility</li>
+                                <li>Yearly forecasts</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 brand-gradient-azure">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
+                We can find the voice that's stopping you from gaining momentum together!
+            </h2>
+            <button id="cta-booking-btn" class="booking-btn bg-white text-azure hover:bg-blue-50 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-azure border border-white/40">
+                Book A Consultation
+            </button>
+
+        </div>
+    </section>
+
+    <!-- Footer include for homepage -->
+    <div include-html="components/footer.html"></div>
+
+    <!-- Component placeholders -->
+    <div id="booking-overlay-section"></div>
+
+    <!-- Main scripts -->
+    <script src="js/load-components.js"></script>
+    <script>
+        // Initialize testimonials carousel after dynamic import
+        document.addEventListener('testimonialsLoaded', function() {
+            if (typeof initTestimonials === 'function') {
+                initTestimonials();
+            }
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+<script>
+// Smooth scroll to services section when 'Learn More' is clicked, with offset
+document.addEventListener('DOMContentLoaded', function() {
+    var learnMoreBtn = document.getElementById('learn-more-btn');
+    if (learnMoreBtn) {
+        learnMoreBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            var servicesSection = document.getElementById('services');
+            if (servicesSection) {
+                var offset = -60; // pixels higher (adjust as needed)
+                var rect = servicesSection.getBoundingClientRect();
+                var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                var top = rect.top + scrollTop + offset;
+                window.scrollTo({ top: top, behavior: 'smooth' });
+            }
+        });
+    }
+});
+</script>
+</body>
+</html>
