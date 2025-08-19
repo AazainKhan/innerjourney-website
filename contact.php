@@ -1,11 +1,31 @@
 <?php
 // Contact form handler for Shanila Mindset and Clarity Coaching website
 
+// Enable error logging
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('log_errors', 1);
+ini_set('error_log', __DIR__ . '/php_contact_errors.log');
+
 // Set headers
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
+
+// Log the request with all server variables for debugging
+error_log("=== New Contact Form Submission ===");
+error_log("Request Method: " . $_SERVER['REQUEST_METHOD']);
+error_log("Content Type: " . ($_SERVER['CONTENT_TYPE'] ?? 'Not set'));
+error_log("Request Headers: " . json_encode(getallheaders()));
+error_log("POST Data: " . file_get_contents('php://input'));
+
+// Check if this is a JSON request
+$isJson = false;
+if (isset($_SERVER['CONTENT_TYPE']) && strpos($_SERVER['CONTENT_TYPE'], 'application/json') !== false) {
+    $isJson = true;
+    error_log("Detected JSON request");
+}
 
 // Only allow POST requests
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -15,24 +35,42 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // Get POST data
-$input = json_decode(file_get_contents('php://input'), true);
+$input = [];
+$rawInput = file_get_contents('php://input');
 
-// If JSON parsing failed, try regular POST
-if (!$input) {
+try {
+    if ($isJson && !empty($rawInput)) {
+        $input = json_decode($rawInput, true);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new Exception('Invalid JSON: ' . json_last_error_msg());
+        }
+        error_log("Parsed JSON input: " . print_r($input, true));
+    } else {
+        $input = $_POST;
+        error_log("Regular POST data: " . print_r($input, true));
+    }
+} catch (Exception $e) {
+    error_log("Error parsing input: " . $e->getMessage());
+    $input = [];
+}
+
+// Fallback to regular POST if JSON parsing failed
+if (empty($input) && !empty($_POST)) {
     $input = $_POST;
+    error_log("Falling back to regular POST data: " . print_r($input, true));
 }
 
 // Validate required fields - handle both old contact form and new booking form
 $required_fields = [];
 $missing_fields = [];
+$is_booking_form = isset($input['first-name']);
 
-// Check if this is a booking form (has first-name field) or contact form (has name field)
-if (isset($input['first-name'])) {
+if ($is_booking_form) {
     // This is a booking form
     $required_fields = ['first-name', 'last-name', 'email', 'phone', 'date', 'time', 'service'];
 } else {
-    // This is the old contact form
-    $required_fields = ['name', 'email', 'phone', 'message'];
+    // This is the contact form
+    $required_fields = ['name', 'email', 'message'];
 }
 
 foreach ($required_fields as $field) {
@@ -42,9 +80,12 @@ foreach ($required_fields as $field) {
 }
 
 if (!empty($missing_fields)) {
+    $errorMsg = 'Missing required fields: ' . implode(', ', $missing_fields);
+    error_log($errorMsg);
     http_response_code(400);
     echo json_encode([
-        'error' => 'Missing required fields',
+        'success' => false,
+        'error' => $errorMsg,
         'missing_fields' => $missing_fields
     ]);
     exit;
@@ -58,27 +99,32 @@ if (!filter_var($input['email'], FILTER_VALIDATE_EMAIL)) {
 }
 
 // Sanitize input data
-if (isset($input['first-name'])) {
+if ($is_booking_form) {
     // This is a booking form
     $firstName = htmlspecialchars(trim($input['first-name']), ENT_QUOTES, 'UTF-8');
     $lastName = htmlspecialchars(trim($input['last-name']), ENT_QUOTES, 'UTF-8');
     $name = $firstName . ' ' . $lastName;
     $email = filter_var(trim($input['email']), FILTER_SANITIZE_EMAIL);
-    $phone = htmlspecialchars(trim($input['phone']), ENT_QUOTES, 'UTF-8');
+    $countryCode = isset($input['country-code']) ? htmlspecialchars(trim($input['country-code']), ENT_QUOTES, 'UTF-8') : '';
+    $phoneNumber = htmlspecialchars(trim($input['phone']), ENT_QUOTES, 'UTF-8');
+    // Format phone number with country code (remove any existing + or 00 at the start of the phone number)
+    $phone = '+' . $countryCode . ' ' . ltrim($phoneNumber, '+0');
     $date = htmlspecialchars(trim($input['date']), ENT_QUOTES, 'UTF-8');
     $time = htmlspecialchars(trim($input['time']), ENT_QUOTES, 'UTF-8');
     $service = htmlspecialchars(trim($input['service']), ENT_QUOTES, 'UTF-8');
     $message = isset($input['message']) ? htmlspecialchars(trim($input['message']), ENT_QUOTES, 'UTF-8') : '';
 } else {
-    // This is the old contact form
+    // This is the contact form
     $name = htmlspecialchars(trim($input['name']), ENT_QUOTES, 'UTF-8');
     $email = filter_var(trim($input['email']), FILTER_SANITIZE_EMAIL);
-    $phone = htmlspecialchars(trim($input['phone']), ENT_QUOTES, 'UTF-8');
+    $countryCode = isset($input['country-code']) ? htmlspecialchars(trim($input['country-code']), ENT_QUOTES, 'UTF-8') : '';
+    $phoneNumber = isset($input['phone']) ? htmlspecialchars(trim($input['phone']), ENT_QUOTES, 'UTF-8') : '';
+    $phone = !empty($phoneNumber) ? '+' . $countryCode . ' ' . ltrim($phoneNumber, '+0') : 'Not provided';
     $message = htmlspecialchars(trim($input['message']), ENT_QUOTES, 'UTF-8');
 }
 
 // Prepare email content
-if (isset($input['first-name'])) {
+if ($is_booking_form) {
     // This is a booking form
     $subject = "New Consultation Booking from $name";
     $email_content = "
@@ -117,21 +163,23 @@ This message was sent from the website contact form.
 
 // Email headers
 $headers = [
-    'From: noreply@shanilalifecoaching.com',
+    'From: ' . $email,
     'Reply-To: ' . $email,
     'X-Mailer: PHP/' . phpversion(),
-    'Content-Type: text/plain; charset=UTF-8'
+    'Content-Type: text/plain; charset=UTF-8',
+    'MIME-Version: 1.0'
 ];
 
 // Send email to admin
 $admin_email = 'info@innerjourney-with-shanila.com';
 $mail_sent = mail($admin_email, $subject, $email_content, implode("\r\n", $headers));
 
-// Send confirmation email to user
-if (isset($input['first-name'])) {
-    // This is a booking form
-    $user_subject = "Thank you for your consultation booking - Shanila Mindset and Clarity Coaching";
-    $user_content = "
+if ($mail_sent) {
+    // Send confirmation email to user
+    if ($is_booking_form) {
+        // This is a booking form
+        $user_subject = "Thank you for your consultation booking - Shanila Mindset and Clarity Coaching";
+        $user_content = "
 Dear $name,
 
 Thank you for booking a consultation with me! I have received your booking request and am excited to work with you on your transformational journey.
@@ -143,35 +191,70 @@ Your booking details:
 
 I will review your booking and get back to you within 24-48 hours to confirm your appointment time.
 
+If you have any questions, feel free to reply to this email.
 
-Best regards,
+Warm regards,
 Shanila Khan
+Shanila Mindset and Clarity Coaching
 ";
-} else {
-    // This is the old contact form
-    $user_subject = "Thank you for your consultation request - Shanila Mindset and Clarity Coaching";
-    $user_content = "
+    } else {
+        // This is the contact form
+        $user_subject = "Thank you for your message - Shanila Mindset and Clarity Coaching";
+        $user_content = "
 Dear $name,
 
-Thank you for reaching out to me! I have received your consultation request and am excited to help you on your transformation journey.
+Thank you for reaching out to me through my website! I've received your message and appreciate you taking the time to contact me.
 
-I will review your message and get back to you within 24-48 hours to schedule your consultation.
+Here's a summary of your message:
+$message
 
+I'll review your message and get back to you within 24-48 hours. If your inquiry is urgent, please call me at [Your Phone Number] or text me at [Your WhatsApp Number].
 
-Best regards,
+Warm regards,
 Shanila Khan
-
-
+Shanila Mindset and Clarity Coaching
 ";
-}
-
-$user_headers = [
-    'From: noreply@shanilalifecoaching.com',
-    'X-Mailer: PHP/' . phpversion(),
-    'Content-Type: text/plain; charset=UTF-8'
-];
-
-$user_mail_sent = mail($email, $user_subject, $user_content, implode("\r\n", $user_headers));
+    }
+    
+    // Send confirmation email to user
+    $user_headers = [
+        'From: ' . $admin_email,
+        'Reply-To: ' . $admin_email,
+        'X-Mailer: PHP/' . phpversion(),
+        'Content-Type: text/plain; charset=UTF-8'
+    ];
+    
+    $user_mail_sent = mail($email, $user_subject, $user_content, implode("\r\n", $user_headers));
+    
+    if ($user_mail_sent) {
+        error_log("Confirmation email sent to $email");
+    } else {
+        error_log("Failed to send confirmation email to $email");
+    }
+    
+    // Log the email sending result
+    if ($mail_sent) {
+        error_log("Email sent to admin: $admin_email");
+        
+        // Return success response
+        $response = [
+            'success' => true,
+            'message' => 'Your message has been sent successfully! I will get back to you soon.'
+        ];
+    } else {
+        error_log("Failed to send email to admin: $admin_email");
+        
+        // Return error response
+        $response = [
+            'success' => false,
+            'error' => 'Failed to send your message. Please try again later.'
+        ];
+    }
+    
+    // Return JSON response
+    header('Content-Type: application/json');
+    echo json_encode($response);
+    exit;
 
 // Log the request (optional)
 if (isset($input['first-name'])) {

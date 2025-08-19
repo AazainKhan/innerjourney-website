@@ -46,6 +46,16 @@
 /* Brand shadows */
 .shadow-azure { box-shadow: var(--shadow-azure); }
 
+/* Hide scrollbar but keep functionality */
+.scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
+}
+
 /* Footer link style using brand palette */
 a.link-muted { color: rgba(229,229,229,0.8); transition: color 0.3s ease; }
 a.link-muted:hover { color: var(--carrot-orange); }

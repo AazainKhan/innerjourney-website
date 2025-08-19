@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shanila - Mindset and Clarity Coach | Transform Your Journey</title>
-    <meta name="description" content="Transform your life with Shanila's expert Mindset and Clarity Coaching. Book your consultation today and start your journey to success.">
+    <meta name="description" content="Transform your life with Shanila's expert Mindset and Clarity Coaching. Book A Consultation today and start your journey to success.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -28,7 +28,7 @@
                     <!-- <a href="about.html" class="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">About</a> -->
                     <!-- <a href="services.html" class="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">Services</a> -->
                     <!-- <a href="blog.html" class="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">Blog</a> -->
-                    <a href="#podcast" class="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">Podcast</a>
+                    <a href="https://www.youtube.com/watch?v=l-9i_aFrrI8" target="_blank" class="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">Podcast</a>
                     <a href="contact.html" class="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">Contact</a>
                 </div>
                 <button id="booking-btn" class="btn-azure btn-sm button-text hidden md:inline-flex">
@@ -49,7 +49,7 @@
                 <a href="about.html" class="block text-white hover:text-orange-400 transition-colors uppercase">About</a>
                 <a href="services.html" class="block text-white hover:text-orange-400 transition-colors uppercase">Services</a>
                 <a href="blog.html" class="block text-white hover:text-orange-400 transition-colors">Blog</a>
-                <a href="#podcast" class="block text-white hover:text-orange-400 transition-colors">Podcast</a>
+                <a href="https://www.youtube.com/watch?v=l-9i_aFrrI8" target="_blank" class="block text-white hover:text-orange-400 transition-colors">Podcast</a>
                 <a href="contact.html" class="block text-white hover:text-orange-400 transition-colors">Contact</a>
                 <button id="mobile-booking-btn" class="w-full btn-azure button-text">
                     Book a Consultation
@@ -288,86 +288,21 @@
             <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
                 We can find the voice that's stopping you from gaining momentum together!
             </h2>
-            <button id="cta-booking-btn" class="bg-white text-azure hover:bg-blue-50 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-azure border border-white/40">
-                Book Your Consultation
+            <button id="cta-booking-btn" class="booking-btn bg-white text-azure hover:bg-blue-50 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-azure border border-white/40">
+                Book A Consultation
             </button>
 
         </div>
     </section>
 
-    <!-- Footer placeholder for dynamic import -->
-    <div id="footer-section"></div>
+    <!-- Footer include for homepage -->
+    <div include-html="components/footer.html"></div>
 
-    <!-- Booking Overlay placeholder for dynamic import -->
+    <!-- Component placeholders -->
     <div id="booking-overlay-section"></div>
 
-    <script src="script.js"></script>
-    <script>
-    // Dynamically load components after script.js is loaded
-    document.addEventListener('DOMContentLoaded', function() {
-        // Load footer component
-        fetch('components/footer.html')
-            .then(response => response.text())
-            .then(html => {
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = html;
-                const footer = tempDiv.querySelector('footer');
-                if (footer) {
-                    document.getElementById('footer-section').appendChild(footer);
-                } else {
-                    document.getElementById('footer-section').innerHTML = '<p>Footer could not be loaded.</p>';
-                }
-            })
-            .catch(() => {
-                document.getElementById('footer-section').innerHTML = '<p>Footer could not be loaded.</p>';
-            });
-
-        // Load testimonials component
-        fetch('components/testimonials.html')
-            .then(response => response.text())
-            .then(html => {
-                // Extract the full testimonials section wrapper from the fetched HTML
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = html;
-                const testimonialsWrapper = tempDiv.querySelector('.testimonials-section-wrapper');
-                if (testimonialsWrapper) {
-                    document.getElementById('testimonials-section').appendChild(testimonialsWrapper);
-                        // Dispatch custom event after testimonials are loaded
-                        document.dispatchEvent(new Event('testimonialsLoaded'));
-                } else {
-                    document.getElementById('testimonials-section').innerHTML = '<p>Testimonials could not be loaded.</p>';
-                }
-            })
-            .catch(() => {
-                document.getElementById('testimonials-section').innerHTML = '<p>Testimonials could not be loaded.</p>';
-            });
-
-        // Load booking overlay component
-        fetch('components/booking-overlay.html')
-            .then(response => response.text())
-            .then(html => {
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = html;
-                const overlay = tempDiv.querySelector('#booking-overlay');
-                if (overlay) {
-                    document.getElementById('booking-overlay-section').appendChild(overlay);
-                    // Initialize booking functionality after overlay is loaded
-                    if (typeof initBookingOverlay === 'function') {
-                        console.log('Calling initBookingOverlay...');
-                        initBookingOverlay();
-                    } else {
-                        console.error('initBookingOverlay function not found');
-                    }
-                } else {
-                    document.getElementById('booking-overlay-section').innerHTML = '<p>Booking overlay could not be loaded.</p>';
-                }
-            })
-            .catch((error) => {
-                console.error('Error loading booking overlay:', error);
-                document.getElementById('booking-overlay-section').innerHTML = '<p>Booking overlay could not be loaded.</p>';
-            });
-    });
-    </script>
+    <!-- Main scripts -->
+    <script src="js/load-components.js"></script>
     <script>
         // Initialize testimonials carousel after dynamic import
         document.addEventListener('testimonialsLoaded', function() {
@@ -376,6 +311,7 @@
             }
         });
     </script>
+    <script src="script.js"></script>
 </body>
 <script>
 // Smooth scroll to services section when 'Learn More' is clicked, with offset

@@ -40,6 +40,7 @@ function includeHTML(callback) {
 // Run includeHTML on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', function() {
     includeHTML();
+    initBookingOverlay(); // Initialize booking overlay
 });
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize all functionality
@@ -590,6 +591,8 @@ function initBookingOverlay() {
     console.log('Initializing booking overlay...');
     
     const overlay = document.getElementById('booking-overlay');
+    const overlayBackdrop = document.getElementById('overlay-backdrop');
+    const overlayContent = document.getElementById('overlay-content');
     const bookingBtn = document.getElementById('booking-btn');
     const mobileBookingBtn = document.getElementById('mobile-booking-btn');
     const ctaBookingBtn = document.getElementById('cta-booking-btn');
@@ -621,28 +624,79 @@ function initBookingOverlay() {
         dateInput.min = `${yyyy}-${mm}-${dd}`;
     }
     
-    // Open overlay
-    function openOverlay() {
+    // Open overlay with smooth animation
+    function openOverlay(e) {
+        if (e) e.stopPropagation(); // Prevent event from bubbling to document
         console.log('Opening overlay...');
         if (overlay) {
+            // First make the overlay visible but transparent
             overlay.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
-            overlay.classList.add('flex');
-            console.log('Overlay opened successfully');
+            
+            // Trigger reflow to ensure the element is in the render tree
+            void overlay.offsetHeight;
+            
+            // Apply the visible state with transitions
+            requestAnimationFrame(() => {
+                overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.75)';
+                overlay.style.opacity = '1';
+                overlay.style.transform = 'translateY(0)';
+            });
+            
+            console.log('Overlay opened with animation');
         } else {
             console.error('Overlay element not found!');
         }
     }
     
-    // Close overlay
+    // Close overlay with smooth animation
     function closeOverlay() {
-        overlay.classList.add('hidden');
-        overlay.classList.remove('flex');
-        document.body.style.overflow = 'auto';
-        // Reset form
-        if (bookingForm) {
-            bookingForm.reset();
+        if (!overlay) return;
+        
+        // Start the fade out animation
+        overlay.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+        overlay.style.opacity = '0';
+        overlay.style.transform = 'translateY(20px)';
+        
+        // Wait for the animation to complete before hiding the overlay
+        setTimeout(() => {
+            overlay.classList.add('hidden');
+            overlay.classList.remove('flex');
+            document.body.style.overflow = 'auto';
+            // Reset form
+            if (bookingForm) {
+                bookingForm.reset();
+            }
+            // Reset inline styles for next open
+            overlay.style.backgroundColor = '';
+            overlay.style.opacity = '';
+            overlay.style.transform = '';
+        }, 300); // Match this with the CSS transition duration
+    }
+    
+    // Handle clicks on the overlay
+    function handleOverlayClick(e) {
+        // If click is on the backdrop (outside the content), close the overlay
+        if (e.target === overlayBackdrop || e.target === overlay) {
+            closeOverlay();
         }
+    }
+    
+    // Add click listeners
+    if (overlayBackdrop) {
+        overlayBackdrop.addEventListener('click', handleOverlayClick);
+    }
+    
+    // Also handle clicks on the overlay itself
+    if (overlay) {
+        overlay.addEventListener('click', handleOverlayClick);
+    }
+    
+    // Prevent clicks on the content from closing the overlay
+    if (overlayContent) {
+        overlayContent.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
     }
     
     // Event listeners

@@ -1,43 +1,45 @@
 <!-- Booking Form Overlay -->
-<div id="booking-overlay" class="fixed inset-0 bg-black bg-opacity-75 hidden transition-all duration-300 flex items-center justify-center" style="z-index: 9999;">
-    <div class="max-w-4xl w-full max-h-[90vh] overflow-y-auto relative flex flex-col items-center justify-center">
-        <div class="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
+<div id="booking-overlay" class="fixed inset-0 bg-black bg-opacity-0 hidden transition-all duration-300 flex items-center justify-center opacity-0 transform translate-y-4 overflow-hidden" style="z-index: 9999;">
+    <!-- Backdrop that covers the entire screen -->
+    <div id="overlay-backdrop" class="absolute inset-0 bg-black bg-opacity-50"></div>
+    
+    <!-- Form container -->
+    <div id="overlay-content" class="relative w-full max-w-4xl m-4 bg-white rounded-2xl shadow-2xl transform transition-all duration-300 scale-95 hover:scale-100">
             <!-- Close Button -->
             <button id="close-booking-overlay" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl z-10">
                 <i class="fas fa-times"></i>
             </button>
             
             <!-- Header -->
-            <div class="bg-gradient-to-r from-orange-500 to-orange-600 text-white p-6 rounded-t-2xl">
-                <h2 class="text-3xl md:text-4xl font-bold text-center">Book Your Consultation</h2>
-                <p class="text-center text-orange-100 mt-2">Take the first step towards transforming your life</p>
+            <div class="bg-gradient-to-r from-orange-500 to-orange-600 text-white p-4 md:p-5 rounded-t-2xl">
+                <h2 class="text-2xl md:text-3xl font-bold text-center">Book A Consultation</h2>
             </div>
             
             <!-- Form Content -->
-            <div class="p-6 md:p-8">
+            <div class="p-4 md:p-6 space-y-4">
                 <form id="booking-form" class="space-y-6">
                     <!-- Personal Information -->
-                    <div class="grid md:grid-cols-2 gap-4">
+                    <div class="grid md:grid-cols-2 gap-2">
                         <div>
-                            <label for="first-name" class="block text-sm font-semibold text-gray-700 mb-2">First Name *</label>
+                            <label for="first-name" class="block text-xs md:text-sm font-medium text-gray-700 mb-1">First Name *</label>
                             <input type="text" id="first-name" name="first-name" required 
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
-                                   placeholder="Enter your first name">
+                                   class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+                                   placeholder="First name">
                         </div>
                         <div>
-                            <label for="last-name" class="block text-sm font-semibold text-gray-700 mb-2">Last Name *</label>
+                            <label for="last-name" class="block text-xs md:text-sm font-medium text-gray-700 mb-1">Last Name *</label>
                             <input type="text" id="last-name" name="last-name" required 
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
-                                   placeholder="Enter your last name">
+                                   class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+                                   placeholder="Last name">
                         </div>
                     </div>
                     
                     <!-- Contact Information -->
-                    <div class="grid md:grid-cols-2 gap-4">
+                    <div class="grid md:grid-cols-2 gap-2">
                         <div>
-                            <label for="country-code" class="block text-sm font-semibold text-gray-700 mb-2">Country Code *</label>
+                            <label for="country-code" class="block text-xs md:text-sm font-medium text-gray-700 mb-1">Country Code *</label>
                             <select id="country-code" name="country-code" required 
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200">
+                                    class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200">
                                 <option value="44" selected>UK (+44)</option>
                                 <option value="1">USA (+1)</option>
                                 <option value="91">India (+91)</option>
@@ -243,33 +245,32 @@
                             </select>
                         </div>
                         <div>
-                            <label for="phone" class="block text-sm font-semibold text-gray-700 mb-2">Phone Number *</label>
+                            <label for="phone" class="block text-xs md:text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
                             <input type="tel" id="phone" name="phone" required maxlength="15"
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+                                   class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
                                    placeholder="Enter your phone number">
                         </div>
                     </div>
                     
                     <!-- Email -->
                     <div>
-                        <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">Email Address *</label>
+                        <label for="email" class="block text-xs md:text-sm font-medium text-gray-700 mb-1">Email Address *</label>
                         <input type="email" id="email" name="email" required 
-                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
-                               placeholder="Enter your email address">
+                               class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+                               placeholder="your.email@example.com">
                     </div>
                     
                     <!-- Date and Time -->
-                    <div class="grid md:grid-cols-2 gap-4">
+                    <div class="grid md:grid-cols-2 gap-2">
                         <div>
-                            <label for="date" class="block text-sm font-semibold text-gray-700 mb-2">Preferred Date *</label>
+                            <label for="date" class="block text-xs md:text-sm font-medium text-gray-700 mb-1">Preferred Date *</label>
                             <input type="date" id="date" name="date" required 
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
-                                   min="">
+                               class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200">
                         </div>
                         <div>
-                            <label for="time" class="block text-sm font-semibold text-gray-700 mb-2">Preferred Time *</label>
+                            <label for="time" class="block text-xs md:text-sm font-medium text-gray-700 mb-1">Preferred Time *</label>
                             <select id="time" name="time" required 
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200">
+                                class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200">
                                 <option value="">Choose Time Slot (BST)</option>
                                 <option value="9:00-9:45">9:00 AM - 9:45 AM BST</option>
                                 <option value="10:00-10:45">10:00 AM - 10:45 AM BST</option>
@@ -288,9 +289,9 @@
                     
                     <!-- Service Selection -->
                     <div>
-                        <label for="service" class="block text-sm font-semibold text-gray-700 mb-2">Service Required *</label>
+                        <label for="service" class="block text-xs md:text-sm font-medium text-gray-700 mb-1">Service *</label>
                         <select id="service" name="service" required 
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200">
+                                class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200">
                             <option value="">Choose a Service</option>
                             <option value="Career Coaching">Career Coaching</option>
                             <option value="Communication Coaching">Communication Coaching</option>
@@ -302,17 +303,17 @@
                     
                     <!-- Message -->
                     <div>
-                        <label for="message" class="block text-sm font-semibold text-gray-700 mb-2">Additional Information</label>
-                        <textarea id="message" name="message" rows="4" 
-                                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200 resize-none"
-                                  placeholder="Tell us about your goals, challenges, or any specific concerns you'd like to address..."></textarea>
+                        <label for="message" class="block text-xs md:text-sm font-medium text-gray-700 mb-1">Additional Information</label>
+                        <textarea id="message" name="message" rows="3" 
+                                  class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+                                  placeholder="Tell us more about your goals"></textarea>
                     </div>
                     
                     <!-- Submit Button -->
-                    <div class="pt-4">
+                    <div class="pt-2">
                         <button type="submit" 
-                                class="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-orange-500/50">
-                            <span class="submit-text">Book Your Consultation</span>
+                                class="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-6 py-3 rounded-lg font-semibold text-base transition-all duration-300 transform hover:scale-[1.02] shadow-md hover:shadow-orange-500/40">
+                            <span class="submit-text">Book Now</span>
                             <span class="loading-text hidden">
                                 <i class="fas fa-spinner fa-spin mr-2"></i>Processing...
                             </span>
@@ -320,10 +321,11 @@
                     </div>
                     
                     <!-- Terms -->
-                    <p class="text-sm text-gray-600 text-center">
+                    <p class="text-xs text-gray-600 text-center leading-tight">
                         By submitting this form, you agree to be contacted regarding your consultation request and our privacy policy.
                     </p>
                 </form>
+            </div>
             </div>
         </div>
     </div>
