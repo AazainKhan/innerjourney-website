@@ -567,25 +567,14 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Add loading states to buttons
+// Button click effect
 document.querySelectorAll('button').forEach(button => {
     button.addEventListener('click', function() {
-        if (this.classList.contains('btn-primary') || this.textContent.includes('Consultation')) {
-            this.classList.add('loading');
-            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-            
-            // Simulate loading
-            setTimeout(() => {
-                this.classList.remove('loading');
-                this.innerHTML = this.getAttribute('data-original-text') || this.textContent;
-            }, 2000);
-        }
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            this.style.transform = 'scale(1)';
+        }, 150);
     });
-});
-
-// Store original button text
-document.querySelectorAll('button').forEach(button => {
-    button.setAttribute('data-original-text', button.innerHTML);
 });
 
 // Parallax effect for hero section
@@ -655,18 +644,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Booking Overlay Functionality
-function initBookingOverlay() {
-    const overlay = document.getElementById('booking-overlay');
-    const overlayBackdrop = document.getElementById('overlay-backdrop');
-    const overlayContent = document.getElementById('overlay-content');
-    const bookingBtn = document.getElementById('booking-btn');
-    const mobileBookingBtn = document.getElementById('mobile-booking-btn');
-    const ctaBookingBtn = document.getElementById('cta-booking-btn');
-    const closeBtn = document.getElementById('close-booking-overlay');
-    const bookingForm = document.getElementById('booking-form');
-    
-    // Set minimum date to today
+// Booking Overlay Functionality is now in booking-overlay.js
+
+// Set minimum date to today for the booking form
+document.addEventListener('DOMContentLoaded', function() {
     const dateInput = document.getElementById('date');
     if (dateInput) {
         const today = new Date();
@@ -675,208 +656,5 @@ function initBookingOverlay() {
         const dd = String(today.getDate()).padStart(2, '0');
         dateInput.min = `${yyyy}-${mm}-${dd}`;
     }
-    
-    // Open overlay with smooth animation
-    function openOverlay(e) {
-        if (e) e.stopPropagation(); // Prevent event from bubbling to document
-        if (overlay) {
-            // First make the overlay visible but transparent
-            overlay.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-            
-            // Trigger reflow to ensure the element is in the render tree
-            void overlay.offsetHeight;
-            
-            // Apply the visible state with transitions
-            requestAnimationFrame(() => {
-                overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.75)';
-                overlay.style.opacity = '1';
-                overlay.style.transform = 'translateY(0)';
-            });
-            
-        } else {
-        }
-    }
-    
-    // Close overlay with smooth animation
-    function closeOverlay() {
-        if (!overlay) return;
-        
-        // Start the fade out animation
-        overlay.style.backgroundColor = 'rgba(0, 0, 0, 0)';
-        overlay.style.opacity = '0';
-        overlay.style.transform = 'translateY(20px)';
-        
-        // Wait for the animation to complete before hiding the overlay
-        setTimeout(() => {
-            overlay.classList.add('hidden');
-            overlay.classList.remove('flex');
-            document.body.style.overflow = 'auto';
-            // Reset form
-            if (bookingForm) {
-                bookingForm.reset();
-            }
-            // Reset inline styles for next open
-            overlay.style.backgroundColor = '';
-            overlay.style.opacity = '';
-            overlay.style.transform = '';
-        }, 300); // Match this with the CSS transition duration
-    }
-    
-    // Handle clicks on the overlay
-    function handleOverlayClick(e) {
-        // If click is on the backdrop (outside the content), close the overlay
-        if (e.target === overlayBackdrop || e.target === overlay) {
-            closeOverlay();
-        }
-    }
-    
-    // Add click listeners
-    if (overlayBackdrop) {
-        overlayBackdrop.addEventListener('click', handleOverlayClick);
-    }
-    
-    // Also handle clicks on the overlay itself
-    if (overlay) {
-        overlay.addEventListener('click', handleOverlayClick);
-    }
-    
-    // Prevent clicks on the content from closing the overlay
-    if (overlayContent) {
-        overlayContent.addEventListener('click', function(e) {
-            e.stopPropagation();
-        });
-    }
-    
-    // Event listeners
-    if (bookingBtn) {
-        bookingBtn.addEventListener('click', function(e) {
-            openOverlay();
-        });
-    }
-    
-    if (mobileBookingBtn) {
-        mobileBookingBtn.addEventListener('click', function(e) {
-            openOverlay();
-        });
-    }
-    
-    if (ctaBookingBtn) {
-        ctaBookingBtn.addEventListener('click', function(e) {
-            openOverlay();
-        });
-    }
-    
-    if (closeBtn) {
-        closeBtn.addEventListener('click', function(e) {
-            closeOverlay();
-        });
-    }
-    
-    // Close on overlay background click
-    if (overlay) {
-        overlay.addEventListener('click', function(e) {
-            if (e.target === overlay) {
-                closeOverlay();
-            }
-        });
-    }
-    
-    // Close on Escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && !overlay.classList.contains('hidden')) {
-            closeOverlay();
-        }
-    });
-    
-    // Form submission
-    if (bookingForm) {
-        // Remove any existing event listeners to prevent duplicates
-        const newBookingForm = bookingForm.cloneNode(true);
-        bookingForm.parentNode.replaceChild(newBookingForm, bookingForm);
-        
-        // Add a data attribute to track if the form is being submitted
-        newBookingForm.setAttribute('data-submitting', 'false');
-        
-        newBookingForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Prevent multiple submissions
-            if (this.getAttribute('data-submitting') === 'true') {
-                console.log('Booking form submission already in progress');
-                return;
-            }
-            
-            // Mark form as submitting
-            this.setAttribute('data-submitting', 'true');
-            
-            // Show loading state
-            console.log('Booking form submission started at:', new Date().toISOString());
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const submitText = submitBtn.querySelector('.submit-text');
-            const loadingText = submitBtn.querySelector('.loading-text');
-            
-            submitText.classList.add('hidden');
-            loadingText.classList.remove('hidden');
-            submitBtn.disabled = true;
-            
-            // Collect form data
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
-            
-            // Send form data
-            fetch('contact.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(result => {
-                if (result.success) {
-                    showNotification(result.message, 'success');
-                    closeOverlay();
-                } else {
-                    showNotification(result.error || 'Something went wrong. Please try again.', 'error');
-                }
-            })
-            .catch(error => {
-                showNotification('Network error. Please try again.', 'error');
-            })
-            .finally(() => {
-                // Reset button state
-                submitText.classList.remove('hidden');
-                loadingText.classList.add('hidden');
-                submitBtn.disabled = false;
-            });
-        });
-    }
-}
-
-// Global test function for debugging
-window.testBookingOverlay = function() {
-    const overlay = document.getElementById('booking-overlay');
-    if (overlay) {
-        overlay.classList.remove('hidden');
-        overlay.classList.add('flex');
-    } else {
-    }
-};
-
-// Global test function to check booking button state
-window.checkBookingButton = function() {
-    const bookingBtn = document.getElementById('booking-btn');
-    const mobileBookingBtn = document.getElementById('mobile-booking-btn');
-    const ctaBookingBtn = document.getElementById('cta-booking-btn');
-    
-    if (bookingBtn) {
-    }
-    
-    if (mobileBookingBtn) {
-    }
-    
-    if (ctaBookingBtn) {
-    }
-};
+});
 

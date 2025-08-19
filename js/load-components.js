@@ -3,8 +3,8 @@ function loadComponents() {
     console.log('Loading components...');
     
     // Load booking overlay if the placeholder exists
-    const bookingOverlaySection = document.getElementById('booking-overlay-section');
-    if (bookingOverlaySection && !document.getElementById('booking-overlay')) {
+    const bookingOverlayContainer = document.getElementById('booking-overlay-container') || document.getElementById('booking-overlay-section');
+    if (bookingOverlayContainer && !document.getElementById('booking-overlay')) {
         console.log('Loading booking overlay...');
         fetch('components/booking-overlay.html')
             .then(response => {
@@ -21,7 +21,7 @@ function loadComponents() {
                 
                 if (overlay) {
                     console.log('Appending booking overlay to DOM...');
-                    bookingOverlaySection.appendChild(overlay);
+                    bookingOverlayContainer.appendChild(overlay);
                     
                     // Initialize the booking overlay
                     if (typeof initBookingOverlay === 'function') {

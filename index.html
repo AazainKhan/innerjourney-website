@@ -89,7 +89,7 @@
                 <p class="text-xl md:text-2xl body-text-light text-white/90 mb-8 leading-relaxed">
                     Helping individuals to build and lead an empowered life with intentions and clarity for holistic success !                </p>
                 <div class="flex flex-col sm:flex-row gap-3 justify-end">
-                    <button class="btn-azure text-sm px-6 py-2 button-text">
+                    <button id="start-journey-btn" class="btn-azure text-sm px-6 py-2 button-text">
                         Start Your Journey
                     </button>
                     <button class="btn-azure-outline text-sm px-6 py-2 button-text" id="learn-more-btn">
@@ -120,7 +120,7 @@
     <!-- About Section -->
     <section id="about" class="py-20 relative overflow-hidden">
         <!-- Background pattern -->
-        <div class="absolute inset-0 bg-gradient-to-br from-orange-50 via-white to-blue-50"></div>
+        <div class="absolute inset-0 bg-transparent"></div>
         <div class="absolute top-0 right-0 w-96 h-96 bg-orange-200/30 rounded-full blur-3xl"></div>
         <div class="absolute bottom-0 left-0 w-96 h-96 bg-blue-200/30 rounded-full blur-3xl"></div>
         
@@ -160,28 +160,17 @@
                     </div>
                 </div>
                 <div class="relative fade-in-left">
-                    <div class="w-full h-[32rem] overflow-hidden shadow-2xl relative rounded-lg transform transition-all duration-1000 ease-out">
+                    <div class="w-full h-[32rem] overflow-visible relative">
                         <img src="images/about-image.jpg" 
                              alt="Shanila - Mindset and Clarity Coach" 
-                             class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent"></div>
+                             class="w-auto max-h-full mx-auto object-contain shadow-2xl">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section class="py-20 relative overflow-hidden">
-        <!-- Background pattern -->
-        <div class="absolute inset-0 bg-gradient-to-br from-orange-50 via-gray-50 to-blue-50"></div>
-        <div class="absolute top-0 left-1/4 w-64 h-64 bg-orange-200/20 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-0 right-1/4 w-64 h-64 bg-blue-200/20 rounded-full blur-3xl"></div>
-        
-        <div class="container mx-auto px-6 relative z-10">
-            <div id="testimonials-section"></div>
-        </div>
-    </section>
+
 
     <!-- Services Section -->
     <section id="services" class="py-20 bg-platinum">
@@ -285,8 +274,8 @@
     <!-- CTA Section -->
     <section class="py-20 brand-gradient-azure">
         <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
-                We can find the voice that's stopping you from gaining momentum together!
+            <h2 class="text-4xl md:text-3xl font-bold text-white mb-6">
+                Let's find the voice stopping you from gaining momentum!
             </h2>
             <button id="cta-booking-btn" class="booking-btn bg-white text-azure hover:bg-blue-50 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-azure border border-white/40">
                 Book A Consultation
@@ -294,6 +283,11 @@
 
         </div>
     </section>
+
+    <!-- Booking Overlay -->
+    <div id="booking-overlay-container">
+        <!-- This will be populated by load-components.js -->
+    </div>
 
     <!-- Footer include for homepage -->
     <div include-html="components/footer.html"></div>
@@ -312,6 +306,32 @@
         });
     </script>
     <script src="script.js"></script>
+    <script>
+    // Debug: Direct event listener for Start Your Journey button
+    document.addEventListener('DOMContentLoaded', function() {
+        const startJourneyBtn = document.getElementById('start-journey-btn');
+        if (startJourneyBtn) {
+            console.log('Start Journey button found, adding click listener');
+            startJourneyBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('Start Journey button clicked');
+                const overlay = document.getElementById('booking-overlay');
+                console.log('Overlay element:', overlay);
+                if (overlay) {
+                    console.log('Showing overlay directly');
+                    overlay.classList.remove('hidden');
+                    overlay.style.opacity = '1';
+                    overlay.style.transform = 'translateY(0)';
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    console.error('Booking overlay not found in DOM');
+                }
+            });
+        } else {
+            console.error('Start Journey button not found');
+        }
+    });
+    </script>
 </body>
 <script>
 // Smooth scroll to services section when 'Learn More' is clicked, with offset

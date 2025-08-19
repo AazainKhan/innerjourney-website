@@ -7,6 +7,9 @@ function initBookingOverlay() {
     const overlayContent = document.getElementById('overlay-content');
     const closeBtn = document.getElementById('close-booking-overlay');
     const bookingForm = document.getElementById('booking-form');
+    const bookingBtn = document.getElementById('booking-btn');
+    const mobileBookingBtn = document.getElementById('mobile-booking-btn');
+    const ctaBookingBtn = document.getElementById('cta-booking-btn');
     
     if (!overlay) {
         console.error('Booking overlay element not found');
@@ -16,9 +19,13 @@ function initBookingOverlay() {
     // Open overlay with smooth animation
     function openOverlay(e) {
         if (e) e.preventDefault();
-        console.log('Opening overlay...');
         if (overlay) {
-            // First make the overlay visible but transparent
+            // Reset styles before opening
+            overlay.style.transform = 'translateY(0)';
+            overlay.style.opacity = '0';
+            overlay.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+            
+            // Make the overlay visible but transparent
             overlay.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
             
@@ -47,27 +54,69 @@ function initBookingOverlay() {
         setTimeout(() => {
             overlay.classList.add('hidden');
             document.body.style.overflow = 'auto';
-            // Reset form
+            // Reset form and transform for next open
+            overlay.style.transform = '';
+            overlay.style.opacity = '';
+            overlay.style.backgroundColor = '';
             if (bookingForm) {
                 bookingForm.reset();
             }
         }, 300);
     }
     
-    // Handle clicks on the overlay
-    function handleOverlayClick(e) {
-        if (e.target === overlayBackdrop || e.target === overlay) {
-            closeOverlay();
+    // Handle form submission
+    function handleFormSubmit(e) {
+        e.preventDefault();
+        
+        // Prevent multiple submissions
+        if (this.getAttribute('data-submitting') === 'true') {
+            console.log('Booking form submission already in progress');
+            return;
         }
+        
+        // Mark form as submitting
+        this.setAttribute('data-submitting', 'true');
+        
+        // Collect form data
+        const formData = new FormData(this);
+        const data = Object.fromEntries(formData);
+        
+        // Send form data
+        fetch('contact.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.success) {
+                showNotification(result.message, 'success');
+                closeOverlay();
+            } else {
+                showNotification(result.error || 'Something went wrong. Please try again.', 'error');
+            }
+        })
+        .catch(error => {
+            showNotification('Network error. Please try again.', 'error');
+        })
+        .finally(() => {
+            this.setAttribute('data-submitting', 'false');
+        });
     }
     
     // Add event listeners
     if (overlayBackdrop) {
-        overlayBackdrop.addEventListener('click', handleOverlayClick);
+        overlayBackdrop.addEventListener('click', closeOverlay);
     }
     
     if (overlay) {
-        overlay.addEventListener('click', handleOverlayClick);
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) {
+                closeOverlay();
+            }
+        });
     }
     
     if (overlayContent) {
@@ -80,19 +129,33 @@ function initBookingOverlay() {
         closeBtn.addEventListener('click', closeOverlay);
     }
     
-    // Use event delegation for booking buttons (works with dynamically added buttons)
-    document.addEventListener('click', function(e) {
-        // Check if the clicked element or any of its parents has the booking-btn class
-        const bookingBtn = e.target.closest('.booking-btn');
-        if (bookingBtn) {
-            e.preventDefault();
-            openOverlay(e);
+    // Add click listeners to all booking buttons
+    [bookingBtn, mobileBookingBtn, ctaBookingBtn].forEach(btn => {
+        if (btn) {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                openOverlay(e);
+            });
         }
     });
     
-    // Handle form submission - Removed duplicate form submission handler
-    // The main form submission is now handled in script.js
-    // This prevents duplicate form submissions
+    // Handle form submission
+    if (bookingForm) {
+        // Remove any existing event listeners to prevent duplicates
+        const newBookingForm = bookingForm.cloneNode(true);
+        bookingForm.parentNode.replaceChild(newBookingForm, bookingForm);
+        
+        // Add a data attribute to track if the form is being submitted
+        newBookingForm.setAttribute('data-submitting', 'false');
+        newBookingForm.addEventListener('submit', handleFormSubmit);
+    }
+    
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && !overlay.classList.contains('hidden')) {
+            closeOverlay();
+        }
+    });
 }
 
 // Initialize when DOM is fully loaded
