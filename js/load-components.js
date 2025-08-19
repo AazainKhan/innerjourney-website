@@ -1,11 +1,10 @@
-// Function to load components
 function loadComponents() {
     console.log('Loading components...');
     
     // Load booking overlay if the placeholder exists
     const bookingOverlayContainer = document.getElementById('booking-overlay-container') || document.getElementById('booking-overlay-section');
     if (bookingOverlayContainer && !document.getElementById('booking-overlay')) {
-        console.log('Loading booking overlay...');
+        console.log('Loading booking overlay from components/booking-overlay.html...');
         fetch('components/booking-overlay.html')
             .then(response => {
                 if (!response.ok) {
@@ -20,25 +19,15 @@ function loadComponents() {
                 const overlay = tempDiv.querySelector('#booking-overlay');
                 
                 if (overlay) {
-                    console.log('Appending booking overlay to DOM...');
+                    console.log('Appending booking overlay to DOM:', overlay);
                     bookingOverlayContainer.appendChild(overlay);
                     
-                    // Initialize the booking overlay
-                    if (typeof initBookingOverlay === 'function') {
-                        console.log('Initializing booking overlay...');
-                        initBookingOverlay();
-                    } else {
-                        console.log('Loading booking overlay script...');
-                        const script = document.createElement('script');
-                        script.src = 'js/booking-overlay.js';
-                        script.onload = function() {
-                            console.log('Booking overlay script loaded, initializing...');
-                            if (typeof initBookingOverlay === 'function') {
-                                initBookingOverlay();
-                            }
-                        };
-                        document.body.appendChild(script);
-                    }
+                    // Confirm overlay presence after appending
+                    console.log('Overlay after appending:', document.getElementById('booking-overlay'));
+                    
+                    // Initialize the booking overlay after appending
+                    console.log('Overlay appended successfully, initializing...');
+                    initBookingOverlay();
                 } else {
                     console.error('Booking overlay content not found in the loaded HTML');
                 }

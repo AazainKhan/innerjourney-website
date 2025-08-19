@@ -201,6 +201,19 @@ html {
     background-repeat: no-repeat;
 }
 
+/* Desktop hero adjustments */
+@media (min-width: 1024px) {
+    #home .container {
+        padding-bottom: 8rem; /* Move content lower on desktop */
+    }
+}
+
+@media (min-width: 1280px) {
+    #home .container {
+        padding-bottom: 10rem; /* Even lower on larger screens */
+    }
+}
+
 /* Testimonials section wrapper */
 .testimonials-section-wrapper {
     position: relative;
@@ -385,7 +398,7 @@ html {
     background: var(--carrot-orange);
     color: var(--white);
     padding: 12px 32px;
-    border-radius: 50px;
+    border-radius: 8px;
     font-weight: 600;
     transition: all 0.3s ease;
     border: none;
@@ -405,7 +418,7 @@ html {
     background: var(--azure-blue);
     color: var(--white);
     padding: 12px 32px;
-    border-radius: 50px;
+    border-radius: 8px;
     font-weight: 600;
     transition: all 0.3s ease;
     border: none;
@@ -413,6 +426,10 @@ html {
     display: inline-block;
     text-decoration: none;
     box-shadow: var(--shadow-azure);
+}
+
+#booking-btn {
+    white-space: nowrap;
 }
 .btn-azure:hover {
     filter: brightness(1.05);
@@ -422,7 +439,7 @@ html {
     background: transparent;
     color: var(--azure-blue);
     padding: 12px 32px;
-    border-radius: 50px;
+    border-radius: 8px;
     font-weight: 600;
     transition: all 0.3s ease;
     border: 2px solid var(--azure-blue);
@@ -439,7 +456,7 @@ html {
 .btn-sm {
     padding: 8px 16px !important;
     font-size: 1rem !important;
-    border-radius: 9999px !important;
+    border-radius: 8px !important;
 }
 
 /* Mobile Menu */
@@ -525,6 +542,36 @@ html {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    /* Hero section responsive adjustments */
+    #home {
+        background-position: 30% center;
+    }
+    
+    #home .container {
+        padding-bottom: 5rem; /* Account for mobile social bar */
+    }
+    
+    /* Ensure hero content is properly centered on tablets and mobile */
+    #home .max-w-2xl {
+        text-align: center !important;
+    }
+    
+    #home .flex {
+        justify-content: center !important;
+    }
+    
+    /* Adjust hero text sizes for better mobile readability */
+    #home h1 {
+        font-size: 3rem !important;
+        line-height: 1.2;
+    }
+    
+    #home p {
+        font-size: 1.125rem !important;
+        padding: 0 1rem;
+    }
+    
+    /* General responsive adjustments */
     .container {
         padding-left: 1rem;
         padding-right: 1rem;
@@ -540,6 +587,67 @@ html {
     
     .grid {
         grid-template-columns: 1fr;
+    }
+    
+    /* Mobile social bar positioning */
+    #home .md\:hidden {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        margin: 0;
+    }
+}
+
+/* Small mobile screens */
+@media (max-width: 640px) {
+    #home {
+        background-position: 25% center;
+    }
+    
+    #home h1 {
+        font-size: 2.5rem !important;
+        margin-bottom: 1.5rem !important;
+    }
+    
+    #home p {
+        font-size: 1rem !important;
+        margin-bottom: 2rem !important;
+    }
+    
+    /* Ensure buttons stack properly on small screens */
+    #home .flex-col {
+        gap: 0.75rem;
+    margin-bottom: 2.5rem;
+    }
+    
+    #home button {
+        width: 100%;
+        max-width: 250px;
+        margin: 0 auto;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    #home {
+        background-position: 20% center;
+    }
+    
+    #home .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        padding-bottom: 4rem;
+    }
+    
+    #home h1 {
+        font-size: 2rem !important;
+    }
+    
+    #home p {
+        font-size: 0.875rem !important;
+        padding: 0;
     }
 }
 
@@ -590,6 +698,98 @@ html {
         opacity: 1;
         transform: translateY(0);
         pointer-events: auto;
+    }
+}
+
+/* Hero section responsive adjustments */
+@media (max-width: 768px) {
+    /* Hero section responsive adjustments */
+    #home {
+        background-position: 30% center;
+    }
+    
+    #home .container {
+        padding-bottom: 8rem; /* Increased padding to move content lower */
+    }
+    
+    /* Ensure hero content is properly centered on tablets and mobile */
+    #home .max-w-2xl {
+        text-align: center !important;
+    }
+    
+    #home .flex {
+        justify-content: center !important;
+    }
+    
+    /* Adjust hero text sizes for better mobile readability */
+    #home h1 {
+        font-size: 3rem !important;
+        line-height: 1.2;
+    }
+    
+    #home p {
+        font-size: 1.125rem !important;
+        padding: 0 1rem;
+    }
+    
+    /* Mobile social bar positioning */
+    #home .md\:hidden {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        margin: 0;
+    }
+}
+
+/* Small mobile screens */
+@media (max-width: 640px) {
+    #home {
+        background-position: 25% center;
+    }
+    
+    #home h1 {
+        font-size: 2.5rem !important;
+        margin-bottom: 1.5rem !important;
+    }
+    
+    #home p {
+        font-size: 1rem !important;
+        margin-bottom: 2rem !important;
+    }
+    
+    /* Ensure buttons stack properly on small screens */
+    #home .flex-col {
+        gap: 0.75rem;
+    }
+    
+    #home button {
+        width: 100%;
+        max-width: 250px;
+        margin: 0 auto;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    #home {
+        background-position: 20% center;
+    }
+    
+    #home .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        padding-bottom: 4rem;
+    }
+    
+    #home h1 {
+        font-size: 2rem !important;
+    }
+    
+    #home p {
+        font-size: 0.875rem !important;
+        padding: 0;
     }
 }
 
@@ -672,6 +872,78 @@ a:focus {
     opacity: 0; /* Start invisible and fade in */
 }
 
+/* Booking Overlay Responsive Styles */
+@media (max-height: 800px) {
+    #booking-overlay #overlay-content {
+        max-height: 90vh;
+        overflow-y: auto;
+        margin: 2rem auto;
+    }
+    
+    #booking-overlay .p-4.md\:p-6 {
+        padding: 1rem;
+    }
+    
+    #booking-overlay form {
+        padding-bottom: 1rem;
+    }
+}
+
+@media (max-height: 600px) {
+    #booking-overlay #overlay-content {
+        max-height: 85vh;
+        margin: 1rem auto;
+    }
+    
+    #booking-overlay .bg-\[\#14213dff\] {
+        padding: 0.75rem 1rem;
+    }
+    
+    #booking-overlay .bg-\[\#14213dff\] h2 {
+        font-size: 1.2rem;
+    }
+    
+    #booking-overlay .space-y-4 {
+        gap: 0.5rem;
+    }
+    
+    #booking-overlay .space-y-6 {
+        gap: 0.75rem;
+    }
+}
+
+/* Mobile booking overlay adjustments */
+@media (max-width: 640px) {
+    #booking-overlay #overlay-content {
+        max-height: 85vh;
+        overflow-y: auto;
+        margin: 1rem;
+        width: calc(100% - 2rem);
+    }
+    
+    #booking-overlay .grid.md\:grid-cols-2 {
+        gap: 0.75rem;
+    }
+    
+    #booking-overlay input,
+    #booking-overlay select,
+    #booking-overlay textarea {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.875rem;
+    }
+    
+    #booking-overlay label {
+        font-size: 0.75rem;
+    }
+    #booking-overlay-header {
+        font-size: 1.5rem !important;
+    }
+
+    #booking-overlay .bg-\[\#14213dff\] h2 {
+        font-size: 1.2rem;
+    }
+}
+
 /* Loading States */
 .loading {
     opacity: 0.7;
@@ -693,6 +965,19 @@ a:focus {
     color: var(--white);
 }
 
+/* About Section Spacing Fix */
+#about {
+    padding-top: 3rem;
+    padding-bottom: 5rem;
+}
+
+@media (min-width: 768px) {
+    #about {
+        padding-top: 4rem;
+        padding-bottom: 5rem;
+    }
+}
+
 /* Print Styles */
 @media print {
     nav, footer, .btn-primary {
@@ -704,28 +989,10 @@ a:focus {
         background: white;
     }
 }
-/* Center hero section for mobile widths */
-@media (max-width: 640px) {
-    #home {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-    #home h1,
-    #home h2,
-    #home h3,
-    #home p,
-    #home img,
-    #home .btn-primary,
-    #home .btn-azure {
-        margin-left: auto !important;
-        margin-right: auto !important;
-        text-align: center !important;
-        display: block;
-        width: 100%;
-        max-width: 100%;
+
+/* Center social icons on medium screens */
+@media (width: 768px) {
+    .hero-social-icons {
+        justify-content: center !important;
     }
 }

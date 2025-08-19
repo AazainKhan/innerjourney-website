@@ -1,8 +1,8 @@
-// Booking Overlay Functionality
 function initBookingOverlay() {
     console.log('Initializing booking overlay...');
     
     const overlay = document.getElementById('booking-overlay');
+    console.log('Overlay element:', overlay); // Added log to check overlay presence
     const overlayBackdrop = document.getElementById('overlay-backdrop');
     const overlayContent = document.getElementById('overlay-content');
     const closeBtn = document.getElementById('close-booking-overlay');

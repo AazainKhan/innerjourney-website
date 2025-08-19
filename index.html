@@ -14,60 +14,7 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300">
-        <div class="mx-auto px-2 md:px-6 py-6">
-            <div class="flex items-center justify-between gap-4 xl:gap-12">
-                <a href="#home" class="flex items-center space-x-2 hover:opacity-90 transition-opacity">
-                    <img src="images/logo_transparent.png" alt="Shanila Khan Mindset and Clarity Coaching Logo" class="h-14 w-auto">
-                    <div class="text-2xl heading-primary text-white">
-                        Shanila Khan
-                    </div>
-                </a>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">Home</a>
-                    <!-- <a href="about.html" class="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">About</a> -->
-                    <!-- <a href="services.html" class="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">Services</a> -->
-                    <!-- <a href="blog.html" class="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">Blog</a> -->
-                    <a href="https://www.youtube.com/watch?v=l-9i_aFrrI8" target="_blank" class="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">Podcast</a>
-                    <a href="contact.html" class="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">Contact</a>
-                </div>
-                <button id="booking-btn" class="btn-azure btn-sm button-text hidden md:inline-flex">
-                    Book a Consultation
-                </button>
-                <div class="md:hidden mr-2">
-                    <button id="mobile-menu-btn" class="text-white text-2xl">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="md:hidden bg-black bg-opacity-95 hidden">
-            <div class="px-6 py-4 space-y-4">
-                <a href="#home" class="block text-white hover:text-orange-400 transition-colors uppercase">Home</a>
-                <a href="about.html" class="block text-white hover:text-orange-400 transition-colors uppercase">About</a>
-                <a href="services.html" class="block text-white hover:text-orange-400 transition-colors uppercase">Services</a>
-                <a href="blog.html" class="block text-white hover:text-orange-400 transition-colors">Blog</a>
-                <a href="https://www.youtube.com/watch?v=l-9i_aFrrI8" target="_blank" class="block text-white hover:text-orange-400 transition-colors">Podcast</a>
-                <a href="contact.html" class="block text-white hover:text-orange-400 transition-colors">Contact</a>
-                <button id="mobile-booking-btn" class="w-full btn-azure button-text">
-                    Book a Consultation
-                </button>
-                <div class="flex justify-center mt-4 space-x-6">
-                    <a href="https://www.facebook.com/innerjourneywithshanila/" target="_blank" aria-label="Facebook" class="text-white text-2xl hover:text-orange-400">
-                        <i class="fab fa-facebook"></i>
-                    </a>
-                    <a href="https://www.instagram.com/_.innerjourney_/" target="_blank" aria-label="Instagram" class="text-white text-2xl hover:text-orange-400">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="https://www.youtube.com/channel/UCJbRrCiY4zXfojPTa17EKMg" target="_blank" aria-label="YouTube" class="text-white text-2xl hover:text-orange-400">
-                        <i class="fab fa-youtube"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <div include-html="components/navbar.html"></div>
 
     <!-- Hero Section -->
     <section id="home" class="relative h-screen flex items-center overflow-hidden">
@@ -80,15 +27,15 @@
         <div class="absolute bottom-20 right-20 w-24 h-24 bg-[rgba(20,33,61,0.25)] rounded-full blur-xl animate-pulse delay-1000"></div>
         <div class="absolute top-1/2 left-10 w-16 h-16 bg-white/10 rounded-full blur-lg animate-pulse delay-500"></div>
         
-        <div class="container mx-auto px-6 relative z-20">
-            <div class="max-w-2xl ml-auto text-right mt-80 md:mt-0">
+        <div class="container mx-auto px-6 relative z-20 h-full flex items-end pb-32 md:pb-20 md:items-end">
+            <div class="max-w-2xl w-full md:ml-auto text-center md:text-right">
 
                 <h1 class="text-5xl md:text-7xl heading-primary text-white mb-6 leading-tight drop-shadow-2xl font-['Dancing_Script'] font-bold">
                     Transform Your Journey!
                 </h1>
                 <p class="text-xl md:text-2xl body-text-light text-white/90 mb-8 leading-relaxed">
                     Helping individuals to build and lead an empowered life with intentions and clarity for holistic success !                </p>
-                <div class="flex flex-col sm:flex-row gap-3 justify-end">
+                <div class="flex flex-col sm:flex-row gap-3 justify-center md:justify-end">
                     <button id="start-journey-btn" class="btn-azure text-sm px-6 py-2 button-text">
                         Start Your Journey
                     </button>
@@ -97,7 +44,7 @@
                     </button>
                 </div>
                 <!-- Social Links from Footer -->
-                <div class="flex justify-end sm:justify-end justify-center mt-6 space-x-4">
+                <div class="hidden md:flex justify-end mt-6 space-x-4 hero-social-icons">
                     <a href="https://www.facebook.com/innerjourneywithshanila/" class="link-muted transition-colors text-2xl opacity-90 hover:opacity-100" target="_blank" aria-label="Facebook">
                         <i class="fab fa-facebook"></i>
                     </a>
@@ -114,7 +61,23 @@
             </div>
         </div>
         
-        <!-- Scroll indicator (removed bouncing animation) -->
+        <!-- Mobile Social Bar -->
+        <div class="md:hidden absolute bottom-0 left-0 right-0 bg-[#14213dff] py-4 px-4 z-20">
+            <div class="flex justify-center space-x-8">
+                <a href="https://www.facebook.com/innerjourneywithshanila/" class="text-white text-xl hover:text-orange-400 transition-colors" target="_blank" aria-label="Facebook">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://www.instagram.com/_.innerjourney_/" class="text-white text-xl hover:text-orange-400 transition-colors" target="_blank" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.youtube.com/channel/UCJbRrCiY4zXfojPTa17EKMg" class="text-white text-xl hover:text-orange-400 transition-colors" target="_blank" aria-label="YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="https://api.whatsapp.com/send?phone=447387973382&" class="text-white text-xl hover:text-orange-400 transition-colors" target="_blank" aria-label="WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+            </div>
+        </div>
     </section>
 
     <!-- About Section -->
@@ -277,7 +240,7 @@
             <h2 class="text-4xl md:text-3xl font-bold text-white mb-6">
                 Let's find the voice stopping you from gaining momentum!
             </h2>
-            <button id="cta-booking-btn" class="booking-btn bg-white text-azure hover:bg-blue-50 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-azure border border-white/40">
+            <button id="cta-booking-btn" class="booking-btn bg-white text-azure hover:bg-blue-50 px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-azure border border-white/40">
                 Book A Consultation
             </button>
 
@@ -296,7 +259,9 @@
     <div id="booking-overlay-section"></div>
 
     <!-- Main scripts -->
-    <script src="js/load-components.js"></script>
+<script src="js/testimonials.js"></script>
+<script src="js/booking-overlay.js"></script>
+    
     <script>
         // Initialize testimonials carousel after dynamic import
         document.addEventListener('testimonialsLoaded', function() {

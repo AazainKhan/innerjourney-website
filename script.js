@@ -302,6 +302,10 @@ function initTestimonials() {
 function initMobileMenu() {
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuClose = document.getElementById('mobile-menu-close');
+    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+    
+    if (!mobileMenuBtn || !mobileMenu) return;
     
     // Remove Tailwind hidden on open, and allow CSS transition to play
     function openMobileMenu() {
@@ -309,39 +313,38 @@ function initMobileMenu() {
         requestAnimationFrame(() => {
             mobileMenu.classList.add('show');
         });
-        const icon = mobileMenuBtn.querySelector('i');
-        icon.className = 'fas fa-times';
     }
+    
     function closeMobileMenu() {
         mobileMenu.classList.remove('show');
-        const icon = mobileMenuBtn.querySelector('i');
-        icon.className = 'fas fa-bars';
+        
         const handleTransitionEnd = () => {
             mobileMenu.classList.add('hidden');
             mobileMenu.removeEventListener('transitionend', handleTransitionEnd);
         };
         mobileMenu.addEventListener('transitionend', handleTransitionEnd);
     }
-    mobileMenuBtn.addEventListener('click', function() {
+    
+    // Toggle menu on button click
+    mobileMenuBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
         if (!mobileMenu.classList.contains('show')) {
             openMobileMenu();
         } else {
             closeMobileMenu();
         }
     });
-    // Close button support
-    const mobileMenuClose = document.getElementById('mobile-menu-close');
+
     if (mobileMenuClose) {
         mobileMenuClose.addEventListener('click', function(e) {
             e.stopPropagation();
             closeMobileMenu();
         });
     }
-    // Overlay click support (only close if clicking outside menu content)
-    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+
     if (mobileMenuOverlay) {
         mobileMenuOverlay.addEventListener('click', function(e) {
-            // Only close if clicking directly on the overlay, not inside menu content
+            // Only close if the overlay itself (the background) is clicked
             if (e.target === mobileMenuOverlay) {
                 closeMobileMenu();
             }
@@ -356,7 +359,12 @@ function initMobileMenu() {
         });
     });
     
-    // Remove old click-outside handler (now handled by overlay)
+    // Close menu on escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && mobileMenu.classList.contains('show')) {
+            closeMobileMenu();
+        }
+    });
 }
 
 // Scroll animations
@@ -597,6 +605,19 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(function() {
             initTestimonials();
         }, 100);
+        
+        // Add event listener for Start Your Journey button
+        const startJourneyBtn = document.getElementById('start-journey-btn');
+        if (startJourneyBtn) {
+            startJourneyBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const bookingBtn = document.getElementById('booking-btn');
+                if (bookingBtn) {
+                    // Trigger the same click handler as the booking button
+                    bookingBtn.click();
+                }
+            });
+        }
     });
     
     // Add smooth scrolling to all links with a hash
