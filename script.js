@@ -59,28 +59,9 @@ document.addEventListener('componentsLoaded', function() {
 function initNavigation() {
     const navbar = document.getElementById('navbar');
     if (!navbar) return;
-    let ticking = false;
-    function updateNavbar() {
-        const scrollY = window.scrollY;
-        const threshold = 100;
-        console.log('updateNavbar called, scrollY:', scrollY);
-        if (scrollY > threshold) {
-            navbar.classList.add('scrolled');
-            console.log('navbar.scrolled added');
-        } else {
-            navbar.classList.remove('scrolled');
-            console.log('navbar.scrolled removed');
-        }
-        ticking = false;
-    }
-    window.addEventListener('scroll', function() {
-        if (!ticking) {
-            requestAnimationFrame(updateNavbar);
-            ticking = true;
-        }
-    });
-    // Initial update in case page is loaded scrolled
-    updateNavbar();
+    
+    // Add scrolled class by default for better mobile experience
+    navbar.classList.add('scrolled');
     // Smooth scrolling for navigation links (only for internal anchor links)
     const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
     navLinks.forEach(link => {
@@ -99,11 +80,8 @@ function initNavigation() {
 
 // Testimonials carousel with smooth transitions
 function initTestimonials() {
-    console.log('initTestimonials called');
     const testimonials = document.querySelectorAll('.testimonial');
-    console.log('Found', testimonials.length, 'testimonials');
     if (!testimonials.length) {
-        console.error('No testimonials found!');
         return;
     }
     
@@ -526,21 +504,16 @@ window.addEventListener('scroll', function() {
 
 // Initialize contact form if it exists
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM fully loaded');
     initContactForm();
     
     // Initialize testimonials after components are loaded
     document.addEventListener('componentsLoaded', function() {
-        console.log('Components loaded, initializing testimonials...');
         // Small delay to ensure all DOM is ready
         setTimeout(function() {
-            console.log('Initializing testimonials...');
             initTestimonials();
-            console.log('Testimonials initialized');
         }, 100);
     });
     
-    console.log('Setting up smooth scrolling...');
     // Add smooth scrolling to all links with a hash
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -588,8 +561,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Booking Overlay Functionality
 function initBookingOverlay() {
-    console.log('Initializing booking overlay...');
-    
     const overlay = document.getElementById('booking-overlay');
     const overlayBackdrop = document.getElementById('overlay-backdrop');
     const overlayContent = document.getElementById('overlay-content');
@@ -598,21 +569,6 @@ function initBookingOverlay() {
     const ctaBookingBtn = document.getElementById('cta-booking-btn');
     const closeBtn = document.getElementById('close-booking-overlay');
     const bookingForm = document.getElementById('booking-form');
-    
-    console.log('Elements found:', {
-        overlay: !!overlay,
-        bookingBtn: !!bookingBtn,
-        mobileBookingBtn: !!mobileBookingBtn,
-        ctaBookingBtn: !!ctaBookingBtn,
-        closeBtn: !!closeBtn,
-        bookingForm: !!bookingForm
-    });
-    
-    // Test if overlay is visible
-    if (overlay) {
-        console.log('Overlay element found, current classes:', overlay.className);
-        console.log('Overlay is hidden:', overlay.classList.contains('hidden'));
-    }
     
     // Set minimum date to today
     const dateInput = document.getElementById('date');
@@ -627,7 +583,6 @@ function initBookingOverlay() {
     // Open overlay with smooth animation
     function openOverlay(e) {
         if (e) e.stopPropagation(); // Prevent event from bubbling to document
-        console.log('Opening overlay...');
         if (overlay) {
             // First make the overlay visible but transparent
             overlay.classList.remove('hidden');
@@ -643,9 +598,7 @@ function initBookingOverlay() {
                 overlay.style.transform = 'translateY(0)';
             });
             
-            console.log('Overlay opened with animation');
         } else {
-            console.error('Overlay element not found!');
         }
     }
     
@@ -701,43 +654,27 @@ function initBookingOverlay() {
     
     // Event listeners
     if (bookingBtn) {
-        console.log('Adding click listener to booking button');
         bookingBtn.addEventListener('click', function(e) {
-            console.log('Booking button clicked!');
             openOverlay();
         });
-    } else {
-        console.error('Booking button not found!');
     }
     
     if (mobileBookingBtn) {
-        console.log('Adding click listener to mobile booking button');
         mobileBookingBtn.addEventListener('click', function(e) {
-            console.log('Mobile booking button clicked!');
             openOverlay();
         });
-    } else {
-        console.error('Mobile booking button not found!');
     }
     
     if (ctaBookingBtn) {
-        console.log('Adding click listener to CTA booking button');
         ctaBookingBtn.addEventListener('click', function(e) {
-            console.log('CTA booking button clicked!');
             openOverlay();
         });
-    } else {
-        console.error('CTA booking button not found!');
     }
     
     if (closeBtn) {
-        console.log('Adding click listener to close button');
         closeBtn.addEventListener('click', function(e) {
-            console.log('Close button clicked!');
             closeOverlay();
         });
-    } else {
-        console.error('Close button not found!');
     }
     
     // Close on overlay background click
@@ -792,7 +729,6 @@ function initBookingOverlay() {
                 }
             })
             .catch(error => {
-                console.error('Error:', error);
                 showNotification('Network error. Please try again.', 'error');
             })
             .finally(() => {
@@ -807,42 +743,27 @@ function initBookingOverlay() {
 
 // Global test function for debugging
 window.testBookingOverlay = function() {
-    console.log('Testing booking overlay...');
     const overlay = document.getElementById('booking-overlay');
     if (overlay) {
-        console.log('Overlay found, current classes:', overlay.className);
-        console.log('Is hidden:', overlay.classList.contains('hidden'));
         overlay.classList.remove('hidden');
         overlay.classList.add('flex');
-        console.log('Overlay should now be visible');
     } else {
-        console.error('Overlay not found!');
     }
 };
 
 // Global test function to check booking button state
 window.checkBookingButton = function() {
-    console.log('Checking booking button state...');
     const bookingBtn = document.getElementById('booking-btn');
     const mobileBookingBtn = document.getElementById('mobile-booking-btn');
     const ctaBookingBtn = document.getElementById('cta-booking-btn');
     
-    console.log('Desktop booking button:', bookingBtn);
-    console.log('Mobile booking button:', mobileBookingBtn);
-    console.log('CTA booking button:', ctaBookingBtn);
-    
     if (bookingBtn) {
-        console.log('Desktop button classes:', bookingBtn.className);
-        console.log('Desktop button text:', bookingBtn.textContent);
     }
     
     if (mobileBookingBtn) {
-        console.log('Mobile button classes:', mobileBookingBtn.className);
-        console.log('Mobile button text:', mobileBookingBtn.textContent);
     }
     
     if (ctaBookingBtn) {
-        console.log('CTA button classes:', ctaBookingBtn.className);
-        console.log('CTA button text:', ctaBookingBtn.textContent);
     }
 };
+
