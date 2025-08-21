@@ -260,38 +260,46 @@
     </section> -->
 
 
+    <!-- Booking Overlay -->
+    <div include-html="components/booking-overlay.html"></div>
+    
+    <!-- Footer -->
     <div include-html="components/footer.html"></div>
 
-    <script src="script.js"></script>
-    <!-- Booking Overlay Placeholder -->
-    <div id="booking-overlay-section"></div>
-
     <!-- Main Scripts -->
-    <script src="script.js"></script>
     <script src="js/load-components.js"></script>
+    <script src="js/booking-overlay.js"></script>
+    <script src="script.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        // Initialize when components are loaded
+        document.addEventListener('componentsLoaded', function() {
             // Initialize navigation
             if (typeof initNavigation === 'function') {
                 initNavigation();
             }
             
+            // Initialize booking overlay
+            if (typeof initBookingOverlay === 'function') {
+                initBookingOverlay();
+            }
+            
             // Form submission is now handled in script.js to prevent duplicate submissions
             // The handler in script.js includes better error handling and submission tracking
-            
-            function showFormMessage(message, type) {
-                if (!formMessage) return;
-                
-                formMessage.textContent = message;
-                formMessage.className = `p-4 mb-4 rounded-lg ${
-                    type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-                }`;
-                formMessage.classList.remove('hidden');
-                
-                // Scroll to message
-                formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
         });
+        
+        function showFormMessage(message, type) {
+            const formMessage = document.getElementById('form-message');
+            if (!formMessage) return;
+            
+            formMessage.textContent = message;
+            formMessage.className = `p-4 mb-4 rounded-lg ${
+                type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+            }`;
+            formMessage.classList.remove('hidden');
+            
+            // Scroll to message
+            formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
     </script>
 </body>
 </html>
