@@ -1,2 +1,4 @@
 *.zip
 /*.vs
+php_contact_errors.log
+php_errors.log

@@ -8,8 +8,8 @@
     
     # Redirect to HTTPS in production
     # Uncomment these lines when deploying to production
-    # RewriteCond %{HTTPS} off
-    # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
     
     # Handle Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
