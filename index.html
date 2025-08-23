@@ -264,10 +264,7 @@
         document.addEventListener('componentsLoaded', function() {
             // Initialize booking overlay
             if (typeof initBookingOverlay === 'function') {
-                console.log('Initializing booking overlay from componentsLoaded event');
                 initBookingOverlay();
-            } else {
-                console.error('initBookingOverlay function not found');
             }
             
             // Initialize testimonials carousel

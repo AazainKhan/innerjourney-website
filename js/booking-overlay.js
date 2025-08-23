@@ -1,10 +1,6 @@
 function initBookingOverlay() {
     const overlay = document.getElementById('booking-overlay');
-    
-    if (!overlay) {
-        console.error('Booking overlay element not found. Please check if the booking-overlay.html is properly included.');
-        return;
-    }
+    if (!overlay) return; // Silently exit if overlay not found
     
     const overlayBackdrop = document.getElementById('overlay-backdrop');
     const overlayContent = document.getElementById('overlay-content');

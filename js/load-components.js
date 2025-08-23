@@ -34,7 +34,9 @@ function loadComponents() {
     }
     
     // Load all components
-    Promise.all([loadBookingOverlay()]).catch(console.error);
+    Promise.all([loadBookingOverlay()]).catch(() => {
+        // Silently handle any errors during component loading
+    });
 }
 
 // Initialize when DOM is fully loaded
