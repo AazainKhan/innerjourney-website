@@ -1,35 +1,39 @@
 // HTML include loader for components (navbar, etc.)
 function includeHTML(callback) {
-    var elements = document.querySelectorAll('[include-html]');
-    var total = elements.length;
+    const elements = document.querySelectorAll('[include-html]');
+    const total = elements.length;
+    
     if (total === 0) {
         if (callback) callback();
         document.dispatchEvent(new Event('componentsLoaded'));
         return;
     }
-    var loaded = 0;
-    elements.forEach(function(el) {
-        var file = el.getAttribute('include-html');
+    
+    let loaded = 0;
+    
+    function checkComplete() {
+        loaded++;
+        if (loaded === total) {
+            if (callback) callback();
+            document.dispatchEvent(new Event('componentsLoaded'));
+        }
+    }
+    
+    elements.forEach(el => {
+        const file = el.getAttribute('include-html');
         if (!file) {
-            loaded++;
-            if (loaded === total) {
-                if (callback) callback();
-                document.dispatchEvent(new Event('componentsLoaded'));
-            }
+            checkComplete();
             return;
         }
-        var xhr = new XMLHttpRequest();
+        
+        const xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
             if (this.readyState === 4) {
                 if (this.status === 200) {
                     el.innerHTML = this.responseText;
                 }
                 el.removeAttribute('include-html');
-                loaded++;
-                if (loaded === total) {
-                    if (callback) callback();
-                    document.dispatchEvent(new Event('componentsLoaded'));
-                }
+                checkComplete();
             }
         };
         xhr.open('GET', file, true);

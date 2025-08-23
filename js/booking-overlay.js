@@ -1,15 +1,29 @@
 function initBookingOverlay() {
-    console.log('Initializing booking overlay...');
-    
     const overlay = document.getElementById('booking-overlay');
-    console.log('Overlay element:', overlay); // Added log to check overlay presence
+    
+    if (!overlay) {
+        console.error('Booking overlay element not found. Please check if the booking-overlay.html is properly included.');
+        return;
+    }
+    
     const overlayBackdrop = document.getElementById('overlay-backdrop');
     const overlayContent = document.getElementById('overlay-content');
     const closeBtn = document.getElementById('close-booking-overlay');
     const bookingForm = document.getElementById('booking-form');
+    
+    // Find all possible booking buttons
     const bookingBtn = document.getElementById('booking-btn');
     const mobileBookingBtn = document.getElementById('mobile-booking-btn');
     const ctaBookingBtn = document.getElementById('cta-booking-btn');
+    const bottomCtaBookingBtn = document.getElementById('bottom-cta-booking-btn');
+    const startJourneyBtn = document.querySelector('.btn-azure');
+    
+    // Add click listeners to all booking buttons
+    [bookingBtn, mobileBookingBtn, ctaBookingBtn, bottomCtaBookingBtn, startJourneyBtn].filter(Boolean).forEach(btn => {
+        // Remove any existing listeners to prevent duplicates
+        btn.removeEventListener('click', openOverlay);
+        btn.addEventListener('click', openOverlay);
+    });
     
     if (!overlay) {
         console.error('Booking overlay element not found');
@@ -132,10 +146,9 @@ function initBookingOverlay() {
     // Add click listeners to all booking buttons
     [bookingBtn, mobileBookingBtn, ctaBookingBtn].forEach(btn => {
         if (btn) {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                openOverlay(e);
-            });
+            // Remove any existing listeners to prevent duplicates
+            btn.removeEventListener('click', openOverlay);
+            btn.addEventListener('click', openOverlay);
         }
     });
     
@@ -158,10 +171,32 @@ function initBookingOverlay() {
     });
 }
 
-// Initialize when DOM is fully loaded
-document.addEventListener('DOMContentLoaded', function() {
-    // Check if booking overlay exists on the page
-    if (document.getElementById('booking-overlay')) {
+// Function to initialize the booking overlay when the DOM is ready
+function initializeBookingOverlay() {
+    // Check if the overlay exists
+    const overlay = document.getElementById('booking-overlay');
+    if (!overlay) {
+        // Retry after a short delay
+        setTimeout(initializeBookingOverlay, 500);
+        return;
+    }
+    
+    // Initialize the booking overlay
+    if (typeof initBookingOverlay === 'function') {
         initBookingOverlay();
     }
-});
+}
+
+// Initialize when DOM is fully loaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+        // Small delay to ensure all components are loaded
+        setTimeout(initializeBookingOverlay, 300);
+    });
+} else {
+    // DOMContentLoaded has already fired
+    setTimeout(initializeBookingOverlay, 300);
+}
+
+// Initialize when components are loaded
+document.addEventListener('componentsLoaded', initializeBookingOverlay);

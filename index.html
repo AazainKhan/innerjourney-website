@@ -25,7 +25,8 @@
         <!-- Floating geometric shapes -->
         <div class="absolute top-20 left-20 w-32 h-32 bg-orange-500/20 rounded-full blur-xl animate-pulse"></div>
         <div class="absolute bottom-20 right-20 w-24 h-24 bg-[rgba(20,33,61,0.25)] rounded-full blur-xl animate-pulse delay-1000"></div>
-        <div class="absolute top-1/2 left-10 w-16 h-16 bg-white/10 rounded-full blur-lg animate-pulse delay-500"></div>
+        <div class="absolute top-1/2 left-10 
+        w-16 h-16 bg-white/10 rounded-full blur-lg animate-pulse delay-500"></div>
         
         <div class="container mx-auto px-6 relative z-20 h-full flex items-end pb-32 md:pb-20 md:items-end">
             <div class="max-w-2xl w-full md:ml-auto text-center md:text-right">
@@ -36,7 +37,7 @@
                 <p class="text-xl md:text-2xl body-text-light text-white/90 mb-8 leading-relaxed">
                     Helping people to build and lead an empowered life with intentions and clarity for holistic success !                </p>
                 <div class="flex flex-col sm:flex-row gap-3 justify-center md:justify-end">
-                    <button id="booking-btn" class="btn-azure text-sm px-6 py-2 button-text">
+                    <button id="cta-booking-btn" class="btn-azure text-sm px-6 py-2 button-text">
                         Start Your Journey
                     </button>
                     <button class="btn-azure-outline text-sm px-6 py-2 button-text" id="learn-more-btn">
@@ -239,32 +240,37 @@
             <h2 class="text-4xl md:text-3xl font-bold text-white mb-6">
                 Let's find the voice stopping you from gaining momentum!
             </h2>
-            <button id="cta-booking-btn" class="booking-btn bg-white text-azure hover:bg-blue-50 px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-azure border border-white/40">
+            <button id="bottom-cta-booking-btn" class="booking-btn bg-white text-azure hover:bg-blue-50 px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-azure border border-white/40">
                 Book A Consultation
             </button>
 
         </div>
     </section>
 
-    <!-- Booking Overlay -->
-    <div include-html="components/booking-overlay.html"></div>
+    <!-- Booking Overlay will be loaded here -->
+    <div id="booking-overlay-container"></div>
     
     <div include-html="components/footer.html"></div>
 
-    <!-- Main scripts -->
+    <!-- Load components first -->
     <script src="js/load-components.js"></script>
-    <script src="js/testimonials.js"></script>
+    
+    <!-- Then load booking overlay script -->
     <script src="js/booking-overlay.js"></script>
+    
+    <!-- Initialize everything after components are loaded -->
     <script>
-        // Initialize booking overlay when components are loaded
+        // Wait for components to be loaded
         document.addEventListener('componentsLoaded', function() {
+            // Initialize booking overlay
             if (typeof initBookingOverlay === 'function') {
+                console.log('Initializing booking overlay from componentsLoaded event');
                 initBookingOverlay();
+            } else {
+                console.error('initBookingOverlay function not found');
             }
-        });
-        
-        // Initialize testimonials carousel after dynamic import
-        document.addEventListener('testimonialsLoaded', function() {
+            
+            // Initialize testimonials carousel
             if (typeof initTestimonials === 'function') {
                 initTestimonials();
             }

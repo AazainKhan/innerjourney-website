@@ -33,51 +33,23 @@
 })();
 
 function initTestimonials() {
-    console.group('Testimonials Initialization');
-    
     // Prevent multiple initializations
     if (window.testimonialsInitialized) {
-        console.log('Testimonials already initialized');
-        console.groupEnd();
         return;
     }
-    
-    console.log('Starting testimonials initialization...');
     
     const testimonials = document.querySelectorAll('.testimonial');
     const prevBtn = document.getElementById('testimonial-prev');
     const nextBtn = document.getElementById('testimonial-next');
     const dotsContainer = document.getElementById('testimonial-dots');
     
-    console.log('Found elements:', {
-        testimonials: testimonials.length,
-        prevBtn: !!prevBtn,
-        nextBtn: !!nextBtn,
-        dotsContainer: !!dotsContainer
-    });
-    
     // Check if we have testimonials to work with
     if (!testimonials || testimonials.length === 0) {
-        console.warn('No testimonials found on this page');
-        console.groupEnd();
         return;
     }
     
-    // Log the current state of testimonials
-    console.log('Initial testimonials state:');
-    testimonials.forEach((testimonial, index) => {
-        console.log(`- Testimonial ${index + 1}:`, {
-            active: testimonial.classList.contains('active'),
-            visibility: window.getComputedStyle(testimonial).visibility,
-            opacity: window.getComputedStyle(testimonial).opacity,
-            transform: window.getComputedStyle(testimonial).transform
-        });
-    });
-    
     // Mark as initialized
     window.testimonialsInitialized = true;
-    console.log('Testimonials initialization complete');
-    console.groupEnd();
     
     let currentIndex = 0;
     let isAnimating = false;
@@ -86,22 +58,15 @@ function initTestimonials() {
     function initDots() {
         if (!dotsContainer) return;
         
+        // Clear any existing dots
         dotsContainer.innerHTML = '';
+        
+        // Create dots
         testimonials.forEach((_, index) => {
             const dot = document.createElement('button');
-            dot.className = 'testimonial-dot';
+            dot.className = 'dot' + (index === 0 ? ' active' : '');
             dot.setAttribute('aria-label', `Go to testimonial ${index + 1}`);
-            
-            if (index === 0) {
-                dot.classList.add('active');
-            }
-            
-            dot.addEventListener('click', () => {
-                if (index !== currentIndex && !isAnimating) {
-                    goToTestimonial(index);
-                }
-            });
-            
+            dot.addEventListener('click', () => goToTestimonial(index));
             dotsContainer.appendChild(dot);
         });
         
