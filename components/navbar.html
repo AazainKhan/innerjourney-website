@@ -3,7 +3,11 @@
     <div class="mx-auto px-2 md:px-6 py-6">
         <div class="flex items-center justify-between gap-4 xl:gap-12">
             <a href="index.html" class="flex items-center space-x-2 hover:opacity-90 transition-opacity">
-                <img src="images/logo_transparent.png" alt="Shanila Khan Mindset and Clarity Coaching Logo" loading="lazy" width="240" height="60" class="h-14 w-auto">
+                <picture>
+                    <source type="image/webp" srcset="images/logo_transparent-480.webp 240w, images/logo_transparent-800.webp 480w" sizes="(max-width: 640px) 120px, 240px">
+                    <source type="image/png" srcset="images/logo_transparent-480.png 240w, images/logo_transparent-800.png 480w" sizes="(max-width: 640px) 120px, 240px">
+                    <img src="images/logo_transparent-480.png" alt="Shanila Khan Mindset and Clarity Coaching Logo" loading="lazy" width="240" height="60" class="h-14 w-auto">
+                </picture>
                 <div class="text-2xl heading-primary text-white">
                     Shanila Khan
                 </div>

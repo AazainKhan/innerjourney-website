@@ -32,7 +32,15 @@
     <section class="relative min-h-screen flex items-center justify-center bg-black overflow-hidden">
         <!-- Background image -->
             <div class="absolute inset-0">
-            <img src="/images/contact-img.jpeg" alt="Contact background" loading="lazy" width="1600" height="900" class="w-full h-full object-cover object-center opacity-70">
+            <picture>
+                <source type="image/webp" srcset="/images/contact-img.webp">
+                <source type="image/jpeg" srcset="/images/contact-img.jpeg">
+                <picture>
+                    <source type="image/webp" srcset="/images/contact-img-480.webp 480w, /images/contact-img-800.webp 800w, /images/contact-img-1200.webp 1200w" sizes="100vw">
+                    <source type="image/jpeg" srcset="/images/contact-img-480.jpg 480w, /images/contact-img-800.jpg 800w, /images/contact-img-1200.jpg 1200w" sizes="100vw">
+                    <img src="/images/contact-img-1200.jpg" alt="Contact background" loading="lazy" width="1600" height="900" class="w-full h-full object-cover object-center opacity-70">
+                </picture>
+            </picture>
             <div class="absolute inset-0 bg-gradient-to-br from-oxford/90 to-black/90"></div>
         </div>
         <div class="container mx-auto px-6 relative z-10">

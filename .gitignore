@@ -2,3 +2,8 @@
 /*.vs
 php_contact_errors.log
 php_errors.log
+node_modules/
+package.json
+.gitignore
+package-lock.json
+tests/playwright-snap.js

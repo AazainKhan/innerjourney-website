@@ -136,12 +136,17 @@
                 </div>
                 <div class="relative fade-in-left">
                     <div class="w-full h-[32rem] overflow-visible relative">
-                    <img src="images/about-image.jpg" 
-                        alt="Shanila - Mindset and Clarity Coach" 
-                        loading="lazy"
-                        width="1200" height="800"
-                        fetchpriority="low"
-                        class="w-auto max-h-full mx-auto object-contain shadow-2xl">
+                        <!-- Responsive picture: browser will use WebP if available; fallback to JPEG -->
+                        <picture>
+                            <source type="image/webp" srcset="images/about-image-480.webp 480w, images/about-image-800.webp 800w, images/about-image-1200.webp 1200w, images/about-image-1600.webp 1600w" sizes="(max-width: 768px) 100vw, 50vw">
+                            <source type="image/jpeg" srcset="images/about-image-480.jpg 480w, images/about-image-800.jpg 800w, images/about-image-1200.jpg 1200w, images/about-image-1600.jpg 1600w" sizes="(max-width: 768px) 100vw, 50vw">
+                            <img src="images/about-image-1200.jpg"
+                                 alt="Shanila - Mindset and Clarity Coach"
+                                 loading="lazy"
+                                 width="1200" height="800"
+                                 fetchpriority="low"
+                                 class="w-auto max-h-full mx-auto object-contain shadow-2xl">
+                        </picture>
                     </div>
                 </div>
             </div>
