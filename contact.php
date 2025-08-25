@@ -1,5 +1,5 @@
 <?php
-// Contact form handler for Shanila Mindset and Clarity Coaching website
+// Contact form handler for Shanila Clarity and Mindset Coaching website
 
 // Enable error reporting
 error_reporting(E_ALL);
