@@ -7,3 +7,4 @@ package.json
 .gitignore
 package-lock.json
 tests/playwright-snap.js
+.playwright-mcp/hero_screenshot

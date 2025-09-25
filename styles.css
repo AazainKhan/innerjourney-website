@@ -46,14 +46,35 @@
 /* Brand shadows */
 .shadow-azure { box-shadow: var(--shadow-azure); }
 
-/* Hide scrollbar but keep functionality */
-.scrollbar-hide {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+/* Hero background with WebP fallback */
+/* Hero media (picture/img) fills the hero area and stays behind content */
+.hero-media { z-index: 0; }
+.hero-media picture, .hero-media img { display: block; width: 100%; height: 100%; }
+.hero-media img { object-fit: cover; object-position: 20% top; }
+
+/* Ensure overlays/content sit above the hero media */
+.relative > .hero-media { z-index: 0; }
+.relative > .container, .relative > .absolute.z-10 { z-index: 20; }
+
+/* Match previous behavior: center on medium+ screens */
+@media (min-width: 768px) {
+    .hero-media img { object-position: center center; }
 }
 
+/* Mobile viewport height fix: prefer small-viewport height when available */
+.hero-section { height: 100vh; }
+@supports (height: 100svh) {
+    .hero-section { height: 100svh; }
+}
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-hide {
+    /* Standard properties to hide scrollbars while preserving scroll */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
 .scrollbar-hide::-webkit-scrollbar {
-    display: none;  /* Chrome, Safari and Opera */
+    display: none; /* Chrome, Safari, Opera */
 }
 
 /* Footer link style using brand palette */
@@ -471,9 +492,9 @@ html {
     z-index: 40;
     height: 100vh;
     width: 100vw;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.85); /* darker for stronger contrast */
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px); /* iOS Safari */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -493,6 +514,8 @@ html {
     display: flex;
     align-items: center;
     justify-content: center;
+    /* extra gradient layer for text legibility */
+    background-image: radial-gradient(ellipse at center, rgba(0,0,0,0.35), rgba(0,0,0,0.6));
 }
 
 .mobile-menu-content {
