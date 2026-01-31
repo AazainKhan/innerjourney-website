@@ -1,25 +1,38 @@
 ---
 # cPanel deployment configuration
 # Copies only explicit files and directories to the cPanel public_html path.
+# Updated: 2026-01-31 - Added Composer and modern PHP structure
 deployment:
   tasks:
     - export DEPLOYPATH=/home/innerjourneywith/public_html/
     - /bin/mkdir -p $DEPLOYPATH
+    # HTML pages
     - /bin/cp index.html $DEPLOYPATH
     - /bin/cp about.html $DEPLOYPATH
     - /bin/cp blog.html $DEPLOYPATH
     - /bin/cp services.html $DEPLOYPATH
     - /bin/cp contact.html $DEPLOYPATH
+    # PHP backend
     - /bin/cp contact.php $DEPLOYPATH
-  - /bin/cp sitemap.xml $DEPLOYPATH
+    - /bin/cp composer.json $DEPLOYPATH
+    - /bin/cp composer.lock $DEPLOYPATH
+    - /bin/cp -R config $DEPLOYPATH
+    - /bin/cp -R src $DEPLOYPATH
+    # Install Composer dependencies (production only)
+    - cd $DEPLOYPATH && composer install --no-dev --optimize-autoloader --no-interaction 2>/dev/null || echo "Composer not available, skipping"
+    # Static assets
+    - /bin/cp sitemap.xml $DEPLOYPATH
     - /bin/cp robots.txt $DEPLOYPATH
     - /bin/cp styles.css $DEPLOYPATH
     - /bin/cp script.js $DEPLOYPATH
-  - /bin/cp email-config.php $DEPLOYPATH
-  - /bin/cp php.ini $DEPLOYPATH
+    - /bin/cp .htaccess $DEPLOYPATH
     - /bin/cp -R components $DEPLOYPATH
     - /bin/cp -R images $DEPLOYPATH
     - /bin/cp -R js $DEPLOYPATH
-    - /bin/cp -R scripts $DEPLOYPATH
+    # Environment file (copy example if .env doesn't exist)
+    - test -f $DEPLOYPATH/.env || /bin/cp .env.example $DEPLOYPATH/.env
     # Ensure public-readable permissions for deployed files
     - /bin/chmod -R 755 $DEPLOYPATH
+    # Protect sensitive files
+    - /bin/chmod 640 $DEPLOYPATH/.env 2>/dev/null || true
+    - /bin/chmod 640 $DEPLOYPATH/config/app.php 2>/dev/null || true
