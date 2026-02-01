@@ -49,7 +49,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize all functionality
     initTestimonials();
     initScrollAnimations(); // Initialize scroll animations
-    initScrollAnimations();
     initServiceCards();
     initContactForm(); // Initialize contact form
 });
@@ -388,8 +387,25 @@ function initMobileMenu() {
 
 // Scroll animations
 function initScrollAnimations() {
-    // Animations disabled per request
-    return;
+    const elements = document.querySelectorAll('.animate-on-scroll, .animate-slide-left, .animate-slide-right, .animate-fade-in');
+    if (!elements.length) return;
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        },
+        {
+            threshold: 0.15,
+            rootMargin: '0px 0px -10% 0px',
+        }
+    );
+
+    elements.forEach((el) => observer.observe(el));
 }
 
 // Service cards hover effects
@@ -604,15 +620,7 @@ document.querySelectorAll('button').forEach(button => {
     });
 });
 
-// Parallax effect for hero section
-window.addEventListener('scroll', function() {
-    const scrolled = window.pageYOffset;
-    const hero = document.getElementById('home');
-    if (hero) {
-        const rate = scrolled * -0.5;
-        hero.style.transform = `translateY(${rate}px)`;
-    }
-});
+// Parallax effect for hero section (disabled to prevent layout shifting)
 
 // Initialize contact form if it exists
 document.addEventListener('DOMContentLoaded', function() {
@@ -684,34 +692,27 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Scroll Animation Function
+// Scroll Animation Function (kept for backward compatibility)
 function initScrollAnimations() {
-    const animateElements = document.querySelectorAll('h2, h1, p, .service-card, .testimonial');
-    
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate-visible');
-            }
-        });
-    }, observerOptions);
-    
-    animateElements.forEach(el => {
-        // Add animation class based on element type
-        if (el.tagName === 'H1' || el.tagName === 'H2') {
-            el.classList.add('animate-fade-in');
-        } else if (el.classList.contains('service-card')) {
-            el.classList.add('animate-on-scroll');
-        } else {
-            el.classList.add('animate-on-scroll');
+    const elements = document.querySelectorAll('.animate-on-scroll, .animate-slide-left, .animate-slide-right, .animate-fade-in');
+    if (!elements.length) return;
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        },
+        {
+            threshold: 0.15,
+            rootMargin: '0px 0px -10% 0px',
         }
-        observer.observe(el);
-    });
+    );
+
+    elements.forEach((el) => observer.observe(el));
 }
 
 // Booking Overlay Functionality is now in booking-overlay.js

@@ -34,7 +34,7 @@
     <div include-html="components/navbar.html"></div>
 
     <!-- Hero Section -->
-    <section id="home" class="relative h-screen hero-section flex items-center overflow-hidden">
+    <section id="home" class="relative hero-section flex items-center overflow-hidden">
         <!-- Animated background elements -->
         <div class="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-orange-900/20 z-10"></div>
         <!-- Hero image: use picture for reliable format selection (WebP preferred) -->
@@ -55,13 +55,13 @@
         <div class="container mx-auto px-6 relative z-20 h-full flex items-end pb-32 md:pb-20 md:items-end">
             <div class="max-w-2xl w-full md:ml-auto text-center md:text-right">
 
-                <h1 class="text-5xl md:text-7xl heading-primary text-white mb-6 leading-tight drop-shadow-2xl font-['Dancing_Script'] font-bold">
+                <h1 class="text-5xl md:text-7xl heading-primary text-white mb-6 leading-tight drop-shadow-2xl font-['Dancing_Script'] font-bold animate-on-scroll">
                     Your Path back to Purpose
                 </h1>
-                <p class="text-xl md:text-2xl body-text-light text-white/90 mb-8 leading-relaxed">
+                <p class="text-xl md:text-2xl body-text-light text-white/90 mb-8 leading-relaxed animate-on-scroll">
                     I partner with female leaders and homemakers to cultivate self-awareness, shift inner narratives, and take aligned action with confidence.
                 </p>
-                <div class="flex flex-col sm:flex-row gap-3 justify-center md:justify-end">
+                <div class="flex flex-col sm:flex-row gap-3 justify-center md:justify-end animate-on-scroll">
                     <button id="cta-booking-btn" class="btn-azure text-sm px-6 py-2 button-text">
                         Start Your Journey
                     </button>
@@ -106,25 +106,35 @@
         </div>
     </section>
 
+    <!-- Unified Background Wrapper for You've Felt Lost, Feel Like You, Testimonials, and Services -->
+    <div class="relative overflow-hidden" style="margin-top: -5px;">
+        <!-- Single unified gradient background -->
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-50 via-blue-100 to-indigo-100"></div>
+        <!-- Evenly distributed frosted glass elements throughout entire unified section -->
+        <div class="absolute top-0 right-10 w-[30rem] h-[30rem] bg-orange-400/30 rounded-full blur-3xl"></div>
+        <div class="absolute top-10 left-10 w-[28rem] h-[28rem] bg-blue-400/30 rounded-full blur-3xl"></div>
+        <div class="absolute top-[20%] right-[40%] w-96 h-96 bg-purple-400/25 rounded-full blur-3xl"></div>
+        <div class="absolute top-[35%] left-[5%] w-[26rem] h-[26rem] bg-indigo-400/30 rounded-full blur-3xl"></div>
+        <div class="absolute top-[50%] right-[15%] w-[28rem] h-[28rem] bg-blue-500/30 rounded-full blur-3xl"></div>
+        <div class="absolute top-[65%] left-[35%] w-96 h-96 bg-indigo-500/30 rounded-full blur-3xl"></div>
+        <div class="absolute top-[80%] right-[25%] w-[26rem] h-[26rem] bg-purple-500/28 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-5 left-[15%] w-96 h-96 bg-blue-400/30 rounded-full blur-3xl"></div>
+
     <!-- Call-to-Action Section -->
-    <section class="pt-2 pb-12 bg-white relative overflow-hidden">
-        <!-- Background decorative elements -->
-        <div class="absolute top-0 left-0 w-64 h-64 bg-orange-100/20 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-0 right-0 w-64 h-64 bg-blue-100/20 rounded-full blur-3xl"></div>
-        
+    <section class="pt-20 pb-12 relative">
         <div class="container mx-auto px-6 relative z-10">
             <div class="max-w-3xl mx-auto text-center space-y-6">
-                <h2 class="text-4xl md:text-5xl heading-secondary text-gray-900 mb-8">
+                <h2 class="text-4xl md:text-5xl heading-secondary text-gray-900 mb-8 animate-on-scroll">
                     You've felt <span class="text-carrot font-bold">lost</span> now for long enough
                 </h2>
                 
-                <div class="space-y-4 text-lg md:text-xl text-gray-700 leading-relaxed">
+                <div class="space-y-4 text-lg md:text-xl text-gray-700 leading-relaxed animate-on-scroll">
                     <p>Do you 'have it all' on paper, but deep down this isn't lighting you up?</p>
                     <p>Are you ignoring the quiet nag that you're meant for more?</p>
                     <p>Does your spark feel dimmed?</p>
                 </div>
                 
-                <div class="py-6">
+                <div class="py-6 animate-on-scroll">
                     <p class="text-lg md:text-xl text-gray-800 leading-relaxed mb-2">
                         I'm here to tell you that it's still there, inside you.
                     </p>
@@ -133,7 +143,7 @@
                     </p>
                 </div>
                 
-                <div class="pt-4">
+                <div class="pt-4 animate-on-scroll">
                     <button class="btn-azure-outline text-lg px-8 py-3 button-text cta-booking-trigger font-semibold">
                         Help me get clarity
                     </button>
@@ -150,13 +160,13 @@
         
         <div class="container mx-auto px-6 relative z-10">
             <div class="text-left">
-                <h2 class="text-4xl md:text-5xl heading-secondary text-white mb-8">
+                <h2 class="text-4xl md:text-5xl heading-secondary text-white mb-8 animate-on-scroll">
                     Hi, I'm <span class="text-carrot font-bold">Shanila</span>
                 </h2>
             </div>
             
             <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="space-y-6">
+                <div class="space-y-6 animate-on-scroll">
                     <div class="flex items-center space-x-4 mb-6">
                         <div class="w-12 h-12 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full flex items-center justify-center">
                             <i class="fas fa-star text-white text-xl"></i>
@@ -180,7 +190,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="relative fade-in-left">
+                <div class="relative fade-in-left animate-on-scroll">
                     <div class="w-full h-auto md:h-[32rem] overflow-visible relative">
                         <!-- Responsive picture: browser will use WebP if available; fallback to JPEG -->
                         <picture>
@@ -200,15 +210,11 @@
     </section>
 
     <!-- Feel Like You Again Section -->
-    <section class="py-24 bg-gray-50 relative overflow-hidden">
-        <!-- Background decorative elements -->
-        <div class="absolute top-0 right-0 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl"></div>
-        
+    <section class="py-24 relative">
         <div class="container mx-auto px-6 relative z-10">
             <div class="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
                 <!-- Left side - Questions -->
-                <div class="space-y-6 order-2 md:order-1">
+                <div class="space-y-6 order-2 md:order-1 animate-on-scroll">
                     <div class="flex items-start space-x-4">
                         <div class="flex-shrink-0 w-2 h-2 bg-carrot rounded-full mt-3"></div>
                         <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
@@ -236,7 +242,7 @@
                 </div>
                 
                 <!-- Right side - Heading -->
-                <div class="order-1 md:order-2">
+                <div class="order-1 md:order-2 animate-on-scroll">
                     <h2 class="text-4xl md:text-6xl heading-secondary text-gray-900 mb-6 leading-tight">
                         Feel like <span class="text-carrot font-bold">YOU</span> again
                     </h2>
@@ -253,9 +259,9 @@
     <div include-html="components/testimonials.html"></div>
 
     <!-- Services Section -->
-    <section id="services" class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
+    <section id="services" class="py-20 relative">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-12 animate-on-scroll">
                 <h2 class="text-4xl md:text-5xl heading-secondary text-oxford font-bold mb-4">
                     Your Inner Journey starts <span class="text-carrot font-bold">here</span>
                 </h2>
@@ -266,7 +272,7 @@
             
             <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12 mt-16">
                 <!-- Clarity Coaching -->
-                <div class="service-card group">
+                <div class="service-card group animate-on-scroll">
                     <div class="brand-gradient-oxford p-8 rounded-2xl text-white h-full transition-all duration-500 transform group-hover:scale-105 shadow-xl flex flex-col">
                         <div class="text-4xl mb-6"><i class="fas fa-lightbulb"></i></div>
                         <h3 class="text-2xl font-bold mb-4">Clarity Coaching</h3>
@@ -278,7 +284,7 @@
                 </div>
 
                 <!-- Career Coaching -->
-                <div class="service-card group">
+                <div class="service-card group animate-on-scroll">
                     <div class="brand-gradient-orange p-8 rounded-2xl text-white h-full transition-all duration-500 transform group-hover:scale-105 shadow-xl flex flex-col">
                         <div class="text-4xl mb-6"><i class="fas fa-chart-line"></i></div>
                         <h3 class="text-2xl font-bold mb-4">Career Coaching</h3>
@@ -290,7 +296,7 @@
                 </div>
 
                 <!-- Numerology for Clarity -->
-                <div class="service-card group">
+                <div class="service-card group animate-on-scroll">
                     <div class="brand-gradient-oxford p-8 rounded-2xl text-white h-full transition-all duration-500 transform group-hover:scale-105 shadow-xl flex flex-col">
                         <div class="text-4xl mb-6"><i class="fas fa-star"></i></div>
                         <h3 class="text-2xl font-bold mb-4">Numerology for Clarity</h3>
@@ -303,14 +309,16 @@
             </div>
         </div>
     </section>
+    </div>
+    <!-- End Unified Background Wrapper -->
 
     <!-- CTA Section -->
     <section class="py-20 brand-gradient-azure">
         <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl md:text-3xl font-bold text-white mb-6">
+            <h2 class="text-4xl md:text-3xl font-bold text-white mb-6 animate-on-scroll">
                 Not sure what service is right for you? Book your free Clarity Call, and we’ll find the right fit.
             </h2>
-            <button id="bottom-cta-booking-btn" class="booking-btn bg-white text-azure hover:bg-blue-50 px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-azure border border-white/40">
+            <button id="bottom-cta-booking-btn" class="booking-btn bg-white text-azure hover:bg-blue-50 px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-azure border border-white/40 animate-on-scroll">
                 Book A Consultation
             </button>
 

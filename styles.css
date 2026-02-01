@@ -61,10 +61,18 @@
     .hero-media img { object-position: center center; }
 }
 
-/* Mobile viewport height fix: prefer small-viewport height when available */
-.hero-section { height: 100vh; }
+/* Mobile viewport height fix: lock to small viewport height to prevent scroll-based shifting */
+.hero-section {
+    height: 100vh;
+    min-height: 600px;
+    max-height: 100vh;
+}
 @supports (height: 100svh) {
-    .hero-section { height: 100svh; }
+    .hero-section {
+        height: 100svh;
+        min-height: 100svh;
+        max-height: 100svh;
+    }
 }
 
 /* Hide scrollbar but keep functionality */
@@ -93,6 +101,7 @@ body {
     line-height: 1.6;
     color: var(--black);
     overflow-x: hidden;
+    background-color: #eaf2ff;
 }
 
 /* Smooth section transitions */
@@ -100,16 +109,7 @@ section {
     position: relative;
 }
 
-/* Subtle wave effect for section transitions */
-section::before {
-    content: '';
-    position: absolute;
-    top: -1px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-}
+/* Section transitions disabled to prevent gaps */
 
 section::after {
     content: '';
