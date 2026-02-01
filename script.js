@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize all functionality
     initTestimonials();
+    initScrollAnimations(); // Initialize scroll animations
     initScrollAnimations();
     initServiceCards();
     initContactForm(); // Initialize contact form
@@ -363,6 +364,20 @@ function initMobileMenu() {
         });
     });
     
+    // Mobile dropdown toggle functionality
+    const mobileDropdownToggle = mobileMenu.querySelector('.mobile-dropdown-toggle');
+    if (mobileDropdownToggle) {
+        mobileDropdownToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const dropdownContent = this.nextElementSibling;
+            if (dropdownContent) {
+                dropdownContent.classList.toggle('hidden');
+                this.classList.toggle('active');
+            }
+        });
+    }
+    
     // Close menu on escape key
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && mobileMenu.classList.contains('show')) {
@@ -668,6 +683,36 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+// Scroll Animation Function
+function initScrollAnimations() {
+    const animateElements = document.querySelectorAll('h2, h1, p, .service-card, .testimonial');
+    
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-visible');
+            }
+        });
+    }, observerOptions);
+    
+    animateElements.forEach(el => {
+        // Add animation class based on element type
+        if (el.tagName === 'H1' || el.tagName === 'H2') {
+            el.classList.add('animate-fade-in');
+        } else if (el.classList.contains('service-card')) {
+            el.classList.add('animate-on-scroll');
+        } else {
+            el.classList.add('animate-on-scroll');
+        }
+        observer.observe(el);
+    });
+}
 
 // Booking Overlay Functionality is now in booking-overlay.js
 

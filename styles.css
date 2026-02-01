@@ -95,6 +95,32 @@ body {
     overflow-x: hidden;
 }
 
+/* Smooth section transitions */
+section {
+    position: relative;
+}
+
+/* Subtle wave effect for section transitions */
+section::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+}
+
+section::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+}
+
 /* Typography Classes */
 .heading-primary {
     font-family: 'Libre Caslon Display', serif;
@@ -121,6 +147,56 @@ body {
     font-weight: 300;
     line-height: 1.7;
 }
+
+/* Scroll Animation Classes */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.animate-on-scroll.animate-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.animate-fade-in {
+    opacity: 0;
+    transition: opacity 1s ease-out;
+}
+
+.animate-fade-in.animate-visible {
+    opacity: 1;
+}
+
+.animate-slide-left {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.animate-slide-left.animate-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.animate-slide-right {
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.animate-slide-right.animate-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Stagger animations for lists */
+.animate-on-scroll:nth-child(1) { transition-delay: 0.1s; }
+.animate-on-scroll:nth-child(2) { transition-delay: 0.2s; }
+.animate-on-scroll:nth-child(3) { transition-delay: 0.3s; }
+.animate-on-scroll:nth-child(4) { transition-delay: 0.4s; }
+.animate-on-scroll:nth-child(5) { transition-delay: 0.5s; }
 
 .body-text-bold {
     font-family: 'Titillium Web', sans-serif;
@@ -214,6 +290,88 @@ html {
     width: 100%;
 }
 
+/* Nav link color when navbar is scrolled */
+#navbar.scrolled .nav-link {
+    color: white !important;
+}
+
+#navbar.scrolled .nav-link:hover {
+    color: #1a1a1a !important;
+}
+
+#navbar.scrolled .nav-link::after {
+    background: #1a1a1a;
+}
+
+/* Navigation Dropdown Styles */
+.nav-dropdown {
+    position: relative;
+}
+
+.nav-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: rgba(0, 0, 0, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 12px 0;
+    min-width: 220px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+.nav-dropdown:hover .nav-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.nav-dropdown-item {
+    display: block;
+    padding: 12px 20px;
+    color: white;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+}
+
+.nav-dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--carrot-orange);
+    padding-left: 24px;
+}
+
+/* Mobile Dropdown Styles */
+.mobile-dropdown-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mobile-dropdown-toggle i {
+    transition: transform 0.3s ease;
+}
+
+.mobile-dropdown-toggle.active i {
+    transform: rotate(180deg);
+}
+
+.mobile-dropdown-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.mobile-dropdown-content:not(.hidden) {
+    max-height: 300px;
+}
+
 /* Hero Section */
 #home {
     background-attachment: fixed;
@@ -249,9 +407,9 @@ html {
 /* Testimonials */
 .testimonials-container {
     position: relative;
-    min-height: 600px;
-    padding: 40px 20px 40px;
-    margin-bottom: 20px;
+    min-height: 300px;
+    padding: 48px 16px 8px;
+    margin-bottom: 4px;
     overflow: visible;
 }
 
@@ -321,7 +479,7 @@ html {
     justify-content: center;
     gap: 12px;
     z-index: 10;
-    padding: 20px 0;
+    padding: 4px 0;
     position: relative;
 }
 

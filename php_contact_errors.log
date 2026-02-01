@@ -457,3 +457,49 @@
 [19-Aug-2025 02:08:29 UTC] [req_68a3dc9d07d9a4.54434146] Sending confirmation email to aazainkhan@gmail.com
 [19-Aug-2025 02:08:29 UTC] [req_68a3dc9d07d9a4.54434146] Confirmation email sent successfully
 [19-Aug-2025 02:08:29 UTC] Confirmation email sent to aazainkhan@gmail.com
+[31-Jan-2026 19:59:36 UTC] [req_697e5f287c9027.18809377] Starting request processing
+[31-Jan-2026 19:59:36 UTC] === New Contact Form Submission ===
+[31-Jan-2026 19:59:36 UTC] Request Method: POST
+[31-Jan-2026 19:59:36 UTC] Content Type: application/x-www-form-urlencoded
+[31-Jan-2026 19:59:36 UTC] Request Headers: {"Host":"localhost:8000","Connection":"keep-alive","Content-Length":"93","sec-ch-ua-platform":"\"macOS\"","User-Agent":"Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/144.0.0.0 Safari\/537.36","sec-ch-ua":"\"Not(A:Brand\";v=\"8\", \"Chromium\";v=\"144\", \"Google Chrome\";v=\"144\"","DNT":"1","Content-Type":"application\/x-www-form-urlencoded","sec-ch-ua-mobile":"?0","Accept":"*\/*","Origin":"http:\/\/localhost:8000","Sec-Fetch-Site":"same-origin","Sec-Fetch-Mode":"cors","Sec-Fetch-Dest":"empty","Referer":"http:\/\/localhost:8000\/contact.html","Accept-Encoding":"gzip, deflate, br, zstd","Accept-Language":"en,en-US;q=0.9,en-GB;q=0.8"}
+[31-Jan-2026 19:59:36 UTC] Raw input: name=Aazain&email=aazainkhan%40gmail.com&country-code=1&phone=7788620153&message=Test+message
+[31-Jan-2026 19:59:36 UTC] Form data: Array
+(
+    [name] => Aazain
+    [email] => aazainkhan@gmail.com
+    [country-code] => 1
+    [phone] => 7788620153
+    [message] => Test message
+)
+
+[31-Jan-2026 19:59:36 UTC] [req_697e5f287c9027.18809377] Preparing to send emails
+[31-Jan-2026 19:59:36 UTC] [req_697e5f287c9027.18809377] Sending admin email to info@innerjourney-with-shanila.com
+[31-Jan-2026 19:59:36 UTC] Failed to send email to admin: info@innerjourney-with-shanila.com
+[31-Jan-2026 19:59:36 UTC] Failed to send one or more emails
+[31-Jan-2026 20:00:29 UTC] [req_697e5f5d503611.26555435] Starting request processing
+[31-Jan-2026 20:00:29 UTC] === New Contact Form Submission ===
+[31-Jan-2026 20:00:29 UTC] Request Method: POST
+[31-Jan-2026 20:00:29 UTC] Content Type: application/x-www-form-urlencoded
+[31-Jan-2026 20:00:29 UTC] Request Headers: {"Host":"localhost:8000","Connection":"keep-alive","Content-Length":"104","sec-ch-ua-platform":"\"macOS\"","User-Agent":"Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/144.0.0.0 Safari\/537.36","sec-ch-ua":"\"Not(A:Brand\";v=\"8\", \"Chromium\";v=\"144\", \"Google Chrome\";v=\"144\"","DNT":"1","Content-Type":"application\/x-www-form-urlencoded","sec-ch-ua-mobile":"?0","Accept":"*\/*","Origin":"http:\/\/localhost:8000","Sec-Fetch-Site":"same-origin","Sec-Fetch-Mode":"cors","Sec-Fetch-Dest":"empty","Referer":"http:\/\/localhost:8000\/contact.html","Accept-Encoding":"gzip, deflate, br, zstd","Accept-Language":"en,en-US;q=0.9,en-GB;q=0.8"}
+[31-Jan-2026 20:00:29 UTC] Raw input: name=Aazain+Ullah+Khan&email=aazainkhan%40gmail.com&country-code=1&phone=7788620153&message=test+message
+[31-Jan-2026 20:00:29 UTC] Form data: Array
+(
+    [name] => Aazain Ullah Khan
+    [email] => aazainkhan@gmail.com
+    [country-code] => 1
+    [phone] => 7788620153
+    [message] => test message
+)
+
+[31-Jan-2026 20:00:29 UTC] [req_697e5f5d503611.26555435] Preparing to send emails
+[31-Jan-2026 20:00:29 UTC] [req_697e5f5d503611.26555435] Sending admin email to info@innerjourney-with-shanila.com
+[31-Jan-2026 20:00:29 UTC] Failed to send email to admin: info@innerjourney-with-shanila.com
+[31-Jan-2026 20:00:29 UTC] Failed to send one or more emails
+[31-Jan-2026 20:02:50 UTC] [req_697e5feabca791.32414866] Sending admin email
+[31-Jan-2026 20:02:50 UTC] [req_697e5feabca791.32414866] Failed to send admin email
+[31-Jan-2026 20:03:19 UTC] [req_697e600780aef2.27226931] Sending admin email
+[31-Jan-2026 20:03:19 UTC] [req_697e600780aef2.27226931] Failed to send admin email
+[31-Jan-2026 20:04:42 UTC] [req_697e605a3149b8.88129196] Sending admin email
+[31-Jan-2026 20:04:42 UTC] [req_697e605a3149b8.88129196] Failed to send admin email
+[31-Jan-2026 20:06:03 UTC] [req_697e60ab5e4823.50963459] Sending admin email
+[31-Jan-2026 20:06:03 UTC] [req_697e60ab5e4823.50963459] Admin email sent, sending confirmation

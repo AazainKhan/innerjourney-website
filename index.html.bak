@@ -107,10 +107,10 @@
     </section>
 
     <!-- Call-to-Action Section -->
-    <section class="pt-2 pb-12 bg-white relative overflow-hidden">
+    <section class="py-10 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
         <!-- Background decorative elements -->
-        <div class="absolute top-0 left-0 w-64 h-64 bg-orange-100/20 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-0 right-0 w-64 h-64 bg-blue-100/20 rounded-full blur-3xl"></div>
+        <div class="absolute top-0 left-0 w-64 h-64 bg-orange-100/40 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 right-0 w-64 h-64 bg-blue-100/40 rounded-full blur-3xl"></div>
         
         <div class="container mx-auto px-6 relative z-10">
             <div class="max-w-3xl mx-auto text-center space-y-6">
@@ -143,14 +143,15 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-16 brand-gradient-oxford relative overflow-hidden">
+    <section id="about" class="pt-10 pb-20 relative overflow-hidden">
         <!-- Background pattern -->
-        <div class="absolute top-0 right-0 w-96 h-96 bg-orange-200/10 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-0 left-0 w-96 h-96 bg-blue-200/10 rounded-full blur-3xl"></div>
+        <div class="absolute inset-0 bg-transparent"></div>
+        <div class="absolute top-0 right-0 w-96 h-96 bg-orange-200/30 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-blue-200/30 rounded-full blur-3xl"></div>
         
         <div class="container mx-auto px-6 relative z-10">
-            <div class="text-left">
-                <h2 class="text-4xl md:text-5xl heading-secondary text-white mb-8">
+            <div class="text-left mb-16">
+                <h2 class="text-4xl md:text-5xl heading-secondary text-gray-900 mb-4">
                     Hi, I'm <span class="text-carrot font-bold">Shanila</span>
                 </h2>
             </div>
@@ -162,14 +163,14 @@
                             <i class="fas fa-star text-white text-xl"></i>
                         </div>
                         <div>
-                            <h3 class="text-xl font-semibold text-white">Certified Clarity and Mindset Coach</h3>
+                            <h3 class="text-xl font-semibold text-gray-900">Certified Clarity and Mindset Coach</h3>
                         </div>
                     </div>
                     
-                    <p class="text-lg text-gray-200 leading-relaxed">
-                        Hi, I'm Shanila — a coach, a facilitator with over eight years of experience helping people create meaningful and lasting change in both their personal and professional lives. Over the years, I've had the privilege of supporting them to break through barriers, reinvent their beliefs, and lead life with intentions and clarity to be the best version of themselves.  
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        Hi, I’m Shanila — a coach, a facilitator with over eight years of experience helping people create meaningful and lasting change in both their personal and professional lives. Over the years, I’ve had the privilege of supporting them to break through barriers, reinvent their beliefs, and lead life with intentions and clarity to be the best version of themselves.  
                     </p>
-                    <p class="text-lg text-gray-200 leading-relaxed">
+                    <p class="text-lg text-gray-700 leading-relaxed">
                         I had the opportunity to be trained and mentored by internationally acclaimed coach (Global Guru) Vikram Dhar, whose guidance gave me a global perspective and equipped me with proven methodologies that I weave into the coaching practice.
                     </p>
                     
@@ -181,7 +182,7 @@
                     </div>
                 </div>
                 <div class="relative fade-in-left">
-                    <div class="w-full h-auto md:h-[32rem] overflow-visible relative">
+                    <div class="w-full h-[32rem] overflow-visible relative">
                         <!-- Responsive picture: browser will use WebP if available; fallback to JPEG -->
                         <picture>
                             <source type="image/webp" srcset="images/about-image-480.webp 480w, images/about-image-800.webp 800w, images/about-image-1200.webp 1200w, images/about-image-1600.webp 1600w" sizes="(max-width: 768px) 100vw, 50vw">
@@ -191,7 +192,7 @@
                                  loading="lazy"
                                  width="1200" height="800"
                                  fetchpriority="low"
-                                 class="w-full md:w-auto md:max-h-full mx-auto object-cover md:object-contain shadow-2xl">
+                                 class="w-auto max-h-full mx-auto object-contain shadow-2xl">
                         </picture>
                     </div>
                 </div>
@@ -200,48 +201,26 @@
     </section>
 
     <!-- Feel Like You Again Section -->
-    <section class="py-24 bg-gray-50 relative overflow-hidden">
+    <section class="py-16 bg-gradient-to-br from-white to-gray-50 relative overflow-hidden">
         <!-- Background decorative elements -->
-        <div class="absolute top-0 right-0 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl"></div>
+        <div class="absolute top-0 right-0 w-64 h-64 bg-orange-100/30 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-blue-100/30 rounded-full blur-3xl"></div>
         
         <div class="container mx-auto px-6 relative z-10">
-            <div class="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-                <!-- Left side - Questions -->
-                <div class="space-y-6 order-2 md:order-1">
-                    <div class="flex items-start space-x-4">
-                        <div class="flex-shrink-0 w-2 h-2 bg-carrot rounded-full mt-3"></div>
-                        <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
-                            What if you could rewrite your story?
-                        </p>
-                    </div>
-                    <div class="flex items-start space-x-4">
-                        <div class="flex-shrink-0 w-2 h-2 bg-carrot rounded-full mt-3"></div>
-                        <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
-                            To feel fired up, instead of fed up, at the start of the day?
-                        </p>
-                    </div>
-                    <div class="flex items-start space-x-4">
-                        <div class="flex-shrink-0 w-2 h-2 bg-carrot rounded-full mt-3"></div>
-                        <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
-                            To remember what YOU felt like, before work, family, and responsibilities took over?
-                        </p>
-                    </div>
-                    <div class="flex items-start space-x-4">
-                        <div class="flex-shrink-0 w-2 h-2 bg-carrot rounded-full mt-3"></div>
-                        <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
-                            To get back in the driver's seat of your life, clear and confident about the road ahead?
-                        </p>
-                    </div>
+            <div class="max-w-3xl mx-auto text-center space-y-6">
+                <h2 class="text-4xl md:text-5xl heading-secondary text-gray-900 mb-8">
+                    Feel like <span class="text-carrot font-bold">YOU</span> again
+                </h2>
+                
+                <div class="space-y-4 text-lg md:text-xl text-gray-700 leading-relaxed">
+                    <p>What if you had permission to rewrite your story?</p>
+                    <p>To feel fired up, instead of fed up, at the start of the day?</p>
+                    <p>To remember what YOU felt like, before work, family, and responsibilities took over?</p>
+                    <p>To get back in the driver's seat of your life, clear and confident about the road ahead?</p>
                 </div>
                 
-                <!-- Right side - Heading -->
-                <div class="order-1 md:order-2">
-                    <h2 class="text-4xl md:text-6xl heading-secondary text-gray-900 mb-6 leading-tight">
-                        Feel like <span class="text-carrot font-bold">YOU</span> again
-                    </h2>
-                    <div class="w-20 h-1 bg-carrot mb-6"></div>
-                    <p class="text-xl md:text-2xl text-gray-900 font-semibold leading-relaxed">
+                <div class="pt-6">
+                    <p class="text-xl md:text-2xl text-gray-900 font-semibold">
                         That's what clarity coaching can give you.
                     </p>
                 </div>
@@ -253,18 +232,18 @@
     <div include-html="components/testimonials.html"></div>
 
     <!-- Services Section -->
-    <section id="services" class="py-20 bg-white">
+    <section id="services" class="py-20 bg-platinum">
         <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
+            <div class="text-center mb-6">
                 <h2 class="text-4xl md:text-5xl heading-secondary text-oxford font-bold mb-4">
-                    Your Inner Journey starts <span class="text-carrot font-bold">here</span>
+                    Your Inner Journey starts here
                 </h2>
-                <p class="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto mt-4">
+                <p class="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">
                     With over eight years' experience helping individuals break through barriers in work and at home, let me take that first step with you.
                 </p>
             </div>
             
-            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12 mt-16">
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12">
                 <!-- Clarity Coaching -->
                 <div class="service-card group">
                     <div class="brand-gradient-oxford p-8 rounded-2xl text-white h-full transition-all duration-500 transform group-hover:scale-105 shadow-xl flex flex-col">
@@ -289,6 +268,77 @@
                     </div>
                 </div>
 
+                <!-- Clarity Coaching -->
+                <div class="service-card group">
+                    <div class="brand-gradient-oxford p-8 rounded-2xl text-white h-full transition-all duration-500 transform group-hover:scale-105 shadow-xl">
+                        <div class="text-4xl mb-6"><i class="fas fa-lightbulb"></i></div>
+                        <h3 class="text-2xl font-bold mb-4">Clarity Coaching</h3>
+                        <p class="text-white/90 mb-6">The mounting pressure can sometimes lead us astray, causing us to make choices that may not serve us well in the long run. You need a guide/ facilitator, someone who can help uncover the key aspects that will steer you toward your intended destination. Let’s talk, you are at the right place.
+
+                        </p>
+                        <div class="service-details opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <ul class="text-white/80 text-sm mb-4 list-disc pl-4">
+                                <li>Vision & goal setting</li>
+                                <li>Values alignment</li>
+                                <li>Decision-making support</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Communication Coaching -->
+                <div class="service-card group">
+                    <div class="brand-gradient-orange p-8 rounded-2xl text-white h-full transition-all duration-500 transform group-hover:scale-105 shadow-xl">
+                        <div class="text-4xl mb-6"><i class="fas fa-comments"></i></div>
+                        <h3 class="text-2xl font-bold mb-4">Communication Coaching</h3>
+                        <p class="text-white/90 mb-6">If you find communication breakdowns, conflicts, or a sense of disconnect in relationships – personal or professional, let’s talk to understand and develop tools to enhance communication skills and strengthen emotional bonds to lead a life with joy and empathy.</p>
+                        <div class="service-details opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <ul class="text-white/80 text-sm mb-4 list-disc pl-4">
+                                <li>Effective communication</li>
+                                <li>Conflict resolution</li>
+                                <li>Emotional intelligence</li>
+                                <li>Trust building</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wellbeing Coaching -->
+                <div class="service-card group">
+                    <div class="brand-gradient-oxford p-8 rounded-2xl text-white h-full transition-all duration-500 transform group-hover:scale-105 shadow-xl">
+                        <div class="text-4xl mb-6"><i class="fas fa-heart"></i></div>
+                        <h3 class="text-2xl font-bold mb-4">Wellbeing Coaching</h3>
+                        <p class="text-white/90 mb-6">With the increasing demands of modern life, looking after one's emotional, and physical needs is a necessity to help individuals establish healthy boundaries, prioritize self-care, and maintain a sense of balance between work and personal life.
+
+                        </p>
+                        <div class="service-details opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <ul class="text-white/80 text-sm mb-4 list-disc pl-4">
+                                <li>Stress management</li>
+                                <li>Self-care strategies</li>
+                                <li>Mindfulness practices</li>
+                                <li>Work-life balance</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Numerology -->
+                <div class="service-card group">
+                    <div class="brand-gradient-orange p-8 rounded-2xl text-white h-full transition-all duration-500 transform group-hover:scale-105 shadow-xl">
+                        <div class="text-4xl mb-6"><i class="fas fa-star"></i></div>
+                        <h3 class="text-2xl font-bold mb-4">Numerology</h3>
+                        <p class="text-white/90 mb-6">Numerology intertwines past, present, and future, offering a holistic lens for individuals to reflect on their life journey, comprehend current circumstances, and make proactive decisions, fostering a deeper understanding of their existence.
+                        </p>
+                        <div class="service-details opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <ul class="text-white/80 text-sm mb-4 list-disc pl-4">
+                                <li>Personal numerology reports</li>
+                                <li>Life path analysis</li>
+                                <li>Relationship compatibility</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Numerology for Clarity -->
                 <div class="service-card group">
                     <div class="brand-gradient-oxford p-8 rounded-2xl text-white h-full transition-all duration-500 transform group-hover:scale-105 shadow-xl flex flex-col">
@@ -301,6 +351,16 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Not Sure Section -->
+            <div class="text-center max-w-3xl mx-auto mt-16">
+                <p class="text-lg md:text-xl text-gray-700 mb-6">
+                    Not sure what service is right for you? Book your free Clarity Call, and we'll find the right fit.
+                </p>
+                <button class="btn-azure-outline text-lg px-8 py-3 font-semibold cta-booking-trigger">
+                    Book my free call
+                </button>
+            </div>
         </div>
     </section>
 
@@ -308,7 +368,7 @@
     <section class="py-20 brand-gradient-azure">
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-4xl md:text-3xl font-bold text-white mb-6">
-                Not sure what service is right for you? Book your free Clarity Call, and we’ll find the right fit.
+                Let's find the voice stopping you from gaining momentum!
             </h2>
             <button id="bottom-cta-booking-btn" class="booking-btn bg-white text-azure hover:bg-blue-50 px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-azure border border-white/40">
                 Book A Consultation
