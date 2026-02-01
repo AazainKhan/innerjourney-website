@@ -9,7 +9,6 @@ deployment:
     # HTML pages
     - /bin/cp index.html $DEPLOYPATH
     - /bin/cp about.html $DEPLOYPATH
-    - /bin/cp blog.html $DEPLOYPATH
     - /bin/cp services.html $DEPLOYPATH
     - /bin/cp contact.html $DEPLOYPATH
     # PHP backend
