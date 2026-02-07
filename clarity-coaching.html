@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/images/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/images/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="/images/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="InnerJourney" />
+    <link rel="manifest" href="/images/favicon/site.webmanifest" />
     <title>Clarity Coaching - Shanila Khan | Transform Your Life in 12 Weeks</title>
     <meta name="description" content="Get answers and transform your life in just 12 weeks. Discover the missing piece to achieving lasting change with Shanila's compassionate clarity coaching.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -75,18 +81,29 @@
     <!-- Booking Overlay -->
     <div include-html="components/booking-overlay.html"></div>
 
+    <!-- Unified Gradient Background Wrapper - Extends from Hero through all sections -->
+    <div class="relative overflow-hidden">
+        <!-- Main gradient background -->
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-indigo-100"></div>
+        <!-- Decorative gradient blobs -->
+        <div class="absolute top-0 right-10 w-[30rem] h-[30rem] bg-orange-400/20 rounded-full blur-3xl"></div>
+        <div class="absolute top-10 left-10 w-[28rem] h-[28rem] bg-blue-400/20 rounded-full blur-3xl"></div>
+        <div class="absolute top-[45%] right-[15%] w-[26rem] h-[26rem] bg-purple-400/20 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-[20%] w-[30rem] h-[30rem] bg-azure/20 rounded-full blur-3xl"></div>
+        <div class="absolute top-[20%] left-[45%] w-[22rem] h-[22rem] bg-indigo-300/20 rounded-full blur-3xl"></div>
+        <div class="absolute top-[65%] right-[35%] w-[24rem] h-[24rem] bg-blue-500/20 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-[10%] right-[10%] w-[20rem] h-[20rem] bg-orange-300/20 rounded-full blur-3xl"></div>
+
     <!-- Hero Section - Asymmetric Split Layout -->
     <section class="relative min-h-screen flex items-center overflow-hidden">
-        <!-- Left side light background -->
-        <div class="absolute left-0 top-0 w-1/2 h-full bg-white hidden lg:block"></div>
-        <!-- Right side dark background -->
-        <div class="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-bl from-[#14213d] via-[#1a2d50] to-[#237bea] hidden lg:block"></div>
+        <!-- Right side dark overlay - layered on top -->
+        <div class="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-bl from-[#14213d] via-[#1a2d50] to-[#237bea] hidden lg:block z-10"></div>
         <!-- Mobile: full dark background -->
-        <div class="absolute inset-0 bg-gradient-to-b from-[#14213d] to-[#237bea] lg:hidden"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[#14213d] to-[#237bea] lg:hidden z-10"></div>
         
         <!-- Decorative circles on dark side -->
-        <div class="absolute right-1/4 top-1/4 w-64 h-64 bg-carrot/20 rounded-full blur-3xl hidden lg:block"></div>
-        <div class="absolute right-10 bottom-20 w-48 h-48 bg-white/10 rounded-full blur-2xl hidden lg:block"></div>
+        <div class="absolute right-1/4 top-1/4 w-64 h-64 bg-carrot/20 rounded-full blur-3xl hidden lg:block z-10"></div>
+        <div class="absolute right-10 bottom-20 w-48 h-48 bg-white/10 rounded-full blur-2xl hidden lg:block z-10"></div>
         
         <div class="container mx-auto px-6 relative z-20">
             <div class="grid lg:grid-cols-2 gap-12 items-center min-h-screen py-32">
@@ -115,17 +132,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Unified Gradient Background Wrapper -->
-    <div class="relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-indigo-100"></div>
-        <div class="absolute top-0 right-10 w-[30rem] h-[30rem] bg-orange-400/20 rounded-full blur-3xl"></div>
-        <div class="absolute top-10 left-10 w-[28rem] h-[28rem] bg-blue-400/20 rounded-full blur-3xl"></div>
-        <div class="absolute top-[45%] right-[15%] w-[26rem] h-[26rem] bg-purple-400/20 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-0 left-[20%] w-[30rem] h-[30rem] bg-azure/20 rounded-full blur-3xl"></div>
-        <div class="absolute top-[20%] left-[45%] w-[22rem] h-[22rem] bg-indigo-300/20 rounded-full blur-3xl"></div>
-        <div class="absolute top-[65%] right-[35%] w-[24rem] h-[24rem] bg-blue-500/20 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-[10%] right-[10%] w-[20rem] h-[20rem] bg-orange-300/20 rounded-full blur-3xl"></div>
 
         <!-- Clarity Coaching That Gets Results - Alternating Layout -->
         <section class="py-24 relative overflow-hidden">
@@ -195,7 +201,7 @@
                 
                 <div class="grid lg:grid-cols-2 gap-12 items-stretch">
                     <!-- Left: The Problem -->
-                    <div class="bg-gray-50 rounded-3xl p-8 md:p-10 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 animate-on-scroll">
+                    <div class="bg-white rounded-3xl p-8 md:p-10 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 animate-on-scroll">
                         <div class="flex items-center gap-3 mb-6">
                             <span class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center text-xl">❌</span>
                             <h3 class="text-xl font-bold text-gray-800">The Problem</h3>
@@ -215,7 +221,7 @@
                     </div>
                     
                     <!-- Right: The Solution -->
-                    <div class="bg-gradient-to-br from-azure/10 to-blue-50 rounded-3xl p-8 md:p-10 border border-azure/20 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 animate-on-scroll">
+                    <div class="bg-white rounded-3xl p-8 md:p-10 border border-azure/20 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 animate-on-scroll">
                         <div class="flex items-center gap-3 mb-6">
                             <span class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-xl">✨</span>
                             <h3 class="text-xl font-bold text-gray-800">The Solution</h3>
