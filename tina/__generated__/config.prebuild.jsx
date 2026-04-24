@@ -229,9 +229,7 @@ var config_default = defineConfig({
             list: true,
             fields: [
               { name: "quote", label: "Quote", type: "string", ui: { component: "textarea" } },
-              { name: "name", label: "Name", type: "string" },
-              { name: "role", label: "Role / Description", type: "string" },
-              { name: "initials", label: "Initials (for avatar)", type: "string" }
+              { name: "author", label: "Author (name + role)", type: "string" }
             ]
           }
         ]

@@ -2,8 +2,8 @@
   "name": "innerjourney-website",
   "version": "2.0.0",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "tinacms dev -c \"next dev\"",
+    "build": "tinacms build --skip-cloud-checks && next build",
     "start": "next start",
     "lint": "next lint"
   },

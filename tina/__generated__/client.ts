@@ -1,23 +1,5 @@
 import { createClient } from "tinacms/dist/client";
 import { queries } from "./types";
-
-const clientId = process.env.NEXT_PUBLIC_TINA_CLIENT_ID
-const branch =
-  process.env.GITHUB_BRANCH ||
-  process.env.VERCEL_GIT_COMMIT_REF ||
-  process.env.HEAD ||
-  'main'
-
-const isLocal = process.env.TINA_PUBLIC_IS_LOCAL === 'true'
-
-const apiUrl =
-  isLocal || !clientId
-    ? 'http://localhost:4001/graphql'
-    : `https://content.tinajs.io/2.2/content/${clientId}/github/${branch}`
-
-export const client = createClient({
-  url: apiUrl,
-  token: process.env.TINA_TOKEN || '',
-  queries,
-});
+export const client = createClient({ cacheDir: '/home/user/innerjourney-website/tina/__generated__/.cache/1777003978888', url: 'https://content.tinajs.io/2.2/content/88bc3f44-ecdf-4f23-bb2a-117721f2da57/github/claude/migrate-cpanel-nextjs-Qbyc2', token: 'b148247977ac4a7421ef6dbb769f4cde7b0be0c1', queries,  });
 export default client;
+  

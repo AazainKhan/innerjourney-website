@@ -132,8 +132,6 @@ fragment TestimonialsParts on Testimonials {
   items {
     __typename
     quote
-    name
-    role
-    initials
+    author
   }
 }

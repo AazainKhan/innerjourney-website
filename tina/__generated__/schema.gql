@@ -465,9 +465,7 @@ type ContactConnection implements Connection {
 
 type TestimonialsItems {
   quote: String
-  name: String
-  role: String
-  initials: String
+  author: String
 }
 
 type Testimonials implements Node & Document {
@@ -479,9 +477,7 @@ type Testimonials implements Node & Document {
 
 input TestimonialsItemsFilter {
   quote: StringFilter
-  name: StringFilter
-  role: StringFilter
-  initials: StringFilter
+  author: StringFilter
 }
 
 input TestimonialsFilter {
@@ -673,9 +669,7 @@ input ContactMutation {
 
 input TestimonialsItemsMutation {
   quote: String
-  name: String
-  role: String
-  initials: String
+  author: String
 }
 
 input TestimonialsMutation {
