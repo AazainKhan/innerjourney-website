@@ -21,38 +21,39 @@
     },
     {
       "icon": "fa-certificate",
-      "title": "ICF Qualified Associate Certified Coach",
-      "description": "International Coaching Federation accredited coach, meeting the highest standards of professional coaching practice.",
+      "title": "ICF Associate Certified Coach",
+      "description": "Accredited by the International Coach Federation, demonstrating commitment to professional coaching standards and ethics.",
       "gradient": "from-purple-500 to-purple-600"
     },
     {
-      "icon": "fa-star",
+      "icon": "fa-chart-line",
       "title": "Vedic Numerologist",
-      "description": "Certified in Vedic Numerology to provide deep insights into life paths, relationships, and personal patterns.",
-      "gradient": "from-carrot to-yellow-600"
+      "description": "Trained in science of Vedic Numerology to provide insights into life paths, challenges, and opportunities.",
+      "gradient": "from-amber-500 to-amber-600"
     }
   ],
-  "valuesHeading": "My Coaching Values",
+  "valuesHeading": "What Drives Me",
+  "valuesSubtext": "These core values guide every coaching session and relationship I build with my clients.",
   "values": [
-    {
-      "icon": "fa-compass",
-      "title": "Clarity",
-      "description": "I help you cut through the noise and find the clear path that aligns with who you truly are and what you genuinely want."
-    },
-    {
-      "icon": "fa-shield-alt",
-      "title": "Authenticity",
-      "description": "I believe in honest, real conversations. No judgment, no pretense — just genuine support for your unique journey."
-    },
-    {
-      "icon": "fa-rocket",
-      "title": "Empowerment",
-      "description": "My goal is to empower you with the tools, mindset, and confidence to take decisive action and create lasting change."
-    },
     {
       "icon": "fa-heart",
       "title": "Compassion",
-      "description": "I approach every coaching relationship with deep empathy and understanding, meeting you exactly where you are."
+      "description": "Compassion is the foundation of meaningful coaching. It creates a safe and non-judgmental space where you are truly heard, supported and empowered to explore challenges."
+    },
+    {
+      "icon": "fa-lightbulb",
+      "title": "Curiosity",
+      "description": "Curiosity is the key to deeper insight. By asking thoughtful questions and exploring without judgement, it helps you connect with what truly drives your decisions and directions."
+    },
+    {
+      "icon": "fa-bullseye",
+      "title": "Clarity",
+      "description": "Clarity transforms awareness into actionable direction. It helps you cut through confusion, identify priorities, and make decisions with confidence and purpose."
+    },
+    {
+      "icon": "fa-graduation-cap",
+      "title": "Confidence",
+      "description": "Confidence empowers to trust oneself. It encourages to embrace your strength, and take bold, purposeful steps toward your goals. It turns intention into meaningful action."
     }
   ],
   "ctaHeading": "Ready to start your journey?",

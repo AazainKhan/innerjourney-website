@@ -42,6 +42,7 @@ fragment AboutParts on About {
     gradient
   }
   valuesHeading
+  valuesSubtext
   values {
     __typename
     icon

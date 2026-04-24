@@ -19,6 +19,7 @@ interface AboutData {
       gradient: string
     }>
     valuesHeading: string
+    valuesSubtext: string
     values: Array<{
       icon: string
       title: string
@@ -135,14 +136,17 @@ export default function AboutPageClient(props: Props) {
               <h2 className="text-4xl md:text-5xl heading-secondary text-gray-900 mb-6">
                 {d.valuesHeading}
               </h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                {d.valuesSubtext}
+              </p>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
               {(d.values ?? []).map((v) => (
                 <div key={v.title} className="text-center animate-on-scroll">
-                  <div className="w-16 h-16 bg-oxford rounded-full flex items-center justify-center mb-4 mx-auto">
-                    <i className={`fas ${v.icon} text-carrot text-2xl`}></i>
+                  <div className="w-20 h-20 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                    <i className={`fas ${v.icon} text-white text-3xl`}></i>
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">{v.title}</h3>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-4">{v.title}</h3>
                   <p className="text-gray-600 leading-relaxed">{v.description}</p>
                 </div>
               ))}

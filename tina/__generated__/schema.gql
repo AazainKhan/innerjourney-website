@@ -204,6 +204,7 @@ type About implements Node & Document {
   credentialsSubtext: String
   credentials: [AboutCredentials]
   valuesHeading: String
+  valuesSubtext: String
   values: [AboutValues]
   ctaHeading: String
   ctaSubtext: String
@@ -236,6 +237,7 @@ input AboutFilter {
   credentialsSubtext: StringFilter
   credentials: AboutCredentialsFilter
   valuesHeading: StringFilter
+  valuesSubtext: StringFilter
   values: AboutValuesFilter
   ctaHeading: StringFilter
   ctaSubtext: StringFilter
@@ -607,6 +609,7 @@ input AboutMutation {
   credentialsSubtext: String
   credentials: [AboutCredentialsMutation]
   valuesHeading: String
+  valuesSubtext: String
   values: [AboutValuesMutation]
   ctaHeading: String
   ctaSubtext: String

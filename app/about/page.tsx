@@ -31,6 +31,7 @@ const QUERY = `
         gradient
       }
       valuesHeading
+      valuesSubtext
       values {
         icon
         title

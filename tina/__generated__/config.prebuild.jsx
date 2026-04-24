@@ -77,6 +77,7 @@ var config_default = defineConfig({
             ]
           },
           { name: "valuesHeading", label: "Values Heading", type: "string" },
+          { name: "valuesSubtext", label: "Values Subtext", type: "string", ui: { component: "textarea" } },
           {
             name: "values",
             label: "Values",
