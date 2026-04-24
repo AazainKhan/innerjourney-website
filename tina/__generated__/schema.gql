@@ -109,23 +109,29 @@ type Collection {
 union DocumentNode = Home | About | ClarityCoaching | CareerCoaching | Numerology | Resources | Contact | Testimonials | Folder
 
 type Home implements Node & Document {
-  heroBadge: String
   heroHeading: String
-  heroHeadingHighlight: String
   heroSubtext: String
   heroCTALabel: String
-  aboutBadge: String
+  heroBottomCTALabel: String
+  ctaHeading: String
+  ctaLine1: String
+  ctaLine2: String
+  ctaLine3: String
+  ctaMessage1: String
+  ctaMessage2: String
   aboutHeading: String
+  aboutCredentialTitle: String
   aboutParagraph1: String
   aboutParagraph2: String
-  aboutParagraph3: String
-  aboutQuote: String
-  aboutCTALabel: String
-  servicesSectionHeading: String
-  servicesSectionSubtext: String
-  ctaSectionHeading: String
-  ctaSectionSubtext: String
-  ctaButtonLabel: String
+  feelLikeYouHeading: String
+  feelLikeYouTagline: String
+  feelLikeYouQuestion1: String
+  feelLikeYouQuestion2: String
+  feelLikeYouQuestion3: String
+  feelLikeYouQuestion4: String
+  servicesHeading: String
+  servicesSubtext: String
+  bottomCTAText: String
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -139,23 +145,29 @@ input StringFilter {
 }
 
 input HomeFilter {
-  heroBadge: StringFilter
   heroHeading: StringFilter
-  heroHeadingHighlight: StringFilter
   heroSubtext: StringFilter
   heroCTALabel: StringFilter
-  aboutBadge: StringFilter
+  heroBottomCTALabel: StringFilter
+  ctaHeading: StringFilter
+  ctaLine1: StringFilter
+  ctaLine2: StringFilter
+  ctaLine3: StringFilter
+  ctaMessage1: StringFilter
+  ctaMessage2: StringFilter
   aboutHeading: StringFilter
+  aboutCredentialTitle: StringFilter
   aboutParagraph1: StringFilter
   aboutParagraph2: StringFilter
-  aboutParagraph3: StringFilter
-  aboutQuote: StringFilter
-  aboutCTALabel: StringFilter
-  servicesSectionHeading: StringFilter
-  servicesSectionSubtext: StringFilter
-  ctaSectionHeading: StringFilter
-  ctaSectionSubtext: StringFilter
-  ctaButtonLabel: StringFilter
+  feelLikeYouHeading: StringFilter
+  feelLikeYouTagline: StringFilter
+  feelLikeYouQuestion1: StringFilter
+  feelLikeYouQuestion2: StringFilter
+  feelLikeYouQuestion3: StringFilter
+  feelLikeYouQuestion4: StringFilter
+  servicesHeading: StringFilter
+  servicesSubtext: StringFilter
+  bottomCTAText: StringFilter
 }
 
 type HomeConnectionEdges {
@@ -172,29 +184,29 @@ type HomeConnection implements Connection {
 type AboutCredentials {
   icon: String
   title: String
-  desc: String
+  description: String
+  gradient: String
 }
 
 type AboutValues {
   icon: String
   title: String
-  desc: String
+  description: String
 }
 
 type About implements Node & Document {
-  heroBadge: String
   heroHeading: String
   heroSubtext: String
-  bioParagraph1: String
-  bioParagraph2: String
-  bioParagraph3: String
-  bioParagraph4: String
-  credentialsSectionHeading: String
+  storyHeading: String
+  storyParagraph1: String
+  storyParagraph2: String
+  credentialsHeading: String
+  credentialsSubtext: String
   credentials: [AboutCredentials]
-  valuesSectionHeading: String
+  valuesHeading: String
   values: [AboutValues]
-  ctaSectionHeading: String
-  ctaSectionSubtext: String
+  ctaHeading: String
+  ctaSubtext: String
   ctaButtonLabel: String
   id: ID!
   _sys: SystemInfo!
@@ -204,29 +216,29 @@ type About implements Node & Document {
 input AboutCredentialsFilter {
   icon: StringFilter
   title: StringFilter
-  desc: StringFilter
+  description: StringFilter
+  gradient: StringFilter
 }
 
 input AboutValuesFilter {
   icon: StringFilter
   title: StringFilter
-  desc: StringFilter
+  description: StringFilter
 }
 
 input AboutFilter {
-  heroBadge: StringFilter
   heroHeading: StringFilter
   heroSubtext: StringFilter
-  bioParagraph1: StringFilter
-  bioParagraph2: StringFilter
-  bioParagraph3: StringFilter
-  bioParagraph4: StringFilter
-  credentialsSectionHeading: StringFilter
+  storyHeading: StringFilter
+  storyParagraph1: StringFilter
+  storyParagraph2: StringFilter
+  credentialsHeading: StringFilter
+  credentialsSubtext: StringFilter
   credentials: AboutCredentialsFilter
-  valuesSectionHeading: StringFilter
+  valuesHeading: StringFilter
   values: AboutValuesFilter
-  ctaSectionHeading: StringFilter
-  ctaSectionSubtext: StringFilter
+  ctaHeading: StringFilter
+  ctaSubtext: StringFilter
   ctaButtonLabel: StringFilter
 }
 
@@ -428,28 +440,32 @@ type ResourcesConnection implements Connection {
 }
 
 type Contact implements Node & Document {
-  heroBadge: String
   heroHeading: String
   heroSubtext: String
+  sectionHeading: String
+  sectionSubtext: String
   email: String
+  phone: String
+  videoText: String
   location: String
-  responseTime: String
+  bookingCTALabel: String
   formHeading: String
-  formSubtext: String
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
 }
 
 input ContactFilter {
-  heroBadge: StringFilter
   heroHeading: StringFilter
   heroSubtext: StringFilter
+  sectionHeading: StringFilter
+  sectionSubtext: StringFilter
   email: StringFilter
+  phone: StringFilter
+  videoText: StringFilter
   location: StringFilter
-  responseTime: StringFilter
+  bookingCTALabel: StringFilter
   formHeading: StringFilter
-  formSubtext: StringFilter
 }
 
 type ContactConnectionEdges {
@@ -543,51 +559,57 @@ input DocumentMutation {
 }
 
 input HomeMutation {
-  heroBadge: String
   heroHeading: String
-  heroHeadingHighlight: String
   heroSubtext: String
   heroCTALabel: String
-  aboutBadge: String
+  heroBottomCTALabel: String
+  ctaHeading: String
+  ctaLine1: String
+  ctaLine2: String
+  ctaLine3: String
+  ctaMessage1: String
+  ctaMessage2: String
   aboutHeading: String
+  aboutCredentialTitle: String
   aboutParagraph1: String
   aboutParagraph2: String
-  aboutParagraph3: String
-  aboutQuote: String
-  aboutCTALabel: String
-  servicesSectionHeading: String
-  servicesSectionSubtext: String
-  ctaSectionHeading: String
-  ctaSectionSubtext: String
-  ctaButtonLabel: String
+  feelLikeYouHeading: String
+  feelLikeYouTagline: String
+  feelLikeYouQuestion1: String
+  feelLikeYouQuestion2: String
+  feelLikeYouQuestion3: String
+  feelLikeYouQuestion4: String
+  servicesHeading: String
+  servicesSubtext: String
+  bottomCTAText: String
 }
 
 input AboutCredentialsMutation {
   icon: String
   title: String
-  desc: String
+  description: String
+  gradient: String
 }
 
 input AboutValuesMutation {
   icon: String
   title: String
-  desc: String
+  description: String
 }
 
 input AboutMutation {
-  heroBadge: String
   heroHeading: String
   heroSubtext: String
-  bioParagraph1: String
-  bioParagraph2: String
-  bioParagraph3: String
-  bioParagraph4: String
-  credentialsSectionHeading: String
+  storyHeading: String
+  storyParagraph1: String
+  storyParagraph2: String
+  credentialsHeading: String
+  credentialsSubtext: String
   credentials: [AboutCredentialsMutation]
-  valuesSectionHeading: String
+  valuesHeading: String
   values: [AboutValuesMutation]
-  ctaSectionHeading: String
-  ctaSectionSubtext: String
+  ctaHeading: String
+  ctaSubtext: String
   ctaButtonLabel: String
 }
 
@@ -657,14 +679,16 @@ input ResourcesMutation {
 }
 
 input ContactMutation {
-  heroBadge: String
   heroHeading: String
   heroSubtext: String
+  sectionHeading: String
+  sectionSubtext: String
   email: String
+  phone: String
+  videoText: String
   location: String
-  responseTime: String
+  bookingCTALabel: String
   formHeading: String
-  formSubtext: String
 }
 
 input TestimonialsItemsMutation {

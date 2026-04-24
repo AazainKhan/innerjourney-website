@@ -1,10 +1,12 @@
 {
-  "heroBadge": "Get In Touch",
   "heroHeading": "Let's Connect",
-  "heroSubtext": "Whether you have questions about my coaching programmes or you're ready to start your journey — I'd love to hear from you.",
+  "heroSubtext": "Ready to start? I'm here to support you every step of the way. Let's discuss how we can work together.",
+  "sectionHeading": "Start Your Journey Today",
+  "sectionSubtext": "I'm excited to learn about your goals and explore how we can work together to create the transformation you're seeking.",
   "email": "info@innerjourney-with-shanila.com",
-  "location": "London, United Kingdom",
-  "responseTime": "I typically respond within 24 hours",
-  "formHeading": "Send Me a Message",
-  "formSubtext": "Fill in the form below and I'll get back to you as soon as possible."
+  "phone": "+44 7387 973 382",
+  "videoText": "Zoom, Google Meet, or your preferred platform",
+  "location": "Leeds, United Kingdom",
+  "bookingCTALabel": "Book A Free Clarity Call",
+  "formHeading": "Send me a message"
 }

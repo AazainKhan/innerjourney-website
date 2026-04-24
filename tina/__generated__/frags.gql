@@ -1,49 +1,55 @@
 fragment HomeParts on Home {
   __typename
-  heroBadge
   heroHeading
-  heroHeadingHighlight
   heroSubtext
   heroCTALabel
-  aboutBadge
+  heroBottomCTALabel
+  ctaHeading
+  ctaLine1
+  ctaLine2
+  ctaLine3
+  ctaMessage1
+  ctaMessage2
   aboutHeading
+  aboutCredentialTitle
   aboutParagraph1
   aboutParagraph2
-  aboutParagraph3
-  aboutQuote
-  aboutCTALabel
-  servicesSectionHeading
-  servicesSectionSubtext
-  ctaSectionHeading
-  ctaSectionSubtext
-  ctaButtonLabel
+  feelLikeYouHeading
+  feelLikeYouTagline
+  feelLikeYouQuestion1
+  feelLikeYouQuestion2
+  feelLikeYouQuestion3
+  feelLikeYouQuestion4
+  servicesHeading
+  servicesSubtext
+  bottomCTAText
 }
 
 fragment AboutParts on About {
   __typename
-  heroBadge
   heroHeading
   heroSubtext
-  bioParagraph1
-  bioParagraph2
-  bioParagraph3
-  bioParagraph4
-  credentialsSectionHeading
+  storyHeading
+  storyParagraph1
+  storyParagraph2
+  credentialsHeading
+  credentialsSubtext
   credentials {
     __typename
     icon
     title
-    desc
+    description
+    gradient
   }
-  valuesSectionHeading
+  valuesHeading
   values {
     __typename
     icon
     title
-    desc
+    description
   }
-  ctaSectionHeading
-  ctaSectionSubtext
+  ctaHeading
+  ctaSubtext
   ctaButtonLabel
 }
 
@@ -117,14 +123,16 @@ fragment ResourcesParts on Resources {
 
 fragment ContactParts on Contact {
   __typename
-  heroBadge
   heroHeading
   heroSubtext
+  sectionHeading
+  sectionSubtext
   email
+  phone
+  videoText
   location
-  responseTime
+  bookingCTALabel
   formHeading
-  formSubtext
 }
 
 fragment TestimonialsParts on Testimonials {

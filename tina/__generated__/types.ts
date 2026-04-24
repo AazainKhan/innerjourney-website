@@ -293,23 +293,29 @@ export type DocumentNode = Home | About | ClarityCoaching | CareerCoaching | Num
 
 export type Home = Node & Document & {
   __typename?: 'Home';
-  heroBadge?: Maybe<Scalars['String']['output']>;
   heroHeading?: Maybe<Scalars['String']['output']>;
-  heroHeadingHighlight?: Maybe<Scalars['String']['output']>;
   heroSubtext?: Maybe<Scalars['String']['output']>;
   heroCTALabel?: Maybe<Scalars['String']['output']>;
-  aboutBadge?: Maybe<Scalars['String']['output']>;
+  heroBottomCTALabel?: Maybe<Scalars['String']['output']>;
+  ctaHeading?: Maybe<Scalars['String']['output']>;
+  ctaLine1?: Maybe<Scalars['String']['output']>;
+  ctaLine2?: Maybe<Scalars['String']['output']>;
+  ctaLine3?: Maybe<Scalars['String']['output']>;
+  ctaMessage1?: Maybe<Scalars['String']['output']>;
+  ctaMessage2?: Maybe<Scalars['String']['output']>;
   aboutHeading?: Maybe<Scalars['String']['output']>;
+  aboutCredentialTitle?: Maybe<Scalars['String']['output']>;
   aboutParagraph1?: Maybe<Scalars['String']['output']>;
   aboutParagraph2?: Maybe<Scalars['String']['output']>;
-  aboutParagraph3?: Maybe<Scalars['String']['output']>;
-  aboutQuote?: Maybe<Scalars['String']['output']>;
-  aboutCTALabel?: Maybe<Scalars['String']['output']>;
-  servicesSectionHeading?: Maybe<Scalars['String']['output']>;
-  servicesSectionSubtext?: Maybe<Scalars['String']['output']>;
-  ctaSectionHeading?: Maybe<Scalars['String']['output']>;
-  ctaSectionSubtext?: Maybe<Scalars['String']['output']>;
-  ctaButtonLabel?: Maybe<Scalars['String']['output']>;
+  feelLikeYouHeading?: Maybe<Scalars['String']['output']>;
+  feelLikeYouTagline?: Maybe<Scalars['String']['output']>;
+  feelLikeYouQuestion1?: Maybe<Scalars['String']['output']>;
+  feelLikeYouQuestion2?: Maybe<Scalars['String']['output']>;
+  feelLikeYouQuestion3?: Maybe<Scalars['String']['output']>;
+  feelLikeYouQuestion4?: Maybe<Scalars['String']['output']>;
+  servicesHeading?: Maybe<Scalars['String']['output']>;
+  servicesSubtext?: Maybe<Scalars['String']['output']>;
+  bottomCTAText?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -323,23 +329,29 @@ export type StringFilter = {
 };
 
 export type HomeFilter = {
-  heroBadge?: InputMaybe<StringFilter>;
   heroHeading?: InputMaybe<StringFilter>;
-  heroHeadingHighlight?: InputMaybe<StringFilter>;
   heroSubtext?: InputMaybe<StringFilter>;
   heroCTALabel?: InputMaybe<StringFilter>;
-  aboutBadge?: InputMaybe<StringFilter>;
+  heroBottomCTALabel?: InputMaybe<StringFilter>;
+  ctaHeading?: InputMaybe<StringFilter>;
+  ctaLine1?: InputMaybe<StringFilter>;
+  ctaLine2?: InputMaybe<StringFilter>;
+  ctaLine3?: InputMaybe<StringFilter>;
+  ctaMessage1?: InputMaybe<StringFilter>;
+  ctaMessage2?: InputMaybe<StringFilter>;
   aboutHeading?: InputMaybe<StringFilter>;
+  aboutCredentialTitle?: InputMaybe<StringFilter>;
   aboutParagraph1?: InputMaybe<StringFilter>;
   aboutParagraph2?: InputMaybe<StringFilter>;
-  aboutParagraph3?: InputMaybe<StringFilter>;
-  aboutQuote?: InputMaybe<StringFilter>;
-  aboutCTALabel?: InputMaybe<StringFilter>;
-  servicesSectionHeading?: InputMaybe<StringFilter>;
-  servicesSectionSubtext?: InputMaybe<StringFilter>;
-  ctaSectionHeading?: InputMaybe<StringFilter>;
-  ctaSectionSubtext?: InputMaybe<StringFilter>;
-  ctaButtonLabel?: InputMaybe<StringFilter>;
+  feelLikeYouHeading?: InputMaybe<StringFilter>;
+  feelLikeYouTagline?: InputMaybe<StringFilter>;
+  feelLikeYouQuestion1?: InputMaybe<StringFilter>;
+  feelLikeYouQuestion2?: InputMaybe<StringFilter>;
+  feelLikeYouQuestion3?: InputMaybe<StringFilter>;
+  feelLikeYouQuestion4?: InputMaybe<StringFilter>;
+  servicesHeading?: InputMaybe<StringFilter>;
+  servicesSubtext?: InputMaybe<StringFilter>;
+  bottomCTAText?: InputMaybe<StringFilter>;
 };
 
 export type HomeConnectionEdges = {
@@ -359,31 +371,31 @@ export type AboutCredentials = {
   __typename?: 'AboutCredentials';
   icon?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
-  desc?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  gradient?: Maybe<Scalars['String']['output']>;
 };
 
 export type AboutValues = {
   __typename?: 'AboutValues';
   icon?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
-  desc?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
 };
 
 export type About = Node & Document & {
   __typename?: 'About';
-  heroBadge?: Maybe<Scalars['String']['output']>;
   heroHeading?: Maybe<Scalars['String']['output']>;
   heroSubtext?: Maybe<Scalars['String']['output']>;
-  bioParagraph1?: Maybe<Scalars['String']['output']>;
-  bioParagraph2?: Maybe<Scalars['String']['output']>;
-  bioParagraph3?: Maybe<Scalars['String']['output']>;
-  bioParagraph4?: Maybe<Scalars['String']['output']>;
-  credentialsSectionHeading?: Maybe<Scalars['String']['output']>;
+  storyHeading?: Maybe<Scalars['String']['output']>;
+  storyParagraph1?: Maybe<Scalars['String']['output']>;
+  storyParagraph2?: Maybe<Scalars['String']['output']>;
+  credentialsHeading?: Maybe<Scalars['String']['output']>;
+  credentialsSubtext?: Maybe<Scalars['String']['output']>;
   credentials?: Maybe<Array<Maybe<AboutCredentials>>>;
-  valuesSectionHeading?: Maybe<Scalars['String']['output']>;
+  valuesHeading?: Maybe<Scalars['String']['output']>;
   values?: Maybe<Array<Maybe<AboutValues>>>;
-  ctaSectionHeading?: Maybe<Scalars['String']['output']>;
-  ctaSectionSubtext?: Maybe<Scalars['String']['output']>;
+  ctaHeading?: Maybe<Scalars['String']['output']>;
+  ctaSubtext?: Maybe<Scalars['String']['output']>;
   ctaButtonLabel?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
@@ -393,29 +405,29 @@ export type About = Node & Document & {
 export type AboutCredentialsFilter = {
   icon?: InputMaybe<StringFilter>;
   title?: InputMaybe<StringFilter>;
-  desc?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  gradient?: InputMaybe<StringFilter>;
 };
 
 export type AboutValuesFilter = {
   icon?: InputMaybe<StringFilter>;
   title?: InputMaybe<StringFilter>;
-  desc?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
 };
 
 export type AboutFilter = {
-  heroBadge?: InputMaybe<StringFilter>;
   heroHeading?: InputMaybe<StringFilter>;
   heroSubtext?: InputMaybe<StringFilter>;
-  bioParagraph1?: InputMaybe<StringFilter>;
-  bioParagraph2?: InputMaybe<StringFilter>;
-  bioParagraph3?: InputMaybe<StringFilter>;
-  bioParagraph4?: InputMaybe<StringFilter>;
-  credentialsSectionHeading?: InputMaybe<StringFilter>;
+  storyHeading?: InputMaybe<StringFilter>;
+  storyParagraph1?: InputMaybe<StringFilter>;
+  storyParagraph2?: InputMaybe<StringFilter>;
+  credentialsHeading?: InputMaybe<StringFilter>;
+  credentialsSubtext?: InputMaybe<StringFilter>;
   credentials?: InputMaybe<AboutCredentialsFilter>;
-  valuesSectionHeading?: InputMaybe<StringFilter>;
+  valuesHeading?: InputMaybe<StringFilter>;
   values?: InputMaybe<AboutValuesFilter>;
-  ctaSectionHeading?: InputMaybe<StringFilter>;
-  ctaSectionSubtext?: InputMaybe<StringFilter>;
+  ctaHeading?: InputMaybe<StringFilter>;
+  ctaSubtext?: InputMaybe<StringFilter>;
   ctaButtonLabel?: InputMaybe<StringFilter>;
 };
 
@@ -633,28 +645,32 @@ export type ResourcesConnection = Connection & {
 
 export type Contact = Node & Document & {
   __typename?: 'Contact';
-  heroBadge?: Maybe<Scalars['String']['output']>;
   heroHeading?: Maybe<Scalars['String']['output']>;
   heroSubtext?: Maybe<Scalars['String']['output']>;
+  sectionHeading?: Maybe<Scalars['String']['output']>;
+  sectionSubtext?: Maybe<Scalars['String']['output']>;
   email?: Maybe<Scalars['String']['output']>;
+  phone?: Maybe<Scalars['String']['output']>;
+  videoText?: Maybe<Scalars['String']['output']>;
   location?: Maybe<Scalars['String']['output']>;
-  responseTime?: Maybe<Scalars['String']['output']>;
+  bookingCTALabel?: Maybe<Scalars['String']['output']>;
   formHeading?: Maybe<Scalars['String']['output']>;
-  formSubtext?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
 };
 
 export type ContactFilter = {
-  heroBadge?: InputMaybe<StringFilter>;
   heroHeading?: InputMaybe<StringFilter>;
   heroSubtext?: InputMaybe<StringFilter>;
+  sectionHeading?: InputMaybe<StringFilter>;
+  sectionSubtext?: InputMaybe<StringFilter>;
   email?: InputMaybe<StringFilter>;
+  phone?: InputMaybe<StringFilter>;
+  videoText?: InputMaybe<StringFilter>;
   location?: InputMaybe<StringFilter>;
-  responseTime?: InputMaybe<StringFilter>;
+  bookingCTALabel?: InputMaybe<StringFilter>;
   formHeading?: InputMaybe<StringFilter>;
-  formSubtext?: InputMaybe<StringFilter>;
 };
 
 export type ContactConnectionEdges = {
@@ -884,51 +900,57 @@ export type DocumentMutation = {
 };
 
 export type HomeMutation = {
-  heroBadge?: InputMaybe<Scalars['String']['input']>;
   heroHeading?: InputMaybe<Scalars['String']['input']>;
-  heroHeadingHighlight?: InputMaybe<Scalars['String']['input']>;
   heroSubtext?: InputMaybe<Scalars['String']['input']>;
   heroCTALabel?: InputMaybe<Scalars['String']['input']>;
-  aboutBadge?: InputMaybe<Scalars['String']['input']>;
+  heroBottomCTALabel?: InputMaybe<Scalars['String']['input']>;
+  ctaHeading?: InputMaybe<Scalars['String']['input']>;
+  ctaLine1?: InputMaybe<Scalars['String']['input']>;
+  ctaLine2?: InputMaybe<Scalars['String']['input']>;
+  ctaLine3?: InputMaybe<Scalars['String']['input']>;
+  ctaMessage1?: InputMaybe<Scalars['String']['input']>;
+  ctaMessage2?: InputMaybe<Scalars['String']['input']>;
   aboutHeading?: InputMaybe<Scalars['String']['input']>;
+  aboutCredentialTitle?: InputMaybe<Scalars['String']['input']>;
   aboutParagraph1?: InputMaybe<Scalars['String']['input']>;
   aboutParagraph2?: InputMaybe<Scalars['String']['input']>;
-  aboutParagraph3?: InputMaybe<Scalars['String']['input']>;
-  aboutQuote?: InputMaybe<Scalars['String']['input']>;
-  aboutCTALabel?: InputMaybe<Scalars['String']['input']>;
-  servicesSectionHeading?: InputMaybe<Scalars['String']['input']>;
-  servicesSectionSubtext?: InputMaybe<Scalars['String']['input']>;
-  ctaSectionHeading?: InputMaybe<Scalars['String']['input']>;
-  ctaSectionSubtext?: InputMaybe<Scalars['String']['input']>;
-  ctaButtonLabel?: InputMaybe<Scalars['String']['input']>;
+  feelLikeYouHeading?: InputMaybe<Scalars['String']['input']>;
+  feelLikeYouTagline?: InputMaybe<Scalars['String']['input']>;
+  feelLikeYouQuestion1?: InputMaybe<Scalars['String']['input']>;
+  feelLikeYouQuestion2?: InputMaybe<Scalars['String']['input']>;
+  feelLikeYouQuestion3?: InputMaybe<Scalars['String']['input']>;
+  feelLikeYouQuestion4?: InputMaybe<Scalars['String']['input']>;
+  servicesHeading?: InputMaybe<Scalars['String']['input']>;
+  servicesSubtext?: InputMaybe<Scalars['String']['input']>;
+  bottomCTAText?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type AboutCredentialsMutation = {
   icon?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
-  desc?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  gradient?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type AboutValuesMutation = {
   icon?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
-  desc?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type AboutMutation = {
-  heroBadge?: InputMaybe<Scalars['String']['input']>;
   heroHeading?: InputMaybe<Scalars['String']['input']>;
   heroSubtext?: InputMaybe<Scalars['String']['input']>;
-  bioParagraph1?: InputMaybe<Scalars['String']['input']>;
-  bioParagraph2?: InputMaybe<Scalars['String']['input']>;
-  bioParagraph3?: InputMaybe<Scalars['String']['input']>;
-  bioParagraph4?: InputMaybe<Scalars['String']['input']>;
-  credentialsSectionHeading?: InputMaybe<Scalars['String']['input']>;
+  storyHeading?: InputMaybe<Scalars['String']['input']>;
+  storyParagraph1?: InputMaybe<Scalars['String']['input']>;
+  storyParagraph2?: InputMaybe<Scalars['String']['input']>;
+  credentialsHeading?: InputMaybe<Scalars['String']['input']>;
+  credentialsSubtext?: InputMaybe<Scalars['String']['input']>;
   credentials?: InputMaybe<Array<InputMaybe<AboutCredentialsMutation>>>;
-  valuesSectionHeading?: InputMaybe<Scalars['String']['input']>;
+  valuesHeading?: InputMaybe<Scalars['String']['input']>;
   values?: InputMaybe<Array<InputMaybe<AboutValuesMutation>>>;
-  ctaSectionHeading?: InputMaybe<Scalars['String']['input']>;
-  ctaSectionSubtext?: InputMaybe<Scalars['String']['input']>;
+  ctaHeading?: InputMaybe<Scalars['String']['input']>;
+  ctaSubtext?: InputMaybe<Scalars['String']['input']>;
   ctaButtonLabel?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -998,14 +1020,16 @@ export type ResourcesMutation = {
 };
 
 export type ContactMutation = {
-  heroBadge?: InputMaybe<Scalars['String']['input']>;
   heroHeading?: InputMaybe<Scalars['String']['input']>;
   heroSubtext?: InputMaybe<Scalars['String']['input']>;
+  sectionHeading?: InputMaybe<Scalars['String']['input']>;
+  sectionSubtext?: InputMaybe<Scalars['String']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
+  phone?: InputMaybe<Scalars['String']['input']>;
+  videoText?: InputMaybe<Scalars['String']['input']>;
   location?: InputMaybe<Scalars['String']['input']>;
-  responseTime?: InputMaybe<Scalars['String']['input']>;
+  bookingCTALabel?: InputMaybe<Scalars['String']['input']>;
   formHeading?: InputMaybe<Scalars['String']['input']>;
-  formSubtext?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type TestimonialsItemsMutation = {
@@ -1017,9 +1041,9 @@ export type TestimonialsMutation = {
   items?: InputMaybe<Array<InputMaybe<TestimonialsItemsMutation>>>;
 };
 
-export type HomePartsFragment = { __typename: 'Home', heroBadge?: string | null, heroHeading?: string | null, heroHeadingHighlight?: string | null, heroSubtext?: string | null, heroCTALabel?: string | null, aboutBadge?: string | null, aboutHeading?: string | null, aboutParagraph1?: string | null, aboutParagraph2?: string | null, aboutParagraph3?: string | null, aboutQuote?: string | null, aboutCTALabel?: string | null, servicesSectionHeading?: string | null, servicesSectionSubtext?: string | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null };
+export type HomePartsFragment = { __typename: 'Home', heroHeading?: string | null, heroSubtext?: string | null, heroCTALabel?: string | null, heroBottomCTALabel?: string | null, ctaHeading?: string | null, ctaLine1?: string | null, ctaLine2?: string | null, ctaLine3?: string | null, ctaMessage1?: string | null, ctaMessage2?: string | null, aboutHeading?: string | null, aboutCredentialTitle?: string | null, aboutParagraph1?: string | null, aboutParagraph2?: string | null, feelLikeYouHeading?: string | null, feelLikeYouTagline?: string | null, feelLikeYouQuestion1?: string | null, feelLikeYouQuestion2?: string | null, feelLikeYouQuestion3?: string | null, feelLikeYouQuestion4?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, bottomCTAText?: string | null };
 
-export type AboutPartsFragment = { __typename: 'About', heroBadge?: string | null, heroHeading?: string | null, heroSubtext?: string | null, bioParagraph1?: string | null, bioParagraph2?: string | null, bioParagraph3?: string | null, bioParagraph4?: string | null, credentialsSectionHeading?: string | null, valuesSectionHeading?: string | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null, credentials?: Array<{ __typename: 'AboutCredentials', icon?: string | null, title?: string | null, desc?: string | null } | null> | null, values?: Array<{ __typename: 'AboutValues', icon?: string | null, title?: string | null, desc?: string | null } | null> | null };
+export type AboutPartsFragment = { __typename: 'About', heroHeading?: string | null, heroSubtext?: string | null, storyHeading?: string | null, storyParagraph1?: string | null, storyParagraph2?: string | null, credentialsHeading?: string | null, credentialsSubtext?: string | null, valuesHeading?: string | null, ctaHeading?: string | null, ctaSubtext?: string | null, ctaButtonLabel?: string | null, credentials?: Array<{ __typename: 'AboutCredentials', icon?: string | null, title?: string | null, description?: string | null, gradient?: string | null } | null> | null, values?: Array<{ __typename: 'AboutValues', icon?: string | null, title?: string | null, description?: string | null } | null> | null };
 
 export type ClarityCoachingPartsFragment = { __typename: 'ClarityCoaching', heroBadge?: string | null, heroHeading?: string | null, heroSubtext?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, bannerQuote?: string | null, outcomesSectionHeading?: string | null, outcomes?: Array<string | null> | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null, perhapsItems?: Array<{ __typename: 'ClarityCoachingPerhapsItems', emoji?: string | null, text?: string | null } | null> | null };
 
@@ -1029,7 +1053,7 @@ export type NumerologyPartsFragment = { __typename: 'Numerology', heroBadge?: st
 
 export type ResourcesPartsFragment = { __typename: 'Resources', heroBadge?: string | null, heroHeading?: string | null, heroHeadingHighlight?: string | null, heroSubtext?: string | null, blogHeading?: string | null, blogText?: string | null, podcastHeading?: string | null, podcastText?: string | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null };
 
-export type ContactPartsFragment = { __typename: 'Contact', heroBadge?: string | null, heroHeading?: string | null, heroSubtext?: string | null, email?: string | null, location?: string | null, responseTime?: string | null, formHeading?: string | null, formSubtext?: string | null };
+export type ContactPartsFragment = { __typename: 'Contact', heroHeading?: string | null, heroSubtext?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, email?: string | null, phone?: string | null, videoText?: string | null, location?: string | null, bookingCTALabel?: string | null, formHeading?: string | null };
 
 export type TestimonialsPartsFragment = { __typename: 'Testimonials', items?: Array<{ __typename: 'TestimonialsItems', quote?: string | null, author?: string | null } | null> | null };
 
@@ -1038,7 +1062,7 @@ export type HomeQueryVariables = Exact<{
 }>;
 
 
-export type HomeQuery = { __typename?: 'Query', home: { __typename: 'Home', id: string, heroBadge?: string | null, heroHeading?: string | null, heroHeadingHighlight?: string | null, heroSubtext?: string | null, heroCTALabel?: string | null, aboutBadge?: string | null, aboutHeading?: string | null, aboutParagraph1?: string | null, aboutParagraph2?: string | null, aboutParagraph3?: string | null, aboutQuote?: string | null, aboutCTALabel?: string | null, servicesSectionHeading?: string | null, servicesSectionSubtext?: string | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type HomeQuery = { __typename?: 'Query', home: { __typename: 'Home', id: string, heroHeading?: string | null, heroSubtext?: string | null, heroCTALabel?: string | null, heroBottomCTALabel?: string | null, ctaHeading?: string | null, ctaLine1?: string | null, ctaLine2?: string | null, ctaLine3?: string | null, ctaMessage1?: string | null, ctaMessage2?: string | null, aboutHeading?: string | null, aboutCredentialTitle?: string | null, aboutParagraph1?: string | null, aboutParagraph2?: string | null, feelLikeYouHeading?: string | null, feelLikeYouTagline?: string | null, feelLikeYouQuestion1?: string | null, feelLikeYouQuestion2?: string | null, feelLikeYouQuestion3?: string | null, feelLikeYouQuestion4?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, bottomCTAText?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type HomeConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1050,14 +1074,14 @@ export type HomeConnectionQueryVariables = Exact<{
 }>;
 
 
-export type HomeConnectionQuery = { __typename?: 'Query', homeConnection: { __typename?: 'HomeConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'HomeConnectionEdges', cursor: string, node?: { __typename: 'Home', id: string, heroBadge?: string | null, heroHeading?: string | null, heroHeadingHighlight?: string | null, heroSubtext?: string | null, heroCTALabel?: string | null, aboutBadge?: string | null, aboutHeading?: string | null, aboutParagraph1?: string | null, aboutParagraph2?: string | null, aboutParagraph3?: string | null, aboutQuote?: string | null, aboutCTALabel?: string | null, servicesSectionHeading?: string | null, servicesSectionSubtext?: string | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type HomeConnectionQuery = { __typename?: 'Query', homeConnection: { __typename?: 'HomeConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'HomeConnectionEdges', cursor: string, node?: { __typename: 'Home', id: string, heroHeading?: string | null, heroSubtext?: string | null, heroCTALabel?: string | null, heroBottomCTALabel?: string | null, ctaHeading?: string | null, ctaLine1?: string | null, ctaLine2?: string | null, ctaLine3?: string | null, ctaMessage1?: string | null, ctaMessage2?: string | null, aboutHeading?: string | null, aboutCredentialTitle?: string | null, aboutParagraph1?: string | null, aboutParagraph2?: string | null, feelLikeYouHeading?: string | null, feelLikeYouTagline?: string | null, feelLikeYouQuestion1?: string | null, feelLikeYouQuestion2?: string | null, feelLikeYouQuestion3?: string | null, feelLikeYouQuestion4?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, bottomCTAText?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type AboutQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type AboutQuery = { __typename?: 'Query', about: { __typename: 'About', id: string, heroBadge?: string | null, heroHeading?: string | null, heroSubtext?: string | null, bioParagraph1?: string | null, bioParagraph2?: string | null, bioParagraph3?: string | null, bioParagraph4?: string | null, credentialsSectionHeading?: string | null, valuesSectionHeading?: string | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, credentials?: Array<{ __typename: 'AboutCredentials', icon?: string | null, title?: string | null, desc?: string | null } | null> | null, values?: Array<{ __typename: 'AboutValues', icon?: string | null, title?: string | null, desc?: string | null } | null> | null } };
+export type AboutQuery = { __typename?: 'Query', about: { __typename: 'About', id: string, heroHeading?: string | null, heroSubtext?: string | null, storyHeading?: string | null, storyParagraph1?: string | null, storyParagraph2?: string | null, credentialsHeading?: string | null, credentialsSubtext?: string | null, valuesHeading?: string | null, ctaHeading?: string | null, ctaSubtext?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, credentials?: Array<{ __typename: 'AboutCredentials', icon?: string | null, title?: string | null, description?: string | null, gradient?: string | null } | null> | null, values?: Array<{ __typename: 'AboutValues', icon?: string | null, title?: string | null, description?: string | null } | null> | null } };
 
 export type AboutConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1069,7 +1093,7 @@ export type AboutConnectionQueryVariables = Exact<{
 }>;
 
 
-export type AboutConnectionQuery = { __typename?: 'Query', aboutConnection: { __typename?: 'AboutConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'AboutConnectionEdges', cursor: string, node?: { __typename: 'About', id: string, heroBadge?: string | null, heroHeading?: string | null, heroSubtext?: string | null, bioParagraph1?: string | null, bioParagraph2?: string | null, bioParagraph3?: string | null, bioParagraph4?: string | null, credentialsSectionHeading?: string | null, valuesSectionHeading?: string | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, credentials?: Array<{ __typename: 'AboutCredentials', icon?: string | null, title?: string | null, desc?: string | null } | null> | null, values?: Array<{ __typename: 'AboutValues', icon?: string | null, title?: string | null, desc?: string | null } | null> | null } | null } | null> | null } };
+export type AboutConnectionQuery = { __typename?: 'Query', aboutConnection: { __typename?: 'AboutConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'AboutConnectionEdges', cursor: string, node?: { __typename: 'About', id: string, heroHeading?: string | null, heroSubtext?: string | null, storyHeading?: string | null, storyParagraph1?: string | null, storyParagraph2?: string | null, credentialsHeading?: string | null, credentialsSubtext?: string | null, valuesHeading?: string | null, ctaHeading?: string | null, ctaSubtext?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, credentials?: Array<{ __typename: 'AboutCredentials', icon?: string | null, title?: string | null, description?: string | null, gradient?: string | null } | null> | null, values?: Array<{ __typename: 'AboutValues', icon?: string | null, title?: string | null, description?: string | null } | null> | null } | null } | null> | null } };
 
 export type ClarityCoachingQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1152,7 +1176,7 @@ export type ContactQueryVariables = Exact<{
 }>;
 
 
-export type ContactQuery = { __typename?: 'Query', contact: { __typename: 'Contact', id: string, heroBadge?: string | null, heroHeading?: string | null, heroSubtext?: string | null, email?: string | null, location?: string | null, responseTime?: string | null, formHeading?: string | null, formSubtext?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type ContactQuery = { __typename?: 'Query', contact: { __typename: 'Contact', id: string, heroHeading?: string | null, heroSubtext?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, email?: string | null, phone?: string | null, videoText?: string | null, location?: string | null, bookingCTALabel?: string | null, formHeading?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type ContactConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1164,7 +1188,7 @@ export type ContactConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ContactConnectionQuery = { __typename?: 'Query', contactConnection: { __typename?: 'ContactConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ContactConnectionEdges', cursor: string, node?: { __typename: 'Contact', id: string, heroBadge?: string | null, heroHeading?: string | null, heroSubtext?: string | null, email?: string | null, location?: string | null, responseTime?: string | null, formHeading?: string | null, formSubtext?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type ContactConnectionQuery = { __typename?: 'Query', contactConnection: { __typename?: 'ContactConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ContactConnectionEdges', cursor: string, node?: { __typename: 'Contact', id: string, heroHeading?: string | null, heroSubtext?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, email?: string | null, phone?: string | null, videoText?: string | null, location?: string | null, bookingCTALabel?: string | null, formHeading?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type TestimonialsQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1188,51 +1212,57 @@ export type TestimonialsConnectionQuery = { __typename?: 'Query', testimonialsCo
 export const HomePartsFragmentDoc = gql`
     fragment HomeParts on Home {
   __typename
-  heroBadge
   heroHeading
-  heroHeadingHighlight
   heroSubtext
   heroCTALabel
-  aboutBadge
+  heroBottomCTALabel
+  ctaHeading
+  ctaLine1
+  ctaLine2
+  ctaLine3
+  ctaMessage1
+  ctaMessage2
   aboutHeading
+  aboutCredentialTitle
   aboutParagraph1
   aboutParagraph2
-  aboutParagraph3
-  aboutQuote
-  aboutCTALabel
-  servicesSectionHeading
-  servicesSectionSubtext
-  ctaSectionHeading
-  ctaSectionSubtext
-  ctaButtonLabel
+  feelLikeYouHeading
+  feelLikeYouTagline
+  feelLikeYouQuestion1
+  feelLikeYouQuestion2
+  feelLikeYouQuestion3
+  feelLikeYouQuestion4
+  servicesHeading
+  servicesSubtext
+  bottomCTAText
 }
     `;
 export const AboutPartsFragmentDoc = gql`
     fragment AboutParts on About {
   __typename
-  heroBadge
   heroHeading
   heroSubtext
-  bioParagraph1
-  bioParagraph2
-  bioParagraph3
-  bioParagraph4
-  credentialsSectionHeading
+  storyHeading
+  storyParagraph1
+  storyParagraph2
+  credentialsHeading
+  credentialsSubtext
   credentials {
     __typename
     icon
     title
-    desc
+    description
+    gradient
   }
-  valuesSectionHeading
+  valuesHeading
   values {
     __typename
     icon
     title
-    desc
+    description
   }
-  ctaSectionHeading
-  ctaSectionSubtext
+  ctaHeading
+  ctaSubtext
   ctaButtonLabel
 }
     `;
@@ -1311,14 +1341,16 @@ export const ResourcesPartsFragmentDoc = gql`
 export const ContactPartsFragmentDoc = gql`
     fragment ContactParts on Contact {
   __typename
-  heroBadge
   heroHeading
   heroSubtext
+  sectionHeading
+  sectionSubtext
   email
+  phone
+  videoText
   location
-  responseTime
+  bookingCTALabel
   formHeading
-  formSubtext
 }
     `;
 export const TestimonialsPartsFragmentDoc = gql`

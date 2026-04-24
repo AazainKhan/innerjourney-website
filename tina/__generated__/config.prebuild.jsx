@@ -24,23 +24,29 @@ var config_default = defineConfig({
         format: "json",
         ui: { router: () => "/" },
         fields: [
-          { name: "heroBadge", label: "Hero Badge Text", type: "string" },
           { name: "heroHeading", label: "Hero Heading", type: "string" },
-          { name: "heroHeadingHighlight", label: "Hero Heading Highlight", type: "string" },
           { name: "heroSubtext", label: "Hero Subtext", type: "string", ui: { component: "textarea" } },
           { name: "heroCTALabel", label: "Hero CTA Button Label", type: "string" },
-          { name: "aboutBadge", label: "About Badge Text", type: "string" },
-          { name: "aboutHeading", label: "About Heading", type: "string" },
+          { name: "heroBottomCTALabel", label: "Hero Secondary CTA Label", type: "string" },
+          { name: "ctaHeading", label: "Mid-CTA Heading", type: "string" },
+          { name: "ctaLine1", label: "Mid-CTA Line 1", type: "string" },
+          { name: "ctaLine2", label: "Mid-CTA Line 2", type: "string" },
+          { name: "ctaLine3", label: "Mid-CTA Line 3", type: "string" },
+          { name: "ctaMessage1", label: "Mid-CTA Message 1", type: "string", ui: { component: "textarea" } },
+          { name: "ctaMessage2", label: "Mid-CTA Message 2", type: "string", ui: { component: "textarea" } },
+          { name: "aboutHeading", label: "About Section Heading", type: "string" },
+          { name: "aboutCredentialTitle", label: "About Credential Subtitle", type: "string" },
           { name: "aboutParagraph1", label: "About Paragraph 1", type: "string", ui: { component: "textarea" } },
           { name: "aboutParagraph2", label: "About Paragraph 2", type: "string", ui: { component: "textarea" } },
-          { name: "aboutParagraph3", label: "About Paragraph 3", type: "string", ui: { component: "textarea" } },
-          { name: "aboutQuote", label: "About Quote", type: "string", ui: { component: "textarea" } },
-          { name: "aboutCTALabel", label: "About Section CTA Label", type: "string" },
-          { name: "servicesSectionHeading", label: "Services Section Heading", type: "string" },
-          { name: "servicesSectionSubtext", label: "Services Section Subtext", type: "string" },
-          { name: "ctaSectionHeading", label: "CTA Section Heading", type: "string" },
-          { name: "ctaSectionSubtext", label: "CTA Section Subtext", type: "string" },
-          { name: "ctaButtonLabel", label: "CTA Button Label", type: "string" }
+          { name: "feelLikeYouHeading", label: '"Feel Like YOU Again" Heading', type: "string" },
+          { name: "feelLikeYouTagline", label: '"Feel Like YOU Again" Tagline', type: "string" },
+          { name: "feelLikeYouQuestion1", label: '"Feel Like YOU" Question 1', type: "string" },
+          { name: "feelLikeYouQuestion2", label: '"Feel Like YOU" Question 2', type: "string" },
+          { name: "feelLikeYouQuestion3", label: '"Feel Like YOU" Question 3', type: "string" },
+          { name: "feelLikeYouQuestion4", label: '"Feel Like YOU" Question 4', type: "string" },
+          { name: "servicesHeading", label: "Services Section Heading", type: "string" },
+          { name: "servicesSubtext", label: "Services Section Subtext", type: "string", ui: { component: "textarea" } },
+          { name: "bottomCTAText", label: "Bottom CTA Text", type: "string", ui: { component: "textarea" } }
         ]
       },
       {
@@ -51,14 +57,13 @@ var config_default = defineConfig({
         format: "json",
         ui: { router: () => "/about" },
         fields: [
-          { name: "heroBadge", label: "Hero Badge Text", type: "string" },
           { name: "heroHeading", label: "Hero Heading", type: "string" },
           { name: "heroSubtext", label: "Hero Subtext", type: "string", ui: { component: "textarea" } },
-          { name: "bioParagraph1", label: "Bio Paragraph 1", type: "string", ui: { component: "textarea" } },
-          { name: "bioParagraph2", label: "Bio Paragraph 2", type: "string", ui: { component: "textarea" } },
-          { name: "bioParagraph3", label: "Bio Paragraph 3", type: "string", ui: { component: "textarea" } },
-          { name: "bioParagraph4", label: "Bio Paragraph 4", type: "string", ui: { component: "textarea" } },
-          { name: "credentialsSectionHeading", label: "Credentials Section Heading", type: "string" },
+          { name: "storyHeading", label: "Story Section Heading", type: "string" },
+          { name: "storyParagraph1", label: "Story Paragraph 1", type: "string", ui: { component: "textarea" } },
+          { name: "storyParagraph2", label: "Story Paragraph 2", type: "string", ui: { component: "textarea" } },
+          { name: "credentialsHeading", label: "Credentials Heading", type: "string" },
+          { name: "credentialsSubtext", label: "Credentials Subtext", type: "string", ui: { component: "textarea" } },
           {
             name: "credentials",
             label: "Credentials",
@@ -67,10 +72,11 @@ var config_default = defineConfig({
             fields: [
               { name: "icon", label: "Font Awesome Icon Class", type: "string" },
               { name: "title", label: "Title", type: "string" },
-              { name: "desc", label: "Description", type: "string", ui: { component: "textarea" } }
+              { name: "description", label: "Description", type: "string", ui: { component: "textarea" } },
+              { name: "gradient", label: "Gradient CSS Classes", type: "string" }
             ]
           },
-          { name: "valuesSectionHeading", label: "Values Section Heading", type: "string" },
+          { name: "valuesHeading", label: "Values Heading", type: "string" },
           {
             name: "values",
             label: "Values",
@@ -79,11 +85,11 @@ var config_default = defineConfig({
             fields: [
               { name: "icon", label: "Font Awesome Icon Class", type: "string" },
               { name: "title", label: "Title", type: "string" },
-              { name: "desc", label: "Description", type: "string", ui: { component: "textarea" } }
+              { name: "description", label: "Description", type: "string", ui: { component: "textarea" } }
             ]
           },
-          { name: "ctaSectionHeading", label: "CTA Section Heading", type: "string" },
-          { name: "ctaSectionSubtext", label: "CTA Section Subtext", type: "string" },
+          { name: "ctaHeading", label: "CTA Section Heading", type: "string" },
+          { name: "ctaSubtext", label: "CTA Section Subtext", type: "string", ui: { component: "textarea" } },
           { name: "ctaButtonLabel", label: "CTA Button Label", type: "string" }
         ]
       },
@@ -212,14 +218,16 @@ var config_default = defineConfig({
         format: "json",
         ui: { router: () => "/contact" },
         fields: [
-          { name: "heroBadge", label: "Hero Badge Text", type: "string" },
           { name: "heroHeading", label: "Hero Heading", type: "string" },
           { name: "heroSubtext", label: "Hero Subtext", type: "string", ui: { component: "textarea" } },
+          { name: "sectionHeading", label: "Form Section Heading", type: "string" },
+          { name: "sectionSubtext", label: "Form Section Subtext", type: "string", ui: { component: "textarea" } },
           { name: "email", label: "Email Address", type: "string" },
+          { name: "phone", label: "Phone Number", type: "string" },
+          { name: "videoText", label: "Video Sessions Text", type: "string" },
           { name: "location", label: "Location", type: "string" },
-          { name: "responseTime", label: "Response Time Text", type: "string" },
-          { name: "formHeading", label: "Form Section Heading", type: "string" },
-          { name: "formSubtext", label: "Form Section Subtext", type: "string" }
+          { name: "bookingCTALabel", label: "Book a Call Button Label", type: "string" },
+          { name: "formHeading", label: 'Form Heading ("Send me a message")', type: "string" }
         ]
       },
       {

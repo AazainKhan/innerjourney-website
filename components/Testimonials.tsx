@@ -3,11 +3,20 @@
 import { useState, useEffect, useCallback } from 'react'
 import testimonialsData from '@/content/testimonials.json'
 
-const testimonials = testimonialsData.items
+interface TestimonialItem {
+  quote: string
+  author: string
+}
 
-export default function Testimonials() {
+interface TestimonialsProps {
+  items?: TestimonialItem[]
+}
+
+export default function Testimonials({ items }: TestimonialsProps = {}) {
+  const testimonials = items ?? testimonialsData.items
+
   const [current, setCurrent] = useState(0)
-  const [direction, setDirection] = useState<'next' | 'prev'>('next')
+  const [, setDirection] = useState<'next' | 'prev'>('next')
 
   const goTo = useCallback((index: number) => {
     setCurrent(index)
@@ -16,17 +25,19 @@ export default function Testimonials() {
   const prev = useCallback(() => {
     setDirection('prev')
     setCurrent(c => (c - 1 + testimonials.length) % testimonials.length)
-  }, [])
+  }, [testimonials.length])
 
   const next = useCallback(() => {
     setDirection('next')
     setCurrent(c => (c + 1) % testimonials.length)
-  }, [])
+  }, [testimonials.length])
 
   useEffect(() => {
     const timer = setInterval(next, 6000)
     return () => clearInterval(timer)
   }, [next])
+
+  if (!testimonials.length) return null
 
   return (
     <div className="testimonials-section-wrapper py-12 relative">
