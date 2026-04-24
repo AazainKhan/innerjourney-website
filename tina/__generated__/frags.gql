@@ -59,34 +59,139 @@ fragment ClarityCoachingParts on ClarityCoaching {
   heroBadge
   heroHeading
   heroSubtext
-  sectionHeading
-  sectionSubtext
+  heroCTALabel
+  heroSideEmoji
+  heroSideWeeks
+  heroSideSubtext
+  resultsHeadingPrefix
+  resultsHeadingHighlight
+  resultsSubtext
+  perhapsLabel
   perhapsItems {
     __typename
     emoji
     text
+    borderColor
   }
-  bannerQuote
-  outcomesSectionHeading
-  outcomes
-  ctaSectionHeading
-  ctaSectionSubtext
+  bannerText
+  bannerHighlight
+  missingPieceHeadingPrefix
+  missingPieceHeadingHighlight
+  problemTitle
+  problemParagraph1
+  problemQuestion
+  problemParagraph2
+  problemParagraph3
+  solutionTitle
+  solutionParagraph1
+  solutionEmphasis
+  solutionParagraph2
+  solutionWord
+  philosophyLabel
+  philosophyHeadingPrefix
+  philosophyHeadingHighlight
+  philosophyQuote
+  philosophyParagraph1
+  philosophyParagraph2
+  philosophyBannerPrefix
+  philosophyBannerHighlight
+  philosophyClosingPrefix
+  philosophyClosingHighlight
+  timelineLabel
+  timelineHeadingPrefix
+  timelineHeadingHighlight
+  timelineSubtext
+  timelineSteps {
+    __typename
+    number
+    weeks
+    title
+    subtitle
+    description
+    accent
+  }
+  timelineCTALabel
+  experienceLabel
+  experienceHeadingPrefix
+  experienceHeadingHighlight
+  experienceItems {
+    __typename
+    emoji
+    title
+    subtitle
+    bg
+  }
+  bonusEmoji
+  bonusPrefix
+  bonusText
+  ctaSectionHeadingPrefix
+  ctaSectionHeadingHighlight
+  ctaSectionParagraph1
+  ctaSectionParagraph2
   ctaButtonLabel
 }
 
 fragment CareerCoachingParts on CareerCoaching {
   __typename
   heroHeading
-  heroSubtext
+  heroSubtextPrefix
+  heroSubtextHighlight
   heroCTALabel
-  sectionHeading
-  sectionSubtext
+  resultsHeadingPrefix
+  resultsHeadingHighlight
+  resultsSubtext
+  perhapsLabel
   situations
-  bannerQuote
-  outcomesSectionHeading
-  outcomes
-  ctaSectionHeading
-  ctaSectionSubtext
+  bannerPrefix
+  bannerHighlight
+  clarityHeadingPrefix
+  clarityHeadingHighlight
+  clarityParagraph1
+  clarityQuestion
+  clarityParagraph2
+  clarityParagraph3
+  clarityEmphasis
+  clarityParagraph4
+  clarityParagraph5
+  clarityBigWord
+  philosophyHeadingPrefix
+  philosophyHeadingHighlight
+  philosophyParagraph1
+  philosophyParagraph2Prefix
+  philosophyParagraph2Highlight
+  philosophyParagraph3
+  philosophyEmphasis
+  philosophyClosing
+  imagineHeadingHighlight
+  imagineItems {
+    __typename
+    emoji
+    text
+    borderColor
+    bg
+  }
+  roadmapHeadingPrefix
+  roadmapHeadingHighlight
+  roadmapSubtext1
+  roadmapSubtext2
+  roadmapSteps {
+    __typename
+    number
+    weeks
+    title
+    subtitle
+    subtitleColor
+    description
+  }
+  roadmapCTALabel
+  experienceHeadingPrefix
+  experienceHeadingHighlight
+  experienceSubtext
+  experienceItems
+  ctaSectionHeadingPrefix
+  ctaSectionHeadingHighlight
+  ctaSectionParagraph1
+  ctaSectionParagraph2
   ctaButtonLabel
 }
 
@@ -97,13 +202,53 @@ fragment NumerologyParts on Numerology {
   heroTagline
   heroSubtext
   heroCTALabel
-  whatIsHeading
-  whatIsSubtext
-  comparisonText
-  powerText
-  sessionIncludes
+  selfDiscoveryHeadingPrefix
+  selfDiscoveryHeadingHighlight
+  selfDiscoverySubtext
+  selfDiscoveryItems {
+    __typename
+    emoji
+    text
+    borderColor
+  }
+  selfDiscoveryStatementPrefix
+  selfDiscoveryStatementHighlight
+  whatIsLabel
+  whatIsHeadingPrefix
+  whatIsHeadingHighlight
+  whatIsIsntParagraph
+  whatIsIsParagraph1
+  whatIsIsParagraph2
+  processLabel
+  processHeadingPrefix
+  processHeadingHighlight
+  processSteps {
+    __typename
+    emoji
+    stepLabel
+    title
+    description
+  }
+  includesLabel
+  includesHeadingPrefix
+  includesHeadingHighlight
+  includesSubtext
+  includes {
+    __typename
+    emoji
+    title
+    description
+  }
+  philosophyLabel
+  philosophyHeadingPrefix
+  philosophyHeadingHighlight
+  philosophyQuote
+  philosophyParagraph1
+  philosophyParagraph2
+  philosophyBanner
+  philosophyClosingPrefix
+  philosophyClosingHighlight
   ctaSectionHeading
-  ctaSectionSubtext
   ctaButtonLabel
 }
 
@@ -113,10 +258,39 @@ fragment ResourcesParts on Resources {
   heroHeading
   heroHeadingHighlight
   heroSubtext
-  blogHeading
-  blogText
-  podcastHeading
-  podcastText
+  featuredHeading
+  featuredBlogCategory
+  featuredBlogStatus
+  featuredBlogTitle
+  featuredBlogExcerpt
+  featuredBlogReadTime
+  featuredBlogCTA
+  blogSectionHeading
+  blogPosts {
+    __typename
+    title
+    excerpt
+    status
+    icon
+    iconColor
+    gradient
+    badgeColor
+  }
+  podcastSectionHeading
+  podcasts {
+    __typename
+    episode
+    title
+    excerpt
+    status
+    icon
+    gradient
+    badgeColor
+  }
+  newsletterHeading
+  newsletterSubtext
+  newsletterPlaceholder
+  newsletterButton
   ctaSectionHeading
   ctaSectionSubtext
   ctaButtonLabel

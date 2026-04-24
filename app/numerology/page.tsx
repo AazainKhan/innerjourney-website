@@ -21,13 +21,37 @@ const QUERY = `
       heroTagline
       heroSubtext
       heroCTALabel
-      whatIsHeading
-      whatIsSubtext
-      comparisonText
-      powerText
-      sessionIncludes
+      selfDiscoveryHeadingPrefix
+      selfDiscoveryHeadingHighlight
+      selfDiscoverySubtext
+      selfDiscoveryItems { emoji text borderColor }
+      selfDiscoveryStatementPrefix
+      selfDiscoveryStatementHighlight
+      whatIsLabel
+      whatIsHeadingPrefix
+      whatIsHeadingHighlight
+      whatIsIsntParagraph
+      whatIsIsParagraph1
+      whatIsIsParagraph2
+      processLabel
+      processHeadingPrefix
+      processHeadingHighlight
+      processSteps { emoji stepLabel title description }
+      includesLabel
+      includesHeadingPrefix
+      includesHeadingHighlight
+      includesSubtext
+      includes { emoji title description }
+      philosophyLabel
+      philosophyHeadingPrefix
+      philosophyHeadingHighlight
+      philosophyQuote
+      philosophyParagraph1
+      philosophyParagraph2
+      philosophyBanner
+      philosophyClosingPrefix
+      philosophyClosingHighlight
       ctaSectionHeading
-      ctaSectionSubtext
       ctaButtonLabel
     }
   }

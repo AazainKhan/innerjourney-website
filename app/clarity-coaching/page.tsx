@@ -19,17 +19,56 @@ const QUERY = `
       heroBadge
       heroHeading
       heroSubtext
-      sectionHeading
-      sectionSubtext
-      perhapsItems {
-        emoji
-        text
-      }
-      bannerQuote
-      outcomesSectionHeading
-      outcomes
-      ctaSectionHeading
-      ctaSectionSubtext
+      heroCTALabel
+      heroSideEmoji
+      heroSideWeeks
+      heroSideSubtext
+      resultsHeadingPrefix
+      resultsHeadingHighlight
+      resultsSubtext
+      perhapsLabel
+      perhapsItems { emoji text borderColor }
+      bannerText
+      bannerHighlight
+      missingPieceHeadingPrefix
+      missingPieceHeadingHighlight
+      problemTitle
+      problemParagraph1
+      problemQuestion
+      problemParagraph2
+      problemParagraph3
+      solutionTitle
+      solutionParagraph1
+      solutionEmphasis
+      solutionParagraph2
+      solutionWord
+      philosophyLabel
+      philosophyHeadingPrefix
+      philosophyHeadingHighlight
+      philosophyQuote
+      philosophyParagraph1
+      philosophyParagraph2
+      philosophyBannerPrefix
+      philosophyBannerHighlight
+      philosophyClosingPrefix
+      philosophyClosingHighlight
+      timelineLabel
+      timelineHeadingPrefix
+      timelineHeadingHighlight
+      timelineSubtext
+      timelineSteps { number weeks title subtitle description accent }
+      timelineCTALabel
+      experienceLabel
+      experienceHeadingPrefix
+      experienceHeadingHighlight
+      experienceItems { emoji title subtitle bg }
+      bonusEmoji
+      bonusPrefix
+      bonusText
+      ctaSectionHeadingPrefix
+      ctaSectionHeadingHighlight
+      ctaSectionParagraph1
+      ctaSectionParagraph2
       ctaButtonLabel
     }
   }

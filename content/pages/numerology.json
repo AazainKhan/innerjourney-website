@@ -4,19 +4,79 @@
   "heroTagline": "Get answers fast, and find your focus",
   "heroSubtext": "Invaluable insight into your life choices, backed by ancient vedic practices",
   "heroCTALabel": "Get my numerology insights",
-  "whatIsHeading": "What is Vedic Numerology?",
-  "whatIsSubtext": "Vedic Numerology is an ancient system that uses the numbers in your birth date and name to reveal deep truths about your personality, life purpose, and the timing of key events in your life.",
-  "comparisonText": "Vedic Numerology is rooted in ancient Indian mathematics and astrology, providing a more nuanced understanding of your numbers and their influence on your life journey.",
-  "powerText": "Every number carries a specific vibration that influences different areas of life. Understanding your numbers can bring remarkable clarity to situations that once felt confusing or stuck.",
-  "sessionIncludes": [
-    "1-hour personalised numerology session (via video call)",
-    "Your Life Path, Expression, and Soul Urge number analysis",
-    "Personal Year cycle reading for actionable timing insights",
-    "Relationship compatibility overview",
-    "Q&A — bring your specific questions for focused clarity",
-    "Follow-up notes summarising your key insights"
+
+  "selfDiscoveryHeadingPrefix": "Self-discovery",
+  "selfDiscoveryHeadingHighlight": "made simple",
+  "selfDiscoverySubtext": "Are you hesitant about the road ahead, or need answers now to something important?",
+  "selfDiscoveryItems": [
+    { "emoji": "💒", "text": "You're planning a life-changing event, like getting married, moving house, changing career, or starting a family", "borderColor": "border-carrot" },
+    { "emoji": "🌀", "text": "You're entering a transitional period, but can't figure out what it means", "borderColor": "border-azure" },
+    { "emoji": "🧭", "text": "Your intuition has felt 'off', and you want to get more confident in your decision-making", "borderColor": "border-azure" },
+    { "emoji": "🔀", "text": "You're at a crossroads in your life, and can't decide which path to take", "borderColor": "border-carrot" }
   ],
-  "ctaSectionHeading": "Ready for clarity?",
-  "ctaSectionSubtext": "Book your personalised Numerology for Clarity session today.",
-  "ctaButtonLabel": "Book My Numerology Session"
+  "selfDiscoveryStatementPrefix": "My one-hour numerology sessions",
+  "selfDiscoveryStatementHighlight": "hold the answer.",
+
+  "whatIsLabel": "Understanding Numerology",
+  "whatIsHeadingPrefix": "What is Numerology",
+  "whatIsHeadingHighlight": "for Clarity?",
+  "whatIsIsntParagraph": "First of all, let's address what numerology isn't: this is not a magic wand that can predict your future.",
+  "whatIsIsParagraph1": "But it is a powerful reflective tool, which draws upon ancient vedic principles that numbers hold vibrations. These energies can provide invaluable context and insight to your life situation, if you know how to read them.",
+  "whatIsIsParagraph2": "Guided by a certified numerologist, this session will take the guesswork out of that big decision you're looking to make, and help to strengthen your intuition around your relationships, career, or living situation, so you can take that next step with confidence.",
+
+  "processLabel": "The Process",
+  "processHeadingPrefix": "Vedic Astrology —",
+  "processHeadingHighlight": "How it works",
+  "processSteps": [
+    {
+      "emoji": "📋",
+      "stepLabel": "Step One",
+      "title": "Data Gathering",
+      "description": "We'll start by gathering the important information to compile your numeroscope: your full name, date of birth, and if relevant, any important information relating to other people or places."
+    },
+    {
+      "emoji": "📊",
+      "stepLabel": "Step Two",
+      "title": "Chart Creation",
+      "description": "Using this data, I'll calculate your key numbers (such as your life path and destiny), and map out your personal cycles. This will form the basis of your personalised numerology chart, and the period of relevance to your query, so that we can get a clear picture of your relationship with numerology, and what bearing this has on your partnership, work, or other dynamics."
+    },
+    {
+      "emoji": "🔮",
+      "stepLabel": "Step Three",
+      "title": "Interpretation",
+      "description": "I will then study your chart to identify key strengths, challenges and patterns. In our 1:1 session (over zoom or in-person), we will discuss these findings, so that you can gain understanding of what these insights are telling you. You'll have the opportunity to ask questions in the session, so that you leave feeling confident about your next step."
+    },
+    {
+      "emoji": "💝",
+      "stepLabel": "Step Four",
+      "title": "Summary and Aftercare",
+      "description": "Following our 1:1 session, you will receive a full copy of your report, and reach out to me at any point if you need a reminder on any of the insights revealed to us."
+    }
+  ],
+
+  "includesLabel": "What You'll Receive",
+  "includesHeadingPrefix": "Enlightening",
+  "includesHeadingHighlight": "Numerology Analysis",
+  "includesSubtext": "Your Numerology for Clarity evaluation includes:",
+  "includes": [
+    { "emoji": "📜", "title": "Personalised Numerology Chart", "description": "A full reading based on your name and birth date, revealing the energy patterns shaping your life purpose, relationships, and decisions." },
+    { "emoji": "🎯", "title": "1:1 Numerology Consultation", "description": "An explorative 60-minute session where we'll interpret your chart, and I'll help you apply its insights to your real-life goals and decisions." },
+    { "emoji": "📅", "title": "Life Cycle Overview", "description": "A look ahead at the themes and opportunities influencing your next chapter, so that you can plan and act with confidence." },
+    { "emoji": "💞", "title": "Compatibility Reading", "description": "Explore the energetic fit between you and your partner, a business venture, or new home, to ensure harmony before you take the next step." },
+    { "emoji": "📝", "title": "Summary & Guidance", "description": "A practical summary of your key numbers and how to use them as anchors for clarity and alignment." },
+    { "emoji": "🤝", "title": "Post-Session Support", "description": "Gentle guidance to help you process your insights, if you have any questions after our session has finished." }
+  ],
+
+  "philosophyLabel": "My Approach",
+  "philosophyHeadingPrefix": "My Coaching",
+  "philosophyHeadingHighlight": "Philosophy",
+  "philosophyQuote": "Success in your outer journey starts with your inner journey.",
+  "philosophyParagraph1": "My own experience of two decades has taught me this profound truth.",
+  "philosophyParagraph2": "Traditional coaching or advice doesn't properly teach us how to get curious, develop self-compassion, or gently grow our confidence as we find the answer, because we're too focussed on the external. Our judgement stays clouded.",
+  "philosophyBanner": "But when you know the first step is looking inward, everything changes.",
+  "philosophyClosingPrefix": "My numerology assessment is a powerful introduction to this concept, and will get you answers around",
+  "philosophyClosingHighlight": "life, career, or relationships.",
+
+  "ctaSectionHeading": "Ready to find out?",
+  "ctaButtonLabel": "Book now"
 }

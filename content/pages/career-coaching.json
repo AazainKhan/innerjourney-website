@@ -1,28 +1,103 @@
 {
   "heroHeading": "Feel clear and confident in your career again",
-  "heroSubtext": "Take action and transform your career in just 12 weeks",
+  "heroSubtextPrefix": "Take action and transform your career in just",
+  "heroSubtextHighlight": "12 weeks",
   "heroCTALabel": "Take the first step",
-  "sectionHeading": "Career Coaching that gets results",
-  "sectionSubtext": "Your career is one of the biggest parts of your life. But our work paths can sometimes become difficult and confusing.",
+
+  "resultsHeadingPrefix": "Career Coaching that",
+  "resultsHeadingHighlight": "gets results",
+  "resultsSubtext": "Your career is one of the biggest parts of your life. But our work paths can sometimes become difficult and confusing.",
+  "perhapsLabel": "Perhaps you're…",
   "situations": [
     "Stuck in middle management, feeling lost and uninspired",
     "Considering a career change, but you don't know where to start",
     "A new graduate, struggling to break into your industry",
     "Experiencing job loss or redundancy",
-    "Feeling unfulfilled despite having a \"good\" job",
-    "Wanting to set up your own business but lacking confidence"
+    "Feeling burnt out, and want a better work-life balance",
+    "Considering entrepreneurship, but scared to take the leap"
   ],
-  "bannerQuote": "Whatever your situation — it's time to take back control of your career.",
-  "outcomesSectionHeading": "By the end of the programme, you will…",
-  "outcomes": [
-    "Identify your strengths, skills, and true career values",
-    "Get clear on the career path that lights you up",
-    "Overcome imposter syndrome and self-doubt",
-    "Build the confidence to make bold career moves",
-    "Create a realistic, actionable career plan",
-    "Step into your next role feeling ready and excited"
+  "bannerPrefix": "You're here to do more than just pay the bills —",
+  "bannerHighlight": "you deserve a purposeful and fulfilling career.",
+
+  "clarityHeadingPrefix": "Clarity Coaching for",
+  "clarityHeadingHighlight": "Career",
+  "clarityParagraph1": "Friends, family, and online career courses might sound helpful, but they're not getting you where you want to be.",
+  "clarityQuestion": "Why?",
+  "clarityParagraph2": "Because they're asking the wrong questions.",
+  "clarityParagraph3": "You need a guiding light with the right roadmap, tools, and qualifications to help you truly look within.",
+  "clarityEmphasis": "That's where real career transformation begins.",
+  "clarityParagraph4": "Too often, we find ourselves deferring to others for the answer, switching to autopilot, or hustling even more when things get hard.",
+  "clarityParagraph5": "But there's a missing piece that can make work decisions much simpler, if you just know how to access it:",
+  "clarityBigWord": "Clarity.",
+
+  "philosophyHeadingPrefix": "My Coaching",
+  "philosophyHeadingHighlight": "Philosophy",
+  "philosophyParagraph1": "You need more than just a CV re-write, a chat with HR, or trawl on the job sites.",
+  "philosophyParagraph2Prefix": "My own experience over ten years ago taught me that success in your outer journey starts with your",
+  "philosophyParagraph2Highlight": "inner journey.",
+  "philosophyParagraph3": "Traditional coaching or advice doesn't properly teach us how to get curious, develop self-compassion, or gently grow our confidence as we find the answer, because we're too focussed on the external. Our judgement stays clouded.",
+  "philosophyEmphasis": "But when you know the first step is looking inward, everything changes.",
+  "philosophyClosing": "If you're ready to make some real career decisions, let go of old habits, and bring purpose into your work again, let me be your guide.",
+
+  "imagineHeadingHighlight": "Imagine",
+  "imagineItems": [
+    { "emoji": "✨", "text": "Feeling proud to present your latest work projects", "borderColor": "border-carrot", "bg": "from-orange-50 to-white" },
+    { "emoji": "🎉", "text": "Your first day at a brand new job", "borderColor": "border-azure", "bg": "from-blue-50 to-white" },
+    { "emoji": "💰", "text": "Finally asking for the pay rise you deserve", "borderColor": "border-carrot", "bg": "from-orange-50 to-white" },
+    { "emoji": "🚀", "text": "Going for the promotion with confidence", "borderColor": "border-azure", "bg": "from-blue-50 to-white" },
+    { "emoji": "😊", "text": "No more Sunday scaries — only genuine excitement when Monday rolls around", "borderColor": "border-carrot", "bg": "from-orange-50 to-white" },
+    { "emoji": "💡", "text": "Finally starting the business you've secretly dreamed of", "borderColor": "border-azure", "bg": "from-blue-50 to-white" },
+    { "emoji": "🌟", "text": "Leaving that old work environment behind, and walking into a bright new office", "borderColor": "border-carrot", "bg": "from-orange-50 to-white" }
   ],
-  "ctaSectionHeading": "Ready to realign your career?",
-  "ctaSectionSubtext": "Book a free Clarity Call and let's talk about your career goals.",
-  "ctaButtonLabel": "Book My Free Clarity Call"
+
+  "roadmapHeadingPrefix": "What Career Coaching",
+  "roadmapHeadingHighlight": "looks like",
+  "roadmapSubtext1": "Your inner journey starts here.",
+  "roadmapSubtext2": "This is your roadmap to a career that you're proud of:",
+  "roadmapSteps": [
+    {
+      "number": "1",
+      "weeks": "Weeks 1-4",
+      "title": "Step One — Career Audit",
+      "subtitle": "The Self-Audit",
+      "subtitleColor": "text-carrot",
+      "description": "Over the first four sessions, you'll get curious about your career journey so far. We'll gently audit your self‑beliefs, what \"stuck\" looks like in your career right now, and what a fulfilling professional life could look like. This phase is about noticing without judgement what stories have kept you small, or at a crossroads at work. By the end of the first four weeks, we'll have shone a light on your career, and where you want to be."
+    },
+    {
+      "number": "2",
+      "weeks": "Weeks 5-8",
+      "title": "Step Two — Work Refocus Method",
+      "subtitle": "Refocus & Reframe",
+      "subtitleColor": "text-azure",
+      "description": "Once your inner landscape is mapped, we'll work on the emotions underpinning your stories and how these have impacted your career decisions. By using emotional intelligence scripts, you'll start to see emotions as information, how to speak to yourself with compassion, and adopt a mindset of personal responsibility. You'll get clear on your work skills, what's no longer serving you, and see how micro steps can create tangible shifts in your work life."
+    },
+    {
+      "number": "3",
+      "weeks": "Weeks 9-12",
+      "title": "Step Three — Integration",
+      "subtitle": "Clarity to Confidence",
+      "subtitleColor": "text-carrot",
+      "description": "In the final month, our focus shifts to integrating what you've learned, exploring these new insights in your work environment. You'll practise new habits, set boundaries, and step out of your comfort zone — from applying to new roles, pivoting in your career, or reshaping your current position so that it lights you up. This is where confidence grows: your renewed clarity translates into decisive actions that create a career you love."
+    }
+  ],
+  "roadmapCTALabel": "Start my career journey",
+
+  "experienceHeadingPrefix": "A Compassionate Coaching",
+  "experienceHeadingHighlight": "Experience",
+  "experienceSubtext": "This compassionate coaching experience includes:",
+  "experienceItems": [
+    "12 weekly one‑to‑one sessions (45-60 minutes)",
+    "Personalised self‑concept audit and diagnostic tools",
+    "Emotional intelligence coaching and practical reframing scripts",
+    "Weekly assignments and journaling prompts to embed new habits",
+    "Gentle accountability check‑ins and support between sessions",
+    "Guided integration exercises to apply insights in real‑life situations",
+    "Resources for continued growth beyond the programme"
+  ],
+
+  "ctaSectionHeadingPrefix": "Unclear if Career Coaching is",
+  "ctaSectionHeadingHighlight": "right for you?",
+  "ctaSectionParagraph1": "Decisions might feel hard right now. Start with a free clarity call to find out if my career coaching can help you.",
+  "ctaSectionParagraph2": "We'll do the figuring out together.",
+  "ctaButtonLabel": "Book my free clarity call"
 }

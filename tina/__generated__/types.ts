@@ -450,6 +450,25 @@ export type ClarityCoachingPerhapsItems = {
   __typename?: 'ClarityCoachingPerhapsItems';
   emoji?: Maybe<Scalars['String']['output']>;
   text?: Maybe<Scalars['String']['output']>;
+  borderColor?: Maybe<Scalars['String']['output']>;
+};
+
+export type ClarityCoachingTimelineSteps = {
+  __typename?: 'ClarityCoachingTimelineSteps';
+  number?: Maybe<Scalars['String']['output']>;
+  weeks?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  subtitle?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  accent?: Maybe<Scalars['String']['output']>;
+};
+
+export type ClarityCoachingExperienceItems = {
+  __typename?: 'ClarityCoachingExperienceItems';
+  emoji?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  subtitle?: Maybe<Scalars['String']['output']>;
+  bg?: Maybe<Scalars['String']['output']>;
 };
 
 export type ClarityCoaching = Node & Document & {
@@ -457,14 +476,56 @@ export type ClarityCoaching = Node & Document & {
   heroBadge?: Maybe<Scalars['String']['output']>;
   heroHeading?: Maybe<Scalars['String']['output']>;
   heroSubtext?: Maybe<Scalars['String']['output']>;
-  sectionHeading?: Maybe<Scalars['String']['output']>;
-  sectionSubtext?: Maybe<Scalars['String']['output']>;
+  heroCTALabel?: Maybe<Scalars['String']['output']>;
+  heroSideEmoji?: Maybe<Scalars['String']['output']>;
+  heroSideWeeks?: Maybe<Scalars['String']['output']>;
+  heroSideSubtext?: Maybe<Scalars['String']['output']>;
+  resultsHeadingPrefix?: Maybe<Scalars['String']['output']>;
+  resultsHeadingHighlight?: Maybe<Scalars['String']['output']>;
+  resultsSubtext?: Maybe<Scalars['String']['output']>;
+  perhapsLabel?: Maybe<Scalars['String']['output']>;
   perhapsItems?: Maybe<Array<Maybe<ClarityCoachingPerhapsItems>>>;
-  bannerQuote?: Maybe<Scalars['String']['output']>;
-  outcomesSectionHeading?: Maybe<Scalars['String']['output']>;
-  outcomes?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  ctaSectionHeading?: Maybe<Scalars['String']['output']>;
-  ctaSectionSubtext?: Maybe<Scalars['String']['output']>;
+  bannerText?: Maybe<Scalars['String']['output']>;
+  bannerHighlight?: Maybe<Scalars['String']['output']>;
+  missingPieceHeadingPrefix?: Maybe<Scalars['String']['output']>;
+  missingPieceHeadingHighlight?: Maybe<Scalars['String']['output']>;
+  problemTitle?: Maybe<Scalars['String']['output']>;
+  problemParagraph1?: Maybe<Scalars['String']['output']>;
+  problemQuestion?: Maybe<Scalars['String']['output']>;
+  problemParagraph2?: Maybe<Scalars['String']['output']>;
+  problemParagraph3?: Maybe<Scalars['String']['output']>;
+  solutionTitle?: Maybe<Scalars['String']['output']>;
+  solutionParagraph1?: Maybe<Scalars['String']['output']>;
+  solutionEmphasis?: Maybe<Scalars['String']['output']>;
+  solutionParagraph2?: Maybe<Scalars['String']['output']>;
+  solutionWord?: Maybe<Scalars['String']['output']>;
+  philosophyLabel?: Maybe<Scalars['String']['output']>;
+  philosophyHeadingPrefix?: Maybe<Scalars['String']['output']>;
+  philosophyHeadingHighlight?: Maybe<Scalars['String']['output']>;
+  philosophyQuote?: Maybe<Scalars['String']['output']>;
+  philosophyParagraph1?: Maybe<Scalars['String']['output']>;
+  philosophyParagraph2?: Maybe<Scalars['String']['output']>;
+  philosophyBannerPrefix?: Maybe<Scalars['String']['output']>;
+  philosophyBannerHighlight?: Maybe<Scalars['String']['output']>;
+  philosophyClosingPrefix?: Maybe<Scalars['String']['output']>;
+  philosophyClosingHighlight?: Maybe<Scalars['String']['output']>;
+  timelineLabel?: Maybe<Scalars['String']['output']>;
+  timelineHeadingPrefix?: Maybe<Scalars['String']['output']>;
+  timelineHeadingHighlight?: Maybe<Scalars['String']['output']>;
+  timelineSubtext?: Maybe<Scalars['String']['output']>;
+  timelineSteps?: Maybe<Array<Maybe<ClarityCoachingTimelineSteps>>>;
+  timelineCTALabel?: Maybe<Scalars['String']['output']>;
+  experienceLabel?: Maybe<Scalars['String']['output']>;
+  experienceHeadingPrefix?: Maybe<Scalars['String']['output']>;
+  experienceHeadingHighlight?: Maybe<Scalars['String']['output']>;
+  experienceItems?: Maybe<Array<Maybe<ClarityCoachingExperienceItems>>>;
+  bonusEmoji?: Maybe<Scalars['String']['output']>;
+  bonusPrefix?: Maybe<Scalars['String']['output']>;
+  bonusText?: Maybe<Scalars['String']['output']>;
+  ctaSectionHeadingPrefix?: Maybe<Scalars['String']['output']>;
+  ctaSectionHeadingHighlight?: Maybe<Scalars['String']['output']>;
+  ctaSectionParagraph1?: Maybe<Scalars['String']['output']>;
+  ctaSectionParagraph2?: Maybe<Scalars['String']['output']>;
   ctaButtonLabel?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
@@ -474,20 +535,79 @@ export type ClarityCoaching = Node & Document & {
 export type ClarityCoachingPerhapsItemsFilter = {
   emoji?: InputMaybe<StringFilter>;
   text?: InputMaybe<StringFilter>;
+  borderColor?: InputMaybe<StringFilter>;
+};
+
+export type ClarityCoachingTimelineStepsFilter = {
+  number?: InputMaybe<StringFilter>;
+  weeks?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  accent?: InputMaybe<StringFilter>;
+};
+
+export type ClarityCoachingExperienceItemsFilter = {
+  emoji?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  bg?: InputMaybe<StringFilter>;
 };
 
 export type ClarityCoachingFilter = {
   heroBadge?: InputMaybe<StringFilter>;
   heroHeading?: InputMaybe<StringFilter>;
   heroSubtext?: InputMaybe<StringFilter>;
-  sectionHeading?: InputMaybe<StringFilter>;
-  sectionSubtext?: InputMaybe<StringFilter>;
+  heroCTALabel?: InputMaybe<StringFilter>;
+  heroSideEmoji?: InputMaybe<StringFilter>;
+  heroSideWeeks?: InputMaybe<StringFilter>;
+  heroSideSubtext?: InputMaybe<StringFilter>;
+  resultsHeadingPrefix?: InputMaybe<StringFilter>;
+  resultsHeadingHighlight?: InputMaybe<StringFilter>;
+  resultsSubtext?: InputMaybe<StringFilter>;
+  perhapsLabel?: InputMaybe<StringFilter>;
   perhapsItems?: InputMaybe<ClarityCoachingPerhapsItemsFilter>;
-  bannerQuote?: InputMaybe<StringFilter>;
-  outcomesSectionHeading?: InputMaybe<StringFilter>;
-  outcomes?: InputMaybe<StringFilter>;
-  ctaSectionHeading?: InputMaybe<StringFilter>;
-  ctaSectionSubtext?: InputMaybe<StringFilter>;
+  bannerText?: InputMaybe<StringFilter>;
+  bannerHighlight?: InputMaybe<StringFilter>;
+  missingPieceHeadingPrefix?: InputMaybe<StringFilter>;
+  missingPieceHeadingHighlight?: InputMaybe<StringFilter>;
+  problemTitle?: InputMaybe<StringFilter>;
+  problemParagraph1?: InputMaybe<StringFilter>;
+  problemQuestion?: InputMaybe<StringFilter>;
+  problemParagraph2?: InputMaybe<StringFilter>;
+  problemParagraph3?: InputMaybe<StringFilter>;
+  solutionTitle?: InputMaybe<StringFilter>;
+  solutionParagraph1?: InputMaybe<StringFilter>;
+  solutionEmphasis?: InputMaybe<StringFilter>;
+  solutionParagraph2?: InputMaybe<StringFilter>;
+  solutionWord?: InputMaybe<StringFilter>;
+  philosophyLabel?: InputMaybe<StringFilter>;
+  philosophyHeadingPrefix?: InputMaybe<StringFilter>;
+  philosophyHeadingHighlight?: InputMaybe<StringFilter>;
+  philosophyQuote?: InputMaybe<StringFilter>;
+  philosophyParagraph1?: InputMaybe<StringFilter>;
+  philosophyParagraph2?: InputMaybe<StringFilter>;
+  philosophyBannerPrefix?: InputMaybe<StringFilter>;
+  philosophyBannerHighlight?: InputMaybe<StringFilter>;
+  philosophyClosingPrefix?: InputMaybe<StringFilter>;
+  philosophyClosingHighlight?: InputMaybe<StringFilter>;
+  timelineLabel?: InputMaybe<StringFilter>;
+  timelineHeadingPrefix?: InputMaybe<StringFilter>;
+  timelineHeadingHighlight?: InputMaybe<StringFilter>;
+  timelineSubtext?: InputMaybe<StringFilter>;
+  timelineSteps?: InputMaybe<ClarityCoachingTimelineStepsFilter>;
+  timelineCTALabel?: InputMaybe<StringFilter>;
+  experienceLabel?: InputMaybe<StringFilter>;
+  experienceHeadingPrefix?: InputMaybe<StringFilter>;
+  experienceHeadingHighlight?: InputMaybe<StringFilter>;
+  experienceItems?: InputMaybe<ClarityCoachingExperienceItemsFilter>;
+  bonusEmoji?: InputMaybe<StringFilter>;
+  bonusPrefix?: InputMaybe<StringFilter>;
+  bonusText?: InputMaybe<StringFilter>;
+  ctaSectionHeadingPrefix?: InputMaybe<StringFilter>;
+  ctaSectionHeadingHighlight?: InputMaybe<StringFilter>;
+  ctaSectionParagraph1?: InputMaybe<StringFilter>;
+  ctaSectionParagraph2?: InputMaybe<StringFilter>;
   ctaButtonLabel?: InputMaybe<StringFilter>;
 };
 
@@ -504,37 +624,139 @@ export type ClarityCoachingConnection = Connection & {
   edges?: Maybe<Array<Maybe<ClarityCoachingConnectionEdges>>>;
 };
 
+export type CareerCoachingImagineItems = {
+  __typename?: 'CareerCoachingImagineItems';
+  emoji?: Maybe<Scalars['String']['output']>;
+  text?: Maybe<Scalars['String']['output']>;
+  borderColor?: Maybe<Scalars['String']['output']>;
+  bg?: Maybe<Scalars['String']['output']>;
+};
+
+export type CareerCoachingRoadmapSteps = {
+  __typename?: 'CareerCoachingRoadmapSteps';
+  number?: Maybe<Scalars['String']['output']>;
+  weeks?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  subtitle?: Maybe<Scalars['String']['output']>;
+  subtitleColor?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+};
+
 export type CareerCoaching = Node & Document & {
   __typename?: 'CareerCoaching';
   heroHeading?: Maybe<Scalars['String']['output']>;
-  heroSubtext?: Maybe<Scalars['String']['output']>;
+  heroSubtextPrefix?: Maybe<Scalars['String']['output']>;
+  heroSubtextHighlight?: Maybe<Scalars['String']['output']>;
   heroCTALabel?: Maybe<Scalars['String']['output']>;
-  sectionHeading?: Maybe<Scalars['String']['output']>;
-  sectionSubtext?: Maybe<Scalars['String']['output']>;
+  resultsHeadingPrefix?: Maybe<Scalars['String']['output']>;
+  resultsHeadingHighlight?: Maybe<Scalars['String']['output']>;
+  resultsSubtext?: Maybe<Scalars['String']['output']>;
+  perhapsLabel?: Maybe<Scalars['String']['output']>;
   situations?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  bannerQuote?: Maybe<Scalars['String']['output']>;
-  outcomesSectionHeading?: Maybe<Scalars['String']['output']>;
-  outcomes?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  ctaSectionHeading?: Maybe<Scalars['String']['output']>;
-  ctaSectionSubtext?: Maybe<Scalars['String']['output']>;
+  bannerPrefix?: Maybe<Scalars['String']['output']>;
+  bannerHighlight?: Maybe<Scalars['String']['output']>;
+  clarityHeadingPrefix?: Maybe<Scalars['String']['output']>;
+  clarityHeadingHighlight?: Maybe<Scalars['String']['output']>;
+  clarityParagraph1?: Maybe<Scalars['String']['output']>;
+  clarityQuestion?: Maybe<Scalars['String']['output']>;
+  clarityParagraph2?: Maybe<Scalars['String']['output']>;
+  clarityParagraph3?: Maybe<Scalars['String']['output']>;
+  clarityEmphasis?: Maybe<Scalars['String']['output']>;
+  clarityParagraph4?: Maybe<Scalars['String']['output']>;
+  clarityParagraph5?: Maybe<Scalars['String']['output']>;
+  clarityBigWord?: Maybe<Scalars['String']['output']>;
+  philosophyHeadingPrefix?: Maybe<Scalars['String']['output']>;
+  philosophyHeadingHighlight?: Maybe<Scalars['String']['output']>;
+  philosophyParagraph1?: Maybe<Scalars['String']['output']>;
+  philosophyParagraph2Prefix?: Maybe<Scalars['String']['output']>;
+  philosophyParagraph2Highlight?: Maybe<Scalars['String']['output']>;
+  philosophyParagraph3?: Maybe<Scalars['String']['output']>;
+  philosophyEmphasis?: Maybe<Scalars['String']['output']>;
+  philosophyClosing?: Maybe<Scalars['String']['output']>;
+  imagineHeadingHighlight?: Maybe<Scalars['String']['output']>;
+  imagineItems?: Maybe<Array<Maybe<CareerCoachingImagineItems>>>;
+  roadmapHeadingPrefix?: Maybe<Scalars['String']['output']>;
+  roadmapHeadingHighlight?: Maybe<Scalars['String']['output']>;
+  roadmapSubtext1?: Maybe<Scalars['String']['output']>;
+  roadmapSubtext2?: Maybe<Scalars['String']['output']>;
+  roadmapSteps?: Maybe<Array<Maybe<CareerCoachingRoadmapSteps>>>;
+  roadmapCTALabel?: Maybe<Scalars['String']['output']>;
+  experienceHeadingPrefix?: Maybe<Scalars['String']['output']>;
+  experienceHeadingHighlight?: Maybe<Scalars['String']['output']>;
+  experienceSubtext?: Maybe<Scalars['String']['output']>;
+  experienceItems?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  ctaSectionHeadingPrefix?: Maybe<Scalars['String']['output']>;
+  ctaSectionHeadingHighlight?: Maybe<Scalars['String']['output']>;
+  ctaSectionParagraph1?: Maybe<Scalars['String']['output']>;
+  ctaSectionParagraph2?: Maybe<Scalars['String']['output']>;
   ctaButtonLabel?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
 };
 
+export type CareerCoachingImagineItemsFilter = {
+  emoji?: InputMaybe<StringFilter>;
+  text?: InputMaybe<StringFilter>;
+  borderColor?: InputMaybe<StringFilter>;
+  bg?: InputMaybe<StringFilter>;
+};
+
+export type CareerCoachingRoadmapStepsFilter = {
+  number?: InputMaybe<StringFilter>;
+  weeks?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  subtitleColor?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
 export type CareerCoachingFilter = {
   heroHeading?: InputMaybe<StringFilter>;
-  heroSubtext?: InputMaybe<StringFilter>;
+  heroSubtextPrefix?: InputMaybe<StringFilter>;
+  heroSubtextHighlight?: InputMaybe<StringFilter>;
   heroCTALabel?: InputMaybe<StringFilter>;
-  sectionHeading?: InputMaybe<StringFilter>;
-  sectionSubtext?: InputMaybe<StringFilter>;
+  resultsHeadingPrefix?: InputMaybe<StringFilter>;
+  resultsHeadingHighlight?: InputMaybe<StringFilter>;
+  resultsSubtext?: InputMaybe<StringFilter>;
+  perhapsLabel?: InputMaybe<StringFilter>;
   situations?: InputMaybe<StringFilter>;
-  bannerQuote?: InputMaybe<StringFilter>;
-  outcomesSectionHeading?: InputMaybe<StringFilter>;
-  outcomes?: InputMaybe<StringFilter>;
-  ctaSectionHeading?: InputMaybe<StringFilter>;
-  ctaSectionSubtext?: InputMaybe<StringFilter>;
+  bannerPrefix?: InputMaybe<StringFilter>;
+  bannerHighlight?: InputMaybe<StringFilter>;
+  clarityHeadingPrefix?: InputMaybe<StringFilter>;
+  clarityHeadingHighlight?: InputMaybe<StringFilter>;
+  clarityParagraph1?: InputMaybe<StringFilter>;
+  clarityQuestion?: InputMaybe<StringFilter>;
+  clarityParagraph2?: InputMaybe<StringFilter>;
+  clarityParagraph3?: InputMaybe<StringFilter>;
+  clarityEmphasis?: InputMaybe<StringFilter>;
+  clarityParagraph4?: InputMaybe<StringFilter>;
+  clarityParagraph5?: InputMaybe<StringFilter>;
+  clarityBigWord?: InputMaybe<StringFilter>;
+  philosophyHeadingPrefix?: InputMaybe<StringFilter>;
+  philosophyHeadingHighlight?: InputMaybe<StringFilter>;
+  philosophyParagraph1?: InputMaybe<StringFilter>;
+  philosophyParagraph2Prefix?: InputMaybe<StringFilter>;
+  philosophyParagraph2Highlight?: InputMaybe<StringFilter>;
+  philosophyParagraph3?: InputMaybe<StringFilter>;
+  philosophyEmphasis?: InputMaybe<StringFilter>;
+  philosophyClosing?: InputMaybe<StringFilter>;
+  imagineHeadingHighlight?: InputMaybe<StringFilter>;
+  imagineItems?: InputMaybe<CareerCoachingImagineItemsFilter>;
+  roadmapHeadingPrefix?: InputMaybe<StringFilter>;
+  roadmapHeadingHighlight?: InputMaybe<StringFilter>;
+  roadmapSubtext1?: InputMaybe<StringFilter>;
+  roadmapSubtext2?: InputMaybe<StringFilter>;
+  roadmapSteps?: InputMaybe<CareerCoachingRoadmapStepsFilter>;
+  roadmapCTALabel?: InputMaybe<StringFilter>;
+  experienceHeadingPrefix?: InputMaybe<StringFilter>;
+  experienceHeadingHighlight?: InputMaybe<StringFilter>;
+  experienceSubtext?: InputMaybe<StringFilter>;
+  experienceItems?: InputMaybe<StringFilter>;
+  ctaSectionHeadingPrefix?: InputMaybe<StringFilter>;
+  ctaSectionHeadingHighlight?: InputMaybe<StringFilter>;
+  ctaSectionParagraph1?: InputMaybe<StringFilter>;
+  ctaSectionParagraph2?: InputMaybe<StringFilter>;
   ctaButtonLabel?: InputMaybe<StringFilter>;
 };
 
@@ -551,6 +773,28 @@ export type CareerCoachingConnection = Connection & {
   edges?: Maybe<Array<Maybe<CareerCoachingConnectionEdges>>>;
 };
 
+export type NumerologySelfDiscoveryItems = {
+  __typename?: 'NumerologySelfDiscoveryItems';
+  emoji?: Maybe<Scalars['String']['output']>;
+  text?: Maybe<Scalars['String']['output']>;
+  borderColor?: Maybe<Scalars['String']['output']>;
+};
+
+export type NumerologyProcessSteps = {
+  __typename?: 'NumerologyProcessSteps';
+  emoji?: Maybe<Scalars['String']['output']>;
+  stepLabel?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+};
+
+export type NumerologyIncludes = {
+  __typename?: 'NumerologyIncludes';
+  emoji?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+};
+
 export type Numerology = Node & Document & {
   __typename?: 'Numerology';
   heroBadge?: Maybe<Scalars['String']['output']>;
@@ -558,17 +802,60 @@ export type Numerology = Node & Document & {
   heroTagline?: Maybe<Scalars['String']['output']>;
   heroSubtext?: Maybe<Scalars['String']['output']>;
   heroCTALabel?: Maybe<Scalars['String']['output']>;
-  whatIsHeading?: Maybe<Scalars['String']['output']>;
-  whatIsSubtext?: Maybe<Scalars['String']['output']>;
-  comparisonText?: Maybe<Scalars['String']['output']>;
-  powerText?: Maybe<Scalars['String']['output']>;
-  sessionIncludes?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  selfDiscoveryHeadingPrefix?: Maybe<Scalars['String']['output']>;
+  selfDiscoveryHeadingHighlight?: Maybe<Scalars['String']['output']>;
+  selfDiscoverySubtext?: Maybe<Scalars['String']['output']>;
+  selfDiscoveryItems?: Maybe<Array<Maybe<NumerologySelfDiscoveryItems>>>;
+  selfDiscoveryStatementPrefix?: Maybe<Scalars['String']['output']>;
+  selfDiscoveryStatementHighlight?: Maybe<Scalars['String']['output']>;
+  whatIsLabel?: Maybe<Scalars['String']['output']>;
+  whatIsHeadingPrefix?: Maybe<Scalars['String']['output']>;
+  whatIsHeadingHighlight?: Maybe<Scalars['String']['output']>;
+  whatIsIsntParagraph?: Maybe<Scalars['String']['output']>;
+  whatIsIsParagraph1?: Maybe<Scalars['String']['output']>;
+  whatIsIsParagraph2?: Maybe<Scalars['String']['output']>;
+  processLabel?: Maybe<Scalars['String']['output']>;
+  processHeadingPrefix?: Maybe<Scalars['String']['output']>;
+  processHeadingHighlight?: Maybe<Scalars['String']['output']>;
+  processSteps?: Maybe<Array<Maybe<NumerologyProcessSteps>>>;
+  includesLabel?: Maybe<Scalars['String']['output']>;
+  includesHeadingPrefix?: Maybe<Scalars['String']['output']>;
+  includesHeadingHighlight?: Maybe<Scalars['String']['output']>;
+  includesSubtext?: Maybe<Scalars['String']['output']>;
+  includes?: Maybe<Array<Maybe<NumerologyIncludes>>>;
+  philosophyLabel?: Maybe<Scalars['String']['output']>;
+  philosophyHeadingPrefix?: Maybe<Scalars['String']['output']>;
+  philosophyHeadingHighlight?: Maybe<Scalars['String']['output']>;
+  philosophyQuote?: Maybe<Scalars['String']['output']>;
+  philosophyParagraph1?: Maybe<Scalars['String']['output']>;
+  philosophyParagraph2?: Maybe<Scalars['String']['output']>;
+  philosophyBanner?: Maybe<Scalars['String']['output']>;
+  philosophyClosingPrefix?: Maybe<Scalars['String']['output']>;
+  philosophyClosingHighlight?: Maybe<Scalars['String']['output']>;
   ctaSectionHeading?: Maybe<Scalars['String']['output']>;
-  ctaSectionSubtext?: Maybe<Scalars['String']['output']>;
   ctaButtonLabel?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
+};
+
+export type NumerologySelfDiscoveryItemsFilter = {
+  emoji?: InputMaybe<StringFilter>;
+  text?: InputMaybe<StringFilter>;
+  borderColor?: InputMaybe<StringFilter>;
+};
+
+export type NumerologyProcessStepsFilter = {
+  emoji?: InputMaybe<StringFilter>;
+  stepLabel?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type NumerologyIncludesFilter = {
+  emoji?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
 };
 
 export type NumerologyFilter = {
@@ -577,13 +864,37 @@ export type NumerologyFilter = {
   heroTagline?: InputMaybe<StringFilter>;
   heroSubtext?: InputMaybe<StringFilter>;
   heroCTALabel?: InputMaybe<StringFilter>;
-  whatIsHeading?: InputMaybe<StringFilter>;
-  whatIsSubtext?: InputMaybe<StringFilter>;
-  comparisonText?: InputMaybe<StringFilter>;
-  powerText?: InputMaybe<StringFilter>;
-  sessionIncludes?: InputMaybe<StringFilter>;
+  selfDiscoveryHeadingPrefix?: InputMaybe<StringFilter>;
+  selfDiscoveryHeadingHighlight?: InputMaybe<StringFilter>;
+  selfDiscoverySubtext?: InputMaybe<StringFilter>;
+  selfDiscoveryItems?: InputMaybe<NumerologySelfDiscoveryItemsFilter>;
+  selfDiscoveryStatementPrefix?: InputMaybe<StringFilter>;
+  selfDiscoveryStatementHighlight?: InputMaybe<StringFilter>;
+  whatIsLabel?: InputMaybe<StringFilter>;
+  whatIsHeadingPrefix?: InputMaybe<StringFilter>;
+  whatIsHeadingHighlight?: InputMaybe<StringFilter>;
+  whatIsIsntParagraph?: InputMaybe<StringFilter>;
+  whatIsIsParagraph1?: InputMaybe<StringFilter>;
+  whatIsIsParagraph2?: InputMaybe<StringFilter>;
+  processLabel?: InputMaybe<StringFilter>;
+  processHeadingPrefix?: InputMaybe<StringFilter>;
+  processHeadingHighlight?: InputMaybe<StringFilter>;
+  processSteps?: InputMaybe<NumerologyProcessStepsFilter>;
+  includesLabel?: InputMaybe<StringFilter>;
+  includesHeadingPrefix?: InputMaybe<StringFilter>;
+  includesHeadingHighlight?: InputMaybe<StringFilter>;
+  includesSubtext?: InputMaybe<StringFilter>;
+  includes?: InputMaybe<NumerologyIncludesFilter>;
+  philosophyLabel?: InputMaybe<StringFilter>;
+  philosophyHeadingPrefix?: InputMaybe<StringFilter>;
+  philosophyHeadingHighlight?: InputMaybe<StringFilter>;
+  philosophyQuote?: InputMaybe<StringFilter>;
+  philosophyParagraph1?: InputMaybe<StringFilter>;
+  philosophyParagraph2?: InputMaybe<StringFilter>;
+  philosophyBanner?: InputMaybe<StringFilter>;
+  philosophyClosingPrefix?: InputMaybe<StringFilter>;
+  philosophyClosingHighlight?: InputMaybe<StringFilter>;
   ctaSectionHeading?: InputMaybe<StringFilter>;
-  ctaSectionSubtext?: InputMaybe<StringFilter>;
   ctaButtonLabel?: InputMaybe<StringFilter>;
 };
 
@@ -600,16 +911,49 @@ export type NumerologyConnection = Connection & {
   edges?: Maybe<Array<Maybe<NumerologyConnectionEdges>>>;
 };
 
+export type ResourcesBlogPosts = {
+  __typename?: 'ResourcesBlogPosts';
+  title?: Maybe<Scalars['String']['output']>;
+  excerpt?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
+  icon?: Maybe<Scalars['String']['output']>;
+  iconColor?: Maybe<Scalars['String']['output']>;
+  gradient?: Maybe<Scalars['String']['output']>;
+  badgeColor?: Maybe<Scalars['String']['output']>;
+};
+
+export type ResourcesPodcasts = {
+  __typename?: 'ResourcesPodcasts';
+  episode?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  excerpt?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
+  icon?: Maybe<Scalars['String']['output']>;
+  gradient?: Maybe<Scalars['String']['output']>;
+  badgeColor?: Maybe<Scalars['String']['output']>;
+};
+
 export type Resources = Node & Document & {
   __typename?: 'Resources';
   heroBadge?: Maybe<Scalars['String']['output']>;
   heroHeading?: Maybe<Scalars['String']['output']>;
   heroHeadingHighlight?: Maybe<Scalars['String']['output']>;
   heroSubtext?: Maybe<Scalars['String']['output']>;
-  blogHeading?: Maybe<Scalars['String']['output']>;
-  blogText?: Maybe<Scalars['String']['output']>;
-  podcastHeading?: Maybe<Scalars['String']['output']>;
-  podcastText?: Maybe<Scalars['String']['output']>;
+  featuredHeading?: Maybe<Scalars['String']['output']>;
+  featuredBlogCategory?: Maybe<Scalars['String']['output']>;
+  featuredBlogStatus?: Maybe<Scalars['String']['output']>;
+  featuredBlogTitle?: Maybe<Scalars['String']['output']>;
+  featuredBlogExcerpt?: Maybe<Scalars['String']['output']>;
+  featuredBlogReadTime?: Maybe<Scalars['String']['output']>;
+  featuredBlogCTA?: Maybe<Scalars['String']['output']>;
+  blogSectionHeading?: Maybe<Scalars['String']['output']>;
+  blogPosts?: Maybe<Array<Maybe<ResourcesBlogPosts>>>;
+  podcastSectionHeading?: Maybe<Scalars['String']['output']>;
+  podcasts?: Maybe<Array<Maybe<ResourcesPodcasts>>>;
+  newsletterHeading?: Maybe<Scalars['String']['output']>;
+  newsletterSubtext?: Maybe<Scalars['String']['output']>;
+  newsletterPlaceholder?: Maybe<Scalars['String']['output']>;
+  newsletterButton?: Maybe<Scalars['String']['output']>;
   ctaSectionHeading?: Maybe<Scalars['String']['output']>;
   ctaSectionSubtext?: Maybe<Scalars['String']['output']>;
   ctaButtonLabel?: Maybe<Scalars['String']['output']>;
@@ -618,15 +962,46 @@ export type Resources = Node & Document & {
   _values: Scalars['JSON']['output'];
 };
 
+export type ResourcesBlogPostsFilter = {
+  title?: InputMaybe<StringFilter>;
+  excerpt?: InputMaybe<StringFilter>;
+  status?: InputMaybe<StringFilter>;
+  icon?: InputMaybe<StringFilter>;
+  iconColor?: InputMaybe<StringFilter>;
+  gradient?: InputMaybe<StringFilter>;
+  badgeColor?: InputMaybe<StringFilter>;
+};
+
+export type ResourcesPodcastsFilter = {
+  episode?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  excerpt?: InputMaybe<StringFilter>;
+  status?: InputMaybe<StringFilter>;
+  icon?: InputMaybe<StringFilter>;
+  gradient?: InputMaybe<StringFilter>;
+  badgeColor?: InputMaybe<StringFilter>;
+};
+
 export type ResourcesFilter = {
   heroBadge?: InputMaybe<StringFilter>;
   heroHeading?: InputMaybe<StringFilter>;
   heroHeadingHighlight?: InputMaybe<StringFilter>;
   heroSubtext?: InputMaybe<StringFilter>;
-  blogHeading?: InputMaybe<StringFilter>;
-  blogText?: InputMaybe<StringFilter>;
-  podcastHeading?: InputMaybe<StringFilter>;
-  podcastText?: InputMaybe<StringFilter>;
+  featuredHeading?: InputMaybe<StringFilter>;
+  featuredBlogCategory?: InputMaybe<StringFilter>;
+  featuredBlogStatus?: InputMaybe<StringFilter>;
+  featuredBlogTitle?: InputMaybe<StringFilter>;
+  featuredBlogExcerpt?: InputMaybe<StringFilter>;
+  featuredBlogReadTime?: InputMaybe<StringFilter>;
+  featuredBlogCTA?: InputMaybe<StringFilter>;
+  blogSectionHeading?: InputMaybe<StringFilter>;
+  blogPosts?: InputMaybe<ResourcesBlogPostsFilter>;
+  podcastSectionHeading?: InputMaybe<StringFilter>;
+  podcasts?: InputMaybe<ResourcesPodcastsFilter>;
+  newsletterHeading?: InputMaybe<StringFilter>;
+  newsletterSubtext?: InputMaybe<StringFilter>;
+  newsletterPlaceholder?: InputMaybe<StringFilter>;
+  newsletterButton?: InputMaybe<StringFilter>;
   ctaSectionHeading?: InputMaybe<StringFilter>;
   ctaSectionSubtext?: InputMaybe<StringFilter>;
   ctaButtonLabel?: InputMaybe<StringFilter>;
@@ -960,36 +1335,164 @@ export type AboutMutation = {
 export type ClarityCoachingPerhapsItemsMutation = {
   emoji?: InputMaybe<Scalars['String']['input']>;
   text?: InputMaybe<Scalars['String']['input']>;
+  borderColor?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ClarityCoachingTimelineStepsMutation = {
+  number?: InputMaybe<Scalars['String']['input']>;
+  weeks?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  accent?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ClarityCoachingExperienceItemsMutation = {
+  emoji?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+  bg?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ClarityCoachingMutation = {
   heroBadge?: InputMaybe<Scalars['String']['input']>;
   heroHeading?: InputMaybe<Scalars['String']['input']>;
   heroSubtext?: InputMaybe<Scalars['String']['input']>;
-  sectionHeading?: InputMaybe<Scalars['String']['input']>;
-  sectionSubtext?: InputMaybe<Scalars['String']['input']>;
+  heroCTALabel?: InputMaybe<Scalars['String']['input']>;
+  heroSideEmoji?: InputMaybe<Scalars['String']['input']>;
+  heroSideWeeks?: InputMaybe<Scalars['String']['input']>;
+  heroSideSubtext?: InputMaybe<Scalars['String']['input']>;
+  resultsHeadingPrefix?: InputMaybe<Scalars['String']['input']>;
+  resultsHeadingHighlight?: InputMaybe<Scalars['String']['input']>;
+  resultsSubtext?: InputMaybe<Scalars['String']['input']>;
+  perhapsLabel?: InputMaybe<Scalars['String']['input']>;
   perhapsItems?: InputMaybe<Array<InputMaybe<ClarityCoachingPerhapsItemsMutation>>>;
-  bannerQuote?: InputMaybe<Scalars['String']['input']>;
-  outcomesSectionHeading?: InputMaybe<Scalars['String']['input']>;
-  outcomes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  ctaSectionHeading?: InputMaybe<Scalars['String']['input']>;
-  ctaSectionSubtext?: InputMaybe<Scalars['String']['input']>;
+  bannerText?: InputMaybe<Scalars['String']['input']>;
+  bannerHighlight?: InputMaybe<Scalars['String']['input']>;
+  missingPieceHeadingPrefix?: InputMaybe<Scalars['String']['input']>;
+  missingPieceHeadingHighlight?: InputMaybe<Scalars['String']['input']>;
+  problemTitle?: InputMaybe<Scalars['String']['input']>;
+  problemParagraph1?: InputMaybe<Scalars['String']['input']>;
+  problemQuestion?: InputMaybe<Scalars['String']['input']>;
+  problemParagraph2?: InputMaybe<Scalars['String']['input']>;
+  problemParagraph3?: InputMaybe<Scalars['String']['input']>;
+  solutionTitle?: InputMaybe<Scalars['String']['input']>;
+  solutionParagraph1?: InputMaybe<Scalars['String']['input']>;
+  solutionEmphasis?: InputMaybe<Scalars['String']['input']>;
+  solutionParagraph2?: InputMaybe<Scalars['String']['input']>;
+  solutionWord?: InputMaybe<Scalars['String']['input']>;
+  philosophyLabel?: InputMaybe<Scalars['String']['input']>;
+  philosophyHeadingPrefix?: InputMaybe<Scalars['String']['input']>;
+  philosophyHeadingHighlight?: InputMaybe<Scalars['String']['input']>;
+  philosophyQuote?: InputMaybe<Scalars['String']['input']>;
+  philosophyParagraph1?: InputMaybe<Scalars['String']['input']>;
+  philosophyParagraph2?: InputMaybe<Scalars['String']['input']>;
+  philosophyBannerPrefix?: InputMaybe<Scalars['String']['input']>;
+  philosophyBannerHighlight?: InputMaybe<Scalars['String']['input']>;
+  philosophyClosingPrefix?: InputMaybe<Scalars['String']['input']>;
+  philosophyClosingHighlight?: InputMaybe<Scalars['String']['input']>;
+  timelineLabel?: InputMaybe<Scalars['String']['input']>;
+  timelineHeadingPrefix?: InputMaybe<Scalars['String']['input']>;
+  timelineHeadingHighlight?: InputMaybe<Scalars['String']['input']>;
+  timelineSubtext?: InputMaybe<Scalars['String']['input']>;
+  timelineSteps?: InputMaybe<Array<InputMaybe<ClarityCoachingTimelineStepsMutation>>>;
+  timelineCTALabel?: InputMaybe<Scalars['String']['input']>;
+  experienceLabel?: InputMaybe<Scalars['String']['input']>;
+  experienceHeadingPrefix?: InputMaybe<Scalars['String']['input']>;
+  experienceHeadingHighlight?: InputMaybe<Scalars['String']['input']>;
+  experienceItems?: InputMaybe<Array<InputMaybe<ClarityCoachingExperienceItemsMutation>>>;
+  bonusEmoji?: InputMaybe<Scalars['String']['input']>;
+  bonusPrefix?: InputMaybe<Scalars['String']['input']>;
+  bonusText?: InputMaybe<Scalars['String']['input']>;
+  ctaSectionHeadingPrefix?: InputMaybe<Scalars['String']['input']>;
+  ctaSectionHeadingHighlight?: InputMaybe<Scalars['String']['input']>;
+  ctaSectionParagraph1?: InputMaybe<Scalars['String']['input']>;
+  ctaSectionParagraph2?: InputMaybe<Scalars['String']['input']>;
   ctaButtonLabel?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CareerCoachingImagineItemsMutation = {
+  emoji?: InputMaybe<Scalars['String']['input']>;
+  text?: InputMaybe<Scalars['String']['input']>;
+  borderColor?: InputMaybe<Scalars['String']['input']>;
+  bg?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CareerCoachingRoadmapStepsMutation = {
+  number?: InputMaybe<Scalars['String']['input']>;
+  weeks?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+  subtitleColor?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type CareerCoachingMutation = {
   heroHeading?: InputMaybe<Scalars['String']['input']>;
-  heroSubtext?: InputMaybe<Scalars['String']['input']>;
+  heroSubtextPrefix?: InputMaybe<Scalars['String']['input']>;
+  heroSubtextHighlight?: InputMaybe<Scalars['String']['input']>;
   heroCTALabel?: InputMaybe<Scalars['String']['input']>;
-  sectionHeading?: InputMaybe<Scalars['String']['input']>;
-  sectionSubtext?: InputMaybe<Scalars['String']['input']>;
+  resultsHeadingPrefix?: InputMaybe<Scalars['String']['input']>;
+  resultsHeadingHighlight?: InputMaybe<Scalars['String']['input']>;
+  resultsSubtext?: InputMaybe<Scalars['String']['input']>;
+  perhapsLabel?: InputMaybe<Scalars['String']['input']>;
   situations?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  bannerQuote?: InputMaybe<Scalars['String']['input']>;
-  outcomesSectionHeading?: InputMaybe<Scalars['String']['input']>;
-  outcomes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  ctaSectionHeading?: InputMaybe<Scalars['String']['input']>;
-  ctaSectionSubtext?: InputMaybe<Scalars['String']['input']>;
+  bannerPrefix?: InputMaybe<Scalars['String']['input']>;
+  bannerHighlight?: InputMaybe<Scalars['String']['input']>;
+  clarityHeadingPrefix?: InputMaybe<Scalars['String']['input']>;
+  clarityHeadingHighlight?: InputMaybe<Scalars['String']['input']>;
+  clarityParagraph1?: InputMaybe<Scalars['String']['input']>;
+  clarityQuestion?: InputMaybe<Scalars['String']['input']>;
+  clarityParagraph2?: InputMaybe<Scalars['String']['input']>;
+  clarityParagraph3?: InputMaybe<Scalars['String']['input']>;
+  clarityEmphasis?: InputMaybe<Scalars['String']['input']>;
+  clarityParagraph4?: InputMaybe<Scalars['String']['input']>;
+  clarityParagraph5?: InputMaybe<Scalars['String']['input']>;
+  clarityBigWord?: InputMaybe<Scalars['String']['input']>;
+  philosophyHeadingPrefix?: InputMaybe<Scalars['String']['input']>;
+  philosophyHeadingHighlight?: InputMaybe<Scalars['String']['input']>;
+  philosophyParagraph1?: InputMaybe<Scalars['String']['input']>;
+  philosophyParagraph2Prefix?: InputMaybe<Scalars['String']['input']>;
+  philosophyParagraph2Highlight?: InputMaybe<Scalars['String']['input']>;
+  philosophyParagraph3?: InputMaybe<Scalars['String']['input']>;
+  philosophyEmphasis?: InputMaybe<Scalars['String']['input']>;
+  philosophyClosing?: InputMaybe<Scalars['String']['input']>;
+  imagineHeadingHighlight?: InputMaybe<Scalars['String']['input']>;
+  imagineItems?: InputMaybe<Array<InputMaybe<CareerCoachingImagineItemsMutation>>>;
+  roadmapHeadingPrefix?: InputMaybe<Scalars['String']['input']>;
+  roadmapHeadingHighlight?: InputMaybe<Scalars['String']['input']>;
+  roadmapSubtext1?: InputMaybe<Scalars['String']['input']>;
+  roadmapSubtext2?: InputMaybe<Scalars['String']['input']>;
+  roadmapSteps?: InputMaybe<Array<InputMaybe<CareerCoachingRoadmapStepsMutation>>>;
+  roadmapCTALabel?: InputMaybe<Scalars['String']['input']>;
+  experienceHeadingPrefix?: InputMaybe<Scalars['String']['input']>;
+  experienceHeadingHighlight?: InputMaybe<Scalars['String']['input']>;
+  experienceSubtext?: InputMaybe<Scalars['String']['input']>;
+  experienceItems?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  ctaSectionHeadingPrefix?: InputMaybe<Scalars['String']['input']>;
+  ctaSectionHeadingHighlight?: InputMaybe<Scalars['String']['input']>;
+  ctaSectionParagraph1?: InputMaybe<Scalars['String']['input']>;
+  ctaSectionParagraph2?: InputMaybe<Scalars['String']['input']>;
   ctaButtonLabel?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type NumerologySelfDiscoveryItemsMutation = {
+  emoji?: InputMaybe<Scalars['String']['input']>;
+  text?: InputMaybe<Scalars['String']['input']>;
+  borderColor?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type NumerologyProcessStepsMutation = {
+  emoji?: InputMaybe<Scalars['String']['input']>;
+  stepLabel?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type NumerologyIncludesMutation = {
+  emoji?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type NumerologyMutation = {
@@ -998,14 +1501,58 @@ export type NumerologyMutation = {
   heroTagline?: InputMaybe<Scalars['String']['input']>;
   heroSubtext?: InputMaybe<Scalars['String']['input']>;
   heroCTALabel?: InputMaybe<Scalars['String']['input']>;
-  whatIsHeading?: InputMaybe<Scalars['String']['input']>;
-  whatIsSubtext?: InputMaybe<Scalars['String']['input']>;
-  comparisonText?: InputMaybe<Scalars['String']['input']>;
-  powerText?: InputMaybe<Scalars['String']['input']>;
-  sessionIncludes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  selfDiscoveryHeadingPrefix?: InputMaybe<Scalars['String']['input']>;
+  selfDiscoveryHeadingHighlight?: InputMaybe<Scalars['String']['input']>;
+  selfDiscoverySubtext?: InputMaybe<Scalars['String']['input']>;
+  selfDiscoveryItems?: InputMaybe<Array<InputMaybe<NumerologySelfDiscoveryItemsMutation>>>;
+  selfDiscoveryStatementPrefix?: InputMaybe<Scalars['String']['input']>;
+  selfDiscoveryStatementHighlight?: InputMaybe<Scalars['String']['input']>;
+  whatIsLabel?: InputMaybe<Scalars['String']['input']>;
+  whatIsHeadingPrefix?: InputMaybe<Scalars['String']['input']>;
+  whatIsHeadingHighlight?: InputMaybe<Scalars['String']['input']>;
+  whatIsIsntParagraph?: InputMaybe<Scalars['String']['input']>;
+  whatIsIsParagraph1?: InputMaybe<Scalars['String']['input']>;
+  whatIsIsParagraph2?: InputMaybe<Scalars['String']['input']>;
+  processLabel?: InputMaybe<Scalars['String']['input']>;
+  processHeadingPrefix?: InputMaybe<Scalars['String']['input']>;
+  processHeadingHighlight?: InputMaybe<Scalars['String']['input']>;
+  processSteps?: InputMaybe<Array<InputMaybe<NumerologyProcessStepsMutation>>>;
+  includesLabel?: InputMaybe<Scalars['String']['input']>;
+  includesHeadingPrefix?: InputMaybe<Scalars['String']['input']>;
+  includesHeadingHighlight?: InputMaybe<Scalars['String']['input']>;
+  includesSubtext?: InputMaybe<Scalars['String']['input']>;
+  includes?: InputMaybe<Array<InputMaybe<NumerologyIncludesMutation>>>;
+  philosophyLabel?: InputMaybe<Scalars['String']['input']>;
+  philosophyHeadingPrefix?: InputMaybe<Scalars['String']['input']>;
+  philosophyHeadingHighlight?: InputMaybe<Scalars['String']['input']>;
+  philosophyQuote?: InputMaybe<Scalars['String']['input']>;
+  philosophyParagraph1?: InputMaybe<Scalars['String']['input']>;
+  philosophyParagraph2?: InputMaybe<Scalars['String']['input']>;
+  philosophyBanner?: InputMaybe<Scalars['String']['input']>;
+  philosophyClosingPrefix?: InputMaybe<Scalars['String']['input']>;
+  philosophyClosingHighlight?: InputMaybe<Scalars['String']['input']>;
   ctaSectionHeading?: InputMaybe<Scalars['String']['input']>;
-  ctaSectionSubtext?: InputMaybe<Scalars['String']['input']>;
   ctaButtonLabel?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ResourcesBlogPostsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  excerpt?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<Scalars['String']['input']>;
+  icon?: InputMaybe<Scalars['String']['input']>;
+  iconColor?: InputMaybe<Scalars['String']['input']>;
+  gradient?: InputMaybe<Scalars['String']['input']>;
+  badgeColor?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ResourcesPodcastsMutation = {
+  episode?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  excerpt?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<Scalars['String']['input']>;
+  icon?: InputMaybe<Scalars['String']['input']>;
+  gradient?: InputMaybe<Scalars['String']['input']>;
+  badgeColor?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ResourcesMutation = {
@@ -1013,10 +1560,21 @@ export type ResourcesMutation = {
   heroHeading?: InputMaybe<Scalars['String']['input']>;
   heroHeadingHighlight?: InputMaybe<Scalars['String']['input']>;
   heroSubtext?: InputMaybe<Scalars['String']['input']>;
-  blogHeading?: InputMaybe<Scalars['String']['input']>;
-  blogText?: InputMaybe<Scalars['String']['input']>;
-  podcastHeading?: InputMaybe<Scalars['String']['input']>;
-  podcastText?: InputMaybe<Scalars['String']['input']>;
+  featuredHeading?: InputMaybe<Scalars['String']['input']>;
+  featuredBlogCategory?: InputMaybe<Scalars['String']['input']>;
+  featuredBlogStatus?: InputMaybe<Scalars['String']['input']>;
+  featuredBlogTitle?: InputMaybe<Scalars['String']['input']>;
+  featuredBlogExcerpt?: InputMaybe<Scalars['String']['input']>;
+  featuredBlogReadTime?: InputMaybe<Scalars['String']['input']>;
+  featuredBlogCTA?: InputMaybe<Scalars['String']['input']>;
+  blogSectionHeading?: InputMaybe<Scalars['String']['input']>;
+  blogPosts?: InputMaybe<Array<InputMaybe<ResourcesBlogPostsMutation>>>;
+  podcastSectionHeading?: InputMaybe<Scalars['String']['input']>;
+  podcasts?: InputMaybe<Array<InputMaybe<ResourcesPodcastsMutation>>>;
+  newsletterHeading?: InputMaybe<Scalars['String']['input']>;
+  newsletterSubtext?: InputMaybe<Scalars['String']['input']>;
+  newsletterPlaceholder?: InputMaybe<Scalars['String']['input']>;
+  newsletterButton?: InputMaybe<Scalars['String']['input']>;
   ctaSectionHeading?: InputMaybe<Scalars['String']['input']>;
   ctaSectionSubtext?: InputMaybe<Scalars['String']['input']>;
   ctaButtonLabel?: InputMaybe<Scalars['String']['input']>;
@@ -1048,13 +1606,13 @@ export type HomePartsFragment = { __typename: 'Home', heroHeading?: string | nul
 
 export type AboutPartsFragment = { __typename: 'About', heroHeading?: string | null, heroSubtext?: string | null, storyHeading?: string | null, storyParagraph1?: string | null, storyParagraph2?: string | null, credentialsHeading?: string | null, credentialsSubtext?: string | null, valuesHeading?: string | null, valuesSubtext?: string | null, ctaHeading?: string | null, ctaSubtext?: string | null, ctaButtonLabel?: string | null, credentials?: Array<{ __typename: 'AboutCredentials', icon?: string | null, title?: string | null, description?: string | null, gradient?: string | null } | null> | null, values?: Array<{ __typename: 'AboutValues', icon?: string | null, title?: string | null, description?: string | null } | null> | null };
 
-export type ClarityCoachingPartsFragment = { __typename: 'ClarityCoaching', heroBadge?: string | null, heroHeading?: string | null, heroSubtext?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, bannerQuote?: string | null, outcomesSectionHeading?: string | null, outcomes?: Array<string | null> | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null, perhapsItems?: Array<{ __typename: 'ClarityCoachingPerhapsItems', emoji?: string | null, text?: string | null } | null> | null };
+export type ClarityCoachingPartsFragment = { __typename: 'ClarityCoaching', heroBadge?: string | null, heroHeading?: string | null, heroSubtext?: string | null, heroCTALabel?: string | null, heroSideEmoji?: string | null, heroSideWeeks?: string | null, heroSideSubtext?: string | null, resultsHeadingPrefix?: string | null, resultsHeadingHighlight?: string | null, resultsSubtext?: string | null, perhapsLabel?: string | null, bannerText?: string | null, bannerHighlight?: string | null, missingPieceHeadingPrefix?: string | null, missingPieceHeadingHighlight?: string | null, problemTitle?: string | null, problemParagraph1?: string | null, problemQuestion?: string | null, problemParagraph2?: string | null, problemParagraph3?: string | null, solutionTitle?: string | null, solutionParagraph1?: string | null, solutionEmphasis?: string | null, solutionParagraph2?: string | null, solutionWord?: string | null, philosophyLabel?: string | null, philosophyHeadingPrefix?: string | null, philosophyHeadingHighlight?: string | null, philosophyQuote?: string | null, philosophyParagraph1?: string | null, philosophyParagraph2?: string | null, philosophyBannerPrefix?: string | null, philosophyBannerHighlight?: string | null, philosophyClosingPrefix?: string | null, philosophyClosingHighlight?: string | null, timelineLabel?: string | null, timelineHeadingPrefix?: string | null, timelineHeadingHighlight?: string | null, timelineSubtext?: string | null, timelineCTALabel?: string | null, experienceLabel?: string | null, experienceHeadingPrefix?: string | null, experienceHeadingHighlight?: string | null, bonusEmoji?: string | null, bonusPrefix?: string | null, bonusText?: string | null, ctaSectionHeadingPrefix?: string | null, ctaSectionHeadingHighlight?: string | null, ctaSectionParagraph1?: string | null, ctaSectionParagraph2?: string | null, ctaButtonLabel?: string | null, perhapsItems?: Array<{ __typename: 'ClarityCoachingPerhapsItems', emoji?: string | null, text?: string | null, borderColor?: string | null } | null> | null, timelineSteps?: Array<{ __typename: 'ClarityCoachingTimelineSteps', number?: string | null, weeks?: string | null, title?: string | null, subtitle?: string | null, description?: string | null, accent?: string | null } | null> | null, experienceItems?: Array<{ __typename: 'ClarityCoachingExperienceItems', emoji?: string | null, title?: string | null, subtitle?: string | null, bg?: string | null } | null> | null };
 
-export type CareerCoachingPartsFragment = { __typename: 'CareerCoaching', heroHeading?: string | null, heroSubtext?: string | null, heroCTALabel?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, situations?: Array<string | null> | null, bannerQuote?: string | null, outcomesSectionHeading?: string | null, outcomes?: Array<string | null> | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null };
+export type CareerCoachingPartsFragment = { __typename: 'CareerCoaching', heroHeading?: string | null, heroSubtextPrefix?: string | null, heroSubtextHighlight?: string | null, heroCTALabel?: string | null, resultsHeadingPrefix?: string | null, resultsHeadingHighlight?: string | null, resultsSubtext?: string | null, perhapsLabel?: string | null, situations?: Array<string | null> | null, bannerPrefix?: string | null, bannerHighlight?: string | null, clarityHeadingPrefix?: string | null, clarityHeadingHighlight?: string | null, clarityParagraph1?: string | null, clarityQuestion?: string | null, clarityParagraph2?: string | null, clarityParagraph3?: string | null, clarityEmphasis?: string | null, clarityParagraph4?: string | null, clarityParagraph5?: string | null, clarityBigWord?: string | null, philosophyHeadingPrefix?: string | null, philosophyHeadingHighlight?: string | null, philosophyParagraph1?: string | null, philosophyParagraph2Prefix?: string | null, philosophyParagraph2Highlight?: string | null, philosophyParagraph3?: string | null, philosophyEmphasis?: string | null, philosophyClosing?: string | null, imagineHeadingHighlight?: string | null, roadmapHeadingPrefix?: string | null, roadmapHeadingHighlight?: string | null, roadmapSubtext1?: string | null, roadmapSubtext2?: string | null, roadmapCTALabel?: string | null, experienceHeadingPrefix?: string | null, experienceHeadingHighlight?: string | null, experienceSubtext?: string | null, experienceItems?: Array<string | null> | null, ctaSectionHeadingPrefix?: string | null, ctaSectionHeadingHighlight?: string | null, ctaSectionParagraph1?: string | null, ctaSectionParagraph2?: string | null, ctaButtonLabel?: string | null, imagineItems?: Array<{ __typename: 'CareerCoachingImagineItems', emoji?: string | null, text?: string | null, borderColor?: string | null, bg?: string | null } | null> | null, roadmapSteps?: Array<{ __typename: 'CareerCoachingRoadmapSteps', number?: string | null, weeks?: string | null, title?: string | null, subtitle?: string | null, subtitleColor?: string | null, description?: string | null } | null> | null };
 
-export type NumerologyPartsFragment = { __typename: 'Numerology', heroBadge?: string | null, heroHeading?: string | null, heroTagline?: string | null, heroSubtext?: string | null, heroCTALabel?: string | null, whatIsHeading?: string | null, whatIsSubtext?: string | null, comparisonText?: string | null, powerText?: string | null, sessionIncludes?: Array<string | null> | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null };
+export type NumerologyPartsFragment = { __typename: 'Numerology', heroBadge?: string | null, heroHeading?: string | null, heroTagline?: string | null, heroSubtext?: string | null, heroCTALabel?: string | null, selfDiscoveryHeadingPrefix?: string | null, selfDiscoveryHeadingHighlight?: string | null, selfDiscoverySubtext?: string | null, selfDiscoveryStatementPrefix?: string | null, selfDiscoveryStatementHighlight?: string | null, whatIsLabel?: string | null, whatIsHeadingPrefix?: string | null, whatIsHeadingHighlight?: string | null, whatIsIsntParagraph?: string | null, whatIsIsParagraph1?: string | null, whatIsIsParagraph2?: string | null, processLabel?: string | null, processHeadingPrefix?: string | null, processHeadingHighlight?: string | null, includesLabel?: string | null, includesHeadingPrefix?: string | null, includesHeadingHighlight?: string | null, includesSubtext?: string | null, philosophyLabel?: string | null, philosophyHeadingPrefix?: string | null, philosophyHeadingHighlight?: string | null, philosophyQuote?: string | null, philosophyParagraph1?: string | null, philosophyParagraph2?: string | null, philosophyBanner?: string | null, philosophyClosingPrefix?: string | null, philosophyClosingHighlight?: string | null, ctaSectionHeading?: string | null, ctaButtonLabel?: string | null, selfDiscoveryItems?: Array<{ __typename: 'NumerologySelfDiscoveryItems', emoji?: string | null, text?: string | null, borderColor?: string | null } | null> | null, processSteps?: Array<{ __typename: 'NumerologyProcessSteps', emoji?: string | null, stepLabel?: string | null, title?: string | null, description?: string | null } | null> | null, includes?: Array<{ __typename: 'NumerologyIncludes', emoji?: string | null, title?: string | null, description?: string | null } | null> | null };
 
-export type ResourcesPartsFragment = { __typename: 'Resources', heroBadge?: string | null, heroHeading?: string | null, heroHeadingHighlight?: string | null, heroSubtext?: string | null, blogHeading?: string | null, blogText?: string | null, podcastHeading?: string | null, podcastText?: string | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null };
+export type ResourcesPartsFragment = { __typename: 'Resources', heroBadge?: string | null, heroHeading?: string | null, heroHeadingHighlight?: string | null, heroSubtext?: string | null, featuredHeading?: string | null, featuredBlogCategory?: string | null, featuredBlogStatus?: string | null, featuredBlogTitle?: string | null, featuredBlogExcerpt?: string | null, featuredBlogReadTime?: string | null, featuredBlogCTA?: string | null, blogSectionHeading?: string | null, podcastSectionHeading?: string | null, newsletterHeading?: string | null, newsletterSubtext?: string | null, newsletterPlaceholder?: string | null, newsletterButton?: string | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null, blogPosts?: Array<{ __typename: 'ResourcesBlogPosts', title?: string | null, excerpt?: string | null, status?: string | null, icon?: string | null, iconColor?: string | null, gradient?: string | null, badgeColor?: string | null } | null> | null, podcasts?: Array<{ __typename: 'ResourcesPodcasts', episode?: string | null, title?: string | null, excerpt?: string | null, status?: string | null, icon?: string | null, gradient?: string | null, badgeColor?: string | null } | null> | null };
 
 export type ContactPartsFragment = { __typename: 'Contact', heroHeading?: string | null, heroSubtext?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, email?: string | null, phone?: string | null, videoText?: string | null, location?: string | null, bookingCTALabel?: string | null, formHeading?: string | null };
 
@@ -1103,7 +1661,7 @@ export type ClarityCoachingQueryVariables = Exact<{
 }>;
 
 
-export type ClarityCoachingQuery = { __typename?: 'Query', clarityCoaching: { __typename: 'ClarityCoaching', id: string, heroBadge?: string | null, heroHeading?: string | null, heroSubtext?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, bannerQuote?: string | null, outcomesSectionHeading?: string | null, outcomes?: Array<string | null> | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, perhapsItems?: Array<{ __typename: 'ClarityCoachingPerhapsItems', emoji?: string | null, text?: string | null } | null> | null } };
+export type ClarityCoachingQuery = { __typename?: 'Query', clarityCoaching: { __typename: 'ClarityCoaching', id: string, heroBadge?: string | null, heroHeading?: string | null, heroSubtext?: string | null, heroCTALabel?: string | null, heroSideEmoji?: string | null, heroSideWeeks?: string | null, heroSideSubtext?: string | null, resultsHeadingPrefix?: string | null, resultsHeadingHighlight?: string | null, resultsSubtext?: string | null, perhapsLabel?: string | null, bannerText?: string | null, bannerHighlight?: string | null, missingPieceHeadingPrefix?: string | null, missingPieceHeadingHighlight?: string | null, problemTitle?: string | null, problemParagraph1?: string | null, problemQuestion?: string | null, problemParagraph2?: string | null, problemParagraph3?: string | null, solutionTitle?: string | null, solutionParagraph1?: string | null, solutionEmphasis?: string | null, solutionParagraph2?: string | null, solutionWord?: string | null, philosophyLabel?: string | null, philosophyHeadingPrefix?: string | null, philosophyHeadingHighlight?: string | null, philosophyQuote?: string | null, philosophyParagraph1?: string | null, philosophyParagraph2?: string | null, philosophyBannerPrefix?: string | null, philosophyBannerHighlight?: string | null, philosophyClosingPrefix?: string | null, philosophyClosingHighlight?: string | null, timelineLabel?: string | null, timelineHeadingPrefix?: string | null, timelineHeadingHighlight?: string | null, timelineSubtext?: string | null, timelineCTALabel?: string | null, experienceLabel?: string | null, experienceHeadingPrefix?: string | null, experienceHeadingHighlight?: string | null, bonusEmoji?: string | null, bonusPrefix?: string | null, bonusText?: string | null, ctaSectionHeadingPrefix?: string | null, ctaSectionHeadingHighlight?: string | null, ctaSectionParagraph1?: string | null, ctaSectionParagraph2?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, perhapsItems?: Array<{ __typename: 'ClarityCoachingPerhapsItems', emoji?: string | null, text?: string | null, borderColor?: string | null } | null> | null, timelineSteps?: Array<{ __typename: 'ClarityCoachingTimelineSteps', number?: string | null, weeks?: string | null, title?: string | null, subtitle?: string | null, description?: string | null, accent?: string | null } | null> | null, experienceItems?: Array<{ __typename: 'ClarityCoachingExperienceItems', emoji?: string | null, title?: string | null, subtitle?: string | null, bg?: string | null } | null> | null } };
 
 export type ClarityCoachingConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1115,14 +1673,14 @@ export type ClarityCoachingConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ClarityCoachingConnectionQuery = { __typename?: 'Query', clarityCoachingConnection: { __typename?: 'ClarityCoachingConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ClarityCoachingConnectionEdges', cursor: string, node?: { __typename: 'ClarityCoaching', id: string, heroBadge?: string | null, heroHeading?: string | null, heroSubtext?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, bannerQuote?: string | null, outcomesSectionHeading?: string | null, outcomes?: Array<string | null> | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, perhapsItems?: Array<{ __typename: 'ClarityCoachingPerhapsItems', emoji?: string | null, text?: string | null } | null> | null } | null } | null> | null } };
+export type ClarityCoachingConnectionQuery = { __typename?: 'Query', clarityCoachingConnection: { __typename?: 'ClarityCoachingConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ClarityCoachingConnectionEdges', cursor: string, node?: { __typename: 'ClarityCoaching', id: string, heroBadge?: string | null, heroHeading?: string | null, heroSubtext?: string | null, heroCTALabel?: string | null, heroSideEmoji?: string | null, heroSideWeeks?: string | null, heroSideSubtext?: string | null, resultsHeadingPrefix?: string | null, resultsHeadingHighlight?: string | null, resultsSubtext?: string | null, perhapsLabel?: string | null, bannerText?: string | null, bannerHighlight?: string | null, missingPieceHeadingPrefix?: string | null, missingPieceHeadingHighlight?: string | null, problemTitle?: string | null, problemParagraph1?: string | null, problemQuestion?: string | null, problemParagraph2?: string | null, problemParagraph3?: string | null, solutionTitle?: string | null, solutionParagraph1?: string | null, solutionEmphasis?: string | null, solutionParagraph2?: string | null, solutionWord?: string | null, philosophyLabel?: string | null, philosophyHeadingPrefix?: string | null, philosophyHeadingHighlight?: string | null, philosophyQuote?: string | null, philosophyParagraph1?: string | null, philosophyParagraph2?: string | null, philosophyBannerPrefix?: string | null, philosophyBannerHighlight?: string | null, philosophyClosingPrefix?: string | null, philosophyClosingHighlight?: string | null, timelineLabel?: string | null, timelineHeadingPrefix?: string | null, timelineHeadingHighlight?: string | null, timelineSubtext?: string | null, timelineCTALabel?: string | null, experienceLabel?: string | null, experienceHeadingPrefix?: string | null, experienceHeadingHighlight?: string | null, bonusEmoji?: string | null, bonusPrefix?: string | null, bonusText?: string | null, ctaSectionHeadingPrefix?: string | null, ctaSectionHeadingHighlight?: string | null, ctaSectionParagraph1?: string | null, ctaSectionParagraph2?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, perhapsItems?: Array<{ __typename: 'ClarityCoachingPerhapsItems', emoji?: string | null, text?: string | null, borderColor?: string | null } | null> | null, timelineSteps?: Array<{ __typename: 'ClarityCoachingTimelineSteps', number?: string | null, weeks?: string | null, title?: string | null, subtitle?: string | null, description?: string | null, accent?: string | null } | null> | null, experienceItems?: Array<{ __typename: 'ClarityCoachingExperienceItems', emoji?: string | null, title?: string | null, subtitle?: string | null, bg?: string | null } | null> | null } | null } | null> | null } };
 
 export type CareerCoachingQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type CareerCoachingQuery = { __typename?: 'Query', careerCoaching: { __typename: 'CareerCoaching', id: string, heroHeading?: string | null, heroSubtext?: string | null, heroCTALabel?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, situations?: Array<string | null> | null, bannerQuote?: string | null, outcomesSectionHeading?: string | null, outcomes?: Array<string | null> | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type CareerCoachingQuery = { __typename?: 'Query', careerCoaching: { __typename: 'CareerCoaching', id: string, heroHeading?: string | null, heroSubtextPrefix?: string | null, heroSubtextHighlight?: string | null, heroCTALabel?: string | null, resultsHeadingPrefix?: string | null, resultsHeadingHighlight?: string | null, resultsSubtext?: string | null, perhapsLabel?: string | null, situations?: Array<string | null> | null, bannerPrefix?: string | null, bannerHighlight?: string | null, clarityHeadingPrefix?: string | null, clarityHeadingHighlight?: string | null, clarityParagraph1?: string | null, clarityQuestion?: string | null, clarityParagraph2?: string | null, clarityParagraph3?: string | null, clarityEmphasis?: string | null, clarityParagraph4?: string | null, clarityParagraph5?: string | null, clarityBigWord?: string | null, philosophyHeadingPrefix?: string | null, philosophyHeadingHighlight?: string | null, philosophyParagraph1?: string | null, philosophyParagraph2Prefix?: string | null, philosophyParagraph2Highlight?: string | null, philosophyParagraph3?: string | null, philosophyEmphasis?: string | null, philosophyClosing?: string | null, imagineHeadingHighlight?: string | null, roadmapHeadingPrefix?: string | null, roadmapHeadingHighlight?: string | null, roadmapSubtext1?: string | null, roadmapSubtext2?: string | null, roadmapCTALabel?: string | null, experienceHeadingPrefix?: string | null, experienceHeadingHighlight?: string | null, experienceSubtext?: string | null, experienceItems?: Array<string | null> | null, ctaSectionHeadingPrefix?: string | null, ctaSectionHeadingHighlight?: string | null, ctaSectionParagraph1?: string | null, ctaSectionParagraph2?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, imagineItems?: Array<{ __typename: 'CareerCoachingImagineItems', emoji?: string | null, text?: string | null, borderColor?: string | null, bg?: string | null } | null> | null, roadmapSteps?: Array<{ __typename: 'CareerCoachingRoadmapSteps', number?: string | null, weeks?: string | null, title?: string | null, subtitle?: string | null, subtitleColor?: string | null, description?: string | null } | null> | null } };
 
 export type CareerCoachingConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1134,14 +1692,14 @@ export type CareerCoachingConnectionQueryVariables = Exact<{
 }>;
 
 
-export type CareerCoachingConnectionQuery = { __typename?: 'Query', careerCoachingConnection: { __typename?: 'CareerCoachingConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'CareerCoachingConnectionEdges', cursor: string, node?: { __typename: 'CareerCoaching', id: string, heroHeading?: string | null, heroSubtext?: string | null, heroCTALabel?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, situations?: Array<string | null> | null, bannerQuote?: string | null, outcomesSectionHeading?: string | null, outcomes?: Array<string | null> | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type CareerCoachingConnectionQuery = { __typename?: 'Query', careerCoachingConnection: { __typename?: 'CareerCoachingConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'CareerCoachingConnectionEdges', cursor: string, node?: { __typename: 'CareerCoaching', id: string, heroHeading?: string | null, heroSubtextPrefix?: string | null, heroSubtextHighlight?: string | null, heroCTALabel?: string | null, resultsHeadingPrefix?: string | null, resultsHeadingHighlight?: string | null, resultsSubtext?: string | null, perhapsLabel?: string | null, situations?: Array<string | null> | null, bannerPrefix?: string | null, bannerHighlight?: string | null, clarityHeadingPrefix?: string | null, clarityHeadingHighlight?: string | null, clarityParagraph1?: string | null, clarityQuestion?: string | null, clarityParagraph2?: string | null, clarityParagraph3?: string | null, clarityEmphasis?: string | null, clarityParagraph4?: string | null, clarityParagraph5?: string | null, clarityBigWord?: string | null, philosophyHeadingPrefix?: string | null, philosophyHeadingHighlight?: string | null, philosophyParagraph1?: string | null, philosophyParagraph2Prefix?: string | null, philosophyParagraph2Highlight?: string | null, philosophyParagraph3?: string | null, philosophyEmphasis?: string | null, philosophyClosing?: string | null, imagineHeadingHighlight?: string | null, roadmapHeadingPrefix?: string | null, roadmapHeadingHighlight?: string | null, roadmapSubtext1?: string | null, roadmapSubtext2?: string | null, roadmapCTALabel?: string | null, experienceHeadingPrefix?: string | null, experienceHeadingHighlight?: string | null, experienceSubtext?: string | null, experienceItems?: Array<string | null> | null, ctaSectionHeadingPrefix?: string | null, ctaSectionHeadingHighlight?: string | null, ctaSectionParagraph1?: string | null, ctaSectionParagraph2?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, imagineItems?: Array<{ __typename: 'CareerCoachingImagineItems', emoji?: string | null, text?: string | null, borderColor?: string | null, bg?: string | null } | null> | null, roadmapSteps?: Array<{ __typename: 'CareerCoachingRoadmapSteps', number?: string | null, weeks?: string | null, title?: string | null, subtitle?: string | null, subtitleColor?: string | null, description?: string | null } | null> | null } | null } | null> | null } };
 
 export type NumerologyQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type NumerologyQuery = { __typename?: 'Query', numerology: { __typename: 'Numerology', id: string, heroBadge?: string | null, heroHeading?: string | null, heroTagline?: string | null, heroSubtext?: string | null, heroCTALabel?: string | null, whatIsHeading?: string | null, whatIsSubtext?: string | null, comparisonText?: string | null, powerText?: string | null, sessionIncludes?: Array<string | null> | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type NumerologyQuery = { __typename?: 'Query', numerology: { __typename: 'Numerology', id: string, heroBadge?: string | null, heroHeading?: string | null, heroTagline?: string | null, heroSubtext?: string | null, heroCTALabel?: string | null, selfDiscoveryHeadingPrefix?: string | null, selfDiscoveryHeadingHighlight?: string | null, selfDiscoverySubtext?: string | null, selfDiscoveryStatementPrefix?: string | null, selfDiscoveryStatementHighlight?: string | null, whatIsLabel?: string | null, whatIsHeadingPrefix?: string | null, whatIsHeadingHighlight?: string | null, whatIsIsntParagraph?: string | null, whatIsIsParagraph1?: string | null, whatIsIsParagraph2?: string | null, processLabel?: string | null, processHeadingPrefix?: string | null, processHeadingHighlight?: string | null, includesLabel?: string | null, includesHeadingPrefix?: string | null, includesHeadingHighlight?: string | null, includesSubtext?: string | null, philosophyLabel?: string | null, philosophyHeadingPrefix?: string | null, philosophyHeadingHighlight?: string | null, philosophyQuote?: string | null, philosophyParagraph1?: string | null, philosophyParagraph2?: string | null, philosophyBanner?: string | null, philosophyClosingPrefix?: string | null, philosophyClosingHighlight?: string | null, ctaSectionHeading?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, selfDiscoveryItems?: Array<{ __typename: 'NumerologySelfDiscoveryItems', emoji?: string | null, text?: string | null, borderColor?: string | null } | null> | null, processSteps?: Array<{ __typename: 'NumerologyProcessSteps', emoji?: string | null, stepLabel?: string | null, title?: string | null, description?: string | null } | null> | null, includes?: Array<{ __typename: 'NumerologyIncludes', emoji?: string | null, title?: string | null, description?: string | null } | null> | null } };
 
 export type NumerologyConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1153,14 +1711,14 @@ export type NumerologyConnectionQueryVariables = Exact<{
 }>;
 
 
-export type NumerologyConnectionQuery = { __typename?: 'Query', numerologyConnection: { __typename?: 'NumerologyConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'NumerologyConnectionEdges', cursor: string, node?: { __typename: 'Numerology', id: string, heroBadge?: string | null, heroHeading?: string | null, heroTagline?: string | null, heroSubtext?: string | null, heroCTALabel?: string | null, whatIsHeading?: string | null, whatIsSubtext?: string | null, comparisonText?: string | null, powerText?: string | null, sessionIncludes?: Array<string | null> | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type NumerologyConnectionQuery = { __typename?: 'Query', numerologyConnection: { __typename?: 'NumerologyConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'NumerologyConnectionEdges', cursor: string, node?: { __typename: 'Numerology', id: string, heroBadge?: string | null, heroHeading?: string | null, heroTagline?: string | null, heroSubtext?: string | null, heroCTALabel?: string | null, selfDiscoveryHeadingPrefix?: string | null, selfDiscoveryHeadingHighlight?: string | null, selfDiscoverySubtext?: string | null, selfDiscoveryStatementPrefix?: string | null, selfDiscoveryStatementHighlight?: string | null, whatIsLabel?: string | null, whatIsHeadingPrefix?: string | null, whatIsHeadingHighlight?: string | null, whatIsIsntParagraph?: string | null, whatIsIsParagraph1?: string | null, whatIsIsParagraph2?: string | null, processLabel?: string | null, processHeadingPrefix?: string | null, processHeadingHighlight?: string | null, includesLabel?: string | null, includesHeadingPrefix?: string | null, includesHeadingHighlight?: string | null, includesSubtext?: string | null, philosophyLabel?: string | null, philosophyHeadingPrefix?: string | null, philosophyHeadingHighlight?: string | null, philosophyQuote?: string | null, philosophyParagraph1?: string | null, philosophyParagraph2?: string | null, philosophyBanner?: string | null, philosophyClosingPrefix?: string | null, philosophyClosingHighlight?: string | null, ctaSectionHeading?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, selfDiscoveryItems?: Array<{ __typename: 'NumerologySelfDiscoveryItems', emoji?: string | null, text?: string | null, borderColor?: string | null } | null> | null, processSteps?: Array<{ __typename: 'NumerologyProcessSteps', emoji?: string | null, stepLabel?: string | null, title?: string | null, description?: string | null } | null> | null, includes?: Array<{ __typename: 'NumerologyIncludes', emoji?: string | null, title?: string | null, description?: string | null } | null> | null } | null } | null> | null } };
 
 export type ResourcesQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type ResourcesQuery = { __typename?: 'Query', resources: { __typename: 'Resources', id: string, heroBadge?: string | null, heroHeading?: string | null, heroHeadingHighlight?: string | null, heroSubtext?: string | null, blogHeading?: string | null, blogText?: string | null, podcastHeading?: string | null, podcastText?: string | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type ResourcesQuery = { __typename?: 'Query', resources: { __typename: 'Resources', id: string, heroBadge?: string | null, heroHeading?: string | null, heroHeadingHighlight?: string | null, heroSubtext?: string | null, featuredHeading?: string | null, featuredBlogCategory?: string | null, featuredBlogStatus?: string | null, featuredBlogTitle?: string | null, featuredBlogExcerpt?: string | null, featuredBlogReadTime?: string | null, featuredBlogCTA?: string | null, blogSectionHeading?: string | null, podcastSectionHeading?: string | null, newsletterHeading?: string | null, newsletterSubtext?: string | null, newsletterPlaceholder?: string | null, newsletterButton?: string | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, blogPosts?: Array<{ __typename: 'ResourcesBlogPosts', title?: string | null, excerpt?: string | null, status?: string | null, icon?: string | null, iconColor?: string | null, gradient?: string | null, badgeColor?: string | null } | null> | null, podcasts?: Array<{ __typename: 'ResourcesPodcasts', episode?: string | null, title?: string | null, excerpt?: string | null, status?: string | null, icon?: string | null, gradient?: string | null, badgeColor?: string | null } | null> | null } };
 
 export type ResourcesConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1172,7 +1730,7 @@ export type ResourcesConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ResourcesConnectionQuery = { __typename?: 'Query', resourcesConnection: { __typename?: 'ResourcesConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ResourcesConnectionEdges', cursor: string, node?: { __typename: 'Resources', id: string, heroBadge?: string | null, heroHeading?: string | null, heroHeadingHighlight?: string | null, heroSubtext?: string | null, blogHeading?: string | null, blogText?: string | null, podcastHeading?: string | null, podcastText?: string | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type ResourcesConnectionQuery = { __typename?: 'Query', resourcesConnection: { __typename?: 'ResourcesConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ResourcesConnectionEdges', cursor: string, node?: { __typename: 'Resources', id: string, heroBadge?: string | null, heroHeading?: string | null, heroHeadingHighlight?: string | null, heroSubtext?: string | null, featuredHeading?: string | null, featuredBlogCategory?: string | null, featuredBlogStatus?: string | null, featuredBlogTitle?: string | null, featuredBlogExcerpt?: string | null, featuredBlogReadTime?: string | null, featuredBlogCTA?: string | null, blogSectionHeading?: string | null, podcastSectionHeading?: string | null, newsletterHeading?: string | null, newsletterSubtext?: string | null, newsletterPlaceholder?: string | null, newsletterButton?: string | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, blogPosts?: Array<{ __typename: 'ResourcesBlogPosts', title?: string | null, excerpt?: string | null, status?: string | null, icon?: string | null, iconColor?: string | null, gradient?: string | null, badgeColor?: string | null } | null> | null, podcasts?: Array<{ __typename: 'ResourcesPodcasts', episode?: string | null, title?: string | null, excerpt?: string | null, status?: string | null, icon?: string | null, gradient?: string | null, badgeColor?: string | null } | null> | null } | null } | null> | null } };
 
 export type ContactQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1276,18 +1834,75 @@ export const ClarityCoachingPartsFragmentDoc = gql`
   heroBadge
   heroHeading
   heroSubtext
-  sectionHeading
-  sectionSubtext
+  heroCTALabel
+  heroSideEmoji
+  heroSideWeeks
+  heroSideSubtext
+  resultsHeadingPrefix
+  resultsHeadingHighlight
+  resultsSubtext
+  perhapsLabel
   perhapsItems {
     __typename
     emoji
     text
+    borderColor
   }
-  bannerQuote
-  outcomesSectionHeading
-  outcomes
-  ctaSectionHeading
-  ctaSectionSubtext
+  bannerText
+  bannerHighlight
+  missingPieceHeadingPrefix
+  missingPieceHeadingHighlight
+  problemTitle
+  problemParagraph1
+  problemQuestion
+  problemParagraph2
+  problemParagraph3
+  solutionTitle
+  solutionParagraph1
+  solutionEmphasis
+  solutionParagraph2
+  solutionWord
+  philosophyLabel
+  philosophyHeadingPrefix
+  philosophyHeadingHighlight
+  philosophyQuote
+  philosophyParagraph1
+  philosophyParagraph2
+  philosophyBannerPrefix
+  philosophyBannerHighlight
+  philosophyClosingPrefix
+  philosophyClosingHighlight
+  timelineLabel
+  timelineHeadingPrefix
+  timelineHeadingHighlight
+  timelineSubtext
+  timelineSteps {
+    __typename
+    number
+    weeks
+    title
+    subtitle
+    description
+    accent
+  }
+  timelineCTALabel
+  experienceLabel
+  experienceHeadingPrefix
+  experienceHeadingHighlight
+  experienceItems {
+    __typename
+    emoji
+    title
+    subtitle
+    bg
+  }
+  bonusEmoji
+  bonusPrefix
+  bonusText
+  ctaSectionHeadingPrefix
+  ctaSectionHeadingHighlight
+  ctaSectionParagraph1
+  ctaSectionParagraph2
   ctaButtonLabel
 }
     `;
@@ -1295,16 +1910,64 @@ export const CareerCoachingPartsFragmentDoc = gql`
     fragment CareerCoachingParts on CareerCoaching {
   __typename
   heroHeading
-  heroSubtext
+  heroSubtextPrefix
+  heroSubtextHighlight
   heroCTALabel
-  sectionHeading
-  sectionSubtext
+  resultsHeadingPrefix
+  resultsHeadingHighlight
+  resultsSubtext
+  perhapsLabel
   situations
-  bannerQuote
-  outcomesSectionHeading
-  outcomes
-  ctaSectionHeading
-  ctaSectionSubtext
+  bannerPrefix
+  bannerHighlight
+  clarityHeadingPrefix
+  clarityHeadingHighlight
+  clarityParagraph1
+  clarityQuestion
+  clarityParagraph2
+  clarityParagraph3
+  clarityEmphasis
+  clarityParagraph4
+  clarityParagraph5
+  clarityBigWord
+  philosophyHeadingPrefix
+  philosophyHeadingHighlight
+  philosophyParagraph1
+  philosophyParagraph2Prefix
+  philosophyParagraph2Highlight
+  philosophyParagraph3
+  philosophyEmphasis
+  philosophyClosing
+  imagineHeadingHighlight
+  imagineItems {
+    __typename
+    emoji
+    text
+    borderColor
+    bg
+  }
+  roadmapHeadingPrefix
+  roadmapHeadingHighlight
+  roadmapSubtext1
+  roadmapSubtext2
+  roadmapSteps {
+    __typename
+    number
+    weeks
+    title
+    subtitle
+    subtitleColor
+    description
+  }
+  roadmapCTALabel
+  experienceHeadingPrefix
+  experienceHeadingHighlight
+  experienceSubtext
+  experienceItems
+  ctaSectionHeadingPrefix
+  ctaSectionHeadingHighlight
+  ctaSectionParagraph1
+  ctaSectionParagraph2
   ctaButtonLabel
 }
     `;
@@ -1316,13 +1979,53 @@ export const NumerologyPartsFragmentDoc = gql`
   heroTagline
   heroSubtext
   heroCTALabel
-  whatIsHeading
-  whatIsSubtext
-  comparisonText
-  powerText
-  sessionIncludes
+  selfDiscoveryHeadingPrefix
+  selfDiscoveryHeadingHighlight
+  selfDiscoverySubtext
+  selfDiscoveryItems {
+    __typename
+    emoji
+    text
+    borderColor
+  }
+  selfDiscoveryStatementPrefix
+  selfDiscoveryStatementHighlight
+  whatIsLabel
+  whatIsHeadingPrefix
+  whatIsHeadingHighlight
+  whatIsIsntParagraph
+  whatIsIsParagraph1
+  whatIsIsParagraph2
+  processLabel
+  processHeadingPrefix
+  processHeadingHighlight
+  processSteps {
+    __typename
+    emoji
+    stepLabel
+    title
+    description
+  }
+  includesLabel
+  includesHeadingPrefix
+  includesHeadingHighlight
+  includesSubtext
+  includes {
+    __typename
+    emoji
+    title
+    description
+  }
+  philosophyLabel
+  philosophyHeadingPrefix
+  philosophyHeadingHighlight
+  philosophyQuote
+  philosophyParagraph1
+  philosophyParagraph2
+  philosophyBanner
+  philosophyClosingPrefix
+  philosophyClosingHighlight
   ctaSectionHeading
-  ctaSectionSubtext
   ctaButtonLabel
 }
     `;
@@ -1333,10 +2036,39 @@ export const ResourcesPartsFragmentDoc = gql`
   heroHeading
   heroHeadingHighlight
   heroSubtext
-  blogHeading
-  blogText
-  podcastHeading
-  podcastText
+  featuredHeading
+  featuredBlogCategory
+  featuredBlogStatus
+  featuredBlogTitle
+  featuredBlogExcerpt
+  featuredBlogReadTime
+  featuredBlogCTA
+  blogSectionHeading
+  blogPosts {
+    __typename
+    title
+    excerpt
+    status
+    icon
+    iconColor
+    gradient
+    badgeColor
+  }
+  podcastSectionHeading
+  podcasts {
+    __typename
+    episode
+    title
+    excerpt
+    status
+    icon
+    gradient
+    badgeColor
+  }
+  newsletterHeading
+  newsletterSubtext
+  newsletterPlaceholder
+  newsletterButton
   ctaSectionHeading
   ctaSectionSubtext
   ctaButtonLabel

@@ -17,16 +17,50 @@ const QUERY = `
   query CareerCoaching($relativePath: String!) {
     careerCoaching(relativePath: $relativePath) {
       heroHeading
-      heroSubtext
+      heroSubtextPrefix
+      heroSubtextHighlight
       heroCTALabel
-      sectionHeading
-      sectionSubtext
+      resultsHeadingPrefix
+      resultsHeadingHighlight
+      resultsSubtext
+      perhapsLabel
       situations
-      bannerQuote
-      outcomesSectionHeading
-      outcomes
-      ctaSectionHeading
-      ctaSectionSubtext
+      bannerPrefix
+      bannerHighlight
+      clarityHeadingPrefix
+      clarityHeadingHighlight
+      clarityParagraph1
+      clarityQuestion
+      clarityParagraph2
+      clarityParagraph3
+      clarityEmphasis
+      clarityParagraph4
+      clarityParagraph5
+      clarityBigWord
+      philosophyHeadingPrefix
+      philosophyHeadingHighlight
+      philosophyParagraph1
+      philosophyParagraph2Prefix
+      philosophyParagraph2Highlight
+      philosophyParagraph3
+      philosophyEmphasis
+      philosophyClosing
+      imagineHeadingHighlight
+      imagineItems { emoji text borderColor bg }
+      roadmapHeadingPrefix
+      roadmapHeadingHighlight
+      roadmapSubtext1
+      roadmapSubtext2
+      roadmapSteps { number weeks title subtitle subtitleColor description }
+      roadmapCTALabel
+      experienceHeadingPrefix
+      experienceHeadingHighlight
+      experienceSubtext
+      experienceItems
+      ctaSectionHeadingPrefix
+      ctaSectionHeadingHighlight
+      ctaSectionParagraph1
+      ctaSectionParagraph2
       ctaButtonLabel
     }
   }

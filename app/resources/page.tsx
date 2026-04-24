@@ -15,10 +15,21 @@ const QUERY = `
       heroHeading
       heroHeadingHighlight
       heroSubtext
-      blogHeading
-      blogText
-      podcastHeading
-      podcastText
+      featuredHeading
+      featuredBlogCategory
+      featuredBlogStatus
+      featuredBlogTitle
+      featuredBlogExcerpt
+      featuredBlogReadTime
+      featuredBlogCTA
+      blogSectionHeading
+      blogPosts { title excerpt status icon iconColor gradient badgeColor }
+      podcastSectionHeading
+      podcasts { episode title excerpt status icon gradient badgeColor }
+      newsletterHeading
+      newsletterSubtext
+      newsletterPlaceholder
+      newsletterButton
       ctaSectionHeading
       ctaSectionSubtext
       ctaButtonLabel
