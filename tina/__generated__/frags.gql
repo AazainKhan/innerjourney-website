@@ -265,32 +265,14 @@ fragment ResourcesParts on Resources {
   featuredBlogExcerpt
   featuredBlogReadTime
   featuredBlogCTA
+  featuredBlogSlug
   blogSectionHeading
-  blogPosts {
-    __typename
-    title
-    excerpt
-    status
-    icon
-    iconColor
-    gradient
-    badgeColor
-  }
   podcastSectionHeading
-  podcasts {
-    __typename
-    episode
-    title
-    excerpt
-    status
-    icon
-    gradient
-    badgeColor
-  }
   newsletterHeading
   newsletterSubtext
   newsletterPlaceholder
   newsletterButton
+  newsletterSuccessMessage
   ctaSectionHeading
   ctaSectionSubtext
   ctaButtonLabel
@@ -308,6 +290,33 @@ fragment ContactParts on Contact {
   location
   bookingCTALabel
   formHeading
+}
+
+fragment PostParts on Post {
+  __typename
+  title
+  publishedAt
+  status
+  excerpt
+  icon
+  iconColor
+  gradient
+  badgeColor
+  body
+}
+
+fragment PodcastParts on Podcast {
+  __typename
+  title
+  episode
+  publishedAt
+  status
+  audioUrl
+  excerpt
+  icon
+  gradient
+  badgeColor
+  body
 }
 
 fragment TestimonialsParts on Testimonials {

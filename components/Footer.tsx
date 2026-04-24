@@ -14,10 +14,11 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
-              <li><Link href="/" className="link-muted transition-colors">Work with me</Link></li>
+              <li><Link href="/services" className="link-muted transition-colors">Work with me</Link></li>
               <li><Link href="/about" className="link-muted transition-colors">About</Link></li>
-              <li><Link href="/contact" className="link-muted transition-colors">Contact</Link></li>
+              <li><Link href="/blog" className="link-muted transition-colors">Blog</Link></li>
               <li><Link href="/resources" className="link-muted transition-colors">Resources</Link></li>
+              <li><Link href="/contact" className="link-muted transition-colors">Contact</Link></li>
             </ul>
           </div>
           <div>

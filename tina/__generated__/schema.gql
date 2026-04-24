@@ -68,6 +68,10 @@ type Query {
   resourcesConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ResourcesFilter): ResourcesConnection!
   contact(relativePath: String): Contact!
   contactConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ContactFilter): ContactConnection!
+  post(relativePath: String): Post!
+  postConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PostFilter): PostConnection!
+  podcast(relativePath: String): Podcast!
+  podcastConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PodcastFilter): PodcastConnection!
   testimonials(relativePath: String): Testimonials!
   testimonialsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: TestimonialsFilter): TestimonialsConnection!
 }
@@ -80,6 +84,8 @@ input DocumentFilter {
   numerology: NumerologyFilter
   resources: ResourcesFilter
   contact: ContactFilter
+  post: PostFilter
+  podcast: PodcastFilter
   testimonials: TestimonialsFilter
 }
 
@@ -106,7 +112,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Home | About | ClarityCoaching | CareerCoaching | Numerology | Resources | Contact | Testimonials | Folder
+union DocumentNode = Home | About | ClarityCoaching | CareerCoaching | Numerology | Resources | Contact | Post | Podcast | Testimonials | Folder
 
 type Home implements Node & Document {
   heroHeading: String
@@ -703,26 +709,6 @@ type NumerologyConnection implements Connection {
   edges: [NumerologyConnectionEdges]
 }
 
-type ResourcesBlogPosts {
-  title: String
-  excerpt: String
-  status: String
-  icon: String
-  iconColor: String
-  gradient: String
-  badgeColor: String
-}
-
-type ResourcesPodcasts {
-  episode: String
-  title: String
-  excerpt: String
-  status: String
-  icon: String
-  gradient: String
-  badgeColor: String
-}
-
 type Resources implements Node & Document {
   heroBadge: String
   heroHeading: String
@@ -735,40 +721,20 @@ type Resources implements Node & Document {
   featuredBlogExcerpt: String
   featuredBlogReadTime: String
   featuredBlogCTA: String
+  featuredBlogSlug: String
   blogSectionHeading: String
-  blogPosts: [ResourcesBlogPosts]
   podcastSectionHeading: String
-  podcasts: [ResourcesPodcasts]
   newsletterHeading: String
   newsletterSubtext: String
   newsletterPlaceholder: String
   newsletterButton: String
+  newsletterSuccessMessage: String
   ctaSectionHeading: String
   ctaSectionSubtext: String
   ctaButtonLabel: String
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
-}
-
-input ResourcesBlogPostsFilter {
-  title: StringFilter
-  excerpt: StringFilter
-  status: StringFilter
-  icon: StringFilter
-  iconColor: StringFilter
-  gradient: StringFilter
-  badgeColor: StringFilter
-}
-
-input ResourcesPodcastsFilter {
-  episode: StringFilter
-  title: StringFilter
-  excerpt: StringFilter
-  status: StringFilter
-  icon: StringFilter
-  gradient: StringFilter
-  badgeColor: StringFilter
 }
 
 input ResourcesFilter {
@@ -783,14 +749,14 @@ input ResourcesFilter {
   featuredBlogExcerpt: StringFilter
   featuredBlogReadTime: StringFilter
   featuredBlogCTA: StringFilter
+  featuredBlogSlug: StringFilter
   blogSectionHeading: StringFilter
-  blogPosts: ResourcesBlogPostsFilter
   podcastSectionHeading: StringFilter
-  podcasts: ResourcesPodcastsFilter
   newsletterHeading: StringFilter
   newsletterSubtext: StringFilter
   newsletterPlaceholder: StringFilter
   newsletterButton: StringFilter
+  newsletterSuccessMessage: StringFilter
   ctaSectionHeading: StringFilter
   ctaSectionSubtext: StringFilter
   ctaButtonLabel: StringFilter
@@ -847,6 +813,98 @@ type ContactConnection implements Connection {
   edges: [ContactConnectionEdges]
 }
 
+type Post implements Node & Document {
+  title: String!
+  publishedAt: String
+  status: String
+  excerpt: String
+  icon: String
+  iconColor: String
+  gradient: String
+  badgeColor: String
+  body: JSON
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input DatetimeFilter {
+  after: String
+  before: String
+  eq: String
+  exists: Boolean
+  in: [String]
+}
+
+input RichTextFilter {
+  startsWith: String
+  eq: String
+  exists: Boolean
+}
+
+input PostFilter {
+  title: StringFilter
+  publishedAt: DatetimeFilter
+  status: StringFilter
+  excerpt: StringFilter
+  icon: StringFilter
+  iconColor: StringFilter
+  gradient: StringFilter
+  badgeColor: StringFilter
+  body: RichTextFilter
+}
+
+type PostConnectionEdges {
+  cursor: String!
+  node: Post
+}
+
+type PostConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [PostConnectionEdges]
+}
+
+type Podcast implements Node & Document {
+  title: String!
+  episode: String
+  publishedAt: String
+  status: String
+  audioUrl: String
+  excerpt: String
+  icon: String
+  gradient: String
+  badgeColor: String
+  body: JSON
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input PodcastFilter {
+  title: StringFilter
+  episode: StringFilter
+  publishedAt: DatetimeFilter
+  status: StringFilter
+  audioUrl: StringFilter
+  excerpt: StringFilter
+  icon: StringFilter
+  gradient: StringFilter
+  badgeColor: StringFilter
+  body: RichTextFilter
+}
+
+type PodcastConnectionEdges {
+  cursor: String!
+  node: Podcast
+}
+
+type PodcastConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [PodcastConnectionEdges]
+}
+
 type TestimonialsItems {
   quote: String
   author: String
@@ -899,6 +957,10 @@ type Mutation {
   createResources(relativePath: String!, params: ResourcesMutation!): Resources!
   updateContact(relativePath: String!, params: ContactMutation!): Contact!
   createContact(relativePath: String!, params: ContactMutation!): Contact!
+  updatePost(relativePath: String!, params: PostMutation!): Post!
+  createPost(relativePath: String!, params: PostMutation!): Post!
+  updatePodcast(relativePath: String!, params: PodcastMutation!): Podcast!
+  createPodcast(relativePath: String!, params: PodcastMutation!): Podcast!
   updateTestimonials(relativePath: String!, params: TestimonialsMutation!): Testimonials!
   createTestimonials(relativePath: String!, params: TestimonialsMutation!): Testimonials!
 }
@@ -911,6 +973,8 @@ input DocumentUpdateMutation {
   numerology: NumerologyMutation
   resources: ResourcesMutation
   contact: ContactMutation
+  post: PostMutation
+  podcast: PodcastMutation
   testimonials: TestimonialsMutation
   relativePath: String
 }
@@ -923,6 +987,8 @@ input DocumentMutation {
   numerology: NumerologyMutation
   resources: ResourcesMutation
   contact: ContactMutation
+  post: PostMutation
+  podcast: PodcastMutation
   testimonials: TestimonialsMutation
 }
 
@@ -1185,26 +1251,6 @@ input NumerologyMutation {
   ctaButtonLabel: String
 }
 
-input ResourcesBlogPostsMutation {
-  title: String
-  excerpt: String
-  status: String
-  icon: String
-  iconColor: String
-  gradient: String
-  badgeColor: String
-}
-
-input ResourcesPodcastsMutation {
-  episode: String
-  title: String
-  excerpt: String
-  status: String
-  icon: String
-  gradient: String
-  badgeColor: String
-}
-
 input ResourcesMutation {
   heroBadge: String
   heroHeading: String
@@ -1217,14 +1263,14 @@ input ResourcesMutation {
   featuredBlogExcerpt: String
   featuredBlogReadTime: String
   featuredBlogCTA: String
+  featuredBlogSlug: String
   blogSectionHeading: String
-  blogPosts: [ResourcesBlogPostsMutation]
   podcastSectionHeading: String
-  podcasts: [ResourcesPodcastsMutation]
   newsletterHeading: String
   newsletterSubtext: String
   newsletterPlaceholder: String
   newsletterButton: String
+  newsletterSuccessMessage: String
   ctaSectionHeading: String
   ctaSectionSubtext: String
   ctaButtonLabel: String
@@ -1241,6 +1287,31 @@ input ContactMutation {
   location: String
   bookingCTALabel: String
   formHeading: String
+}
+
+input PostMutation {
+  title: String
+  publishedAt: String
+  status: String
+  excerpt: String
+  icon: String
+  iconColor: String
+  gradient: String
+  badgeColor: String
+  body: JSON
+}
+
+input PodcastMutation {
+  title: String
+  episode: String
+  publishedAt: String
+  status: String
+  audioUrl: String
+  excerpt: String
+  icon: String
+  gradient: String
+  badgeColor: String
+  body: JSON
 }
 
 input TestimonialsItemsMutation {

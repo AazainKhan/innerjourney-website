@@ -369,42 +369,14 @@ var config_default = defineConfig({
           { name: "featuredBlogExcerpt", label: "Featured Blog Excerpt", type: "string", ui: { component: "textarea" } },
           { name: "featuredBlogReadTime", label: "Featured Read Time", type: "string" },
           { name: "featuredBlogCTA", label: "Featured CTA Label", type: "string" },
+          { name: "featuredBlogSlug", label: "Featured Blog Slug (filename in content/posts, optional)", type: "string" },
           { name: "blogSectionHeading", label: "Blog Section Heading", type: "string" },
-          {
-            name: "blogPosts",
-            label: "Blog Posts",
-            type: "object",
-            list: true,
-            fields: [
-              { name: "title", label: "Title", type: "string" },
-              { name: "excerpt", label: "Excerpt", type: "string", ui: { component: "textarea" } },
-              { name: "status", label: "Status", type: "string" },
-              { name: "icon", label: "Icon (fa-...)", type: "string" },
-              { name: "iconColor", label: "Icon Color Class", type: "string" },
-              { name: "gradient", label: "Card Gradient Class", type: "string" },
-              { name: "badgeColor", label: "Badge Color Class", type: "string" }
-            ]
-          },
           { name: "podcastSectionHeading", label: "Podcast Section Heading", type: "string" },
-          {
-            name: "podcasts",
-            label: "Podcasts",
-            type: "object",
-            list: true,
-            fields: [
-              { name: "episode", label: "Episode Label", type: "string" },
-              { name: "title", label: "Title", type: "string" },
-              { name: "excerpt", label: "Excerpt", type: "string", ui: { component: "textarea" } },
-              { name: "status", label: "Status", type: "string" },
-              { name: "icon", label: "Icon (fa-...)", type: "string" },
-              { name: "gradient", label: "Background Gradient Class", type: "string" },
-              { name: "badgeColor", label: "Badge Color Class", type: "string" }
-            ]
-          },
           { name: "newsletterHeading", label: "Newsletter Heading", type: "string" },
           { name: "newsletterSubtext", label: "Newsletter Subtext", type: "string", ui: { component: "textarea" } },
           { name: "newsletterPlaceholder", label: "Newsletter Email Placeholder", type: "string" },
           { name: "newsletterButton", label: "Newsletter Button Label", type: "string" },
+          { name: "newsletterSuccessMessage", label: "Newsletter Success Message", type: "string" },
           { name: "ctaSectionHeading", label: "Bottom CTA Heading", type: "string" },
           { name: "ctaSectionSubtext", label: "Bottom CTA Subtext", type: "string", ui: { component: "textarea" } },
           { name: "ctaButtonLabel", label: "Bottom CTA Button Label", type: "string" }
@@ -428,6 +400,81 @@ var config_default = defineConfig({
           { name: "location", label: "Location", type: "string" },
           { name: "bookingCTALabel", label: "Book a Call Button Label", type: "string" },
           { name: "formHeading", label: 'Form Heading ("Send me a message")', type: "string" }
+        ]
+      },
+      {
+        name: "post",
+        label: "Blog Posts",
+        path: "content/posts",
+        format: "md",
+        ui: {
+          router: ({ document }) => `/blog/${document._sys.filename}`,
+          filename: {
+            readonly: false,
+            slugify: (values) => {
+              const title = values.title || "untitled";
+              return title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+            }
+          }
+        },
+        defaultItem: () => ({
+          title: "New Blog Post",
+          publishedAt: (/* @__PURE__ */ new Date()).toISOString(),
+          status: "Draft",
+          excerpt: "Write a short excerpt for the preview card\u2026",
+          icon: "fa-pen-fancy",
+          iconColor: "text-carrot/40",
+          gradient: "from-orange-100 to-orange-200",
+          badgeColor: "bg-carrot"
+        }),
+        fields: [
+          { name: "title", label: "Title", type: "string", isTitle: true, required: true },
+          { name: "publishedAt", label: "Published Date", type: "datetime" },
+          { name: "status", label: "Status", type: "string", options: ["Coming Soon", "Published", "Draft"] },
+          { name: "excerpt", label: "Excerpt (shown on card)", type: "string", ui: { component: "textarea" } },
+          { name: "icon", label: "Card Icon (fa-class)", type: "string" },
+          { name: "iconColor", label: "Card Icon Color Class", type: "string" },
+          { name: "gradient", label: "Card Gradient Class", type: "string" },
+          { name: "badgeColor", label: "Card Badge Color Class", type: "string" },
+          { name: "body", label: "Body", type: "rich-text", isBody: true }
+        ]
+      },
+      {
+        name: "podcast",
+        label: "Podcast Episodes",
+        path: "content/podcasts",
+        format: "md",
+        ui: {
+          router: ({ document }) => `/podcast/${document._sys.filename}`,
+          filename: {
+            readonly: false,
+            slugify: (values) => {
+              const title = values.title || "untitled";
+              return title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+            }
+          }
+        },
+        defaultItem: () => ({
+          title: "New Episode",
+          episode: "Episode XX",
+          publishedAt: (/* @__PURE__ */ new Date()).toISOString(),
+          status: "Coming Soon",
+          excerpt: "Write a short excerpt\u2026",
+          icon: "fa-microphone-alt",
+          gradient: "from-carrot/30 to-orange-500/30",
+          badgeColor: "bg-carrot"
+        }),
+        fields: [
+          { name: "title", label: "Title", type: "string", isTitle: true, required: true },
+          { name: "episode", label: 'Episode Label (e.g. "Episode 01")', type: "string" },
+          { name: "publishedAt", label: "Published Date", type: "datetime" },
+          { name: "status", label: "Status", type: "string", options: ["Coming Soon", "Published", "Draft"] },
+          { name: "audioUrl", label: "Listen URL (Spotify / Apple / YouTube)", type: "string" },
+          { name: "excerpt", label: "Excerpt (shown on card)", type: "string", ui: { component: "textarea" } },
+          { name: "icon", label: "Card Icon (fa-class)", type: "string" },
+          { name: "gradient", label: "Background Gradient Class", type: "string" },
+          { name: "badgeColor", label: "Badge Color Class", type: "string" },
+          { name: "body", label: "Show Notes / Description", type: "rich-text", isBody: true }
         ]
       },
       {

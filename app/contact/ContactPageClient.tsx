@@ -62,9 +62,10 @@ export default function ContactPageClient(props: Props) {
     }
   }
 
-  const contactItems = [
-    { icon: 'fa-envelope', title: 'Email', text: d.email },
-    { icon: 'fa-phone', title: 'Phone', text: d.phone },
+  const telDigits = (d.phone ?? '').replace(/[^+\d]/g, '')
+  const contactItems: Array<{ icon: string; title: string; text: string; href?: string }> = [
+    { icon: 'fa-envelope', title: 'Email', text: d.email, href: d.email ? `mailto:${d.email}` : undefined },
+    { icon: 'fa-phone', title: 'Phone', text: d.phone, href: telDigits ? `tel:${telDigits}` : undefined },
     { icon: 'fa-video', title: 'Video Sessions', text: d.videoText },
     { icon: 'fa-map-marker-alt', title: 'Location', text: d.location },
   ]
@@ -119,7 +120,11 @@ export default function ContactPageClient(props: Props) {
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold text-gray-900">{item.title}</h3>
-                      <p className="text-gray-600">{item.text}</p>
+                      {item.href ? (
+                        <a href={item.href} className="text-gray-600 hover:text-azure transition-colors">{item.text}</a>
+                      ) : (
+                        <p className="text-gray-600">{item.text}</p>
+                      )}
                     </div>
                   </div>
                 ))}

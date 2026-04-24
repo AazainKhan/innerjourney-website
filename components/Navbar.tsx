@@ -51,7 +51,7 @@ export default function Navbar() {
             {/* Desktop nav */}
             <div className="hidden md:flex items-center space-x-8">
               <div className="nav-dropdown">
-                <Link href="/" className="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">
+                <Link href="/services" className="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">
                   Work with me <i className="fas fa-chevron-down ml-1 text-xs"></i>
                 </Link>
                 <div className="nav-dropdown-menu">
@@ -61,6 +61,7 @@ export default function Navbar() {
                 </div>
               </div>
               <Link href="/about" className="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">About</Link>
+              <Link href="/blog" className="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">Blog</Link>
               <Link href="/resources" className="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">Resources</Link>
               <Link href="/contact" className="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">Contact</Link>
             </div>
@@ -117,6 +118,7 @@ export default function Navbar() {
               )}
             </div>
             <Link href="/about" className="block text-white hover:text-orange-400 transition-colors uppercase" onClick={() => setMobileOpen(false)}>About</Link>
+            <Link href="/blog" className="block text-white hover:text-orange-400 transition-colors uppercase" onClick={() => setMobileOpen(false)}>Blog</Link>
             <Link href="/resources" className="block text-white hover:text-orange-400 transition-colors uppercase" onClick={() => setMobileOpen(false)}>Resources</Link>
             <Link href="/contact" className="block text-white hover:text-orange-400 transition-colors" onClick={() => setMobileOpen(false)}>Contact</Link>
             <button

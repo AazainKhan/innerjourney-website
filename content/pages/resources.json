@@ -10,70 +10,14 @@
   "featuredBlogExcerpt": "This is where your featured blog post excerpt will appear. Share your insights on clarity, mindset, and personal transformation to help your readers on their inner journey.",
   "featuredBlogReadTime": "5 min read",
   "featuredBlogCTA": "Read More",
+  "featuredBlogSlug": "",
   "blogSectionHeading": "Latest Blog Posts",
-  "blogPosts": [
-    {
-      "title": "Finding Clarity in Uncertain Times",
-      "excerpt": "Discover practical strategies to navigate life's uncertainties and reconnect with your inner wisdom.",
-      "status": "Coming Soon",
-      "icon": "fa-lightbulb",
-      "iconColor": "text-carrot/40",
-      "gradient": "from-orange-100 to-orange-200",
-      "badgeColor": "bg-carrot"
-    },
-    {
-      "title": "The Power of Self-Compassion",
-      "excerpt": "Learn how treating yourself with kindness can transform your inner dialogue and boost confidence.",
-      "status": "Coming Soon",
-      "icon": "fa-heart",
-      "iconColor": "text-azure/40",
-      "gradient": "from-blue-100 to-indigo-200",
-      "badgeColor": "bg-azure"
-    },
-    {
-      "title": "Your Journey Starts Within",
-      "excerpt": "Explore why the most transformative journey you'll ever take begins with looking inward.",
-      "status": "Coming Soon",
-      "icon": "fa-compass",
-      "iconColor": "text-purple-400",
-      "gradient": "from-purple-100 to-pink-200",
-      "badgeColor": "bg-purple-500"
-    }
-  ],
   "podcastSectionHeading": "Featured Podcasts",
-  "podcasts": [
-    {
-      "episode": "Episode 01",
-      "title": "Introduction to Your Inner Journey",
-      "excerpt": "Join me as we explore what it means to embark on an inner journey, and why it's the foundation for lasting transformation in your life.",
-      "status": "Coming Soon",
-      "icon": "fa-microphone-alt",
-      "gradient": "from-carrot/30 to-orange-500/30",
-      "badgeColor": "bg-carrot"
-    },
-    {
-      "episode": "Episode 02",
-      "title": "Breaking Through Limiting Beliefs",
-      "excerpt": "Discover how to identify and overcome the limiting beliefs that keep you stuck, and replace them with empowering narratives.",
-      "status": "Coming Soon",
-      "icon": "fa-headphones",
-      "gradient": "from-azure/30 to-blue-600/30",
-      "badgeColor": "bg-azure"
-    },
-    {
-      "episode": "Episode 03",
-      "title": "Cultivating Daily Clarity Practices",
-      "excerpt": "Learn simple yet powerful daily practices that help you maintain clarity, focus, and alignment with your values.",
-      "status": "Coming Soon",
-      "icon": "fa-broadcast-tower",
-      "gradient": "from-purple-400/30 to-indigo-600/30",
-      "badgeColor": "bg-purple-500"
-    }
-  ],
   "newsletterHeading": "Stay Updated on New Resources",
   "newsletterSubtext": "Get notified when new blog posts and podcast episodes are published",
   "newsletterPlaceholder": "Enter your email",
   "newsletterButton": "Subscribe",
+  "newsletterSuccessMessage": "Thanks — I'll be in touch soon!",
   "ctaSectionHeading": "Ready to Start Your Inner Journey?",
   "ctaSectionSubtext": "Book a free clarity call to discover how coaching can help you transform your life",
   "ctaButtonLabel": "Book A Free Call"

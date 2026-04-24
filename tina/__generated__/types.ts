@@ -96,6 +96,10 @@ export type Query = {
   resourcesConnection: ResourcesConnection;
   contact: Contact;
   contactConnection: ContactConnection;
+  post: Post;
+  postConnection: PostConnection;
+  podcast: Podcast;
+  podcastConnection: PodcastConnection;
   testimonials: Testimonials;
   testimonialsConnection: TestimonialsConnection;
 };
@@ -227,6 +231,36 @@ export type QueryContactConnectionArgs = {
 };
 
 
+export type QueryPostArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryPostConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<PostFilter>;
+};
+
+
+export type QueryPodcastArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryPodcastConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<PodcastFilter>;
+};
+
+
 export type QueryTestimonialsArgs = {
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
@@ -249,6 +283,8 @@ export type DocumentFilter = {
   numerology?: InputMaybe<NumerologyFilter>;
   resources?: InputMaybe<ResourcesFilter>;
   contact?: InputMaybe<ContactFilter>;
+  post?: InputMaybe<PostFilter>;
+  podcast?: InputMaybe<PodcastFilter>;
   testimonials?: InputMaybe<TestimonialsFilter>;
 };
 
@@ -289,7 +325,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Home | About | ClarityCoaching | CareerCoaching | Numerology | Resources | Contact | Testimonials | Folder;
+export type DocumentNode = Home | About | ClarityCoaching | CareerCoaching | Numerology | Resources | Contact | Post | Podcast | Testimonials | Folder;
 
 export type Home = Node & Document & {
   __typename?: 'Home';
@@ -911,28 +947,6 @@ export type NumerologyConnection = Connection & {
   edges?: Maybe<Array<Maybe<NumerologyConnectionEdges>>>;
 };
 
-export type ResourcesBlogPosts = {
-  __typename?: 'ResourcesBlogPosts';
-  title?: Maybe<Scalars['String']['output']>;
-  excerpt?: Maybe<Scalars['String']['output']>;
-  status?: Maybe<Scalars['String']['output']>;
-  icon?: Maybe<Scalars['String']['output']>;
-  iconColor?: Maybe<Scalars['String']['output']>;
-  gradient?: Maybe<Scalars['String']['output']>;
-  badgeColor?: Maybe<Scalars['String']['output']>;
-};
-
-export type ResourcesPodcasts = {
-  __typename?: 'ResourcesPodcasts';
-  episode?: Maybe<Scalars['String']['output']>;
-  title?: Maybe<Scalars['String']['output']>;
-  excerpt?: Maybe<Scalars['String']['output']>;
-  status?: Maybe<Scalars['String']['output']>;
-  icon?: Maybe<Scalars['String']['output']>;
-  gradient?: Maybe<Scalars['String']['output']>;
-  badgeColor?: Maybe<Scalars['String']['output']>;
-};
-
 export type Resources = Node & Document & {
   __typename?: 'Resources';
   heroBadge?: Maybe<Scalars['String']['output']>;
@@ -946,40 +960,20 @@ export type Resources = Node & Document & {
   featuredBlogExcerpt?: Maybe<Scalars['String']['output']>;
   featuredBlogReadTime?: Maybe<Scalars['String']['output']>;
   featuredBlogCTA?: Maybe<Scalars['String']['output']>;
+  featuredBlogSlug?: Maybe<Scalars['String']['output']>;
   blogSectionHeading?: Maybe<Scalars['String']['output']>;
-  blogPosts?: Maybe<Array<Maybe<ResourcesBlogPosts>>>;
   podcastSectionHeading?: Maybe<Scalars['String']['output']>;
-  podcasts?: Maybe<Array<Maybe<ResourcesPodcasts>>>;
   newsletterHeading?: Maybe<Scalars['String']['output']>;
   newsletterSubtext?: Maybe<Scalars['String']['output']>;
   newsletterPlaceholder?: Maybe<Scalars['String']['output']>;
   newsletterButton?: Maybe<Scalars['String']['output']>;
+  newsletterSuccessMessage?: Maybe<Scalars['String']['output']>;
   ctaSectionHeading?: Maybe<Scalars['String']['output']>;
   ctaSectionSubtext?: Maybe<Scalars['String']['output']>;
   ctaButtonLabel?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
-};
-
-export type ResourcesBlogPostsFilter = {
-  title?: InputMaybe<StringFilter>;
-  excerpt?: InputMaybe<StringFilter>;
-  status?: InputMaybe<StringFilter>;
-  icon?: InputMaybe<StringFilter>;
-  iconColor?: InputMaybe<StringFilter>;
-  gradient?: InputMaybe<StringFilter>;
-  badgeColor?: InputMaybe<StringFilter>;
-};
-
-export type ResourcesPodcastsFilter = {
-  episode?: InputMaybe<StringFilter>;
-  title?: InputMaybe<StringFilter>;
-  excerpt?: InputMaybe<StringFilter>;
-  status?: InputMaybe<StringFilter>;
-  icon?: InputMaybe<StringFilter>;
-  gradient?: InputMaybe<StringFilter>;
-  badgeColor?: InputMaybe<StringFilter>;
 };
 
 export type ResourcesFilter = {
@@ -994,14 +988,14 @@ export type ResourcesFilter = {
   featuredBlogExcerpt?: InputMaybe<StringFilter>;
   featuredBlogReadTime?: InputMaybe<StringFilter>;
   featuredBlogCTA?: InputMaybe<StringFilter>;
+  featuredBlogSlug?: InputMaybe<StringFilter>;
   blogSectionHeading?: InputMaybe<StringFilter>;
-  blogPosts?: InputMaybe<ResourcesBlogPostsFilter>;
   podcastSectionHeading?: InputMaybe<StringFilter>;
-  podcasts?: InputMaybe<ResourcesPodcastsFilter>;
   newsletterHeading?: InputMaybe<StringFilter>;
   newsletterSubtext?: InputMaybe<StringFilter>;
   newsletterPlaceholder?: InputMaybe<StringFilter>;
   newsletterButton?: InputMaybe<StringFilter>;
+  newsletterSuccessMessage?: InputMaybe<StringFilter>;
   ctaSectionHeading?: InputMaybe<StringFilter>;
   ctaSectionSubtext?: InputMaybe<StringFilter>;
   ctaButtonLabel?: InputMaybe<StringFilter>;
@@ -1063,6 +1057,104 @@ export type ContactConnection = Connection & {
   edges?: Maybe<Array<Maybe<ContactConnectionEdges>>>;
 };
 
+export type Post = Node & Document & {
+  __typename?: 'Post';
+  title: Scalars['String']['output'];
+  publishedAt?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
+  excerpt?: Maybe<Scalars['String']['output']>;
+  icon?: Maybe<Scalars['String']['output']>;
+  iconColor?: Maybe<Scalars['String']['output']>;
+  gradient?: Maybe<Scalars['String']['output']>;
+  badgeColor?: Maybe<Scalars['String']['output']>;
+  body?: Maybe<Scalars['JSON']['output']>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type DatetimeFilter = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  eq?: InputMaybe<Scalars['String']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type RichTextFilter = {
+  startsWith?: InputMaybe<Scalars['String']['input']>;
+  eq?: InputMaybe<Scalars['String']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type PostFilter = {
+  title?: InputMaybe<StringFilter>;
+  publishedAt?: InputMaybe<DatetimeFilter>;
+  status?: InputMaybe<StringFilter>;
+  excerpt?: InputMaybe<StringFilter>;
+  icon?: InputMaybe<StringFilter>;
+  iconColor?: InputMaybe<StringFilter>;
+  gradient?: InputMaybe<StringFilter>;
+  badgeColor?: InputMaybe<StringFilter>;
+  body?: InputMaybe<RichTextFilter>;
+};
+
+export type PostConnectionEdges = {
+  __typename?: 'PostConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Post>;
+};
+
+export type PostConnection = Connection & {
+  __typename?: 'PostConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<PostConnectionEdges>>>;
+};
+
+export type Podcast = Node & Document & {
+  __typename?: 'Podcast';
+  title: Scalars['String']['output'];
+  episode?: Maybe<Scalars['String']['output']>;
+  publishedAt?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
+  audioUrl?: Maybe<Scalars['String']['output']>;
+  excerpt?: Maybe<Scalars['String']['output']>;
+  icon?: Maybe<Scalars['String']['output']>;
+  gradient?: Maybe<Scalars['String']['output']>;
+  badgeColor?: Maybe<Scalars['String']['output']>;
+  body?: Maybe<Scalars['JSON']['output']>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type PodcastFilter = {
+  title?: InputMaybe<StringFilter>;
+  episode?: InputMaybe<StringFilter>;
+  publishedAt?: InputMaybe<DatetimeFilter>;
+  status?: InputMaybe<StringFilter>;
+  audioUrl?: InputMaybe<StringFilter>;
+  excerpt?: InputMaybe<StringFilter>;
+  icon?: InputMaybe<StringFilter>;
+  gradient?: InputMaybe<StringFilter>;
+  badgeColor?: InputMaybe<StringFilter>;
+  body?: InputMaybe<RichTextFilter>;
+};
+
+export type PodcastConnectionEdges = {
+  __typename?: 'PodcastConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Podcast>;
+};
+
+export type PodcastConnection = Connection & {
+  __typename?: 'PodcastConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<PodcastConnectionEdges>>>;
+};
+
 export type TestimonialsItems = {
   __typename?: 'TestimonialsItems';
   quote?: Maybe<Scalars['String']['output']>;
@@ -1120,6 +1212,10 @@ export type Mutation = {
   createResources: Resources;
   updateContact: Contact;
   createContact: Contact;
+  updatePost: Post;
+  createPost: Post;
+  updatePodcast: Podcast;
+  createPodcast: Podcast;
   updateTestimonials: Testimonials;
   createTestimonials: Testimonials;
 };
@@ -1242,6 +1338,30 @@ export type MutationCreateContactArgs = {
 };
 
 
+export type MutationUpdatePostArgs = {
+  relativePath: Scalars['String']['input'];
+  params: PostMutation;
+};
+
+
+export type MutationCreatePostArgs = {
+  relativePath: Scalars['String']['input'];
+  params: PostMutation;
+};
+
+
+export type MutationUpdatePodcastArgs = {
+  relativePath: Scalars['String']['input'];
+  params: PodcastMutation;
+};
+
+
+export type MutationCreatePodcastArgs = {
+  relativePath: Scalars['String']['input'];
+  params: PodcastMutation;
+};
+
+
 export type MutationUpdateTestimonialsArgs = {
   relativePath: Scalars['String']['input'];
   params: TestimonialsMutation;
@@ -1261,6 +1381,8 @@ export type DocumentUpdateMutation = {
   numerology?: InputMaybe<NumerologyMutation>;
   resources?: InputMaybe<ResourcesMutation>;
   contact?: InputMaybe<ContactMutation>;
+  post?: InputMaybe<PostMutation>;
+  podcast?: InputMaybe<PodcastMutation>;
   testimonials?: InputMaybe<TestimonialsMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
@@ -1273,6 +1395,8 @@ export type DocumentMutation = {
   numerology?: InputMaybe<NumerologyMutation>;
   resources?: InputMaybe<ResourcesMutation>;
   contact?: InputMaybe<ContactMutation>;
+  post?: InputMaybe<PostMutation>;
+  podcast?: InputMaybe<PodcastMutation>;
   testimonials?: InputMaybe<TestimonialsMutation>;
 };
 
@@ -1535,26 +1659,6 @@ export type NumerologyMutation = {
   ctaButtonLabel?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type ResourcesBlogPostsMutation = {
-  title?: InputMaybe<Scalars['String']['input']>;
-  excerpt?: InputMaybe<Scalars['String']['input']>;
-  status?: InputMaybe<Scalars['String']['input']>;
-  icon?: InputMaybe<Scalars['String']['input']>;
-  iconColor?: InputMaybe<Scalars['String']['input']>;
-  gradient?: InputMaybe<Scalars['String']['input']>;
-  badgeColor?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type ResourcesPodcastsMutation = {
-  episode?: InputMaybe<Scalars['String']['input']>;
-  title?: InputMaybe<Scalars['String']['input']>;
-  excerpt?: InputMaybe<Scalars['String']['input']>;
-  status?: InputMaybe<Scalars['String']['input']>;
-  icon?: InputMaybe<Scalars['String']['input']>;
-  gradient?: InputMaybe<Scalars['String']['input']>;
-  badgeColor?: InputMaybe<Scalars['String']['input']>;
-};
-
 export type ResourcesMutation = {
   heroBadge?: InputMaybe<Scalars['String']['input']>;
   heroHeading?: InputMaybe<Scalars['String']['input']>;
@@ -1567,14 +1671,14 @@ export type ResourcesMutation = {
   featuredBlogExcerpt?: InputMaybe<Scalars['String']['input']>;
   featuredBlogReadTime?: InputMaybe<Scalars['String']['input']>;
   featuredBlogCTA?: InputMaybe<Scalars['String']['input']>;
+  featuredBlogSlug?: InputMaybe<Scalars['String']['input']>;
   blogSectionHeading?: InputMaybe<Scalars['String']['input']>;
-  blogPosts?: InputMaybe<Array<InputMaybe<ResourcesBlogPostsMutation>>>;
   podcastSectionHeading?: InputMaybe<Scalars['String']['input']>;
-  podcasts?: InputMaybe<Array<InputMaybe<ResourcesPodcastsMutation>>>;
   newsletterHeading?: InputMaybe<Scalars['String']['input']>;
   newsletterSubtext?: InputMaybe<Scalars['String']['input']>;
   newsletterPlaceholder?: InputMaybe<Scalars['String']['input']>;
   newsletterButton?: InputMaybe<Scalars['String']['input']>;
+  newsletterSuccessMessage?: InputMaybe<Scalars['String']['input']>;
   ctaSectionHeading?: InputMaybe<Scalars['String']['input']>;
   ctaSectionSubtext?: InputMaybe<Scalars['String']['input']>;
   ctaButtonLabel?: InputMaybe<Scalars['String']['input']>;
@@ -1591,6 +1695,31 @@ export type ContactMutation = {
   location?: InputMaybe<Scalars['String']['input']>;
   bookingCTALabel?: InputMaybe<Scalars['String']['input']>;
   formHeading?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PostMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  publishedAt?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<Scalars['String']['input']>;
+  excerpt?: InputMaybe<Scalars['String']['input']>;
+  icon?: InputMaybe<Scalars['String']['input']>;
+  iconColor?: InputMaybe<Scalars['String']['input']>;
+  gradient?: InputMaybe<Scalars['String']['input']>;
+  badgeColor?: InputMaybe<Scalars['String']['input']>;
+  body?: InputMaybe<Scalars['JSON']['input']>;
+};
+
+export type PodcastMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  episode?: InputMaybe<Scalars['String']['input']>;
+  publishedAt?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<Scalars['String']['input']>;
+  audioUrl?: InputMaybe<Scalars['String']['input']>;
+  excerpt?: InputMaybe<Scalars['String']['input']>;
+  icon?: InputMaybe<Scalars['String']['input']>;
+  gradient?: InputMaybe<Scalars['String']['input']>;
+  badgeColor?: InputMaybe<Scalars['String']['input']>;
+  body?: InputMaybe<Scalars['JSON']['input']>;
 };
 
 export type TestimonialsItemsMutation = {
@@ -1612,9 +1741,13 @@ export type CareerCoachingPartsFragment = { __typename: 'CareerCoaching', heroHe
 
 export type NumerologyPartsFragment = { __typename: 'Numerology', heroBadge?: string | null, heroHeading?: string | null, heroTagline?: string | null, heroSubtext?: string | null, heroCTALabel?: string | null, selfDiscoveryHeadingPrefix?: string | null, selfDiscoveryHeadingHighlight?: string | null, selfDiscoverySubtext?: string | null, selfDiscoveryStatementPrefix?: string | null, selfDiscoveryStatementHighlight?: string | null, whatIsLabel?: string | null, whatIsHeadingPrefix?: string | null, whatIsHeadingHighlight?: string | null, whatIsIsntParagraph?: string | null, whatIsIsParagraph1?: string | null, whatIsIsParagraph2?: string | null, processLabel?: string | null, processHeadingPrefix?: string | null, processHeadingHighlight?: string | null, includesLabel?: string | null, includesHeadingPrefix?: string | null, includesHeadingHighlight?: string | null, includesSubtext?: string | null, philosophyLabel?: string | null, philosophyHeadingPrefix?: string | null, philosophyHeadingHighlight?: string | null, philosophyQuote?: string | null, philosophyParagraph1?: string | null, philosophyParagraph2?: string | null, philosophyBanner?: string | null, philosophyClosingPrefix?: string | null, philosophyClosingHighlight?: string | null, ctaSectionHeading?: string | null, ctaButtonLabel?: string | null, selfDiscoveryItems?: Array<{ __typename: 'NumerologySelfDiscoveryItems', emoji?: string | null, text?: string | null, borderColor?: string | null } | null> | null, processSteps?: Array<{ __typename: 'NumerologyProcessSteps', emoji?: string | null, stepLabel?: string | null, title?: string | null, description?: string | null } | null> | null, includes?: Array<{ __typename: 'NumerologyIncludes', emoji?: string | null, title?: string | null, description?: string | null } | null> | null };
 
-export type ResourcesPartsFragment = { __typename: 'Resources', heroBadge?: string | null, heroHeading?: string | null, heroHeadingHighlight?: string | null, heroSubtext?: string | null, featuredHeading?: string | null, featuredBlogCategory?: string | null, featuredBlogStatus?: string | null, featuredBlogTitle?: string | null, featuredBlogExcerpt?: string | null, featuredBlogReadTime?: string | null, featuredBlogCTA?: string | null, blogSectionHeading?: string | null, podcastSectionHeading?: string | null, newsletterHeading?: string | null, newsletterSubtext?: string | null, newsletterPlaceholder?: string | null, newsletterButton?: string | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null, blogPosts?: Array<{ __typename: 'ResourcesBlogPosts', title?: string | null, excerpt?: string | null, status?: string | null, icon?: string | null, iconColor?: string | null, gradient?: string | null, badgeColor?: string | null } | null> | null, podcasts?: Array<{ __typename: 'ResourcesPodcasts', episode?: string | null, title?: string | null, excerpt?: string | null, status?: string | null, icon?: string | null, gradient?: string | null, badgeColor?: string | null } | null> | null };
+export type ResourcesPartsFragment = { __typename: 'Resources', heroBadge?: string | null, heroHeading?: string | null, heroHeadingHighlight?: string | null, heroSubtext?: string | null, featuredHeading?: string | null, featuredBlogCategory?: string | null, featuredBlogStatus?: string | null, featuredBlogTitle?: string | null, featuredBlogExcerpt?: string | null, featuredBlogReadTime?: string | null, featuredBlogCTA?: string | null, featuredBlogSlug?: string | null, blogSectionHeading?: string | null, podcastSectionHeading?: string | null, newsletterHeading?: string | null, newsletterSubtext?: string | null, newsletterPlaceholder?: string | null, newsletterButton?: string | null, newsletterSuccessMessage?: string | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null };
 
 export type ContactPartsFragment = { __typename: 'Contact', heroHeading?: string | null, heroSubtext?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, email?: string | null, phone?: string | null, videoText?: string | null, location?: string | null, bookingCTALabel?: string | null, formHeading?: string | null };
+
+export type PostPartsFragment = { __typename: 'Post', title: string, publishedAt?: string | null, status?: string | null, excerpt?: string | null, icon?: string | null, iconColor?: string | null, gradient?: string | null, badgeColor?: string | null, body?: any | null };
+
+export type PodcastPartsFragment = { __typename: 'Podcast', title: string, episode?: string | null, publishedAt?: string | null, status?: string | null, audioUrl?: string | null, excerpt?: string | null, icon?: string | null, gradient?: string | null, badgeColor?: string | null, body?: any | null };
 
 export type TestimonialsPartsFragment = { __typename: 'Testimonials', items?: Array<{ __typename: 'TestimonialsItems', quote?: string | null, author?: string | null } | null> | null };
 
@@ -1718,7 +1851,7 @@ export type ResourcesQueryVariables = Exact<{
 }>;
 
 
-export type ResourcesQuery = { __typename?: 'Query', resources: { __typename: 'Resources', id: string, heroBadge?: string | null, heroHeading?: string | null, heroHeadingHighlight?: string | null, heroSubtext?: string | null, featuredHeading?: string | null, featuredBlogCategory?: string | null, featuredBlogStatus?: string | null, featuredBlogTitle?: string | null, featuredBlogExcerpt?: string | null, featuredBlogReadTime?: string | null, featuredBlogCTA?: string | null, blogSectionHeading?: string | null, podcastSectionHeading?: string | null, newsletterHeading?: string | null, newsletterSubtext?: string | null, newsletterPlaceholder?: string | null, newsletterButton?: string | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, blogPosts?: Array<{ __typename: 'ResourcesBlogPosts', title?: string | null, excerpt?: string | null, status?: string | null, icon?: string | null, iconColor?: string | null, gradient?: string | null, badgeColor?: string | null } | null> | null, podcasts?: Array<{ __typename: 'ResourcesPodcasts', episode?: string | null, title?: string | null, excerpt?: string | null, status?: string | null, icon?: string | null, gradient?: string | null, badgeColor?: string | null } | null> | null } };
+export type ResourcesQuery = { __typename?: 'Query', resources: { __typename: 'Resources', id: string, heroBadge?: string | null, heroHeading?: string | null, heroHeadingHighlight?: string | null, heroSubtext?: string | null, featuredHeading?: string | null, featuredBlogCategory?: string | null, featuredBlogStatus?: string | null, featuredBlogTitle?: string | null, featuredBlogExcerpt?: string | null, featuredBlogReadTime?: string | null, featuredBlogCTA?: string | null, featuredBlogSlug?: string | null, blogSectionHeading?: string | null, podcastSectionHeading?: string | null, newsletterHeading?: string | null, newsletterSubtext?: string | null, newsletterPlaceholder?: string | null, newsletterButton?: string | null, newsletterSuccessMessage?: string | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type ResourcesConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1730,7 +1863,7 @@ export type ResourcesConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ResourcesConnectionQuery = { __typename?: 'Query', resourcesConnection: { __typename?: 'ResourcesConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ResourcesConnectionEdges', cursor: string, node?: { __typename: 'Resources', id: string, heroBadge?: string | null, heroHeading?: string | null, heroHeadingHighlight?: string | null, heroSubtext?: string | null, featuredHeading?: string | null, featuredBlogCategory?: string | null, featuredBlogStatus?: string | null, featuredBlogTitle?: string | null, featuredBlogExcerpt?: string | null, featuredBlogReadTime?: string | null, featuredBlogCTA?: string | null, blogSectionHeading?: string | null, podcastSectionHeading?: string | null, newsletterHeading?: string | null, newsletterSubtext?: string | null, newsletterPlaceholder?: string | null, newsletterButton?: string | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, blogPosts?: Array<{ __typename: 'ResourcesBlogPosts', title?: string | null, excerpt?: string | null, status?: string | null, icon?: string | null, iconColor?: string | null, gradient?: string | null, badgeColor?: string | null } | null> | null, podcasts?: Array<{ __typename: 'ResourcesPodcasts', episode?: string | null, title?: string | null, excerpt?: string | null, status?: string | null, icon?: string | null, gradient?: string | null, badgeColor?: string | null } | null> | null } | null } | null> | null } };
+export type ResourcesConnectionQuery = { __typename?: 'Query', resourcesConnection: { __typename?: 'ResourcesConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ResourcesConnectionEdges', cursor: string, node?: { __typename: 'Resources', id: string, heroBadge?: string | null, heroHeading?: string | null, heroHeadingHighlight?: string | null, heroSubtext?: string | null, featuredHeading?: string | null, featuredBlogCategory?: string | null, featuredBlogStatus?: string | null, featuredBlogTitle?: string | null, featuredBlogExcerpt?: string | null, featuredBlogReadTime?: string | null, featuredBlogCTA?: string | null, featuredBlogSlug?: string | null, blogSectionHeading?: string | null, podcastSectionHeading?: string | null, newsletterHeading?: string | null, newsletterSubtext?: string | null, newsletterPlaceholder?: string | null, newsletterButton?: string | null, newsletterSuccessMessage?: string | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type ContactQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1750,6 +1883,44 @@ export type ContactConnectionQueryVariables = Exact<{
 
 
 export type ContactConnectionQuery = { __typename?: 'Query', contactConnection: { __typename?: 'ContactConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ContactConnectionEdges', cursor: string, node?: { __typename: 'Contact', id: string, heroHeading?: string | null, heroSubtext?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, email?: string | null, phone?: string | null, videoText?: string | null, location?: string | null, bookingCTALabel?: string | null, formHeading?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+
+export type PostQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type PostQuery = { __typename?: 'Query', post: { __typename: 'Post', id: string, title: string, publishedAt?: string | null, status?: string | null, excerpt?: string | null, icon?: string | null, iconColor?: string | null, gradient?: string | null, badgeColor?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+
+export type PostConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<PostFilter>;
+}>;
+
+
+export type PostConnectionQuery = { __typename?: 'Query', postConnection: { __typename?: 'PostConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PostConnectionEdges', cursor: string, node?: { __typename: 'Post', id: string, title: string, publishedAt?: string | null, status?: string | null, excerpt?: string | null, icon?: string | null, iconColor?: string | null, gradient?: string | null, badgeColor?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+
+export type PodcastQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type PodcastQuery = { __typename?: 'Query', podcast: { __typename: 'Podcast', id: string, title: string, episode?: string | null, publishedAt?: string | null, status?: string | null, audioUrl?: string | null, excerpt?: string | null, icon?: string | null, gradient?: string | null, badgeColor?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+
+export type PodcastConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<PodcastFilter>;
+}>;
+
+
+export type PodcastConnectionQuery = { __typename?: 'Query', podcastConnection: { __typename?: 'PodcastConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PodcastConnectionEdges', cursor: string, node?: { __typename: 'Podcast', id: string, title: string, episode?: string | null, publishedAt?: string | null, status?: string | null, audioUrl?: string | null, excerpt?: string | null, icon?: string | null, gradient?: string | null, badgeColor?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type TestimonialsQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -2043,32 +2214,14 @@ export const ResourcesPartsFragmentDoc = gql`
   featuredBlogExcerpt
   featuredBlogReadTime
   featuredBlogCTA
+  featuredBlogSlug
   blogSectionHeading
-  blogPosts {
-    __typename
-    title
-    excerpt
-    status
-    icon
-    iconColor
-    gradient
-    badgeColor
-  }
   podcastSectionHeading
-  podcasts {
-    __typename
-    episode
-    title
-    excerpt
-    status
-    icon
-    gradient
-    badgeColor
-  }
   newsletterHeading
   newsletterSubtext
   newsletterPlaceholder
   newsletterButton
+  newsletterSuccessMessage
   ctaSectionHeading
   ctaSectionSubtext
   ctaButtonLabel
@@ -2087,6 +2240,35 @@ export const ContactPartsFragmentDoc = gql`
   location
   bookingCTALabel
   formHeading
+}
+    `;
+export const PostPartsFragmentDoc = gql`
+    fragment PostParts on Post {
+  __typename
+  title
+  publishedAt
+  status
+  excerpt
+  icon
+  iconColor
+  gradient
+  badgeColor
+  body
+}
+    `;
+export const PodcastPartsFragmentDoc = gql`
+    fragment PodcastParts on Podcast {
+  __typename
+  title
+  episode
+  publishedAt
+  status
+  audioUrl
+  excerpt
+  icon
+  gradient
+  badgeColor
+  body
 }
     `;
 export const TestimonialsPartsFragmentDoc = gql`
@@ -2498,6 +2680,120 @@ export const ContactConnectionDocument = gql`
   }
 }
     ${ContactPartsFragmentDoc}`;
+export const PostDocument = gql`
+    query post($relativePath: String!) {
+  post(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...PostParts
+  }
+}
+    ${PostPartsFragmentDoc}`;
+export const PostConnectionDocument = gql`
+    query postConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: PostFilter) {
+  postConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...PostParts
+      }
+    }
+  }
+}
+    ${PostPartsFragmentDoc}`;
+export const PodcastDocument = gql`
+    query podcast($relativePath: String!) {
+  podcast(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...PodcastParts
+  }
+}
+    ${PodcastPartsFragmentDoc}`;
+export const PodcastConnectionDocument = gql`
+    query podcastConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: PodcastFilter) {
+  podcastConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...PodcastParts
+      }
+    }
+  }
+}
+    ${PodcastPartsFragmentDoc}`;
 export const TestimonialsDocument = gql`
     query testimonials($relativePath: String!) {
   testimonials(relativePath: $relativePath) {
@@ -2599,6 +2895,18 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     contactConnection(variables?: ContactConnectionQueryVariables, options?: C): Promise<{data: ContactConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ContactConnectionQueryVariables, query: string}> {
         return requester<{data: ContactConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ContactConnectionQueryVariables, query: string}, ContactConnectionQueryVariables>(ContactConnectionDocument, variables, options);
+      },
+    post(variables: PostQueryVariables, options?: C): Promise<{data: PostQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PostQueryVariables, query: string}> {
+        return requester<{data: PostQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PostQueryVariables, query: string}, PostQueryVariables>(PostDocument, variables, options);
+      },
+    postConnection(variables?: PostConnectionQueryVariables, options?: C): Promise<{data: PostConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PostConnectionQueryVariables, query: string}> {
+        return requester<{data: PostConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PostConnectionQueryVariables, query: string}, PostConnectionQueryVariables>(PostConnectionDocument, variables, options);
+      },
+    podcast(variables: PodcastQueryVariables, options?: C): Promise<{data: PodcastQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PodcastQueryVariables, query: string}> {
+        return requester<{data: PodcastQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PodcastQueryVariables, query: string}, PodcastQueryVariables>(PodcastDocument, variables, options);
+      },
+    podcastConnection(variables?: PodcastConnectionQueryVariables, options?: C): Promise<{data: PodcastConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PodcastConnectionQueryVariables, query: string}> {
+        return requester<{data: PodcastConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PodcastConnectionQueryVariables, query: string}, PodcastConnectionQueryVariables>(PodcastConnectionDocument, variables, options);
       },
     testimonials(variables: TestimonialsQueryVariables, options?: C): Promise<{data: TestimonialsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TestimonialsQueryVariables, query: string}> {
         return requester<{data: TestimonialsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TestimonialsQueryVariables, query: string}, TestimonialsQueryVariables>(TestimonialsDocument, variables, options);
