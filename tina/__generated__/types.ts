@@ -1917,7 +1917,7 @@ export const ExperimentalGetTinaClient = () =>
   getSdk(
     generateRequester(
       createClient({
-        url: "https://content.tinajs.io/2.2/content/88bc3f44-ecdf-4f23-bb2a-117721f2da57/github/claude/migrate-cpanel-nextjs-Qbyc2",
+        url: "http://localhost:4001/graphql",
         queries,
       })
     )
