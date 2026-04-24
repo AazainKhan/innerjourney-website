@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import resourcesData from '@/content/pages/resources.json'
+import client from '@/tina/__generated__/client'
 import { listPosts, listPodcasts } from '@/lib/posts'
 import ResourcesClient from './ResourcesClient'
 
@@ -9,37 +10,12 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://innerjourney-with-shanila.com/resources' },
 }
 
-const QUERY = `
-  query Resources($relativePath: String!) {
-    resources(relativePath: $relativePath) {
-      heroBadge
-      heroHeading
-      heroHeadingHighlight
-      heroSubtext
-      featuredHeading
-      featuredBlogCategory
-      featuredBlogStatus
-      featuredBlogTitle
-      featuredBlogExcerpt
-      featuredBlogReadTime
-      featuredBlogCTA
-      featuredBlogSlug
-      blogSectionHeading
-      podcastSectionHeading
-      newsletterHeading
-      newsletterSubtext
-      newsletterPlaceholder
-      newsletterButton
-      newsletterSuccessMessage
-      ctaSectionHeading
-      ctaSectionSubtext
-      ctaButtonLabel
-    }
-  }
-`
-
 export default async function ResourcesPage() {
-  const [allPosts, allPodcasts] = await Promise.all([listPosts(), listPodcasts()])
+  const [res, allPosts, allPodcasts] = await Promise.all([
+    client.queries.resources({ relativePath: 'resources.json' }).catch(() => null),
+    listPosts(),
+    listPodcasts(),
+  ])
 
   const posts = allPosts.map((p) => ({
     slug: p.slug,
@@ -64,11 +40,24 @@ export default async function ResourcesPage() {
     badgeColor: p.badgeColor ?? 'bg-carrot',
   }))
 
+  if (!res) {
+    return (
+      <ResourcesClient
+        query=""
+        variables={{ relativePath: 'resources.json' }}
+        data={{ resources: resourcesData }}
+        posts={posts}
+        podcasts={podcasts}
+      />
+    )
+  }
+
   return (
     <ResourcesClient
-      query={QUERY}
-      variables={{ relativePath: 'resources.json' }}
-      data={{ resources: resourcesData }}
+      query={res.query}
+      variables={res.variables}
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      data={res.data as any}
       posts={posts}
       podcasts={podcasts}
     />

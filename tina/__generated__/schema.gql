@@ -72,6 +72,8 @@ type Query {
   postConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PostFilter): PostConnection!
   podcast(relativePath: String): Podcast!
   podcastConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PodcastFilter): PodcastConnection!
+  footer(relativePath: String): Footer!
+  footerConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: FooterFilter): FooterConnection!
   testimonials(relativePath: String): Testimonials!
   testimonialsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: TestimonialsFilter): TestimonialsConnection!
 }
@@ -86,6 +88,7 @@ input DocumentFilter {
   contact: ContactFilter
   post: PostFilter
   podcast: PodcastFilter
+  footer: FooterFilter
   testimonials: TestimonialsFilter
 }
 
@@ -112,9 +115,10 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Home | About | ClarityCoaching | CareerCoaching | Numerology | Resources | Contact | Post | Podcast | Testimonials | Folder
+union DocumentNode = Home | About | ClarityCoaching | CareerCoaching | Numerology | Resources | Contact | Post | Podcast | Footer | Testimonials | Folder
 
 type Home implements Node & Document {
+  heroImage: String
   heroHeading: String
   heroSubtext: String
   heroCTALabel: String
@@ -126,6 +130,7 @@ type Home implements Node & Document {
   ctaMessage1: String
   ctaMessage2: String
   aboutHeading: String
+  aboutImage: String
   aboutCredentialTitle: String
   aboutParagraph1: String
   aboutParagraph2: String
@@ -143,6 +148,13 @@ type Home implements Node & Document {
   _values: JSON!
 }
 
+input ImageFilter {
+  startsWith: String
+  eq: String
+  exists: Boolean
+  in: [String]
+}
+
 input StringFilter {
   startsWith: String
   eq: String
@@ -151,6 +163,7 @@ input StringFilter {
 }
 
 input HomeFilter {
+  heroImage: ImageFilter
   heroHeading: StringFilter
   heroSubtext: StringFilter
   heroCTALabel: StringFilter
@@ -162,6 +175,7 @@ input HomeFilter {
   ctaMessage1: StringFilter
   ctaMessage2: StringFilter
   aboutHeading: StringFilter
+  aboutImage: ImageFilter
   aboutCredentialTitle: StringFilter
   aboutParagraph1: StringFilter
   aboutParagraph2: StringFilter
@@ -774,6 +788,7 @@ type ResourcesConnection implements Connection {
 }
 
 type Contact implements Node & Document {
+  heroImage: String
   heroHeading: String
   heroSubtext: String
   sectionHeading: String
@@ -790,6 +805,7 @@ type Contact implements Node & Document {
 }
 
 input ContactFilter {
+  heroImage: ImageFilter
   heroHeading: StringFilter
   heroSubtext: StringFilter
   sectionHeading: StringFilter
@@ -905,6 +921,84 @@ type PodcastConnection implements Connection {
   edges: [PodcastConnectionEdges]
 }
 
+type FooterQuickLinks {
+  label: String
+  href: String
+}
+
+type FooterServiceLinks {
+  label: String
+  href: String
+}
+
+type FooterSocialLinks {
+  label: String
+  icon: String
+  href: String
+}
+
+type Footer implements Node & Document {
+  brandHeading: String
+  brandDescription: String
+  quickLinksHeading: String
+  quickLinks: [FooterQuickLinks]
+  servicesHeading: String
+  serviceLinks: [FooterServiceLinks]
+  connectHeading: String
+  socialLinks: [FooterSocialLinks]
+  emailLabel: String
+  email: String
+  phoneLabel: String
+  phone: String
+  copyright: String
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input FooterQuickLinksFilter {
+  label: StringFilter
+  href: StringFilter
+}
+
+input FooterServiceLinksFilter {
+  label: StringFilter
+  href: StringFilter
+}
+
+input FooterSocialLinksFilter {
+  label: StringFilter
+  icon: StringFilter
+  href: StringFilter
+}
+
+input FooterFilter {
+  brandHeading: StringFilter
+  brandDescription: StringFilter
+  quickLinksHeading: StringFilter
+  quickLinks: FooterQuickLinksFilter
+  servicesHeading: StringFilter
+  serviceLinks: FooterServiceLinksFilter
+  connectHeading: StringFilter
+  socialLinks: FooterSocialLinksFilter
+  emailLabel: StringFilter
+  email: StringFilter
+  phoneLabel: StringFilter
+  phone: StringFilter
+  copyright: StringFilter
+}
+
+type FooterConnectionEdges {
+  cursor: String!
+  node: Footer
+}
+
+type FooterConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [FooterConnectionEdges]
+}
+
 type TestimonialsItems {
   quote: String
   author: String
@@ -961,6 +1055,8 @@ type Mutation {
   createPost(relativePath: String!, params: PostMutation!): Post!
   updatePodcast(relativePath: String!, params: PodcastMutation!): Podcast!
   createPodcast(relativePath: String!, params: PodcastMutation!): Podcast!
+  updateFooter(relativePath: String!, params: FooterMutation!): Footer!
+  createFooter(relativePath: String!, params: FooterMutation!): Footer!
   updateTestimonials(relativePath: String!, params: TestimonialsMutation!): Testimonials!
   createTestimonials(relativePath: String!, params: TestimonialsMutation!): Testimonials!
 }
@@ -975,6 +1071,7 @@ input DocumentUpdateMutation {
   contact: ContactMutation
   post: PostMutation
   podcast: PodcastMutation
+  footer: FooterMutation
   testimonials: TestimonialsMutation
   relativePath: String
 }
@@ -989,10 +1086,12 @@ input DocumentMutation {
   contact: ContactMutation
   post: PostMutation
   podcast: PodcastMutation
+  footer: FooterMutation
   testimonials: TestimonialsMutation
 }
 
 input HomeMutation {
+  heroImage: String
   heroHeading: String
   heroSubtext: String
   heroCTALabel: String
@@ -1004,6 +1103,7 @@ input HomeMutation {
   ctaMessage1: String
   ctaMessage2: String
   aboutHeading: String
+  aboutImage: String
   aboutCredentialTitle: String
   aboutParagraph1: String
   aboutParagraph2: String
@@ -1277,6 +1377,7 @@ input ResourcesMutation {
 }
 
 input ContactMutation {
+  heroImage: String
   heroHeading: String
   heroSubtext: String
   sectionHeading: String
@@ -1312,6 +1413,38 @@ input PodcastMutation {
   gradient: String
   badgeColor: String
   body: JSON
+}
+
+input FooterQuickLinksMutation {
+  label: String
+  href: String
+}
+
+input FooterServiceLinksMutation {
+  label: String
+  href: String
+}
+
+input FooterSocialLinksMutation {
+  label: String
+  icon: String
+  href: String
+}
+
+input FooterMutation {
+  brandHeading: String
+  brandDescription: String
+  quickLinksHeading: String
+  quickLinks: [FooterQuickLinksMutation]
+  servicesHeading: String
+  serviceLinks: [FooterServiceLinksMutation]
+  connectHeading: String
+  socialLinks: [FooterSocialLinksMutation]
+  emailLabel: String
+  email: String
+  phoneLabel: String
+  phone: String
+  copyright: String
 }
 
 input TestimonialsItemsMutation {

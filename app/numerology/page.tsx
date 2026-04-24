@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import numerologyData from '@/content/pages/numerology.json'
+import client from '@/tina/__generated__/client'
 import NumerologyClient from './NumerologyClient'
 
 export const metadata: Metadata = {
@@ -13,56 +14,27 @@ export const metadata: Metadata = {
   },
 }
 
-const QUERY = `
-  query Numerology($relativePath: String!) {
-    numerology(relativePath: $relativePath) {
-      heroBadge
-      heroHeading
-      heroTagline
-      heroSubtext
-      heroCTALabel
-      selfDiscoveryHeadingPrefix
-      selfDiscoveryHeadingHighlight
-      selfDiscoverySubtext
-      selfDiscoveryItems { emoji text borderColor }
-      selfDiscoveryStatementPrefix
-      selfDiscoveryStatementHighlight
-      whatIsLabel
-      whatIsHeadingPrefix
-      whatIsHeadingHighlight
-      whatIsIsntParagraph
-      whatIsIsParagraph1
-      whatIsIsParagraph2
-      processLabel
-      processHeadingPrefix
-      processHeadingHighlight
-      processSteps { emoji stepLabel title description }
-      includesLabel
-      includesHeadingPrefix
-      includesHeadingHighlight
-      includesSubtext
-      includes { emoji title description }
-      philosophyLabel
-      philosophyHeadingPrefix
-      philosophyHeadingHighlight
-      philosophyQuote
-      philosophyParagraph1
-      philosophyParagraph2
-      philosophyBanner
-      philosophyClosingPrefix
-      philosophyClosingHighlight
-      ctaSectionHeading
-      ctaButtonLabel
-    }
-  }
-`
+export default async function NumerologyPage() {
+  const res = await client.queries
+    .numerology({ relativePath: 'numerology.json' })
+    .catch(() => null)
 
-export default function NumerologyPage() {
+  if (!res) {
+    return (
+      <NumerologyClient
+        query=""
+        variables={{ relativePath: 'numerology.json' }}
+        data={{ numerology: numerologyData }}
+      />
+    )
+  }
+
   return (
     <NumerologyClient
-      query={QUERY}
-      variables={{ relativePath: 'numerology.json' }}
-      data={{ numerology: numerologyData }}
+      query={res.query}
+      variables={res.variables}
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      data={res.data as any}
     />
   )
 }

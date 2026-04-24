@@ -1,5 +1,6 @@
 fragment HomeParts on Home {
   __typename
+  heroImage
   heroHeading
   heroSubtext
   heroCTALabel
@@ -11,6 +12,7 @@ fragment HomeParts on Home {
   ctaMessage1
   ctaMessage2
   aboutHeading
+  aboutImage
   aboutCredentialTitle
   aboutParagraph1
   aboutParagraph2
@@ -280,6 +282,7 @@ fragment ResourcesParts on Resources {
 
 fragment ContactParts on Contact {
   __typename
+  heroImage
   heroHeading
   heroSubtext
   sectionHeading
@@ -317,6 +320,36 @@ fragment PodcastParts on Podcast {
   gradient
   badgeColor
   body
+}
+
+fragment FooterParts on Footer {
+  __typename
+  brandHeading
+  brandDescription
+  quickLinksHeading
+  quickLinks {
+    __typename
+    label
+    href
+  }
+  servicesHeading
+  serviceLinks {
+    __typename
+    label
+    href
+  }
+  connectHeading
+  socialLinks {
+    __typename
+    label
+    icon
+    href
+  }
+  emailLabel
+  email
+  phoneLabel
+  phone
+  copyright
 }
 
 fragment TestimonialsParts on Testimonials {

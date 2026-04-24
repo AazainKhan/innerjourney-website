@@ -1,0 +1,30 @@
+{
+  "brandHeading": "Inner Journey with Shanila",
+  "brandDescription": "I help female leaders and homemakers to cultivate self-awareness, shift inner narratives, and take aligned action with confidence.",
+  "quickLinksHeading": "Quick Links",
+  "quickLinks": [
+    { "label": "Work with me", "href": "/services" },
+    { "label": "About", "href": "/about" },
+    { "label": "Blog", "href": "/blog" },
+    { "label": "Resources", "href": "/resources" },
+    { "label": "Contact", "href": "/contact" }
+  ],
+  "servicesHeading": "Services",
+  "serviceLinks": [
+    { "label": "Clarity Coaching", "href": "/clarity-coaching" },
+    { "label": "Career Coaching", "href": "/career-coaching" },
+    { "label": "Numerology for Clarity", "href": "/numerology" }
+  ],
+  "connectHeading": "Connect",
+  "socialLinks": [
+    { "label": "Facebook", "icon": "fa-facebook", "href": "https://www.facebook.com/innerjourneywithshanila/" },
+    { "label": "Instagram", "icon": "fa-instagram", "href": "https://www.instagram.com/_.innerjourney_/" },
+    { "label": "YouTube", "icon": "fa-youtube", "href": "https://www.youtube.com/channel/UCJbRrCiY4zXfojPTa17EKMg" },
+    { "label": "WhatsApp", "icon": "fa-whatsapp", "href": "https://api.whatsapp.com/send?phone=447387973382&" }
+  ],
+  "emailLabel": "Email",
+  "email": "info@innerjourney-with-shanila.com",
+  "phoneLabel": "Phone",
+  "phone": "+44 7387 973 382",
+  "copyright": "© 2026 Shanila Khan. All rights reserved."
+}

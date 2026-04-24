@@ -7,6 +7,7 @@ import BookingButton from '@/components/BookingButton'
 
 interface ContactData {
   contact: {
+    heroImage?: string | null
     heroHeading: string
     heroSubtext: string
     sectionHeading: string
@@ -76,7 +77,7 @@ export default function ContactPageClient(props: Props) {
       <section className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/contact-img-1200.webp"
+            src={d.heroImage || '/images/contact-img-1200.webp'}
             alt="Contact background"
             fill
             className="object-cover object-center opacity-70"

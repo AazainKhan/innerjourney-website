@@ -8,6 +8,8 @@ import HomeClient from '@/components/HomeClient'
 
 interface HomeData {
   home: {
+    heroImage?: string | null
+    aboutImage?: string | null
     heroHeading: string
     heroSubtext: string
     heroCTALabel: string
@@ -58,7 +60,7 @@ export default function HomePageClient(props: Props) {
         <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-orange-900/20 z-10"></div>
         <div className="absolute inset-0 overflow-hidden hero-media" aria-hidden="true">
           <Image
-            src="/images/hero_img-1200.webp"
+            src={d.heroImage || '/images/hero_img-1200.webp'}
             alt="Abstract wellness background"
             fill
             className="object-cover"
@@ -183,7 +185,7 @@ export default function HomePageClient(props: Props) {
               <div className="relative fade-in-left animate-on-scroll">
                 <div className="w-full h-auto md:h-[32rem] overflow-visible relative">
                   <Image
-                    src="/images/about-image-1200.webp"
+                    src={d.aboutImage || '/images/about-image-1200.webp'}
                     alt="Shanila - Clarity and Mindset Coach"
                     width={1200}
                     height={800}

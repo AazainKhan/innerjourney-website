@@ -100,6 +100,8 @@ export type Query = {
   postConnection: PostConnection;
   podcast: Podcast;
   podcastConnection: PodcastConnection;
+  footer: Footer;
+  footerConnection: FooterConnection;
   testimonials: Testimonials;
   testimonialsConnection: TestimonialsConnection;
 };
@@ -261,6 +263,21 @@ export type QueryPodcastConnectionArgs = {
 };
 
 
+export type QueryFooterArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryFooterConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<FooterFilter>;
+};
+
+
 export type QueryTestimonialsArgs = {
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
@@ -285,6 +302,7 @@ export type DocumentFilter = {
   contact?: InputMaybe<ContactFilter>;
   post?: InputMaybe<PostFilter>;
   podcast?: InputMaybe<PodcastFilter>;
+  footer?: InputMaybe<FooterFilter>;
   testimonials?: InputMaybe<TestimonialsFilter>;
 };
 
@@ -325,10 +343,11 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Home | About | ClarityCoaching | CareerCoaching | Numerology | Resources | Contact | Post | Podcast | Testimonials | Folder;
+export type DocumentNode = Home | About | ClarityCoaching | CareerCoaching | Numerology | Resources | Contact | Post | Podcast | Footer | Testimonials | Folder;
 
 export type Home = Node & Document & {
   __typename?: 'Home';
+  heroImage?: Maybe<Scalars['String']['output']>;
   heroHeading?: Maybe<Scalars['String']['output']>;
   heroSubtext?: Maybe<Scalars['String']['output']>;
   heroCTALabel?: Maybe<Scalars['String']['output']>;
@@ -340,6 +359,7 @@ export type Home = Node & Document & {
   ctaMessage1?: Maybe<Scalars['String']['output']>;
   ctaMessage2?: Maybe<Scalars['String']['output']>;
   aboutHeading?: Maybe<Scalars['String']['output']>;
+  aboutImage?: Maybe<Scalars['String']['output']>;
   aboutCredentialTitle?: Maybe<Scalars['String']['output']>;
   aboutParagraph1?: Maybe<Scalars['String']['output']>;
   aboutParagraph2?: Maybe<Scalars['String']['output']>;
@@ -357,6 +377,13 @@ export type Home = Node & Document & {
   _values: Scalars['JSON']['output'];
 };
 
+export type ImageFilter = {
+  startsWith?: InputMaybe<Scalars['String']['input']>;
+  eq?: InputMaybe<Scalars['String']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
 export type StringFilter = {
   startsWith?: InputMaybe<Scalars['String']['input']>;
   eq?: InputMaybe<Scalars['String']['input']>;
@@ -365,6 +392,7 @@ export type StringFilter = {
 };
 
 export type HomeFilter = {
+  heroImage?: InputMaybe<ImageFilter>;
   heroHeading?: InputMaybe<StringFilter>;
   heroSubtext?: InputMaybe<StringFilter>;
   heroCTALabel?: InputMaybe<StringFilter>;
@@ -376,6 +404,7 @@ export type HomeFilter = {
   ctaMessage1?: InputMaybe<StringFilter>;
   ctaMessage2?: InputMaybe<StringFilter>;
   aboutHeading?: InputMaybe<StringFilter>;
+  aboutImage?: InputMaybe<ImageFilter>;
   aboutCredentialTitle?: InputMaybe<StringFilter>;
   aboutParagraph1?: InputMaybe<StringFilter>;
   aboutParagraph2?: InputMaybe<StringFilter>;
@@ -1016,6 +1045,7 @@ export type ResourcesConnection = Connection & {
 
 export type Contact = Node & Document & {
   __typename?: 'Contact';
+  heroImage?: Maybe<Scalars['String']['output']>;
   heroHeading?: Maybe<Scalars['String']['output']>;
   heroSubtext?: Maybe<Scalars['String']['output']>;
   sectionHeading?: Maybe<Scalars['String']['output']>;
@@ -1032,6 +1062,7 @@ export type Contact = Node & Document & {
 };
 
 export type ContactFilter = {
+  heroImage?: InputMaybe<ImageFilter>;
   heroHeading?: InputMaybe<StringFilter>;
   heroSubtext?: InputMaybe<StringFilter>;
   sectionHeading?: InputMaybe<StringFilter>;
@@ -1155,6 +1186,90 @@ export type PodcastConnection = Connection & {
   edges?: Maybe<Array<Maybe<PodcastConnectionEdges>>>;
 };
 
+export type FooterQuickLinks = {
+  __typename?: 'FooterQuickLinks';
+  label?: Maybe<Scalars['String']['output']>;
+  href?: Maybe<Scalars['String']['output']>;
+};
+
+export type FooterServiceLinks = {
+  __typename?: 'FooterServiceLinks';
+  label?: Maybe<Scalars['String']['output']>;
+  href?: Maybe<Scalars['String']['output']>;
+};
+
+export type FooterSocialLinks = {
+  __typename?: 'FooterSocialLinks';
+  label?: Maybe<Scalars['String']['output']>;
+  icon?: Maybe<Scalars['String']['output']>;
+  href?: Maybe<Scalars['String']['output']>;
+};
+
+export type Footer = Node & Document & {
+  __typename?: 'Footer';
+  brandHeading?: Maybe<Scalars['String']['output']>;
+  brandDescription?: Maybe<Scalars['String']['output']>;
+  quickLinksHeading?: Maybe<Scalars['String']['output']>;
+  quickLinks?: Maybe<Array<Maybe<FooterQuickLinks>>>;
+  servicesHeading?: Maybe<Scalars['String']['output']>;
+  serviceLinks?: Maybe<Array<Maybe<FooterServiceLinks>>>;
+  connectHeading?: Maybe<Scalars['String']['output']>;
+  socialLinks?: Maybe<Array<Maybe<FooterSocialLinks>>>;
+  emailLabel?: Maybe<Scalars['String']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
+  phoneLabel?: Maybe<Scalars['String']['output']>;
+  phone?: Maybe<Scalars['String']['output']>;
+  copyright?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type FooterQuickLinksFilter = {
+  label?: InputMaybe<StringFilter>;
+  href?: InputMaybe<StringFilter>;
+};
+
+export type FooterServiceLinksFilter = {
+  label?: InputMaybe<StringFilter>;
+  href?: InputMaybe<StringFilter>;
+};
+
+export type FooterSocialLinksFilter = {
+  label?: InputMaybe<StringFilter>;
+  icon?: InputMaybe<StringFilter>;
+  href?: InputMaybe<StringFilter>;
+};
+
+export type FooterFilter = {
+  brandHeading?: InputMaybe<StringFilter>;
+  brandDescription?: InputMaybe<StringFilter>;
+  quickLinksHeading?: InputMaybe<StringFilter>;
+  quickLinks?: InputMaybe<FooterQuickLinksFilter>;
+  servicesHeading?: InputMaybe<StringFilter>;
+  serviceLinks?: InputMaybe<FooterServiceLinksFilter>;
+  connectHeading?: InputMaybe<StringFilter>;
+  socialLinks?: InputMaybe<FooterSocialLinksFilter>;
+  emailLabel?: InputMaybe<StringFilter>;
+  email?: InputMaybe<StringFilter>;
+  phoneLabel?: InputMaybe<StringFilter>;
+  phone?: InputMaybe<StringFilter>;
+  copyright?: InputMaybe<StringFilter>;
+};
+
+export type FooterConnectionEdges = {
+  __typename?: 'FooterConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Footer>;
+};
+
+export type FooterConnection = Connection & {
+  __typename?: 'FooterConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<FooterConnectionEdges>>>;
+};
+
 export type TestimonialsItems = {
   __typename?: 'TestimonialsItems';
   quote?: Maybe<Scalars['String']['output']>;
@@ -1216,6 +1331,8 @@ export type Mutation = {
   createPost: Post;
   updatePodcast: Podcast;
   createPodcast: Podcast;
+  updateFooter: Footer;
+  createFooter: Footer;
   updateTestimonials: Testimonials;
   createTestimonials: Testimonials;
 };
@@ -1362,6 +1479,18 @@ export type MutationCreatePodcastArgs = {
 };
 
 
+export type MutationUpdateFooterArgs = {
+  relativePath: Scalars['String']['input'];
+  params: FooterMutation;
+};
+
+
+export type MutationCreateFooterArgs = {
+  relativePath: Scalars['String']['input'];
+  params: FooterMutation;
+};
+
+
 export type MutationUpdateTestimonialsArgs = {
   relativePath: Scalars['String']['input'];
   params: TestimonialsMutation;
@@ -1383,6 +1512,7 @@ export type DocumentUpdateMutation = {
   contact?: InputMaybe<ContactMutation>;
   post?: InputMaybe<PostMutation>;
   podcast?: InputMaybe<PodcastMutation>;
+  footer?: InputMaybe<FooterMutation>;
   testimonials?: InputMaybe<TestimonialsMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
@@ -1397,10 +1527,12 @@ export type DocumentMutation = {
   contact?: InputMaybe<ContactMutation>;
   post?: InputMaybe<PostMutation>;
   podcast?: InputMaybe<PodcastMutation>;
+  footer?: InputMaybe<FooterMutation>;
   testimonials?: InputMaybe<TestimonialsMutation>;
 };
 
 export type HomeMutation = {
+  heroImage?: InputMaybe<Scalars['String']['input']>;
   heroHeading?: InputMaybe<Scalars['String']['input']>;
   heroSubtext?: InputMaybe<Scalars['String']['input']>;
   heroCTALabel?: InputMaybe<Scalars['String']['input']>;
@@ -1412,6 +1544,7 @@ export type HomeMutation = {
   ctaMessage1?: InputMaybe<Scalars['String']['input']>;
   ctaMessage2?: InputMaybe<Scalars['String']['input']>;
   aboutHeading?: InputMaybe<Scalars['String']['input']>;
+  aboutImage?: InputMaybe<Scalars['String']['input']>;
   aboutCredentialTitle?: InputMaybe<Scalars['String']['input']>;
   aboutParagraph1?: InputMaybe<Scalars['String']['input']>;
   aboutParagraph2?: InputMaybe<Scalars['String']['input']>;
@@ -1685,6 +1818,7 @@ export type ResourcesMutation = {
 };
 
 export type ContactMutation = {
+  heroImage?: InputMaybe<Scalars['String']['input']>;
   heroHeading?: InputMaybe<Scalars['String']['input']>;
   heroSubtext?: InputMaybe<Scalars['String']['input']>;
   sectionHeading?: InputMaybe<Scalars['String']['input']>;
@@ -1722,6 +1856,38 @@ export type PodcastMutation = {
   body?: InputMaybe<Scalars['JSON']['input']>;
 };
 
+export type FooterQuickLinksMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  href?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type FooterServiceLinksMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  href?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type FooterSocialLinksMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  icon?: InputMaybe<Scalars['String']['input']>;
+  href?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type FooterMutation = {
+  brandHeading?: InputMaybe<Scalars['String']['input']>;
+  brandDescription?: InputMaybe<Scalars['String']['input']>;
+  quickLinksHeading?: InputMaybe<Scalars['String']['input']>;
+  quickLinks?: InputMaybe<Array<InputMaybe<FooterQuickLinksMutation>>>;
+  servicesHeading?: InputMaybe<Scalars['String']['input']>;
+  serviceLinks?: InputMaybe<Array<InputMaybe<FooterServiceLinksMutation>>>;
+  connectHeading?: InputMaybe<Scalars['String']['input']>;
+  socialLinks?: InputMaybe<Array<InputMaybe<FooterSocialLinksMutation>>>;
+  emailLabel?: InputMaybe<Scalars['String']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  phoneLabel?: InputMaybe<Scalars['String']['input']>;
+  phone?: InputMaybe<Scalars['String']['input']>;
+  copyright?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type TestimonialsItemsMutation = {
   quote?: InputMaybe<Scalars['String']['input']>;
   author?: InputMaybe<Scalars['String']['input']>;
@@ -1731,7 +1897,7 @@ export type TestimonialsMutation = {
   items?: InputMaybe<Array<InputMaybe<TestimonialsItemsMutation>>>;
 };
 
-export type HomePartsFragment = { __typename: 'Home', heroHeading?: string | null, heroSubtext?: string | null, heroCTALabel?: string | null, heroBottomCTALabel?: string | null, ctaHeading?: string | null, ctaLine1?: string | null, ctaLine2?: string | null, ctaLine3?: string | null, ctaMessage1?: string | null, ctaMessage2?: string | null, aboutHeading?: string | null, aboutCredentialTitle?: string | null, aboutParagraph1?: string | null, aboutParagraph2?: string | null, feelLikeYouHeading?: string | null, feelLikeYouTagline?: string | null, feelLikeYouQuestion1?: string | null, feelLikeYouQuestion2?: string | null, feelLikeYouQuestion3?: string | null, feelLikeYouQuestion4?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, bottomCTAText?: string | null };
+export type HomePartsFragment = { __typename: 'Home', heroImage?: string | null, heroHeading?: string | null, heroSubtext?: string | null, heroCTALabel?: string | null, heroBottomCTALabel?: string | null, ctaHeading?: string | null, ctaLine1?: string | null, ctaLine2?: string | null, ctaLine3?: string | null, ctaMessage1?: string | null, ctaMessage2?: string | null, aboutHeading?: string | null, aboutImage?: string | null, aboutCredentialTitle?: string | null, aboutParagraph1?: string | null, aboutParagraph2?: string | null, feelLikeYouHeading?: string | null, feelLikeYouTagline?: string | null, feelLikeYouQuestion1?: string | null, feelLikeYouQuestion2?: string | null, feelLikeYouQuestion3?: string | null, feelLikeYouQuestion4?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, bottomCTAText?: string | null };
 
 export type AboutPartsFragment = { __typename: 'About', heroHeading?: string | null, heroSubtext?: string | null, storyHeading?: string | null, storyParagraph1?: string | null, storyParagraph2?: string | null, credentialsHeading?: string | null, credentialsSubtext?: string | null, valuesHeading?: string | null, valuesSubtext?: string | null, ctaHeading?: string | null, ctaSubtext?: string | null, ctaButtonLabel?: string | null, credentials?: Array<{ __typename: 'AboutCredentials', icon?: string | null, title?: string | null, description?: string | null, gradient?: string | null } | null> | null, values?: Array<{ __typename: 'AboutValues', icon?: string | null, title?: string | null, description?: string | null } | null> | null };
 
@@ -1743,11 +1909,13 @@ export type NumerologyPartsFragment = { __typename: 'Numerology', heroBadge?: st
 
 export type ResourcesPartsFragment = { __typename: 'Resources', heroBadge?: string | null, heroHeading?: string | null, heroHeadingHighlight?: string | null, heroSubtext?: string | null, featuredHeading?: string | null, featuredBlogCategory?: string | null, featuredBlogStatus?: string | null, featuredBlogTitle?: string | null, featuredBlogExcerpt?: string | null, featuredBlogReadTime?: string | null, featuredBlogCTA?: string | null, featuredBlogSlug?: string | null, blogSectionHeading?: string | null, podcastSectionHeading?: string | null, newsletterHeading?: string | null, newsletterSubtext?: string | null, newsletterPlaceholder?: string | null, newsletterButton?: string | null, newsletterSuccessMessage?: string | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null };
 
-export type ContactPartsFragment = { __typename: 'Contact', heroHeading?: string | null, heroSubtext?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, email?: string | null, phone?: string | null, videoText?: string | null, location?: string | null, bookingCTALabel?: string | null, formHeading?: string | null };
+export type ContactPartsFragment = { __typename: 'Contact', heroImage?: string | null, heroHeading?: string | null, heroSubtext?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, email?: string | null, phone?: string | null, videoText?: string | null, location?: string | null, bookingCTALabel?: string | null, formHeading?: string | null };
 
 export type PostPartsFragment = { __typename: 'Post', title: string, publishedAt?: string | null, status?: string | null, excerpt?: string | null, icon?: string | null, iconColor?: string | null, gradient?: string | null, badgeColor?: string | null, body?: any | null };
 
 export type PodcastPartsFragment = { __typename: 'Podcast', title: string, episode?: string | null, publishedAt?: string | null, status?: string | null, audioUrl?: string | null, excerpt?: string | null, icon?: string | null, gradient?: string | null, badgeColor?: string | null, body?: any | null };
+
+export type FooterPartsFragment = { __typename: 'Footer', brandHeading?: string | null, brandDescription?: string | null, quickLinksHeading?: string | null, servicesHeading?: string | null, connectHeading?: string | null, emailLabel?: string | null, email?: string | null, phoneLabel?: string | null, phone?: string | null, copyright?: string | null, quickLinks?: Array<{ __typename: 'FooterQuickLinks', label?: string | null, href?: string | null } | null> | null, serviceLinks?: Array<{ __typename: 'FooterServiceLinks', label?: string | null, href?: string | null } | null> | null, socialLinks?: Array<{ __typename: 'FooterSocialLinks', label?: string | null, icon?: string | null, href?: string | null } | null> | null };
 
 export type TestimonialsPartsFragment = { __typename: 'Testimonials', items?: Array<{ __typename: 'TestimonialsItems', quote?: string | null, author?: string | null } | null> | null };
 
@@ -1756,7 +1924,7 @@ export type HomeQueryVariables = Exact<{
 }>;
 
 
-export type HomeQuery = { __typename?: 'Query', home: { __typename: 'Home', id: string, heroHeading?: string | null, heroSubtext?: string | null, heroCTALabel?: string | null, heroBottomCTALabel?: string | null, ctaHeading?: string | null, ctaLine1?: string | null, ctaLine2?: string | null, ctaLine3?: string | null, ctaMessage1?: string | null, ctaMessage2?: string | null, aboutHeading?: string | null, aboutCredentialTitle?: string | null, aboutParagraph1?: string | null, aboutParagraph2?: string | null, feelLikeYouHeading?: string | null, feelLikeYouTagline?: string | null, feelLikeYouQuestion1?: string | null, feelLikeYouQuestion2?: string | null, feelLikeYouQuestion3?: string | null, feelLikeYouQuestion4?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, bottomCTAText?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type HomeQuery = { __typename?: 'Query', home: { __typename: 'Home', id: string, heroImage?: string | null, heroHeading?: string | null, heroSubtext?: string | null, heroCTALabel?: string | null, heroBottomCTALabel?: string | null, ctaHeading?: string | null, ctaLine1?: string | null, ctaLine2?: string | null, ctaLine3?: string | null, ctaMessage1?: string | null, ctaMessage2?: string | null, aboutHeading?: string | null, aboutImage?: string | null, aboutCredentialTitle?: string | null, aboutParagraph1?: string | null, aboutParagraph2?: string | null, feelLikeYouHeading?: string | null, feelLikeYouTagline?: string | null, feelLikeYouQuestion1?: string | null, feelLikeYouQuestion2?: string | null, feelLikeYouQuestion3?: string | null, feelLikeYouQuestion4?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, bottomCTAText?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type HomeConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1768,7 +1936,7 @@ export type HomeConnectionQueryVariables = Exact<{
 }>;
 
 
-export type HomeConnectionQuery = { __typename?: 'Query', homeConnection: { __typename?: 'HomeConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'HomeConnectionEdges', cursor: string, node?: { __typename: 'Home', id: string, heroHeading?: string | null, heroSubtext?: string | null, heroCTALabel?: string | null, heroBottomCTALabel?: string | null, ctaHeading?: string | null, ctaLine1?: string | null, ctaLine2?: string | null, ctaLine3?: string | null, ctaMessage1?: string | null, ctaMessage2?: string | null, aboutHeading?: string | null, aboutCredentialTitle?: string | null, aboutParagraph1?: string | null, aboutParagraph2?: string | null, feelLikeYouHeading?: string | null, feelLikeYouTagline?: string | null, feelLikeYouQuestion1?: string | null, feelLikeYouQuestion2?: string | null, feelLikeYouQuestion3?: string | null, feelLikeYouQuestion4?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, bottomCTAText?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type HomeConnectionQuery = { __typename?: 'Query', homeConnection: { __typename?: 'HomeConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'HomeConnectionEdges', cursor: string, node?: { __typename: 'Home', id: string, heroImage?: string | null, heroHeading?: string | null, heroSubtext?: string | null, heroCTALabel?: string | null, heroBottomCTALabel?: string | null, ctaHeading?: string | null, ctaLine1?: string | null, ctaLine2?: string | null, ctaLine3?: string | null, ctaMessage1?: string | null, ctaMessage2?: string | null, aboutHeading?: string | null, aboutImage?: string | null, aboutCredentialTitle?: string | null, aboutParagraph1?: string | null, aboutParagraph2?: string | null, feelLikeYouHeading?: string | null, feelLikeYouTagline?: string | null, feelLikeYouQuestion1?: string | null, feelLikeYouQuestion2?: string | null, feelLikeYouQuestion3?: string | null, feelLikeYouQuestion4?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, bottomCTAText?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type AboutQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1870,7 +2038,7 @@ export type ContactQueryVariables = Exact<{
 }>;
 
 
-export type ContactQuery = { __typename?: 'Query', contact: { __typename: 'Contact', id: string, heroHeading?: string | null, heroSubtext?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, email?: string | null, phone?: string | null, videoText?: string | null, location?: string | null, bookingCTALabel?: string | null, formHeading?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type ContactQuery = { __typename?: 'Query', contact: { __typename: 'Contact', id: string, heroImage?: string | null, heroHeading?: string | null, heroSubtext?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, email?: string | null, phone?: string | null, videoText?: string | null, location?: string | null, bookingCTALabel?: string | null, formHeading?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type ContactConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1882,7 +2050,7 @@ export type ContactConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ContactConnectionQuery = { __typename?: 'Query', contactConnection: { __typename?: 'ContactConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ContactConnectionEdges', cursor: string, node?: { __typename: 'Contact', id: string, heroHeading?: string | null, heroSubtext?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, email?: string | null, phone?: string | null, videoText?: string | null, location?: string | null, bookingCTALabel?: string | null, formHeading?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type ContactConnectionQuery = { __typename?: 'Query', contactConnection: { __typename?: 'ContactConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ContactConnectionEdges', cursor: string, node?: { __typename: 'Contact', id: string, heroImage?: string | null, heroHeading?: string | null, heroSubtext?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, email?: string | null, phone?: string | null, videoText?: string | null, location?: string | null, bookingCTALabel?: string | null, formHeading?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type PostQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1922,6 +2090,25 @@ export type PodcastConnectionQueryVariables = Exact<{
 
 export type PodcastConnectionQuery = { __typename?: 'Query', podcastConnection: { __typename?: 'PodcastConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PodcastConnectionEdges', cursor: string, node?: { __typename: 'Podcast', id: string, title: string, episode?: string | null, publishedAt?: string | null, status?: string | null, audioUrl?: string | null, excerpt?: string | null, icon?: string | null, gradient?: string | null, badgeColor?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
+export type FooterQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type FooterQuery = { __typename?: 'Query', footer: { __typename: 'Footer', id: string, brandHeading?: string | null, brandDescription?: string | null, quickLinksHeading?: string | null, servicesHeading?: string | null, connectHeading?: string | null, emailLabel?: string | null, email?: string | null, phoneLabel?: string | null, phone?: string | null, copyright?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, quickLinks?: Array<{ __typename: 'FooterQuickLinks', label?: string | null, href?: string | null } | null> | null, serviceLinks?: Array<{ __typename: 'FooterServiceLinks', label?: string | null, href?: string | null } | null> | null, socialLinks?: Array<{ __typename: 'FooterSocialLinks', label?: string | null, icon?: string | null, href?: string | null } | null> | null } };
+
+export type FooterConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<FooterFilter>;
+}>;
+
+
+export type FooterConnectionQuery = { __typename?: 'Query', footerConnection: { __typename?: 'FooterConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'FooterConnectionEdges', cursor: string, node?: { __typename: 'Footer', id: string, brandHeading?: string | null, brandDescription?: string | null, quickLinksHeading?: string | null, servicesHeading?: string | null, connectHeading?: string | null, emailLabel?: string | null, email?: string | null, phoneLabel?: string | null, phone?: string | null, copyright?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, quickLinks?: Array<{ __typename: 'FooterQuickLinks', label?: string | null, href?: string | null } | null> | null, serviceLinks?: Array<{ __typename: 'FooterServiceLinks', label?: string | null, href?: string | null } | null> | null, socialLinks?: Array<{ __typename: 'FooterSocialLinks', label?: string | null, icon?: string | null, href?: string | null } | null> | null } | null } | null> | null } };
+
 export type TestimonialsQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
@@ -1944,6 +2131,7 @@ export type TestimonialsConnectionQuery = { __typename?: 'Query', testimonialsCo
 export const HomePartsFragmentDoc = gql`
     fragment HomeParts on Home {
   __typename
+  heroImage
   heroHeading
   heroSubtext
   heroCTALabel
@@ -1955,6 +2143,7 @@ export const HomePartsFragmentDoc = gql`
   ctaMessage1
   ctaMessage2
   aboutHeading
+  aboutImage
   aboutCredentialTitle
   aboutParagraph1
   aboutParagraph2
@@ -2230,6 +2419,7 @@ export const ResourcesPartsFragmentDoc = gql`
 export const ContactPartsFragmentDoc = gql`
     fragment ContactParts on Contact {
   __typename
+  heroImage
   heroHeading
   heroSubtext
   sectionHeading
@@ -2269,6 +2459,37 @@ export const PodcastPartsFragmentDoc = gql`
   gradient
   badgeColor
   body
+}
+    `;
+export const FooterPartsFragmentDoc = gql`
+    fragment FooterParts on Footer {
+  __typename
+  brandHeading
+  brandDescription
+  quickLinksHeading
+  quickLinks {
+    __typename
+    label
+    href
+  }
+  servicesHeading
+  serviceLinks {
+    __typename
+    label
+    href
+  }
+  connectHeading
+  socialLinks {
+    __typename
+    label
+    icon
+    href
+  }
+  emailLabel
+  email
+  phoneLabel
+  phone
+  copyright
 }
     `;
 export const TestimonialsPartsFragmentDoc = gql`
@@ -2794,6 +3015,63 @@ export const PodcastConnectionDocument = gql`
   }
 }
     ${PodcastPartsFragmentDoc}`;
+export const FooterDocument = gql`
+    query footer($relativePath: String!) {
+  footer(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...FooterParts
+  }
+}
+    ${FooterPartsFragmentDoc}`;
+export const FooterConnectionDocument = gql`
+    query footerConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: FooterFilter) {
+  footerConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...FooterParts
+      }
+    }
+  }
+}
+    ${FooterPartsFragmentDoc}`;
 export const TestimonialsDocument = gql`
     query testimonials($relativePath: String!) {
   testimonials(relativePath: $relativePath) {
@@ -2907,6 +3185,12 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     podcastConnection(variables?: PodcastConnectionQueryVariables, options?: C): Promise<{data: PodcastConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PodcastConnectionQueryVariables, query: string}> {
         return requester<{data: PodcastConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PodcastConnectionQueryVariables, query: string}, PodcastConnectionQueryVariables>(PodcastConnectionDocument, variables, options);
+      },
+    footer(variables: FooterQueryVariables, options?: C): Promise<{data: FooterQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FooterQueryVariables, query: string}> {
+        return requester<{data: FooterQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FooterQueryVariables, query: string}, FooterQueryVariables>(FooterDocument, variables, options);
+      },
+    footerConnection(variables?: FooterConnectionQueryVariables, options?: C): Promise<{data: FooterConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FooterConnectionQueryVariables, query: string}> {
+        return requester<{data: FooterConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FooterConnectionQueryVariables, query: string}, FooterConnectionQueryVariables>(FooterConnectionDocument, variables, options);
       },
     testimonials(variables: TestimonialsQueryVariables, options?: C): Promise<{data: TestimonialsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TestimonialsQueryVariables, query: string}> {
         return requester<{data: TestimonialsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TestimonialsQueryVariables, query: string}, TestimonialsQueryVariables>(TestimonialsDocument, variables, options);

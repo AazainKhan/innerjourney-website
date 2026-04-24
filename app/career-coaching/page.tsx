@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import careerData from '@/content/pages/career-coaching.json'
+import client from '@/tina/__generated__/client'
 import CareerCoachingClient from './CareerCoachingClient'
 
 export const metadata: Metadata = {
@@ -13,65 +14,27 @@ export const metadata: Metadata = {
   },
 }
 
-const QUERY = `
-  query CareerCoaching($relativePath: String!) {
-    careerCoaching(relativePath: $relativePath) {
-      heroHeading
-      heroSubtextPrefix
-      heroSubtextHighlight
-      heroCTALabel
-      resultsHeadingPrefix
-      resultsHeadingHighlight
-      resultsSubtext
-      perhapsLabel
-      situations
-      bannerPrefix
-      bannerHighlight
-      clarityHeadingPrefix
-      clarityHeadingHighlight
-      clarityParagraph1
-      clarityQuestion
-      clarityParagraph2
-      clarityParagraph3
-      clarityEmphasis
-      clarityParagraph4
-      clarityParagraph5
-      clarityBigWord
-      philosophyHeadingPrefix
-      philosophyHeadingHighlight
-      philosophyParagraph1
-      philosophyParagraph2Prefix
-      philosophyParagraph2Highlight
-      philosophyParagraph3
-      philosophyEmphasis
-      philosophyClosing
-      imagineHeadingHighlight
-      imagineItems { emoji text borderColor bg }
-      roadmapHeadingPrefix
-      roadmapHeadingHighlight
-      roadmapSubtext1
-      roadmapSubtext2
-      roadmapSteps { number weeks title subtitle subtitleColor description }
-      roadmapCTALabel
-      experienceHeadingPrefix
-      experienceHeadingHighlight
-      experienceSubtext
-      experienceItems
-      ctaSectionHeadingPrefix
-      ctaSectionHeadingHighlight
-      ctaSectionParagraph1
-      ctaSectionParagraph2
-      ctaButtonLabel
-    }
-  }
-`
+export default async function CareerCoachingPage() {
+  const res = await client.queries
+    .careerCoaching({ relativePath: 'career-coaching.json' })
+    .catch(() => null)
 
-export default function CareerCoachingPage() {
+  if (!res) {
+    return (
+      <CareerCoachingClient
+        query=""
+        variables={{ relativePath: 'career-coaching.json' }}
+        data={{ careerCoaching: careerData }}
+      />
+    )
+  }
+
   return (
     <CareerCoachingClient
-      query={QUERY}
-      variables={{ relativePath: 'career-coaching.json' }}
-      data={{ careerCoaching: careerData }}
+      query={res.query}
+      variables={res.variables}
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      data={res.data as any}
     />
   )
 }

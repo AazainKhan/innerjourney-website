@@ -24,6 +24,7 @@ export default defineConfig({
         format: 'json',
         ui: { router: () => '/' },
         fields: [
+          { name: 'heroImage', label: 'Hero Background Image', type: 'image' },
           { name: 'heroHeading', label: 'Hero Heading', type: 'string' },
           { name: 'heroSubtext', label: 'Hero Subtext', type: 'string', ui: { component: 'textarea' } },
           { name: 'heroCTALabel', label: 'Hero CTA Button Label', type: 'string' },
@@ -35,6 +36,7 @@ export default defineConfig({
           { name: 'ctaMessage1', label: 'Mid-CTA Message 1', type: 'string', ui: { component: 'textarea' } },
           { name: 'ctaMessage2', label: 'Mid-CTA Message 2', type: 'string', ui: { component: 'textarea' } },
           { name: 'aboutHeading', label: 'About Section Heading', type: 'string' },
+          { name: 'aboutImage', label: 'About Section Image', type: 'image' },
           { name: 'aboutCredentialTitle', label: 'About Credential Subtitle', type: 'string' },
           { name: 'aboutParagraph1', label: 'About Paragraph 1', type: 'string', ui: { component: 'textarea' } },
           { name: 'aboutParagraph2', label: 'About Paragraph 2', type: 'string', ui: { component: 'textarea' } },
@@ -385,6 +387,7 @@ export default defineConfig({
         format: 'json',
         ui: { router: () => '/contact' },
         fields: [
+          { name: 'heroImage', label: 'Hero Background Image', type: 'image' },
           { name: 'heroHeading', label: 'Hero Heading', type: 'string' },
           { name: 'heroSubtext', label: 'Hero Subtext', type: 'string', ui: { component: 'textarea' } },
           { name: 'sectionHeading', label: 'Form Section Heading', type: 'string' },
@@ -470,6 +473,51 @@ export default defineConfig({
           { name: 'gradient', label: 'Background Gradient Class', type: 'string' },
           { name: 'badgeColor', label: 'Badge Color Class', type: 'string' },
           { name: 'body', label: 'Show Notes / Description', type: 'rich-text', isBody: true },
+        ],
+      },
+      {
+        name: 'footer',
+        label: 'Footer (Site-Wide)',
+        path: 'content',
+        match: { include: 'footer' },
+        format: 'json',
+        ui: { router: () => '/' },
+        fields: [
+          { name: 'brandHeading', label: 'Brand Heading', type: 'string' },
+          { name: 'brandDescription', label: 'Brand Description', type: 'string', ui: { component: 'textarea' } },
+          { name: 'quickLinksHeading', label: 'Quick Links Heading', type: 'string' },
+          {
+            name: 'quickLinks', label: 'Quick Links', type: 'object', list: true,
+            ui: { itemProps: (item) => ({ label: item?.label }) },
+            fields: [
+              { name: 'label', label: 'Label', type: 'string' },
+              { name: 'href', label: 'Link URL', type: 'string' },
+            ],
+          },
+          { name: 'servicesHeading', label: 'Services Heading', type: 'string' },
+          {
+            name: 'serviceLinks', label: 'Service Links', type: 'object', list: true,
+            ui: { itemProps: (item) => ({ label: item?.label }) },
+            fields: [
+              { name: 'label', label: 'Label', type: 'string' },
+              { name: 'href', label: 'Link URL', type: 'string' },
+            ],
+          },
+          { name: 'connectHeading', label: 'Connect Heading', type: 'string' },
+          {
+            name: 'socialLinks', label: 'Social Links', type: 'object', list: true,
+            ui: { itemProps: (item) => ({ label: item?.label }) },
+            fields: [
+              { name: 'label', label: 'Label', type: 'string' },
+              { name: 'icon', label: 'Font Awesome Icon Class (fa-...)', type: 'string' },
+              { name: 'href', label: 'URL', type: 'string' },
+            ],
+          },
+          { name: 'emailLabel', label: 'Email Label', type: 'string' },
+          { name: 'email', label: 'Email Address', type: 'string' },
+          { name: 'phoneLabel', label: 'Phone Label', type: 'string' },
+          { name: 'phone', label: 'Phone Number', type: 'string' },
+          { name: 'copyright', label: 'Copyright Text', type: 'string' },
         ],
       },
       {

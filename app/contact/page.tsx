@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import contactData from '@/content/pages/contact.json'
+import client from '@/tina/__generated__/client'
 import ContactPageClient from './ContactPageClient'
 
 export const metadata: Metadata = {
@@ -14,29 +15,27 @@ export const metadata: Metadata = {
   },
 }
 
-const QUERY = `
-  query Contact($relativePath: String!) {
-    contact(relativePath: $relativePath) {
-      heroHeading
-      heroSubtext
-      sectionHeading
-      sectionSubtext
-      email
-      phone
-      videoText
-      location
-      bookingCTALabel
-      formHeading
-    }
-  }
-`
+export default async function ContactPage() {
+  const res = await client.queries
+    .contact({ relativePath: 'contact.json' })
+    .catch(() => null)
 
-export default function ContactPage() {
+  if (!res) {
+    return (
+      <ContactPageClient
+        query=""
+        variables={{ relativePath: 'contact.json' }}
+        data={{ contact: contactData }}
+      />
+    )
+  }
+
   return (
     <ContactPageClient
-      query={QUERY}
-      variables={{ relativePath: 'contact.json' }}
-      data={{ contact: contactData }}
+      query={res.query}
+      variables={res.variables}
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      data={res.data as any}
     />
   )
 }

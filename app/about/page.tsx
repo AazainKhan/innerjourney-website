@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import aboutData from '@/content/pages/about.json'
+import client from '@/tina/__generated__/client'
 import AboutPageClient from './AboutPageClient'
 
 export const metadata: Metadata = {
@@ -14,42 +15,27 @@ export const metadata: Metadata = {
   },
 }
 
-const QUERY = `
-  query About($relativePath: String!) {
-    about(relativePath: $relativePath) {
-      heroHeading
-      heroSubtext
-      storyHeading
-      storyParagraph1
-      storyParagraph2
-      credentialsHeading
-      credentialsSubtext
-      credentials {
-        icon
-        title
-        description
-        gradient
-      }
-      valuesHeading
-      valuesSubtext
-      values {
-        icon
-        title
-        description
-      }
-      ctaHeading
-      ctaSubtext
-      ctaButtonLabel
-    }
-  }
-`
+export default async function AboutPage() {
+  const res = await client.queries
+    .about({ relativePath: 'about.json' })
+    .catch(() => null)
 
-export default function AboutPage() {
+  if (!res) {
+    return (
+      <AboutPageClient
+        query=""
+        variables={{ relativePath: 'about.json' }}
+        data={{ about: aboutData }}
+      />
+    )
+  }
+
   return (
     <AboutPageClient
-      query={QUERY}
-      variables={{ relativePath: 'about.json' }}
-      data={{ about: aboutData }}
+      query={res.query}
+      variables={res.variables}
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      data={res.data as any}
     />
   )
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import homeData from '@/content/pages/home.json'
+import client from '@/tina/__generated__/client'
 import HomePageClient from './HomePageClient'
 
 export const metadata: Metadata = {
@@ -14,42 +15,28 @@ export const metadata: Metadata = {
   },
 }
 
-const QUERY = `
-  query Home($relativePath: String!) {
-    home(relativePath: $relativePath) {
-      heroHeading
-      heroSubtext
-      heroCTALabel
-      heroBottomCTALabel
-      ctaHeading
-      ctaLine1
-      ctaLine2
-      ctaLine3
-      ctaMessage1
-      ctaMessage2
-      aboutHeading
-      aboutCredentialTitle
-      aboutParagraph1
-      aboutParagraph2
-      feelLikeYouQuestion1
-      feelLikeYouQuestion2
-      feelLikeYouQuestion3
-      feelLikeYouQuestion4
-      feelLikeYouHeading
-      feelLikeYouTagline
-      servicesHeading
-      servicesSubtext
-      bottomCTAText
-    }
-  }
-`
+export default async function HomePage() {
+  const res = await client.queries
+    .home({ relativePath: 'home.json' })
+    .catch(() => null)
 
-export default function HomePage() {
+  // Fall back to static JSON if Tina Cloud is unreachable or schema is still indexing
+  if (!res) {
+    return (
+      <HomePageClient
+        query=""
+        variables={{ relativePath: 'home.json' }}
+        data={{ home: homeData }}
+      />
+    )
+  }
+
   return (
     <HomePageClient
-      query={QUERY}
-      variables={{ relativePath: 'home.json' }}
-      data={{ home: homeData }}
+      query={res.query}
+      variables={res.variables}
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      data={res.data as any}
     />
   )
 }
