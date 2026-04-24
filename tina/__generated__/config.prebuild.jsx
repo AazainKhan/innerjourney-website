@@ -22,6 +22,7 @@ var config_default = defineConfig({
         path: "content/pages",
         match: { include: "home" },
         format: "json",
+        ui: { router: () => "/" },
         fields: [
           { name: "heroBadge", label: "Hero Badge Text", type: "string" },
           { name: "heroHeading", label: "Hero Heading", type: "string" },
@@ -48,6 +49,7 @@ var config_default = defineConfig({
         path: "content/pages",
         match: { include: "about" },
         format: "json",
+        ui: { router: () => "/about" },
         fields: [
           { name: "heroBadge", label: "Hero Badge Text", type: "string" },
           { name: "heroHeading", label: "Hero Heading", type: "string" },
@@ -91,6 +93,7 @@ var config_default = defineConfig({
         path: "content/pages",
         match: { include: "clarity-coaching" },
         format: "json",
+        ui: { router: () => "/clarity-coaching" },
         fields: [
           { name: "heroBadge", label: "Hero Badge Text", type: "string" },
           { name: "heroHeading", label: "Hero Heading", type: "string" },
@@ -126,6 +129,7 @@ var config_default = defineConfig({
         path: "content/pages",
         match: { include: "career-coaching" },
         format: "json",
+        ui: { router: () => "/career-coaching" },
         fields: [
           { name: "heroHeading", label: "Hero Heading", type: "string" },
           { name: "heroSubtext", label: "Hero Subtext", type: "string", ui: { component: "textarea" } },
@@ -157,6 +161,7 @@ var config_default = defineConfig({
         path: "content/pages",
         match: { include: "numerology" },
         format: "json",
+        ui: { router: () => "/numerology" },
         fields: [
           { name: "heroBadge", label: "Hero Badge Text", type: "string" },
           { name: "heroHeading", label: "Hero Heading", type: "string" },
@@ -184,6 +189,7 @@ var config_default = defineConfig({
         path: "content/pages",
         match: { include: "resources" },
         format: "json",
+        ui: { router: () => "/resources" },
         fields: [
           { name: "heroBadge", label: "Hero Badge Text", type: "string" },
           { name: "heroHeading", label: "Hero Heading", type: "string" },
@@ -204,6 +210,7 @@ var config_default = defineConfig({
         path: "content/pages",
         match: { include: "contact" },
         format: "json",
+        ui: { router: () => "/contact" },
         fields: [
           { name: "heroBadge", label: "Hero Badge Text", type: "string" },
           { name: "heroHeading", label: "Hero Heading", type: "string" },
@@ -221,6 +228,7 @@ var config_default = defineConfig({
         path: "content",
         match: { include: "testimonials" },
         format: "json",
+        ui: { router: () => "/" },
         fields: [
           {
             name: "items",
