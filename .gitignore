@@ -24,4 +24,6 @@ tests/playwright-snap.js
 .DS_Store
 Thumbs.db
 
-cpanel pages/
+cpanel pages/.next/
+.next/
+tina/__generated__/.cache/

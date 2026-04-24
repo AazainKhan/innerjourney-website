@@ -1,0 +1,27 @@
+{
+  "heroBadge": "12-Week Transformation Programme",
+  "heroHeading": "Get answers and transform your life",
+  "heroSubtext": "Discover the missing piece to achieving lasting change, and the life you deserve",
+  "sectionHeading": "Clarity Coaching that gets results",
+  "sectionSubtext": "There comes a time in life when you find yourself on a challenging path, but can't find a clear way through.",
+  "perhapsItems": [
+    { "emoji": "🔀", "text": "At a crossroads, struggling to make a decision" },
+    { "emoji": "🏠", "text": "Experiencing a big life change, like becoming a parent, or a house move" },
+    { "emoji": "💔", "text": "In a relationship dynamic that no longer serves you" },
+    { "emoji": "🎭", "text": "Fed up of being the supporting role in everyone else's life" },
+    { "emoji": "⏸️", "text": "Bored of putting your own goals on pause, but struggling to make progress" }
+  ],
+  "bannerQuote": "You're done going through the motions — it's time to get answers.",
+  "outcomesSectionHeading": "By the end of the programme, you will…",
+  "outcomes": [
+    "Get clear on your values and what truly matters to you",
+    "Make confident decisions aligned with your authentic self",
+    "Break through the mental blocks holding you back",
+    "Build the courage to take action towards your goals",
+    "Develop lasting habits and a growth mindset",
+    "Step into the next chapter of your life with clarity"
+  ],
+  "ctaSectionHeading": "Ready to get clear?",
+  "ctaSectionSubtext": "Book a free Clarity Call and let's explore if this programme is the right fit for you.",
+  "ctaButtonLabel": "Book My Free Clarity Call"
+}

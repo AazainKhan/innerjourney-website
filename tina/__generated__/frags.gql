@@ -1,0 +1,139 @@
+fragment HomeParts on Home {
+  __typename
+  heroBadge
+  heroHeading
+  heroHeadingHighlight
+  heroSubtext
+  heroCTALabel
+  aboutBadge
+  aboutHeading
+  aboutParagraph1
+  aboutParagraph2
+  aboutParagraph3
+  aboutQuote
+  aboutCTALabel
+  servicesSectionHeading
+  servicesSectionSubtext
+  ctaSectionHeading
+  ctaSectionSubtext
+  ctaButtonLabel
+}
+
+fragment AboutParts on About {
+  __typename
+  heroBadge
+  heroHeading
+  heroSubtext
+  bioParagraph1
+  bioParagraph2
+  bioParagraph3
+  bioParagraph4
+  credentialsSectionHeading
+  credentials {
+    __typename
+    icon
+    title
+    desc
+  }
+  valuesSectionHeading
+  values {
+    __typename
+    icon
+    title
+    desc
+  }
+  ctaSectionHeading
+  ctaSectionSubtext
+  ctaButtonLabel
+}
+
+fragment ClarityCoachingParts on ClarityCoaching {
+  __typename
+  heroBadge
+  heroHeading
+  heroSubtext
+  sectionHeading
+  sectionSubtext
+  perhapsItems {
+    __typename
+    emoji
+    text
+  }
+  bannerQuote
+  outcomesSectionHeading
+  outcomes
+  ctaSectionHeading
+  ctaSectionSubtext
+  ctaButtonLabel
+}
+
+fragment CareerCoachingParts on CareerCoaching {
+  __typename
+  heroHeading
+  heroSubtext
+  heroCTALabel
+  sectionHeading
+  sectionSubtext
+  situations
+  bannerQuote
+  outcomesSectionHeading
+  outcomes
+  ctaSectionHeading
+  ctaSectionSubtext
+  ctaButtonLabel
+}
+
+fragment NumerologyParts on Numerology {
+  __typename
+  heroBadge
+  heroHeading
+  heroTagline
+  heroSubtext
+  heroCTALabel
+  whatIsHeading
+  whatIsSubtext
+  comparisonText
+  powerText
+  sessionIncludes
+  ctaSectionHeading
+  ctaSectionSubtext
+  ctaButtonLabel
+}
+
+fragment ResourcesParts on Resources {
+  __typename
+  heroBadge
+  heroHeading
+  heroHeadingHighlight
+  heroSubtext
+  blogHeading
+  blogText
+  podcastHeading
+  podcastText
+  ctaSectionHeading
+  ctaSectionSubtext
+  ctaButtonLabel
+}
+
+fragment ContactParts on Contact {
+  __typename
+  heroBadge
+  heroHeading
+  heroSubtext
+  email
+  location
+  responseTime
+  formHeading
+  formSubtext
+}
+
+fragment TestimonialsParts on Testimonials {
+  __typename
+  items {
+    __typename
+    quote
+    name
+    role
+    initials
+  }
+}
