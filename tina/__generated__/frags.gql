@@ -1,0 +1,370 @@
+fragment HomeParts on Home {
+  __typename
+  heroImage
+  heroHeading
+  heroSubtext
+  heroCTALabel
+  heroBottomCTALabel
+  ctaHeading
+  ctaLine1
+  ctaLine2
+  ctaLine3
+  ctaMessage1
+  ctaMessage2
+  aboutHeading
+  aboutImage
+  aboutCredentialTitle
+  aboutParagraph1
+  aboutParagraph2
+  feelLikeYouHeading
+  feelLikeYouTagline
+  feelLikeYouQuestion1
+  feelLikeYouQuestion2
+  feelLikeYouQuestion3
+  feelLikeYouQuestion4
+  servicesHeading
+  servicesSubtext
+  bottomCTAText
+}
+
+fragment AboutParts on About {
+  __typename
+  heroHeading
+  heroSubtext
+  storyHeading
+  storyParagraph1
+  storyParagraph2
+  credentialsHeading
+  credentialsSubtext
+  credentials {
+    __typename
+    icon
+    title
+    description
+    gradient
+  }
+  valuesHeading
+  valuesSubtext
+  values {
+    __typename
+    icon
+    title
+    description
+  }
+  ctaHeading
+  ctaSubtext
+  ctaButtonLabel
+}
+
+fragment ClarityCoachingParts on ClarityCoaching {
+  __typename
+  heroBadge
+  heroHeading
+  heroSubtext
+  heroCTALabel
+  heroSideEmoji
+  heroSideWeeks
+  heroSideSubtext
+  resultsHeadingPrefix
+  resultsHeadingHighlight
+  resultsSubtext
+  perhapsLabel
+  perhapsItems {
+    __typename
+    emoji
+    text
+    borderColor
+  }
+  bannerText
+  bannerHighlight
+  missingPieceHeadingPrefix
+  missingPieceHeadingHighlight
+  problemTitle
+  problemParagraph1
+  problemQuestion
+  problemParagraph2
+  problemParagraph3
+  solutionTitle
+  solutionParagraph1
+  solutionEmphasis
+  solutionParagraph2
+  solutionWord
+  philosophyLabel
+  philosophyHeadingPrefix
+  philosophyHeadingHighlight
+  philosophyQuote
+  philosophyParagraph1
+  philosophyParagraph2
+  philosophyBannerPrefix
+  philosophyBannerHighlight
+  philosophyClosingPrefix
+  philosophyClosingHighlight
+  timelineLabel
+  timelineHeadingPrefix
+  timelineHeadingHighlight
+  timelineSubtext
+  timelineSteps {
+    __typename
+    number
+    weeks
+    title
+    subtitle
+    description
+    accent
+  }
+  timelineCTALabel
+  experienceLabel
+  experienceHeadingPrefix
+  experienceHeadingHighlight
+  experienceItems {
+    __typename
+    emoji
+    title
+    subtitle
+    bg
+  }
+  bonusEmoji
+  bonusPrefix
+  bonusText
+  ctaSectionHeadingPrefix
+  ctaSectionHeadingHighlight
+  ctaSectionParagraph1
+  ctaSectionParagraph2
+  ctaButtonLabel
+}
+
+fragment CareerCoachingParts on CareerCoaching {
+  __typename
+  heroHeading
+  heroSubtextPrefix
+  heroSubtextHighlight
+  heroCTALabel
+  resultsHeadingPrefix
+  resultsHeadingHighlight
+  resultsSubtext
+  perhapsLabel
+  situations
+  bannerPrefix
+  bannerHighlight
+  clarityHeadingPrefix
+  clarityHeadingHighlight
+  clarityParagraph1
+  clarityQuestion
+  clarityParagraph2
+  clarityParagraph3
+  clarityEmphasis
+  clarityParagraph4
+  clarityParagraph5
+  clarityBigWord
+  philosophyHeadingPrefix
+  philosophyHeadingHighlight
+  philosophyParagraph1
+  philosophyParagraph2Prefix
+  philosophyParagraph2Highlight
+  philosophyParagraph3
+  philosophyEmphasis
+  philosophyClosing
+  imagineHeadingHighlight
+  imagineItems {
+    __typename
+    emoji
+    text
+    borderColor
+    bg
+  }
+  roadmapHeadingPrefix
+  roadmapHeadingHighlight
+  roadmapSubtext1
+  roadmapSubtext2
+  roadmapSteps {
+    __typename
+    number
+    weeks
+    title
+    subtitle
+    subtitleColor
+    description
+  }
+  roadmapCTALabel
+  experienceHeadingPrefix
+  experienceHeadingHighlight
+  experienceSubtext
+  experienceItems
+  ctaSectionHeadingPrefix
+  ctaSectionHeadingHighlight
+  ctaSectionParagraph1
+  ctaSectionParagraph2
+  ctaButtonLabel
+}
+
+fragment NumerologyParts on Numerology {
+  __typename
+  heroBadge
+  heroHeading
+  heroTagline
+  heroSubtext
+  heroCTALabel
+  selfDiscoveryHeadingPrefix
+  selfDiscoveryHeadingHighlight
+  selfDiscoverySubtext
+  selfDiscoveryItems {
+    __typename
+    emoji
+    text
+    borderColor
+  }
+  selfDiscoveryStatementPrefix
+  selfDiscoveryStatementHighlight
+  whatIsLabel
+  whatIsHeadingPrefix
+  whatIsHeadingHighlight
+  whatIsIsntParagraph
+  whatIsIsParagraph1
+  whatIsIsParagraph2
+  processLabel
+  processHeadingPrefix
+  processHeadingHighlight
+  processSteps {
+    __typename
+    emoji
+    stepLabel
+    title
+    description
+  }
+  includesLabel
+  includesHeadingPrefix
+  includesHeadingHighlight
+  includesSubtext
+  includes {
+    __typename
+    emoji
+    title
+    description
+  }
+  philosophyLabel
+  philosophyHeadingPrefix
+  philosophyHeadingHighlight
+  philosophyQuote
+  philosophyParagraph1
+  philosophyParagraph2
+  philosophyBanner
+  philosophyClosingPrefix
+  philosophyClosingHighlight
+  ctaSectionHeading
+  ctaButtonLabel
+}
+
+fragment ResourcesParts on Resources {
+  __typename
+  heroBadge
+  heroHeading
+  heroHeadingHighlight
+  heroSubtext
+  featuredHeading
+  featuredBlogCategory
+  featuredBlogStatus
+  featuredBlogTitle
+  featuredBlogExcerpt
+  featuredBlogReadTime
+  featuredBlogCTA
+  featuredBlogSlug
+  blogSectionHeading
+  podcastSectionHeading
+  newsletterHeading
+  newsletterSubtext
+  newsletterPlaceholder
+  newsletterButton
+  newsletterSuccessMessage
+  ctaSectionHeading
+  ctaSectionSubtext
+  ctaButtonLabel
+}
+
+fragment ContactParts on Contact {
+  __typename
+  heroImage
+  heroHeading
+  heroSubtext
+  sectionHeading
+  sectionSubtext
+  email
+  phone
+  videoText
+  location
+  bookingCTALabel
+  formHeading
+}
+
+fragment PostParts on Post {
+  __typename
+  title
+  publishedAt
+  status
+  excerpt
+  icon
+  iconColor
+  gradient
+  badgeColor
+  body
+}
+
+fragment PodcastParts on Podcast {
+  __typename
+  title
+  episode
+  publishedAt
+  status
+  audioUrl
+  excerpt
+  icon
+  gradient
+  badgeColor
+  body
+}
+
+fragment FooterParts on Footer {
+  __typename
+  brandHeading
+  brandDescription
+  quickLinksHeading
+  quickLinks {
+    __typename
+    label
+    href
+  }
+  servicesHeading
+  serviceLinks {
+    __typename
+    label
+    href
+  }
+  connectHeading
+  socialLinks {
+    __typename
+    label
+    icon
+    href
+  }
+  emailLabel
+  email
+  phoneLabel
+  phone
+  copyright
+}
+
+fragment ThemeParts on Theme {
+  __typename
+  primaryColor
+  secondaryColor
+  accentColor
+  neutralColor
+}
+
+fragment TestimonialsParts on Testimonials {
+  __typename
+  items {
+    __typename
+    quote
+    author
+  }
+}

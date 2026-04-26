@@ -1,0 +1,62 @@
+{
+  "heroHeading": "Meet Shanila",
+  "heroSubtext": "Your dedicated Clarity and Mindset Coach, committed to helping you unlock your potential and create the life you've always dreamed of.",
+  "storyHeading": "Clarity, Mindset, and Transformation – My Story",
+  "storyParagraph1": "Shanila, an accomplished coach with a ten year track record, possesses a deep understanding of coaching methodologies, guiding individuals to achieve personal and professional goals. Committed to continuous learning and known for her empathetic approach, she empowers clients to overcome challenges and unlock their potential. Her dedicated coaching experience reflects a commitment to excellence and passion for positive change.",
+  "storyParagraph2": "Trained by internationally acclaimed coach (Global Guru) Vikram Dhar, Shanila's coaching approach is infused with a global perspective and proven methodologies, enabling her to drive impactful transformations. Boasting diverse credentials, including a Master Practitioner in NLP, Certified Emotional Intelligence Practitioner, ICF qualified Associate Certified Coach, and Vedic Numerologist.",
+  "credentialsHeading": "Professional Qualifications",
+  "credentialsSubtext": "I'm committed to continuous learning and professional development to provide you with the best coaching experience.",
+  "credentials": [
+    {
+      "icon": "fa-brain",
+      "title": "Master Practitioner in NLP",
+      "description": "Advanced certification in Neuro-Linguistic Programming techniques for personal transformation and behavioral change.",
+      "gradient": "from-orange-500 to-orange-600"
+    },
+    {
+      "icon": "fa-heart",
+      "title": "Certified Emotional Intelligence Practitioner",
+      "description": "Specialized training in understanding and applying emotional intelligence for personal and professional growth.",
+      "gradient": "from-blue-500 to-blue-600"
+    },
+    {
+      "icon": "fa-certificate",
+      "title": "ICF Associate Certified Coach",
+      "description": "Accredited by the International Coach Federation, demonstrating commitment to professional coaching standards and ethics.",
+      "gradient": "from-purple-500 to-purple-600"
+    },
+    {
+      "icon": "fa-chart-line",
+      "title": "Vedic Numerologist",
+      "description": "Trained in science of Vedic Numerology to provide insights into life paths, challenges, and opportunities.",
+      "gradient": "from-amber-500 to-amber-600"
+    }
+  ],
+  "valuesHeading": "What Drives Me",
+  "valuesSubtext": "These core values guide every coaching session and relationship I build with my clients.",
+  "values": [
+    {
+      "icon": "fa-heart",
+      "title": "Compassion",
+      "description": "Compassion is the foundation of meaningful coaching. It creates a safe and non-judgmental space where you are truly heard, supported and empowered to explore challenges."
+    },
+    {
+      "icon": "fa-lightbulb",
+      "title": "Curiosity",
+      "description": "Curiosity is the key to deeper insight. By asking thoughtful questions and exploring without judgement, it helps you connect with what truly drives your decisions and directions."
+    },
+    {
+      "icon": "fa-bullseye",
+      "title": "Clarity",
+      "description": "Clarity transforms awareness into actionable direction. It helps you cut through confusion, identify priorities, and make decisions with confidence and purpose."
+    },
+    {
+      "icon": "fa-graduation-cap",
+      "title": "Confidence",
+      "description": "Confidence empowers to trust oneself. It encourages to embrace your strength, and take bold, purposeful steps toward your goals. It turns intention into meaningful action."
+    }
+  ],
+  "ctaHeading": "Ready to start your journey?",
+  "ctaSubtext": "Book a free Clarity Call and let's explore how coaching can help you create the change you're seeking.",
+  "ctaButtonLabel": "Book Your Free Clarity Call"
+}

@@ -1,0 +1,41 @@
+import type { Metadata } from 'next'
+import contactData from '@/content/pages/contact.json'
+import client from '@/tina/__generated__/client'
+import ContactPageClient from './ContactPageClient'
+
+export const metadata: Metadata = {
+  title: 'Contact Shanila - Clarity and Mindset Coach | Get In Touch',
+  description: "Ready to start your transformation? Contact Shanila today to book a free consultation or ask any questions about clarity and mindset coaching.",
+  alternates: { canonical: 'https://innerjourney-with-shanila.com/contact' },
+  openGraph: {
+    title: 'Contact Shanila - Clarity and Mindset Coach',
+    description: 'Get in touch for a free consultation or to start your coaching journey.',
+    url: 'https://innerjourney-with-shanila.com/contact',
+    images: [{ url: '/images/contact-img.jpg' }],
+  },
+}
+
+export default async function ContactPage() {
+  const res = await client.queries
+    .contact({ relativePath: 'contact.json' })
+    .catch(() => null)
+
+  if (!res) {
+    return (
+      <ContactPageClient
+        query=""
+        variables={{ relativePath: 'contact.json' }}
+        data={{ contact: contactData }}
+      />
+    )
+  }
+
+  return (
+    <ContactPageClient
+      query={res.query}
+      variables={res.variables}
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      data={res.data as any}
+    />
+  )
+}
