@@ -12,6 +12,7 @@ export default defineConfig({
     tina: {
       mediaRoot: 'images',
       publicFolder: 'public',
+      static: false,
     },
   },
   schema: {
@@ -518,6 +519,40 @@ export default defineConfig({
           { name: 'phoneLabel', label: 'Phone Label', type: 'string' },
           { name: 'phone', label: 'Phone Number', type: 'string' },
           { name: 'copyright', label: 'Copyright Text', type: 'string' },
+        ],
+      },
+      {
+        name: 'theme',
+        label: 'Website Theme',
+        path: 'content',
+        match: { include: 'theme' },
+        format: 'json',
+        ui: { router: () => '/' },
+        fields: [
+          {
+            name: 'primaryColor',
+            label: 'Primary Color (Carrot Orange — buttons, accents, hover states)',
+            type: 'string',
+            ui: { component: 'color' },
+          },
+          {
+            name: 'secondaryColor',
+            label: 'Secondary Color (Oxford Blue — dark backgrounds, headings)',
+            type: 'string',
+            ui: { component: 'color' },
+          },
+          {
+            name: 'accentColor',
+            label: 'Accent Color (Azure Blue — CTAs, links)',
+            type: 'string',
+            ui: { component: 'color' },
+          },
+          {
+            name: 'neutralColor',
+            label: 'Neutral Color (Platinum — soft backgrounds)',
+            type: 'string',
+            ui: { component: 'color' },
+          },
         ],
       },
       {

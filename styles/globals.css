@@ -2,14 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom CSS Variables */
+/* Custom CSS Variables (defaults — override via Tina "Website Theme" collection) */
 :root {
     --black: #000000ff;
-    --oxford-blue: #14213dff;
-    --carrot-orange: #ea9223ff;
+    --oxford-blue: #14213d;
+    --carrot-orange: #ea9223;
     --azure-blue: #237bea;
-    --platinum: #e5e5e5ff;
+    --platinum: #e5e5e5;
     --white: #ffffffff;
+    /* RGB triplets used by Tailwind opacity modifiers (e.g. bg-carrot/20) */
+    --oxford-rgb: 20 33 61;
+    --carrot-rgb: 234 146 35;
+    --azure-rgb: 35 123 234;
+    --platinum-rgb: 229 229 229;
     --primary: var(--carrot-orange);
     --secondary: var(--oxford-blue);
     --brand-azure: var(--azure-blue);
@@ -20,9 +25,9 @@
     --gradient-secondary: linear-gradient(135deg, var(--oxford-blue) 0%, #1e3a8a 100%);
     --gradient-azure: linear-gradient(135deg, var(--azure-blue) 0%, #1e63c9 100%);
     --gradient-dark: linear-gradient(135deg, var(--black) 0%, var(--oxford-blue) 100%);
-    --shadow-primary: 0 10px 30px rgba(234, 146, 35, 0.3);
-    --shadow-secondary: 0 10px 30px rgba(20, 33, 61, 0.3);
-    --shadow-azure: 0 10px 30px rgba(35, 123, 234, 0.35);
+    --shadow-primary: 0 10px 30px rgb(var(--carrot-rgb) / 0.3);
+    --shadow-secondary: 0 10px 30px rgb(var(--oxford-rgb) / 0.3);
+    --shadow-azure: 0 10px 30px rgb(var(--azure-rgb) / 0.35);
 }
 
 /* Brand utility classes */

@@ -9,10 +9,10 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        oxford: '#14213d',
-        carrot: '#ea9223',
-        azure: '#237bea',
-        platinum: '#e5e5e5',
+        oxford: 'rgb(var(--oxford-rgb) / <alpha-value>)',
+        carrot: 'rgb(var(--carrot-rgb) / <alpha-value>)',
+        azure: 'rgb(var(--azure-rgb) / <alpha-value>)',
+        platinum: 'rgb(var(--platinum-rgb) / <alpha-value>)',
       },
       fontFamily: {
         caslon: ['var(--font-caslon)', 'serif'],

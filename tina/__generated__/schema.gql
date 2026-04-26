@@ -74,6 +74,8 @@ type Query {
   podcastConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PodcastFilter): PodcastConnection!
   footer(relativePath: String): Footer!
   footerConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: FooterFilter): FooterConnection!
+  theme(relativePath: String): Theme!
+  themeConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ThemeFilter): ThemeConnection!
   testimonials(relativePath: String): Testimonials!
   testimonialsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: TestimonialsFilter): TestimonialsConnection!
 }
@@ -89,6 +91,7 @@ input DocumentFilter {
   post: PostFilter
   podcast: PodcastFilter
   footer: FooterFilter
+  theme: ThemeFilter
   testimonials: TestimonialsFilter
 }
 
@@ -115,7 +118,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Home | About | ClarityCoaching | CareerCoaching | Numerology | Resources | Contact | Post | Podcast | Footer | Testimonials | Folder
+union DocumentNode = Home | About | ClarityCoaching | CareerCoaching | Numerology | Resources | Contact | Post | Podcast | Footer | Theme | Testimonials | Folder
 
 type Home implements Node & Document {
   heroImage: String
@@ -999,6 +1002,34 @@ type FooterConnection implements Connection {
   edges: [FooterConnectionEdges]
 }
 
+type Theme implements Node & Document {
+  primaryColor: String
+  secondaryColor: String
+  accentColor: String
+  neutralColor: String
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input ThemeFilter {
+  primaryColor: StringFilter
+  secondaryColor: StringFilter
+  accentColor: StringFilter
+  neutralColor: StringFilter
+}
+
+type ThemeConnectionEdges {
+  cursor: String!
+  node: Theme
+}
+
+type ThemeConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [ThemeConnectionEdges]
+}
+
 type TestimonialsItems {
   quote: String
   author: String
@@ -1057,6 +1088,8 @@ type Mutation {
   createPodcast(relativePath: String!, params: PodcastMutation!): Podcast!
   updateFooter(relativePath: String!, params: FooterMutation!): Footer!
   createFooter(relativePath: String!, params: FooterMutation!): Footer!
+  updateTheme(relativePath: String!, params: ThemeMutation!): Theme!
+  createTheme(relativePath: String!, params: ThemeMutation!): Theme!
   updateTestimonials(relativePath: String!, params: TestimonialsMutation!): Testimonials!
   createTestimonials(relativePath: String!, params: TestimonialsMutation!): Testimonials!
 }
@@ -1072,6 +1105,7 @@ input DocumentUpdateMutation {
   post: PostMutation
   podcast: PodcastMutation
   footer: FooterMutation
+  theme: ThemeMutation
   testimonials: TestimonialsMutation
   relativePath: String
 }
@@ -1087,6 +1121,7 @@ input DocumentMutation {
   post: PostMutation
   podcast: PodcastMutation
   footer: FooterMutation
+  theme: ThemeMutation
   testimonials: TestimonialsMutation
 }
 
@@ -1445,6 +1480,13 @@ input FooterMutation {
   phoneLabel: String
   phone: String
   copyright: String
+}
+
+input ThemeMutation {
+  primaryColor: String
+  secondaryColor: String
+  accentColor: String
+  neutralColor: String
 }
 
 input TestimonialsItemsMutation {

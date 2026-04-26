@@ -548,6 +548,61 @@ query footerConnection($before: String, $after: String, $first: Float, $last: Fl
   }
 }
 
+query theme($relativePath: String!) {
+  theme(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...ThemeParts
+  }
+}
+
+query themeConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: ThemeFilter) {
+  themeConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...ThemeParts
+      }
+    }
+  }
+}
+
 query testimonials($relativePath: String!) {
   testimonials(relativePath: $relativePath) {
     ... on Document {

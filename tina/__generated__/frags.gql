@@ -352,6 +352,14 @@ fragment FooterParts on Footer {
   copyright
 }
 
+fragment ThemeParts on Theme {
+  __typename
+  primaryColor
+  secondaryColor
+  accentColor
+  neutralColor
+}
+
 fragment TestimonialsParts on Testimonials {
   __typename
   items {

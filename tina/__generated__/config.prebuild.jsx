@@ -11,7 +11,8 @@ var config_default = defineConfig({
   media: {
     tina: {
       mediaRoot: "images",
-      publicFolder: "public"
+      publicFolder: "public",
+      static: false
     }
   },
   schema: {
@@ -532,6 +533,40 @@ var config_default = defineConfig({
           { name: "phoneLabel", label: "Phone Label", type: "string" },
           { name: "phone", label: "Phone Number", type: "string" },
           { name: "copyright", label: "Copyright Text", type: "string" }
+        ]
+      },
+      {
+        name: "theme",
+        label: "Website Theme",
+        path: "content",
+        match: { include: "theme" },
+        format: "json",
+        ui: { router: () => "/" },
+        fields: [
+          {
+            name: "primaryColor",
+            label: "Primary Color (Carrot Orange \u2014 buttons, accents, hover states)",
+            type: "string",
+            ui: { component: "color" }
+          },
+          {
+            name: "secondaryColor",
+            label: "Secondary Color (Oxford Blue \u2014 dark backgrounds, headings)",
+            type: "string",
+            ui: { component: "color" }
+          },
+          {
+            name: "accentColor",
+            label: "Accent Color (Azure Blue \u2014 CTAs, links)",
+            type: "string",
+            ui: { component: "color" }
+          },
+          {
+            name: "neutralColor",
+            label: "Neutral Color (Platinum \u2014 soft backgrounds)",
+            type: "string",
+            ui: { component: "color" }
+          }
         ]
       },
       {
