@@ -1,8 +1,13 @@
 'use client'
 
 import { useEffect } from 'react'
+import { usePathname } from 'next/navigation'
+
+const SELECTOR = '.animate-on-scroll, .animate-fade-in, .animate-slide-left, .animate-slide-right'
 
 export default function ScrollAnimator() {
+  const pathname = usePathname()
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -16,12 +21,24 @@ export default function ScrollAnimator() {
       { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
     )
 
-    document.querySelectorAll('.animate-on-scroll, .animate-fade-in, .animate-slide-left, .animate-slide-right').forEach((el) => {
-      observer.observe(el)
-    })
+    const observe = () => {
+      document.querySelectorAll(SELECTOR).forEach((el) => {
+        if (!el.classList.contains('animate-visible')) observer.observe(el)
+      })
+    }
 
-    return () => observer.disconnect()
-  }, [])
+    observe()
+
+    // Catch elements that mount asynchronously (Tina admin iframe re-renders content
+    // after fetching GraphQL data; without this they'd stay at opacity 0 forever).
+    const mutation = new MutationObserver(() => observe())
+    mutation.observe(document.body, { childList: true, subtree: true })
+
+    return () => {
+      observer.disconnect()
+      mutation.disconnect()
+    }
+  }, [pathname])
 
   return null
 }
