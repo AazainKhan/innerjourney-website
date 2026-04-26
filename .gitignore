@@ -27,3 +27,22 @@ Thumbs.db
 cpanel pages/.next/
 .next/
 tina/__generated__/.cache/
+
+# Vercel CLI link state — local only, never commit
+.vercel/
+
+# Claude Code session state and worktrees
+.claude/
+
+# Playwright MCP debug artifacts
+.playwright-mcp/
+
+# Migration artifacts (cPanel snapshots)
+cpanel pages/
+original-about.*
+original-live.*
+live-home.*
+
+# Workspace screenshots
+vercel-*.png
+
