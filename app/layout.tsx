@@ -102,7 +102,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const theme = await loadTheme()
   const themeStyle = buildThemeStyle(theme)
   return (
-    <html lang="en" className={`${caslonDisplay.variable} ${titilliumWeb.variable} ${dancingScript.variable}`}>
+    <html lang="en" className={`${caslonDisplay.variable} ${titilliumWeb.variable} ${dancingScript.variable}`} suppressHydrationWarning>
       <head>
         <link
           rel="stylesheet"
