@@ -5,7 +5,6 @@
   "quickLinks": [
     { "label": "Work with me", "href": "/services" },
     { "label": "About", "href": "/about" },
-    { "label": "Blog", "href": "/blog" },
     { "label": "Resources", "href": "/resources" },
     { "label": "Contact", "href": "/contact" }
   ],

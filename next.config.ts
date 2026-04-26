@@ -11,6 +11,7 @@ const nextConfig: NextConfig = {
       { source: '/numerology.html', destination: '/numerology', permanent: true },
       { source: '/resources.html', destination: '/resources', permanent: true },
       { source: '/contact.html', destination: '/contact', permanent: true },
+      { source: '/blog', destination: '/resources', permanent: true },
     ]
   },
   images: {

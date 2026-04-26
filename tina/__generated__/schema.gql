@@ -56,6 +56,8 @@ type Query {
   document(collection: String, relativePath: String): DocumentNode!
   home(relativePath: String): Home!
   homeConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: HomeFilter): HomeConnection!
+  services(relativePath: String): Services!
+  servicesConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ServicesFilter): ServicesConnection!
   about(relativePath: String): About!
   aboutConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: AboutFilter): AboutConnection!
   clarityCoaching(relativePath: String): ClarityCoaching!
@@ -82,6 +84,7 @@ type Query {
 
 input DocumentFilter {
   home: HomeFilter
+  services: ServicesFilter
   about: AboutFilter
   clarityCoaching: ClarityCoachingFilter
   careerCoaching: CareerCoachingFilter
@@ -118,7 +121,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Home | About | ClarityCoaching | CareerCoaching | Numerology | Resources | Contact | Post | Podcast | Footer | Theme | Testimonials | Folder
+union DocumentNode = Home | Services | About | ClarityCoaching | CareerCoaching | Numerology | Resources | Contact | Post | Podcast | Footer | Theme | Testimonials | Folder
 
 type Home implements Node & Document {
   heroImage: String
@@ -202,6 +205,36 @@ type HomeConnection implements Connection {
   pageInfo: PageInfo!
   totalCount: Float!
   edges: [HomeConnectionEdges]
+}
+
+type Services implements Node & Document {
+  heroHeading: String
+  heroSubtext: String
+  ctaHeading: String
+  ctaSubtext: String
+  ctaButtonLabel: String
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input ServicesFilter {
+  heroHeading: StringFilter
+  heroSubtext: StringFilter
+  ctaHeading: StringFilter
+  ctaSubtext: StringFilter
+  ctaButtonLabel: StringFilter
+}
+
+type ServicesConnectionEdges {
+  cursor: String!
+  node: Services
+}
+
+type ServicesConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [ServicesConnectionEdges]
 }
 
 type AboutCredentials {
@@ -1070,6 +1103,8 @@ type Mutation {
   createFolder(collection: String, relativePath: String!): DocumentNode!
   updateHome(relativePath: String!, params: HomeMutation!): Home!
   createHome(relativePath: String!, params: HomeMutation!): Home!
+  updateServices(relativePath: String!, params: ServicesMutation!): Services!
+  createServices(relativePath: String!, params: ServicesMutation!): Services!
   updateAbout(relativePath: String!, params: AboutMutation!): About!
   createAbout(relativePath: String!, params: AboutMutation!): About!
   updateClarityCoaching(relativePath: String!, params: ClarityCoachingMutation!): ClarityCoaching!
@@ -1096,6 +1131,7 @@ type Mutation {
 
 input DocumentUpdateMutation {
   home: HomeMutation
+  services: ServicesMutation
   about: AboutMutation
   clarityCoaching: ClarityCoachingMutation
   careerCoaching: CareerCoachingMutation
@@ -1112,6 +1148,7 @@ input DocumentUpdateMutation {
 
 input DocumentMutation {
   home: HomeMutation
+  services: ServicesMutation
   about: AboutMutation
   clarityCoaching: ClarityCoachingMutation
   careerCoaching: CareerCoachingMutation
@@ -1151,6 +1188,14 @@ input HomeMutation {
   servicesHeading: String
   servicesSubtext: String
   bottomCTAText: String
+}
+
+input ServicesMutation {
+  heroHeading: String
+  heroSubtext: String
+  ctaHeading: String
+  ctaSubtext: String
+  ctaButtonLabel: String
 }
 
 input AboutCredentialsMutation {

@@ -84,6 +84,8 @@ export type Query = {
   document: DocumentNode;
   home: Home;
   homeConnection: HomeConnection;
+  services: Services;
+  servicesConnection: ServicesConnection;
   about: About;
   aboutConnection: AboutConnection;
   clarityCoaching: ClarityCoaching;
@@ -142,6 +144,21 @@ export type QueryHomeConnectionArgs = {
   last?: InputMaybe<Scalars['Float']['input']>;
   sort?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<HomeFilter>;
+};
+
+
+export type QueryServicesArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryServicesConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<ServicesFilter>;
 };
 
 
@@ -311,6 +328,7 @@ export type QueryTestimonialsConnectionArgs = {
 
 export type DocumentFilter = {
   home?: InputMaybe<HomeFilter>;
+  services?: InputMaybe<ServicesFilter>;
   about?: InputMaybe<AboutFilter>;
   clarityCoaching?: InputMaybe<ClarityCoachingFilter>;
   careerCoaching?: InputMaybe<CareerCoachingFilter>;
@@ -361,7 +379,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Home | About | ClarityCoaching | CareerCoaching | Numerology | Resources | Contact | Post | Podcast | Footer | Theme | Testimonials | Folder;
+export type DocumentNode = Home | Services | About | ClarityCoaching | CareerCoaching | Numerology | Resources | Contact | Post | Podcast | Footer | Theme | Testimonials | Folder;
 
 export type Home = Node & Document & {
   __typename?: 'Home';
@@ -448,6 +466,39 @@ export type HomeConnection = Connection & {
   pageInfo: PageInfo;
   totalCount: Scalars['Float']['output'];
   edges?: Maybe<Array<Maybe<HomeConnectionEdges>>>;
+};
+
+export type Services = Node & Document & {
+  __typename?: 'Services';
+  heroHeading?: Maybe<Scalars['String']['output']>;
+  heroSubtext?: Maybe<Scalars['String']['output']>;
+  ctaHeading?: Maybe<Scalars['String']['output']>;
+  ctaSubtext?: Maybe<Scalars['String']['output']>;
+  ctaButtonLabel?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type ServicesFilter = {
+  heroHeading?: InputMaybe<StringFilter>;
+  heroSubtext?: InputMaybe<StringFilter>;
+  ctaHeading?: InputMaybe<StringFilter>;
+  ctaSubtext?: InputMaybe<StringFilter>;
+  ctaButtonLabel?: InputMaybe<StringFilter>;
+};
+
+export type ServicesConnectionEdges = {
+  __typename?: 'ServicesConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Services>;
+};
+
+export type ServicesConnection = Connection & {
+  __typename?: 'ServicesConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<ServicesConnectionEdges>>>;
 };
 
 export type AboutCredentials = {
@@ -1364,6 +1415,8 @@ export type Mutation = {
   createFolder: DocumentNode;
   updateHome: Home;
   createHome: Home;
+  updateServices: Services;
+  createServices: Services;
   updateAbout: About;
   createAbout: About;
   updateClarityCoaching: ClarityCoaching;
@@ -1431,6 +1484,18 @@ export type MutationUpdateHomeArgs = {
 export type MutationCreateHomeArgs = {
   relativePath: Scalars['String']['input'];
   params: HomeMutation;
+};
+
+
+export type MutationUpdateServicesArgs = {
+  relativePath: Scalars['String']['input'];
+  params: ServicesMutation;
+};
+
+
+export type MutationCreateServicesArgs = {
+  relativePath: Scalars['String']['input'];
+  params: ServicesMutation;
 };
 
 
@@ -1567,6 +1632,7 @@ export type MutationCreateTestimonialsArgs = {
 
 export type DocumentUpdateMutation = {
   home?: InputMaybe<HomeMutation>;
+  services?: InputMaybe<ServicesMutation>;
   about?: InputMaybe<AboutMutation>;
   clarityCoaching?: InputMaybe<ClarityCoachingMutation>;
   careerCoaching?: InputMaybe<CareerCoachingMutation>;
@@ -1583,6 +1649,7 @@ export type DocumentUpdateMutation = {
 
 export type DocumentMutation = {
   home?: InputMaybe<HomeMutation>;
+  services?: InputMaybe<ServicesMutation>;
   about?: InputMaybe<AboutMutation>;
   clarityCoaching?: InputMaybe<ClarityCoachingMutation>;
   careerCoaching?: InputMaybe<CareerCoachingMutation>;
@@ -1622,6 +1689,14 @@ export type HomeMutation = {
   servicesHeading?: InputMaybe<Scalars['String']['input']>;
   servicesSubtext?: InputMaybe<Scalars['String']['input']>;
   bottomCTAText?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ServicesMutation = {
+  heroHeading?: InputMaybe<Scalars['String']['input']>;
+  heroSubtext?: InputMaybe<Scalars['String']['input']>;
+  ctaHeading?: InputMaybe<Scalars['String']['input']>;
+  ctaSubtext?: InputMaybe<Scalars['String']['input']>;
+  ctaButtonLabel?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type AboutCredentialsMutation = {
@@ -1971,6 +2046,8 @@ export type TestimonialsMutation = {
 
 export type HomePartsFragment = { __typename: 'Home', heroImage?: string | null, heroHeading?: string | null, heroSubtext?: string | null, heroCTALabel?: string | null, heroBottomCTALabel?: string | null, ctaHeading?: string | null, ctaLine1?: string | null, ctaLine2?: string | null, ctaLine3?: string | null, ctaMessage1?: string | null, ctaMessage2?: string | null, aboutHeading?: string | null, aboutImage?: string | null, aboutCredentialTitle?: string | null, aboutParagraph1?: string | null, aboutParagraph2?: string | null, feelLikeYouHeading?: string | null, feelLikeYouTagline?: string | null, feelLikeYouQuestion1?: string | null, feelLikeYouQuestion2?: string | null, feelLikeYouQuestion3?: string | null, feelLikeYouQuestion4?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, bottomCTAText?: string | null };
 
+export type ServicesPartsFragment = { __typename: 'Services', heroHeading?: string | null, heroSubtext?: string | null, ctaHeading?: string | null, ctaSubtext?: string | null, ctaButtonLabel?: string | null };
+
 export type AboutPartsFragment = { __typename: 'About', heroHeading?: string | null, heroSubtext?: string | null, storyHeading?: string | null, storyParagraph1?: string | null, storyParagraph2?: string | null, credentialsHeading?: string | null, credentialsSubtext?: string | null, valuesHeading?: string | null, valuesSubtext?: string | null, ctaHeading?: string | null, ctaSubtext?: string | null, ctaButtonLabel?: string | null, credentials?: Array<{ __typename: 'AboutCredentials', icon?: string | null, title?: string | null, description?: string | null, gradient?: string | null } | null> | null, values?: Array<{ __typename: 'AboutValues', icon?: string | null, title?: string | null, description?: string | null } | null> | null };
 
 export type ClarityCoachingPartsFragment = { __typename: 'ClarityCoaching', heroBadge?: string | null, heroHeading?: string | null, heroSubtext?: string | null, heroCTALabel?: string | null, heroSideEmoji?: string | null, heroSideWeeks?: string | null, heroSideSubtext?: string | null, resultsHeadingPrefix?: string | null, resultsHeadingHighlight?: string | null, resultsSubtext?: string | null, perhapsLabel?: string | null, bannerText?: string | null, bannerHighlight?: string | null, missingPieceHeadingPrefix?: string | null, missingPieceHeadingHighlight?: string | null, problemTitle?: string | null, problemParagraph1?: string | null, problemQuestion?: string | null, problemParagraph2?: string | null, problemParagraph3?: string | null, solutionTitle?: string | null, solutionParagraph1?: string | null, solutionEmphasis?: string | null, solutionParagraph2?: string | null, solutionWord?: string | null, philosophyLabel?: string | null, philosophyHeadingPrefix?: string | null, philosophyHeadingHighlight?: string | null, philosophyQuote?: string | null, philosophyParagraph1?: string | null, philosophyParagraph2?: string | null, philosophyBannerPrefix?: string | null, philosophyBannerHighlight?: string | null, philosophyClosingPrefix?: string | null, philosophyClosingHighlight?: string | null, timelineLabel?: string | null, timelineHeadingPrefix?: string | null, timelineHeadingHighlight?: string | null, timelineSubtext?: string | null, timelineCTALabel?: string | null, experienceLabel?: string | null, experienceHeadingPrefix?: string | null, experienceHeadingHighlight?: string | null, bonusEmoji?: string | null, bonusPrefix?: string | null, bonusText?: string | null, ctaSectionHeadingPrefix?: string | null, ctaSectionHeadingHighlight?: string | null, ctaSectionParagraph1?: string | null, ctaSectionParagraph2?: string | null, ctaButtonLabel?: string | null, perhapsItems?: Array<{ __typename: 'ClarityCoachingPerhapsItems', emoji?: string | null, text?: string | null, borderColor?: string | null } | null> | null, timelineSteps?: Array<{ __typename: 'ClarityCoachingTimelineSteps', number?: string | null, weeks?: string | null, title?: string | null, subtitle?: string | null, description?: string | null, accent?: string | null } | null> | null, experienceItems?: Array<{ __typename: 'ClarityCoachingExperienceItems', emoji?: string | null, title?: string | null, subtitle?: string | null, bg?: string | null } | null> | null };
@@ -2011,6 +2088,25 @@ export type HomeConnectionQueryVariables = Exact<{
 
 
 export type HomeConnectionQuery = { __typename?: 'Query', homeConnection: { __typename?: 'HomeConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'HomeConnectionEdges', cursor: string, node?: { __typename: 'Home', id: string, heroImage?: string | null, heroHeading?: string | null, heroSubtext?: string | null, heroCTALabel?: string | null, heroBottomCTALabel?: string | null, ctaHeading?: string | null, ctaLine1?: string | null, ctaLine2?: string | null, ctaLine3?: string | null, ctaMessage1?: string | null, ctaMessage2?: string | null, aboutHeading?: string | null, aboutImage?: string | null, aboutCredentialTitle?: string | null, aboutParagraph1?: string | null, aboutParagraph2?: string | null, feelLikeYouHeading?: string | null, feelLikeYouTagline?: string | null, feelLikeYouQuestion1?: string | null, feelLikeYouQuestion2?: string | null, feelLikeYouQuestion3?: string | null, feelLikeYouQuestion4?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, bottomCTAText?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+
+export type ServicesQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type ServicesQuery = { __typename?: 'Query', services: { __typename: 'Services', id: string, heroHeading?: string | null, heroSubtext?: string | null, ctaHeading?: string | null, ctaSubtext?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+
+export type ServicesConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<ServicesFilter>;
+}>;
+
+
+export type ServicesConnectionQuery = { __typename?: 'Query', servicesConnection: { __typename?: 'ServicesConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ServicesConnectionEdges', cursor: string, node?: { __typename: 'Services', id: string, heroHeading?: string | null, heroSubtext?: string | null, ctaHeading?: string | null, ctaSubtext?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type AboutQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -2249,6 +2345,16 @@ export const HomePartsFragmentDoc = gql`
   servicesHeading
   servicesSubtext
   bottomCTAText
+}
+    `;
+export const ServicesPartsFragmentDoc = gql`
+    fragment ServicesParts on Services {
+  __typename
+  heroHeading
+  heroSubtext
+  ctaHeading
+  ctaSubtext
+  ctaButtonLabel
 }
     `;
 export const AboutPartsFragmentDoc = gql`
@@ -2661,6 +2767,63 @@ export const HomeConnectionDocument = gql`
   }
 }
     ${HomePartsFragmentDoc}`;
+export const ServicesDocument = gql`
+    query services($relativePath: String!) {
+  services(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...ServicesParts
+  }
+}
+    ${ServicesPartsFragmentDoc}`;
+export const ServicesConnectionDocument = gql`
+    query servicesConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: ServicesFilter) {
+  servicesConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...ServicesParts
+      }
+    }
+  }
+}
+    ${ServicesPartsFragmentDoc}`;
 export const AboutDocument = gql`
     query about($relativePath: String!) {
   about(relativePath: $relativePath) {
@@ -3296,6 +3459,12 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     homeConnection(variables?: HomeConnectionQueryVariables, options?: C): Promise<{data: HomeConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: HomeConnectionQueryVariables, query: string}> {
         return requester<{data: HomeConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: HomeConnectionQueryVariables, query: string}, HomeConnectionQueryVariables>(HomeConnectionDocument, variables, options);
+      },
+    services(variables: ServicesQueryVariables, options?: C): Promise<{data: ServicesQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ServicesQueryVariables, query: string}> {
+        return requester<{data: ServicesQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ServicesQueryVariables, query: string}, ServicesQueryVariables>(ServicesDocument, variables, options);
+      },
+    servicesConnection(variables?: ServicesConnectionQueryVariables, options?: C): Promise<{data: ServicesConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ServicesConnectionQueryVariables, query: string}> {
+        return requester<{data: ServicesConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ServicesConnectionQueryVariables, query: string}, ServicesConnectionQueryVariables>(ServicesConnectionDocument, variables, options);
       },
     about(variables: AboutQueryVariables, options?: C): Promise<{data: AboutQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AboutQueryVariables, query: string}> {
         return requester<{data: AboutQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AboutQueryVariables, query: string}, AboutQueryVariables>(AboutDocument, variables, options);

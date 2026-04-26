@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import BookingButton from '@/components/BookingButton'
+import servicesData from '@/content/pages/services.json'
+import client from '@/tina/__generated__/client'
 
 export const metadata: Metadata = {
   title: 'Services - Coaching & Numerology',
@@ -44,7 +46,10 @@ const services = [
   },
 ]
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const res = await client.queries.services({ relativePath: 'services.json' }).catch(() => null)
+  const d = (res?.data.services as typeof servicesData) ?? servicesData
+
   return (
     <>
       {/* Hero */}
@@ -54,10 +59,10 @@ export default function ServicesPage() {
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-5xl md:text-7xl heading-primary text-white mb-6 leading-tight font-dancing font-bold">
-              How I Can Help You
+              {d.heroHeading}
             </h1>
             <p className="text-xl md:text-2xl body-text-light text-white/90 leading-relaxed max-w-3xl mx-auto">
-              Three pathways to clarity, confidence, and lasting change.
+              {d.heroSubtext}
             </p>
           </div>
         </div>
@@ -110,12 +115,12 @@ export default function ServicesPage() {
         <section className="py-20 relative">
           <div className="container mx-auto px-6 relative z-10 text-center">
             <h2 className="text-4xl md:text-5xl heading-secondary text-gray-900 mb-6 animate-on-scroll">
-              Not sure which is right for you?
+              {d.ctaHeading}
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8 animate-on-scroll">
-              Book a free Clarity Call and we&apos;ll work it out together.
+              {d.ctaSubtext}
             </p>
-            <BookingButton label="Book My Free Clarity Call" className="btn-azure text-lg px-10 py-4 button-text animate-on-scroll" />
+            <BookingButton label={d.ctaButtonLabel} className="btn-azure text-lg px-10 py-4 button-text animate-on-scroll" />
           </div>
         </section>
       </div>

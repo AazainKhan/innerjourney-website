@@ -27,6 +27,15 @@ fragment HomeParts on Home {
   bottomCTAText
 }
 
+fragment ServicesParts on Services {
+  __typename
+  heroHeading
+  heroSubtext
+  ctaHeading
+  ctaSubtext
+  ctaButtonLabel
+}
+
 fragment AboutParts on About {
   __typename
   heroHeading

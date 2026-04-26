@@ -53,6 +53,21 @@ var config_default = defineConfig({
         ]
       },
       {
+        name: "services",
+        label: "Services Page",
+        path: "content/pages",
+        match: { include: "services" },
+        format: "json",
+        ui: { router: () => "/services" },
+        fields: [
+          { name: "heroHeading", label: "Hero Heading", type: "string" },
+          { name: "heroSubtext", label: "Hero Subtext", type: "string", ui: { component: "textarea" } },
+          { name: "ctaHeading", label: "Bottom CTA Heading", type: "string" },
+          { name: "ctaSubtext", label: "Bottom CTA Subtext", type: "string", ui: { component: "textarea" } },
+          { name: "ctaButtonLabel", label: "Bottom CTA Button Label", type: "string" }
+        ]
+      },
+      {
         name: "about",
         label: "About Page",
         path: "content/pages",
