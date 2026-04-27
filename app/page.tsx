@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     title: 'Shanila - Clarity and Mindset Coach | Transform Your Journey',
     description: 'Transform your journey with Shanila\'s Clarity and Mindset Coaching.',
     url: 'https://innerjourney-with-shanila.com/',
-    images: [{ url: '/images/hero_img.jpg' }],
+    images: [{ url: '/images/og-default.jpg', width: 1200, height: 630, alt: 'Your Path back to Purpose' }],
   },
 }
 

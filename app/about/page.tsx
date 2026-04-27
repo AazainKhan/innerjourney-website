@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     title: 'About Shanila - Clarity and Mindset Coach | Your Journey to Success',
     description: 'Learn more about Shanila, a certified Clarity and Mindset Coach with years of experience helping people build clarity and confidence.',
     url: 'https://innerjourney-with-shanila.com/about',
-    images: [{ url: '/images/about-image.jpg' }],
+    images: [{ url: '/images/og-about.jpg', width: 1200, height: 630, alt: 'Meet Shanila Khan' }],
   },
 }
 

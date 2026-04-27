@@ -11,6 +11,7 @@ export const metadata: Metadata = {
     title: 'Clarity Coaching - Shanila Khan | Transform Your Life in 12 Weeks',
     description: 'Get answers and transform your life in just 12 weeks with compassionate clarity coaching.',
     url: 'https://innerjourney-with-shanila.com/clarity-coaching',
+    images: [{ url: '/images/og-default.jpg', width: 1200, height: 630, alt: 'Clarity Coaching with Shanila' }],
   },
 }
 

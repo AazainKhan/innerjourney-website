@@ -11,6 +11,7 @@ export const metadata: Metadata = {
     title: 'Career Coaching - Shanila Khan | Transform Your Career in 12 Weeks',
     description: 'Feel clear and confident in your career again. Transform your career in just 12 weeks.',
     url: 'https://innerjourney-with-shanila.com/career-coaching',
+    images: [{ url: '/images/og-default.jpg', width: 1200, height: 630, alt: 'Career Coaching with Shanila' }],
   },
 }
 

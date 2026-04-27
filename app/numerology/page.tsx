@@ -11,6 +11,7 @@ export const metadata: Metadata = {
     title: 'Numerology for Clarity - Shanila Khan | Vedic Numerology Readings',
     description: 'Get answers fast with personalised numerology readings backed by ancient vedic practices.',
     url: 'https://innerjourney-with-shanila.com/numerology',
+    images: [{ url: '/images/og-default.jpg', width: 1200, height: 630, alt: 'Numerology for Clarity' }],
   },
 }
 

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     title: 'Contact Shanila - Clarity and Mindset Coach',
     description: 'Get in touch for a free consultation or to start your coaching journey.',
     url: 'https://innerjourney-with-shanila.com/contact',
-    images: [{ url: '/images/contact-img.jpg' }],
+    images: [{ url: '/images/og-contact.jpg', width: 1200, height: 630, alt: "Let's Connect" }],
   },
 }
 

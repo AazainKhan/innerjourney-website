@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     siteName: 'Inner Journey with Shanila',
-    images: [{ url: '/images/hero_img.jpg' }],
+    images: [{ url: '/images/og-default.jpg', width: 1200, height: 630, alt: 'Inner Journey with Shanila' }],
   },
   twitter: { card: 'summary_large_image' },
   icons: {
