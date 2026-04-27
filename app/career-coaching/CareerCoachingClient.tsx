@@ -81,7 +81,7 @@ export default function CareerCoachingClient(props: Props) {
   return (
     <>
       {/* Hero */}
-      <section className="relative h-screen flex items-center overflow-hidden">
+      <section className="page-hero">
         <div className="absolute inset-0 bg-gradient-to-br from-oxford/95 via-[#1a2d50] to-[#0f1a2e]"></div>
         <div className="absolute top-20 left-20 w-32 h-32 bg-orange-500/20 rounded-full blur-xl animate-pulse"></div>
         <div className="absolute bottom-40 right-20 w-40 h-40 bg-azure/20 rounded-full blur-xl animate-pulse delay-1000"></div>
@@ -89,10 +89,10 @@ export default function CareerCoachingClient(props: Props) {
 
         <div className="container mx-auto px-6 relative z-20">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-7xl heading-primary text-white mb-8 leading-tight font-dancing font-bold">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white font-dancing font-bold mb-6 leading-tight">
               {d.heroHeading}
             </h1>
-            <p className="text-xl md:text-2xl body-text-light text-white/90 mb-10 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl body-text-light text-white/90 mb-8 leading-relaxed max-w-3xl mx-auto">
               {d.heroSubtextPrefix} <span className="text-carrot font-bold">{d.heroSubtextHighlight}</span>
             </p>
             <BookingButton label={d.heroCTALabel} />

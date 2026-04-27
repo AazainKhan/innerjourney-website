@@ -73,7 +73,7 @@ export default function NumerologyClient(props: Props) {
   return (
     <>
       {/* Hero */}
-      <section className="relative min-h-screen flex items-center overflow-hidden">
+      <section className="page-hero">
         <div className="absolute inset-0 bg-gradient-to-br from-oxford via-[#1a2d50] to-[#0d1829]"></div>
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           {floatingNumbers.map((f, i) => (
@@ -84,13 +84,13 @@ export default function NumerologyClient(props: Props) {
         <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-azure/20 rounded-full blur-3xl"></div>
 
         <div className="container mx-auto px-6 relative z-20">
-          <div className="max-w-4xl mx-auto text-center py-32">
+          <div className="max-w-4xl mx-auto text-center">
             <span className="inline-block text-carrot font-semibold text-sm uppercase tracking-widest mb-6">{d.heroBadge}</span>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl heading-primary text-white mb-6 leading-tight font-dancing font-bold">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white font-dancing font-bold mb-4 leading-tight">
               {d.heroHeading}
             </h1>
-            <p className="text-2xl md:text-3xl text-carrot font-semibold mb-4">{d.heroTagline}</p>
-            <p className="text-lg md:text-xl text-white/80 mb-10 max-w-2xl mx-auto leading-relaxed">{d.heroSubtext}</p>
+            <p className="text-xl md:text-2xl text-carrot font-semibold mb-4">{d.heroTagline}</p>
+            <p className="text-lg md:text-xl text-white/80 mb-8 max-w-2xl mx-auto leading-relaxed">{d.heroSubtext}</p>
             <BookingButton label={d.heroCTALabel} />
           </div>
         </div>

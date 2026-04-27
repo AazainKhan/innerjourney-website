@@ -53,8 +53,24 @@
     .hero-media img { object-position: center center; }
 }
 
-/* Hero section */
+/* Hero section — full-bleed, used on the homepage only */
 .hero-section { height: 100vh; min-height: 600px; max-height: 100vh; }
+
+/* Page hero — used on every non-home page so they all share the same height,
+ * vertical centering, and nav-clearing top padding. */
+.page-hero {
+    position: relative;
+    min-height: 55vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding-top: 8rem;     /* clears the fixed navbar */
+    padding-bottom: 4rem;
+}
+@media (min-width: 768px) {
+    .page-hero { min-height: 60vh; }
+}
 @supports (height: 100svh) {
     .hero-section { height: 100svh; min-height: 100svh; max-height: 100svh; }
 }

@@ -76,18 +76,18 @@ export default function ResourcesClient(props: Props) {
   return (
     <>
       {/* Hero */}
-      <section className="relative min-h-[60vh] flex items-center overflow-hidden bg-gradient-to-br from-oxford via-[#1a2d50] to-azure">
+      <section className="page-hero bg-gradient-to-br from-oxford via-[#1a2d50] to-azure">
         <div className="absolute top-20 right-20 w-72 h-72 bg-carrot/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-20 left-20 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
         <div className="absolute top-1/2 right-1/3 w-48 h-48 bg-azure/20 rounded-full blur-2xl"></div>
 
-        <div className="container mx-auto px-6 relative z-20 py-32">
+        <div className="container mx-auto px-6 relative z-20">
           <div className="max-w-4xl mx-auto text-center">
             <span className="inline-block text-carrot font-semibold text-sm uppercase tracking-widest mb-6">{d.heroBadge}</span>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl heading-primary text-white mb-6 leading-tight font-dancing font-bold">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white font-dancing font-bold mb-6 leading-tight">
               {d.heroHeading} <span className="text-carrot">{d.heroHeadingHighlight}</span>
             </h1>
-            <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
+            <p className="text-lg md:text-xl text-white/90 leading-relaxed">
               {d.heroSubtext}
             </p>
           </div>

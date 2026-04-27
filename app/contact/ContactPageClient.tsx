@@ -74,7 +74,7 @@ export default function ContactPageClient(props: Props) {
   return (
     <>
       {/* Hero */}
-      <section className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden">
+      <section className="page-hero bg-black">
         <div className="absolute inset-0">
           <Image
             src={d.heroImage || '/images/contact-img-1200.webp'}
@@ -88,10 +88,10 @@ export default function ContactPageClient(props: Props) {
         </div>
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-5xl md:text-7xl heading-primary text-white mb-6 leading-tight drop-shadow-2xl font-dancing font-bold">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white font-dancing font-bold mb-6 leading-tight drop-shadow-2xl">
               {d.heroHeading}
             </h1>
-            <p className="text-xl md:text-2xl body-text-light text-white/90 mb-8 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl body-text-light text-white/90 leading-relaxed max-w-3xl mx-auto">
               {d.heroSubtext}
             </p>
           </div>

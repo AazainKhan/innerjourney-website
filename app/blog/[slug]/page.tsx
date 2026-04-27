@@ -44,7 +44,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   return (
     <>
       {/* Hero */}
-      <section className="relative pt-32 pb-16 bg-gradient-to-br from-oxford via-[#1a2d50] to-azure overflow-hidden">
+      <section className="page-hero bg-gradient-to-br from-oxford via-[#1a2d50] to-azure">
         <div className="absolute top-20 right-20 w-72 h-72 bg-carrot/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 left-20 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
         <div className="container mx-auto px-6 relative z-10">

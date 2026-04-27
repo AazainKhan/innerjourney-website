@@ -110,17 +110,17 @@ export default function ClarityCoachingClient(props: Props) {
         <div className="absolute bottom-0 left-[20%] w-[30rem] h-[30rem] bg-azure/20 rounded-full blur-3xl"></div>
 
         {/* Hero */}
-        <section className="relative min-h-screen flex items-center overflow-hidden">
+        <section className="page-hero">
           <div className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-bl from-oxford via-[#1a2d50] to-azure hidden lg:block z-10"></div>
           <div className="absolute inset-0 bg-gradient-to-b from-oxford to-azure lg:hidden z-10"></div>
           <div className="absolute right-1/4 top-1/4 w-64 h-64 bg-carrot/20 rounded-full blur-3xl hidden lg:block z-10"></div>
           <div className="absolute right-10 bottom-20 w-48 h-48 bg-white/10 rounded-full blur-2xl hidden lg:block z-10"></div>
 
           <div className="container mx-auto px-6 relative z-20">
-            <div className="grid lg:grid-cols-2 gap-12 items-center min-h-screen py-32">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="text-center lg:text-left order-2 lg:order-1">
                 <span className="inline-block text-carrot font-semibold text-sm uppercase tracking-widest mb-4">{d.heroBadge}</span>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white lg:text-gray-900 mb-6 leading-tight font-dancing font-bold">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white lg:text-gray-900 font-dancing font-bold mb-6 leading-tight">
                   {d.heroHeading}
                 </h1>
                 <p className="text-lg md:text-xl body-text text-white/90 lg:text-gray-600 mb-8 leading-relaxed max-w-xl">

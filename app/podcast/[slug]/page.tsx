@@ -40,7 +40,7 @@ export default async function PodcastEpisodePage({ params }: { params: Promise<{
   return (
     <>
       {/* Hero */}
-      <section className="relative pt-32 pb-16 overflow-hidden" style={{ background: 'linear-gradient(135deg, #14213d 0%, #1a2d50 100%)' }}>
+      <section className="page-hero" style={{ background: 'linear-gradient(135deg, #14213d 0%, #1a2d50 100%)' }}>
         <div className="absolute top-20 right-20 w-72 h-72 bg-carrot/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 left-20 w-64 h-64 bg-azure/20 rounded-full blur-3xl"></div>
         <div className="container mx-auto px-6 relative z-10">
