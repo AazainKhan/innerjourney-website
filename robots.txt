@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://innerjourney-with-shanila.com/sitemap.xml
