@@ -99,7 +99,7 @@ export default async function PodcastEpisodePage({ params }: { params: Promise<{
           <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
             Book a free clarity call and let&apos;s talk about what&apos;s holding you back.
           </p>
-          <BookingButton label="Book A Free Clarity Call" className="bg-white text-azure hover:bg-blue-50 px-10 py-4 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-azure border border-white/40" />
+          <BookingButton variant="primaryOnDark" />
         </div>
       </section>
     </>

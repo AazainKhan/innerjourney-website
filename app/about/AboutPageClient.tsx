@@ -162,7 +162,7 @@ export default function AboutPageClient(props: Props) {
             <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8 animate-on-scroll">
               {d.ctaSubtext}
             </p>
-            <BookingButton label={d.ctaButtonLabel} className="btn-azure text-lg px-10 py-4 button-text animate-on-scroll" />
+            <BookingButton label={d.ctaButtonLabel} className="animate-on-scroll" />
           </div>
         </section>
       </div>

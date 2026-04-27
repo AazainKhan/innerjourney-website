@@ -95,7 +95,7 @@ export default function CareerCoachingClient(props: Props) {
             <p className="text-xl md:text-2xl body-text-light text-white/90 mb-10 leading-relaxed max-w-3xl mx-auto">
               {d.heroSubtextPrefix} <span className="text-carrot font-bold">{d.heroSubtextHighlight}</span>
             </p>
-            <BookingButton label={d.heroCTALabel} className="btn-azure text-lg px-10 py-4 button-text transform hover:scale-105 transition-all duration-300" />
+            <BookingButton label={d.heroCTALabel} />
           </div>
         </div>
       </section>
@@ -240,7 +240,7 @@ export default function CareerCoachingClient(props: Props) {
                 </div>
               ))}
               <div className="text-center mt-16">
-                <BookingButton label={d.roadmapCTALabel} className="btn-azure-outline text-lg px-10 py-4 button-text transform hover:scale-105 transition-all duration-300" />
+                <BookingButton label={d.roadmapCTALabel} variant="secondary" />
               </div>
             </div>
           </div>
@@ -279,7 +279,7 @@ export default function CareerCoachingClient(props: Props) {
           </h2>
           <p className="text-lg md:text-xl text-white/90 mb-4 max-w-2xl mx-auto">{d.ctaSectionParagraph1}</p>
           <p className="text-xl md:text-2xl text-white font-semibold mb-10 max-w-2xl mx-auto">{d.ctaSectionParagraph2}</p>
-          <BookingButton label={d.ctaButtonLabel} className="bg-white text-azure hover:bg-blue-50 px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-azure border border-white/40" />
+          <BookingButton label={d.ctaButtonLabel} variant="primaryOnDark" />
         </div>
       </section>
     </>

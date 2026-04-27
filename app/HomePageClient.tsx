@@ -287,7 +287,7 @@ export default function HomePageClient(props: Props) {
       {/* Bottom CTA */}
       <section className="py-20 brand-gradient-azure">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-4xl md:text-3xl font-bold text-white mb-6 animate-on-scroll">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-6 animate-on-scroll">
             {d.bottomCTAText}
           </h2>
           <HomeClient buttonOnly variant="onAzure" ctaLabel={d.heroBottomCTALabel} />

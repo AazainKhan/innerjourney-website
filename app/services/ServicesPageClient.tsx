@@ -110,7 +110,7 @@ export default function ServicesPageClient(props: Props) {
                   <div className={`space-y-6 ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
                     <h3 className="text-2xl font-bold text-gray-900">Is this for you?</h3>
                     <p className="text-gray-600 text-lg leading-relaxed">{s.isThisForYou}</p>
-                    <BookingButton label="Book A Free Clarity Call" className="btn-azure-outline px-8 py-3 button-text" />
+                    <BookingButton variant="secondary" size="md" />
                   </div>
                 </div>
               ))}
@@ -126,7 +126,7 @@ export default function ServicesPageClient(props: Props) {
             <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8 animate-on-scroll">
               {d.ctaSubtext}
             </p>
-            <BookingButton label={d.ctaButtonLabel} className="btn-azure text-lg px-10 py-4 button-text animate-on-scroll" />
+            <BookingButton label={d.ctaButtonLabel} className="animate-on-scroll" />
           </div>
         </section>
       </div>

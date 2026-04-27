@@ -91,7 +91,7 @@ export default function NumerologyClient(props: Props) {
             </h1>
             <p className="text-2xl md:text-3xl text-carrot font-semibold mb-4">{d.heroTagline}</p>
             <p className="text-lg md:text-xl text-white/80 mb-10 max-w-2xl mx-auto leading-relaxed">{d.heroSubtext}</p>
-            <BookingButton label={d.heroCTALabel} className="btn-azure text-lg px-10 py-4 button-text transform hover:scale-105 transition-all duration-300" />
+            <BookingButton label={d.heroCTALabel} />
           </div>
         </div>
       </section>
@@ -261,7 +261,7 @@ export default function NumerologyClient(props: Props) {
       <section className="py-24 brand-gradient-azure">
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">{d.ctaSectionHeading}</h2>
-          <BookingButton label={d.ctaButtonLabel} className="bg-white text-azure hover:bg-blue-50 px-10 py-4 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-azure border border-white/40" />
+          <BookingButton label={d.ctaButtonLabel} variant="primaryOnDark" />
         </div>
       </section>
     </>

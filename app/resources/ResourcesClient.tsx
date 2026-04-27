@@ -339,7 +339,7 @@ export default function ResourcesClient(props: Props) {
             {d.ctaSectionHeading}
           </h2>
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">{d.ctaSectionSubtext}</p>
-          <BookingButton label={d.ctaButtonLabel} className="bg-white text-azure hover:bg-blue-50 px-10 py-4 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-azure border border-white/40" />
+          <BookingButton label={d.ctaButtonLabel} variant="primaryOnDark" />
         </div>
       </section>
     </>

@@ -147,7 +147,7 @@ export default function ContactPageClient(props: Props) {
               </div>
 
               <div className="mt-8">
-                <BookingButton label={d.bookingCTALabel} className="btn-azure button-text px-8 py-4" />
+                <BookingButton label={d.bookingCTALabel} />
               </div>
             </div>
 
