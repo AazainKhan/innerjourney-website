@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import { Libre_Caslon_Display, Titillium_Web, Dancing_Script } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import '@/styles/globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
@@ -121,6 +123,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <BookingOverlay copy={bookingFormData} />
           <ScrollAnimator />
         </BookingProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
