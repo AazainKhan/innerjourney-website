@@ -290,7 +290,7 @@ export default function HomePageClient(props: Props) {
           <h2 className="text-4xl md:text-3xl font-bold text-white mb-6 animate-on-scroll">
             {d.bottomCTAText}
           </h2>
-          <HomeClient buttonOnly ctaLabel={d.heroBottomCTALabel} />
+          <HomeClient buttonOnly variant="onAzure" ctaLabel={d.heroBottomCTALabel} />
         </div>
       </section>
     </>

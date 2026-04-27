@@ -5,9 +5,12 @@ import { useBooking } from '@/context/BookingContext'
 interface HomeClientProps {
   buttonOnly?: boolean
   ctaLabel?: string
+  /** "outline" = azure text + border on light bg (default).
+   *  "onAzure" = white text + white border, for use on the blue gradient section. */
+  variant?: 'outline' | 'onAzure'
 }
 
-export default function HomeClient({ buttonOnly, ctaLabel }: HomeClientProps) {
+export default function HomeClient({ buttonOnly, ctaLabel, variant = 'outline' }: HomeClientProps) {
   const { openBooking } = useBooking()
 
   function scrollToServices() {
@@ -19,11 +22,11 @@ export default function HomeClient({ buttonOnly, ctaLabel }: HomeClientProps) {
   }
 
   if (buttonOnly) {
+    const className = variant === 'onAzure'
+      ? 'bg-white text-azure hover:bg-blue-50 px-10 py-4 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-azure border border-white/40 button-text animate-on-scroll'
+      : 'btn-azure-outline text-lg px-8 py-3 button-text font-semibold animate-on-scroll'
     return (
-      <button
-        onClick={openBooking}
-        className="btn-azure-outline text-lg px-8 py-3 button-text font-semibold animate-on-scroll"
-      >
+      <button onClick={openBooking} className={className}>
         {ctaLabel ?? 'Book A Consultation'}
       </button>
     )
