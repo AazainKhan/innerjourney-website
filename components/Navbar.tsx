@@ -53,7 +53,7 @@ export default function Navbar({ data }: { data: NavbarData }) {
                 className="h-14 w-auto"
                 priority
               />
-              <div className="text-3xl font-dancing font-bold text-white leading-none">{data.brandLabel}</div>
+              <div className="text-2xl heading-primary text-white">{data.brandLabel}</div>
             </Link>
 
             {/* Desktop nav */}
