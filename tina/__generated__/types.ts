@@ -102,6 +102,10 @@ export type Query = {
   postConnection: PostConnection;
   podcast: Podcast;
   podcastConnection: PodcastConnection;
+  navbar: Navbar;
+  navbarConnection: NavbarConnection;
+  bookingForm: BookingForm;
+  bookingFormConnection: BookingFormConnection;
   footer: Footer;
   footerConnection: FooterConnection;
   theme: Theme;
@@ -282,6 +286,36 @@ export type QueryPodcastConnectionArgs = {
 };
 
 
+export type QueryNavbarArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryNavbarConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<NavbarFilter>;
+};
+
+
+export type QueryBookingFormArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryBookingFormConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<BookingFormFilter>;
+};
+
+
 export type QueryFooterArgs = {
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
@@ -337,6 +371,8 @@ export type DocumentFilter = {
   contact?: InputMaybe<ContactFilter>;
   post?: InputMaybe<PostFilter>;
   podcast?: InputMaybe<PodcastFilter>;
+  navbar?: InputMaybe<NavbarFilter>;
+  bookingForm?: InputMaybe<BookingFormFilter>;
   footer?: InputMaybe<FooterFilter>;
   theme?: InputMaybe<ThemeFilter>;
   testimonials?: InputMaybe<TestimonialsFilter>;
@@ -379,7 +415,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Home | Services | About | ClarityCoaching | CareerCoaching | Numerology | Resources | Contact | Post | Podcast | Footer | Theme | Testimonials | Folder;
+export type DocumentNode = Home | Services | About | ClarityCoaching | CareerCoaching | Numerology | Resources | Contact | Post | Podcast | Navbar | BookingForm | Footer | Theme | Testimonials | Folder;
 
 export type Home = Node & Document & {
   __typename?: 'Home';
@@ -1255,6 +1291,117 @@ export type PodcastConnection = Connection & {
   edges?: Maybe<Array<Maybe<PodcastConnectionEdges>>>;
 };
 
+export type NavbarLinks = {
+  __typename?: 'NavbarLinks';
+  label?: Maybe<Scalars['String']['output']>;
+  href?: Maybe<Scalars['String']['output']>;
+  showDropdown?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type NavbarWorkWithMeDropdown = {
+  __typename?: 'NavbarWorkWithMeDropdown';
+  label?: Maybe<Scalars['String']['output']>;
+  href?: Maybe<Scalars['String']['output']>;
+};
+
+export type Navbar = Node & Document & {
+  __typename?: 'Navbar';
+  brandLabel?: Maybe<Scalars['String']['output']>;
+  ctaLabel?: Maybe<Scalars['String']['output']>;
+  links?: Maybe<Array<Maybe<NavbarLinks>>>;
+  workWithMeDropdown?: Maybe<Array<Maybe<NavbarWorkWithMeDropdown>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type BooleanFilter = {
+  eq?: InputMaybe<Scalars['Boolean']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type NavbarLinksFilter = {
+  label?: InputMaybe<StringFilter>;
+  href?: InputMaybe<StringFilter>;
+  showDropdown?: InputMaybe<BooleanFilter>;
+};
+
+export type NavbarWorkWithMeDropdownFilter = {
+  label?: InputMaybe<StringFilter>;
+  href?: InputMaybe<StringFilter>;
+};
+
+export type NavbarFilter = {
+  brandLabel?: InputMaybe<StringFilter>;
+  ctaLabel?: InputMaybe<StringFilter>;
+  links?: InputMaybe<NavbarLinksFilter>;
+  workWithMeDropdown?: InputMaybe<NavbarWorkWithMeDropdownFilter>;
+};
+
+export type NavbarConnectionEdges = {
+  __typename?: 'NavbarConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Navbar>;
+};
+
+export type NavbarConnection = Connection & {
+  __typename?: 'NavbarConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<NavbarConnectionEdges>>>;
+};
+
+export type BookingForm = Node & Document & {
+  __typename?: 'BookingForm';
+  overlayTitle?: Maybe<Scalars['String']['output']>;
+  firstNameLabel?: Maybe<Scalars['String']['output']>;
+  lastNameLabel?: Maybe<Scalars['String']['output']>;
+  emailLabel?: Maybe<Scalars['String']['output']>;
+  countryCodeLabel?: Maybe<Scalars['String']['output']>;
+  phoneLabel?: Maybe<Scalars['String']['output']>;
+  serviceLabel?: Maybe<Scalars['String']['output']>;
+  messageLabel?: Maybe<Scalars['String']['output']>;
+  messagePlaceholder?: Maybe<Scalars['String']['output']>;
+  submitLabel?: Maybe<Scalars['String']['output']>;
+  submittingLabel?: Maybe<Scalars['String']['output']>;
+  successMessage?: Maybe<Scalars['String']['output']>;
+  errorMessage?: Maybe<Scalars['String']['output']>;
+  services?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type BookingFormFilter = {
+  overlayTitle?: InputMaybe<StringFilter>;
+  firstNameLabel?: InputMaybe<StringFilter>;
+  lastNameLabel?: InputMaybe<StringFilter>;
+  emailLabel?: InputMaybe<StringFilter>;
+  countryCodeLabel?: InputMaybe<StringFilter>;
+  phoneLabel?: InputMaybe<StringFilter>;
+  serviceLabel?: InputMaybe<StringFilter>;
+  messageLabel?: InputMaybe<StringFilter>;
+  messagePlaceholder?: InputMaybe<StringFilter>;
+  submitLabel?: InputMaybe<StringFilter>;
+  submittingLabel?: InputMaybe<StringFilter>;
+  successMessage?: InputMaybe<StringFilter>;
+  errorMessage?: InputMaybe<StringFilter>;
+  services?: InputMaybe<StringFilter>;
+};
+
+export type BookingFormConnectionEdges = {
+  __typename?: 'BookingFormConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<BookingForm>;
+};
+
+export type BookingFormConnection = Connection & {
+  __typename?: 'BookingFormConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<BookingFormConnectionEdges>>>;
+};
+
 export type FooterQuickLinks = {
   __typename?: 'FooterQuickLinks';
   label?: Maybe<Scalars['String']['output']>;
@@ -1433,6 +1580,10 @@ export type Mutation = {
   createPost: Post;
   updatePodcast: Podcast;
   createPodcast: Podcast;
+  updateNavbar: Navbar;
+  createNavbar: Navbar;
+  updateBookingForm: BookingForm;
+  createBookingForm: BookingForm;
   updateFooter: Footer;
   createFooter: Footer;
   updateTheme: Theme;
@@ -1595,6 +1746,30 @@ export type MutationCreatePodcastArgs = {
 };
 
 
+export type MutationUpdateNavbarArgs = {
+  relativePath: Scalars['String']['input'];
+  params: NavbarMutation;
+};
+
+
+export type MutationCreateNavbarArgs = {
+  relativePath: Scalars['String']['input'];
+  params: NavbarMutation;
+};
+
+
+export type MutationUpdateBookingFormArgs = {
+  relativePath: Scalars['String']['input'];
+  params: BookingFormMutation;
+};
+
+
+export type MutationCreateBookingFormArgs = {
+  relativePath: Scalars['String']['input'];
+  params: BookingFormMutation;
+};
+
+
 export type MutationUpdateFooterArgs = {
   relativePath: Scalars['String']['input'];
   params: FooterMutation;
@@ -1641,6 +1816,8 @@ export type DocumentUpdateMutation = {
   contact?: InputMaybe<ContactMutation>;
   post?: InputMaybe<PostMutation>;
   podcast?: InputMaybe<PodcastMutation>;
+  navbar?: InputMaybe<NavbarMutation>;
+  bookingForm?: InputMaybe<BookingFormMutation>;
   footer?: InputMaybe<FooterMutation>;
   theme?: InputMaybe<ThemeMutation>;
   testimonials?: InputMaybe<TestimonialsMutation>;
@@ -1658,6 +1835,8 @@ export type DocumentMutation = {
   contact?: InputMaybe<ContactMutation>;
   post?: InputMaybe<PostMutation>;
   podcast?: InputMaybe<PodcastMutation>;
+  navbar?: InputMaybe<NavbarMutation>;
+  bookingForm?: InputMaybe<BookingFormMutation>;
   footer?: InputMaybe<FooterMutation>;
   theme?: InputMaybe<ThemeMutation>;
   testimonials?: InputMaybe<TestimonialsMutation>;
@@ -1996,6 +2175,41 @@ export type PodcastMutation = {
   body?: InputMaybe<Scalars['JSON']['input']>;
 };
 
+export type NavbarLinksMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  href?: InputMaybe<Scalars['String']['input']>;
+  showDropdown?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type NavbarWorkWithMeDropdownMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  href?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type NavbarMutation = {
+  brandLabel?: InputMaybe<Scalars['String']['input']>;
+  ctaLabel?: InputMaybe<Scalars['String']['input']>;
+  links?: InputMaybe<Array<InputMaybe<NavbarLinksMutation>>>;
+  workWithMeDropdown?: InputMaybe<Array<InputMaybe<NavbarWorkWithMeDropdownMutation>>>;
+};
+
+export type BookingFormMutation = {
+  overlayTitle?: InputMaybe<Scalars['String']['input']>;
+  firstNameLabel?: InputMaybe<Scalars['String']['input']>;
+  lastNameLabel?: InputMaybe<Scalars['String']['input']>;
+  emailLabel?: InputMaybe<Scalars['String']['input']>;
+  countryCodeLabel?: InputMaybe<Scalars['String']['input']>;
+  phoneLabel?: InputMaybe<Scalars['String']['input']>;
+  serviceLabel?: InputMaybe<Scalars['String']['input']>;
+  messageLabel?: InputMaybe<Scalars['String']['input']>;
+  messagePlaceholder?: InputMaybe<Scalars['String']['input']>;
+  submitLabel?: InputMaybe<Scalars['String']['input']>;
+  submittingLabel?: InputMaybe<Scalars['String']['input']>;
+  successMessage?: InputMaybe<Scalars['String']['input']>;
+  errorMessage?: InputMaybe<Scalars['String']['input']>;
+  services?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
 export type FooterQuickLinksMutation = {
   label?: InputMaybe<Scalars['String']['input']>;
   href?: InputMaybe<Scalars['String']['input']>;
@@ -2063,6 +2277,10 @@ export type ContactPartsFragment = { __typename: 'Contact', heroImage?: string |
 export type PostPartsFragment = { __typename: 'Post', title: string, publishedAt?: string | null, status?: string | null, excerpt?: string | null, icon?: string | null, iconColor?: string | null, gradient?: string | null, badgeColor?: string | null, body?: any | null };
 
 export type PodcastPartsFragment = { __typename: 'Podcast', title: string, episode?: string | null, publishedAt?: string | null, status?: string | null, audioUrl?: string | null, excerpt?: string | null, icon?: string | null, gradient?: string | null, badgeColor?: string | null, body?: any | null };
+
+export type NavbarPartsFragment = { __typename: 'Navbar', brandLabel?: string | null, ctaLabel?: string | null, links?: Array<{ __typename: 'NavbarLinks', label?: string | null, href?: string | null, showDropdown?: boolean | null } | null> | null, workWithMeDropdown?: Array<{ __typename: 'NavbarWorkWithMeDropdown', label?: string | null, href?: string | null } | null> | null };
+
+export type BookingFormPartsFragment = { __typename: 'BookingForm', overlayTitle?: string | null, firstNameLabel?: string | null, lastNameLabel?: string | null, emailLabel?: string | null, countryCodeLabel?: string | null, phoneLabel?: string | null, serviceLabel?: string | null, messageLabel?: string | null, messagePlaceholder?: string | null, submitLabel?: string | null, submittingLabel?: string | null, successMessage?: string | null, errorMessage?: string | null, services?: Array<string | null> | null };
 
 export type FooterPartsFragment = { __typename: 'Footer', brandHeading?: string | null, brandDescription?: string | null, quickLinksHeading?: string | null, servicesHeading?: string | null, connectHeading?: string | null, emailLabel?: string | null, email?: string | null, phoneLabel?: string | null, phone?: string | null, copyright?: string | null, quickLinks?: Array<{ __typename: 'FooterQuickLinks', label?: string | null, href?: string | null } | null> | null, serviceLinks?: Array<{ __typename: 'FooterServiceLinks', label?: string | null, href?: string | null } | null> | null, socialLinks?: Array<{ __typename: 'FooterSocialLinks', label?: string | null, icon?: string | null, href?: string | null } | null> | null };
 
@@ -2259,6 +2477,44 @@ export type PodcastConnectionQueryVariables = Exact<{
 
 
 export type PodcastConnectionQuery = { __typename?: 'Query', podcastConnection: { __typename?: 'PodcastConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PodcastConnectionEdges', cursor: string, node?: { __typename: 'Podcast', id: string, title: string, episode?: string | null, publishedAt?: string | null, status?: string | null, audioUrl?: string | null, excerpt?: string | null, icon?: string | null, gradient?: string | null, badgeColor?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+
+export type NavbarQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type NavbarQuery = { __typename?: 'Query', navbar: { __typename: 'Navbar', id: string, brandLabel?: string | null, ctaLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, links?: Array<{ __typename: 'NavbarLinks', label?: string | null, href?: string | null, showDropdown?: boolean | null } | null> | null, workWithMeDropdown?: Array<{ __typename: 'NavbarWorkWithMeDropdown', label?: string | null, href?: string | null } | null> | null } };
+
+export type NavbarConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<NavbarFilter>;
+}>;
+
+
+export type NavbarConnectionQuery = { __typename?: 'Query', navbarConnection: { __typename?: 'NavbarConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'NavbarConnectionEdges', cursor: string, node?: { __typename: 'Navbar', id: string, brandLabel?: string | null, ctaLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, links?: Array<{ __typename: 'NavbarLinks', label?: string | null, href?: string | null, showDropdown?: boolean | null } | null> | null, workWithMeDropdown?: Array<{ __typename: 'NavbarWorkWithMeDropdown', label?: string | null, href?: string | null } | null> | null } | null } | null> | null } };
+
+export type BookingFormQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type BookingFormQuery = { __typename?: 'Query', bookingForm: { __typename: 'BookingForm', id: string, overlayTitle?: string | null, firstNameLabel?: string | null, lastNameLabel?: string | null, emailLabel?: string | null, countryCodeLabel?: string | null, phoneLabel?: string | null, serviceLabel?: string | null, messageLabel?: string | null, messagePlaceholder?: string | null, submitLabel?: string | null, submittingLabel?: string | null, successMessage?: string | null, errorMessage?: string | null, services?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+
+export type BookingFormConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<BookingFormFilter>;
+}>;
+
+
+export type BookingFormConnectionQuery = { __typename?: 'Query', bookingFormConnection: { __typename?: 'BookingFormConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'BookingFormConnectionEdges', cursor: string, node?: { __typename: 'BookingForm', id: string, overlayTitle?: string | null, firstNameLabel?: string | null, lastNameLabel?: string | null, emailLabel?: string | null, countryCodeLabel?: string | null, phoneLabel?: string | null, serviceLabel?: string | null, messageLabel?: string | null, messagePlaceholder?: string | null, submitLabel?: string | null, submittingLabel?: string | null, successMessage?: string | null, errorMessage?: string | null, services?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type FooterQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -2658,6 +2914,43 @@ export const PodcastPartsFragmentDoc = gql`
   gradient
   badgeColor
   body
+}
+    `;
+export const NavbarPartsFragmentDoc = gql`
+    fragment NavbarParts on Navbar {
+  __typename
+  brandLabel
+  ctaLabel
+  links {
+    __typename
+    label
+    href
+    showDropdown
+  }
+  workWithMeDropdown {
+    __typename
+    label
+    href
+  }
+}
+    `;
+export const BookingFormPartsFragmentDoc = gql`
+    fragment BookingFormParts on BookingForm {
+  __typename
+  overlayTitle
+  firstNameLabel
+  lastNameLabel
+  emailLabel
+  countryCodeLabel
+  phoneLabel
+  serviceLabel
+  messageLabel
+  messagePlaceholder
+  submitLabel
+  submittingLabel
+  successMessage
+  errorMessage
+  services
 }
     `;
 export const FooterPartsFragmentDoc = gql`
@@ -3280,6 +3573,120 @@ export const PodcastConnectionDocument = gql`
   }
 }
     ${PodcastPartsFragmentDoc}`;
+export const NavbarDocument = gql`
+    query navbar($relativePath: String!) {
+  navbar(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...NavbarParts
+  }
+}
+    ${NavbarPartsFragmentDoc}`;
+export const NavbarConnectionDocument = gql`
+    query navbarConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: NavbarFilter) {
+  navbarConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...NavbarParts
+      }
+    }
+  }
+}
+    ${NavbarPartsFragmentDoc}`;
+export const BookingFormDocument = gql`
+    query bookingForm($relativePath: String!) {
+  bookingForm(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...BookingFormParts
+  }
+}
+    ${BookingFormPartsFragmentDoc}`;
+export const BookingFormConnectionDocument = gql`
+    query bookingFormConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: BookingFormFilter) {
+  bookingFormConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...BookingFormParts
+      }
+    }
+  }
+}
+    ${BookingFormPartsFragmentDoc}`;
 export const FooterDocument = gql`
     query footer($relativePath: String!) {
   footer(relativePath: $relativePath) {
@@ -3513,6 +3920,18 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     podcastConnection(variables?: PodcastConnectionQueryVariables, options?: C): Promise<{data: PodcastConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PodcastConnectionQueryVariables, query: string}> {
         return requester<{data: PodcastConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PodcastConnectionQueryVariables, query: string}, PodcastConnectionQueryVariables>(PodcastConnectionDocument, variables, options);
+      },
+    navbar(variables: NavbarQueryVariables, options?: C): Promise<{data: NavbarQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: NavbarQueryVariables, query: string}> {
+        return requester<{data: NavbarQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: NavbarQueryVariables, query: string}, NavbarQueryVariables>(NavbarDocument, variables, options);
+      },
+    navbarConnection(variables?: NavbarConnectionQueryVariables, options?: C): Promise<{data: NavbarConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: NavbarConnectionQueryVariables, query: string}> {
+        return requester<{data: NavbarConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: NavbarConnectionQueryVariables, query: string}, NavbarConnectionQueryVariables>(NavbarConnectionDocument, variables, options);
+      },
+    bookingForm(variables: BookingFormQueryVariables, options?: C): Promise<{data: BookingFormQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: BookingFormQueryVariables, query: string}> {
+        return requester<{data: BookingFormQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: BookingFormQueryVariables, query: string}, BookingFormQueryVariables>(BookingFormDocument, variables, options);
+      },
+    bookingFormConnection(variables?: BookingFormConnectionQueryVariables, options?: C): Promise<{data: BookingFormConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: BookingFormConnectionQueryVariables, query: string}> {
+        return requester<{data: BookingFormConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: BookingFormConnectionQueryVariables, query: string}, BookingFormConnectionQueryVariables>(BookingFormConnectionDocument, variables, options);
       },
     footer(variables: FooterQueryVariables, options?: C): Promise<{data: FooterQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FooterQueryVariables, query: string}> {
         return requester<{data: FooterQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FooterQueryVariables, query: string}, FooterQueryVariables>(FooterDocument, variables, options);

@@ -14,6 +14,12 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
 
+    // Honeypot — bots auto-fill `website`, humans never see the hidden input.
+    // Pretend we accepted the submission so the bot doesn't retry.
+    if (typeof body.website === 'string' && body.website.length > 0) {
+      return NextResponse.json({ success: true, message: 'Received.' })
+    }
+
     const formType = sanitize(body.form_type)
     const email = sanitize(body.email)
 

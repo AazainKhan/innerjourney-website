@@ -1,0 +1,15 @@
+{
+  "brandLabel": "Shanila Khan",
+  "ctaLabel": "Free Clarity Call",
+  "links": [
+    { "label": "Work with me", "href": "/services", "showDropdown": true },
+    { "label": "About", "href": "/about", "showDropdown": false },
+    { "label": "Resources", "href": "/resources", "showDropdown": false },
+    { "label": "Contact", "href": "/contact", "showDropdown": false }
+  ],
+  "workWithMeDropdown": [
+    { "label": "Clarity Coaching", "href": "/clarity-coaching" },
+    { "label": "Career Coaching", "href": "/career-coaching" },
+    { "label": "Numerology for Clarity", "href": "/numerology" }
+  ]
+}

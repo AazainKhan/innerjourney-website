@@ -3,6 +3,23 @@
 import { useState, useRef, useEffect } from 'react'
 import { useBooking } from '@/context/BookingContext'
 
+interface BookingFormCopy {
+  overlayTitle: string
+  firstNameLabel: string
+  lastNameLabel: string
+  emailLabel: string
+  countryCodeLabel: string
+  phoneLabel: string
+  serviceLabel: string
+  messageLabel: string
+  messagePlaceholder: string
+  submitLabel: string
+  submittingLabel: string
+  successMessage: string
+  errorMessage: string
+  services: string[]
+}
+
 const COUNTRY_CODES = [
   { value: '44', label: 'UK (+44)' },
   { value: '1', label: 'USA (+1)' },
@@ -23,14 +40,7 @@ const COUNTRY_CODES = [
   { value: '81', label: 'Japan (+81)' },
 ]
 
-const SERVICES = [
-  'Clarity Coaching (12-week programme)',
-  'Career Coaching',
-  'Numerology for Clarity (1-hour session)',
-  'Not sure yet – just exploring',
-]
-
-export default function BookingOverlay() {
+export default function BookingOverlay({ copy }: { copy: BookingFormCopy }) {
   const { isOpen, closeBooking } = useBooking()
   const [submitting, setSubmitting] = useState(false)
   const [status, setStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
@@ -57,13 +67,13 @@ export default function BookingOverlay() {
       })
       const result = await res.json()
       if (result.success) {
-        setStatus({ type: 'success', message: result.message || 'Thank you! We\'ll be in touch soon.' })
+        setStatus({ type: 'success', message: result.message || copy.successMessage })
         formRef.current?.reset()
       } else {
-        setStatus({ type: 'error', message: result.error || 'Something went wrong. Please try again.' })
+        setStatus({ type: 'error', message: result.error || copy.errorMessage })
       }
     } catch {
-      setStatus({ type: 'error', message: 'Network error. Please try again.' })
+      setStatus({ type: 'error', message: copy.errorMessage })
     } finally {
       setSubmitting(false)
     }
@@ -74,6 +84,9 @@ export default function BookingOverlay() {
   return (
     <div
       id="booking-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="booking-overlay-title"
       className="fixed inset-0 flex items-start justify-center overflow-y-auto py-4 md:py-8"
       style={{ zIndex: 9999, backgroundColor: 'rgba(0,0,0,0.75)' }}
       onClick={(e) => { if (e.target === e.currentTarget) closeBooking() }}
@@ -93,89 +106,95 @@ export default function BookingOverlay() {
         </button>
 
         <div className="sticky top-0 bg-oxford text-white p-3 md:p-4 rounded-t-lg z-10">
-          <h2 className="text-xl font-bold text-center">Book A Consultation</h2>
+          <h2 id="booking-overlay-title" className="text-xl font-bold text-center">{copy.overlayTitle}</h2>
         </div>
 
         <div className="p-3 md:p-4 space-y-2">
-          {status && (
-            <div className={`p-4 mb-4 rounded-lg ${status.type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
-              {status.message}
-            </div>
-          )}
+          <div role="status" aria-live="polite" aria-atomic="true" className={status ? '' : 'sr-only'}>
+            {status && (
+              <div className={`p-4 mb-4 rounded-lg ${status.type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                {status.message}
+              </div>
+            )}
+          </div>
 
           <form ref={formRef} onSubmit={handleSubmit} className="space-y-3">
+            {/* Honeypot — bots auto-fill this, humans never see it. */}
+            <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true"
+              className="absolute -left-[9999px] -top-[9999px] opacity-0 pointer-events-none" />
+
             <div className="grid md:grid-cols-2 gap-2">
               <div>
-                <label htmlFor="b-first-name" className="block text-xs font-medium text-gray-700 mb-0.5">First Name *</label>
-                <input type="text" id="b-first-name" name="first_name" required
-                  className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                  placeholder="First name" />
+                <label htmlFor="b-first-name" className="block text-xs font-medium text-gray-700 mb-0.5">{copy.firstNameLabel} *</label>
+                <input type="text" id="b-first-name" name="first_name" required aria-required="true"
+                  className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-azure focus:border-transparent"
+                  placeholder={copy.firstNameLabel} />
               </div>
               <div>
-                <label htmlFor="b-last-name" className="block text-xs font-medium text-gray-700 mb-0.5">Last Name *</label>
-                <input type="text" id="b-last-name" name="last_name" required
-                  className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                  placeholder="Last name" />
+                <label htmlFor="b-last-name" className="block text-xs font-medium text-gray-700 mb-0.5">{copy.lastNameLabel} *</label>
+                <input type="text" id="b-last-name" name="last_name" required aria-required="true"
+                  className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-azure focus:border-transparent"
+                  placeholder={copy.lastNameLabel} />
               </div>
             </div>
 
             <div>
-              <label htmlFor="b-email" className="block text-xs font-medium text-gray-700 mb-0.5">Email Address *</label>
-              <input type="email" id="b-email" name="email" required
-                className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+              <label htmlFor="b-email" className="block text-xs font-medium text-gray-700 mb-0.5">{copy.emailLabel} *</label>
+              <input type="email" id="b-email" name="email" required aria-required="true"
+                className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-azure focus:border-transparent"
                 placeholder="your@email.com" />
             </div>
 
             <div className="grid md:grid-cols-2 gap-2">
               <div>
-                <label htmlFor="b-country-code" className="block text-xs font-medium text-gray-700 mb-0.5">Country Code *</label>
-                <select id="b-country-code" name="country_code" required
-                  className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent">
-                  {COUNTRY_CODES.map((c) => (
-                    <option key={`${c.value}-${c.label}`} value={c.value}>{c.label}</option>
+                <label htmlFor="b-country-code" className="block text-xs font-medium text-gray-700 mb-0.5">{copy.countryCodeLabel} *</label>
+                <select id="b-country-code" name="country_code" required aria-required="true"
+                  className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-azure focus:border-transparent">
+                  {COUNTRY_CODES.map((c, i) => (
+                    <option key={`${c.value}-${i}`} value={c.value}>{c.label}</option>
                   ))}
                 </select>
               </div>
               <div>
-                <label htmlFor="b-phone" className="block text-xs font-medium text-gray-700 mb-0.5">Phone Number</label>
+                <label htmlFor="b-phone" className="block text-xs font-medium text-gray-700 mb-0.5">{copy.phoneLabel}</label>
                 <input type="tel" id="b-phone" name="phone"
-                  className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                  className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-azure focus:border-transparent"
                   placeholder="07xxx xxxxxx" />
               </div>
             </div>
 
             <div>
-              <label htmlFor="b-service" className="block text-xs font-medium text-gray-700 mb-0.5">Service Interested In *</label>
-              <select id="b-service" name="service" required
-                className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent">
-                <option value="">Select a service...</option>
-                {SERVICES.map((s) => (
+              <label htmlFor="b-service" className="block text-xs font-medium text-gray-700 mb-0.5">{copy.serviceLabel} *</label>
+              <select id="b-service" name="service" required aria-required="true"
+                className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-azure focus:border-transparent">
+                <option value="">Select a service…</option>
+                {copy.services.map((s) => (
                   <option key={s} value={s}>{s}</option>
                 ))}
               </select>
             </div>
 
             <div>
-              <label htmlFor="b-message" className="block text-xs font-medium text-gray-700 mb-0.5">Tell me about yourself</label>
+              <label htmlFor="b-message" className="block text-xs font-medium text-gray-700 mb-0.5">{copy.messageLabel}</label>
               <textarea id="b-message" name="message" rows={3}
-                className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent resize-none"
-                placeholder="What are your main goals or challenges?" />
+                className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-azure focus:border-transparent resize-none"
+                placeholder={copy.messagePlaceholder} />
             </div>
 
             <button
               type="submit"
               disabled={submitting}
-              className="w-full btn-azure button-text py-3 rounded-lg disabled:opacity-60 flex items-center justify-center gap-2"
+              className="w-full bg-azure text-white hover:brightness-110 shadow-azure font-semibold py-3 rounded-lg disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-all"
             >
               {submitting ? (
                 <>
-                  <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                   </svg>
-                  Sending...
+                  {copy.submittingLabel}
                 </>
-              ) : 'Book My Free Clarity Call'}
+              ) : copy.submitLabel}
             </button>
           </form>
         </div>

@@ -331,6 +331,41 @@ fragment PodcastParts on Podcast {
   body
 }
 
+fragment NavbarParts on Navbar {
+  __typename
+  brandLabel
+  ctaLabel
+  links {
+    __typename
+    label
+    href
+    showDropdown
+  }
+  workWithMeDropdown {
+    __typename
+    label
+    href
+  }
+}
+
+fragment BookingFormParts on BookingForm {
+  __typename
+  overlayTitle
+  firstNameLabel
+  lastNameLabel
+  emailLabel
+  countryCodeLabel
+  phoneLabel
+  serviceLabel
+  messageLabel
+  messagePlaceholder
+  submitLabel
+  submittingLabel
+  successMessage
+  errorMessage
+  services
+}
+
 fragment FooterParts on Footer {
   __typename
   brandHeading

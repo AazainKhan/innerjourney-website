@@ -497,6 +497,70 @@ var config_default = defineConfig({
         ]
       },
       {
+        name: "navbar",
+        label: "Navbar (Site-Wide)",
+        path: "content",
+        match: { include: "navbar" },
+        format: "json",
+        ui: { router: () => "/" },
+        fields: [
+          { name: "brandLabel", label: "Brand Label (next to logo)", type: "string" },
+          { name: "ctaLabel", label: "Sticky CTA Button Label", type: "string" },
+          {
+            name: "links",
+            label: "Top-level Links",
+            type: "object",
+            list: true,
+            ui: { itemProps: (item) => ({ label: item?.label }) },
+            fields: [
+              { name: "label", label: "Label", type: "string" },
+              { name: "href", label: "URL", type: "string" },
+              { name: "showDropdown", label: "Has dropdown?", type: "boolean" }
+            ]
+          },
+          {
+            name: "workWithMeDropdown",
+            label: "Work-with-me Dropdown",
+            type: "object",
+            list: true,
+            ui: { itemProps: (item) => ({ label: item?.label }) },
+            fields: [
+              { name: "label", label: "Label", type: "string" },
+              { name: "href", label: "URL", type: "string" }
+            ]
+          }
+        ]
+      },
+      {
+        name: "bookingForm",
+        label: "Booking Form (Site-Wide)",
+        path: "content",
+        match: { include: "booking-form" },
+        format: "json",
+        ui: { router: () => "/" },
+        fields: [
+          { name: "overlayTitle", label: "Overlay Title", type: "string" },
+          { name: "firstNameLabel", label: "First Name Label", type: "string" },
+          { name: "lastNameLabel", label: "Last Name Label", type: "string" },
+          { name: "emailLabel", label: "Email Label", type: "string" },
+          { name: "countryCodeLabel", label: "Country Code Label", type: "string" },
+          { name: "phoneLabel", label: "Phone Number Label", type: "string" },
+          { name: "serviceLabel", label: "Service Field Label", type: "string" },
+          { name: "messageLabel", label: "Message Label", type: "string" },
+          { name: "messagePlaceholder", label: "Message Placeholder", type: "string" },
+          { name: "submitLabel", label: "Submit Button Label", type: "string" },
+          { name: "submittingLabel", label: "Submit Button (sending\u2026)", type: "string" },
+          { name: "successMessage", label: "Success Message", type: "string", ui: { component: "textarea" } },
+          { name: "errorMessage", label: "Error Message (fallback)", type: "string", ui: { component: "textarea" } },
+          {
+            name: "services",
+            label: "Services in Dropdown",
+            type: "string",
+            list: true
+          }
+        ]
+      },
+      {
         name: "footer",
         label: "Footer (Site-Wide)",
         path: "content",

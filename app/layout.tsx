@@ -7,6 +7,8 @@ import BookingOverlay from '@/components/BookingOverlay'
 import ScrollAnimator from '@/components/ScrollAnimator'
 import { BookingProvider } from '@/context/BookingContext'
 import themeData from '@/content/theme.json'
+import navbarData from '@/content/navbar.json'
+import bookingFormData from '@/content/booking-form.json'
 import client from '@/tina/__generated__/client'
 
 const caslonDisplay = Libre_Caslon_Display({
@@ -111,11 +113,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <style dangerouslySetInnerHTML={{ __html: themeStyle }} />
       </head>
       <body>
+        <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[10000] focus:bg-azure focus:text-white focus:px-4 focus:py-2 focus:rounded">Skip to content</a>
         <BookingProvider>
-          <Navbar />
-          <main>{children}</main>
+          <Navbar data={navbarData} />
+          <main id="main">{children}</main>
           <Footer />
-          <BookingOverlay />
+          <BookingOverlay copy={bookingFormData} />
           <ScrollAnimator />
         </BookingProvider>
       </body>

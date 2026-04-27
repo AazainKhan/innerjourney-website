@@ -5,7 +5,15 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useBooking } from '@/context/BookingContext'
 
-export default function Navbar() {
+interface NavLink { label: string; href: string; showDropdown?: boolean }
+interface NavbarData {
+  brandLabel: string
+  ctaLabel: string
+  links: NavLink[]
+  workWithMeDropdown: Array<{ label: string; href: string }>
+}
+
+export default function Navbar({ data }: { data: NavbarData }) {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [workDropdownOpen, setWorkDropdownOpen] = useState(false)
@@ -45,24 +53,25 @@ export default function Navbar() {
                 className="h-14 w-auto"
                 priority
               />
-              <div className="text-2xl heading-primary text-white">Shanila Khan</div>
+              <div className="text-2xl heading-primary text-white">{data.brandLabel}</div>
             </Link>
 
             {/* Desktop nav */}
             <div className="hidden md:flex items-center space-x-8">
-              <div className="nav-dropdown">
-                <Link href="/services" className="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">
-                  Work with me <i className="fas fa-chevron-down ml-1 text-xs"></i>
-                </Link>
-                <div className="nav-dropdown-menu">
-                  <Link href="/clarity-coaching" className="nav-dropdown-item">Clarity Coaching</Link>
-                  <Link href="/career-coaching" className="nav-dropdown-item">Career Coaching</Link>
-                  <Link href="/numerology" className="nav-dropdown-item">Numerology for Clarity</Link>
+              {data.links.map((link) => link.showDropdown ? (
+                <div key={link.href} className="nav-dropdown">
+                  <Link href={link.href} className="nav-link nav-text text-white hover:text-carrot transition-colors uppercase">
+                    {link.label} <i className="fas fa-chevron-down ml-1 text-xs"></i>
+                  </Link>
+                  <div className="nav-dropdown-menu">
+                    {data.workWithMeDropdown.map((d) => (
+                      <Link key={d.href} href={d.href} className="nav-dropdown-item">{d.label}</Link>
+                    ))}
+                  </div>
                 </div>
-              </div>
-              <Link href="/about" className="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">About</Link>
-              <Link href="/resources" className="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">Resources</Link>
-              <Link href="/contact" className="nav-link nav-text text-white hover:text-orange-400 transition-colors uppercase">Contact</Link>
+              ) : (
+                <Link key={link.href} href={link.href} className="nav-link nav-text text-white hover:text-carrot transition-colors uppercase">{link.label}</Link>
+              ))}
             </div>
 
             <button
@@ -70,7 +79,7 @@ export default function Navbar() {
               onClick={openBooking}
               className="booking-btn btn-azure btn-sm button-text hidden md:inline-flex"
             >
-              Free Clarity Call
+              {data.ctaLabel}
             </button>
 
             <div className="md:hidden mr-2">
@@ -101,29 +110,30 @@ export default function Navbar() {
             <span className="close-icon">&times;</span>
           </button>
           <div className="px-6 py-4 space-y-4 mobile-menu-content">
-            <div className="mobile-nav-dropdown">
-              <button
-                className="mobile-dropdown-toggle block text-white hover:text-orange-400 transition-colors uppercase w-full text-left"
-                onClick={() => setWorkDropdownOpen(!workDropdownOpen)}
-              >
-                Work with me <i className={`fas fa-chevron-down ml-1 text-xs transition-transform ${workDropdownOpen ? 'rotate-180' : ''}`}></i>
-              </button>
-              {workDropdownOpen && (
-                <div className="pl-4 space-y-2 mt-2">
-                  <Link href="/clarity-coaching" className="block text-white hover:text-orange-400 transition-colors" onClick={() => setMobileOpen(false)}>Clarity Coaching</Link>
-                  <Link href="/career-coaching" className="block text-white hover:text-orange-400 transition-colors" onClick={() => setMobileOpen(false)}>Career Coaching</Link>
-                  <Link href="/numerology" className="block text-white hover:text-orange-400 transition-colors" onClick={() => setMobileOpen(false)}>Numerology for Clarity</Link>
-                </div>
-              )}
-            </div>
-            <Link href="/about" className="block text-white hover:text-orange-400 transition-colors uppercase" onClick={() => setMobileOpen(false)}>About</Link>
-            <Link href="/resources" className="block text-white hover:text-orange-400 transition-colors uppercase" onClick={() => setMobileOpen(false)}>Resources</Link>
-            <Link href="/contact" className="block text-white hover:text-orange-400 transition-colors" onClick={() => setMobileOpen(false)}>Contact</Link>
+            {data.links.map((link) => link.showDropdown ? (
+              <div key={link.href} className="mobile-nav-dropdown">
+                <button
+                  className="mobile-dropdown-toggle block text-white hover:text-carrot transition-colors uppercase w-full text-left"
+                  onClick={() => setWorkDropdownOpen(!workDropdownOpen)}
+                >
+                  {link.label} <i className={`fas fa-chevron-down ml-1 text-xs transition-transform ${workDropdownOpen ? 'rotate-180' : ''}`}></i>
+                </button>
+                {workDropdownOpen && (
+                  <div className="pl-4 space-y-2 mt-2">
+                    {data.workWithMeDropdown.map((d) => (
+                      <Link key={d.href} href={d.href} className="block text-white hover:text-carrot transition-colors" onClick={() => setMobileOpen(false)}>{d.label}</Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link key={link.href} href={link.href} className="block text-white hover:text-carrot transition-colors uppercase" onClick={() => setMobileOpen(false)}>{link.label}</Link>
+            ))}
             <button
               onClick={() => { setMobileOpen(false); openBooking() }}
               className="booking-btn w-full btn-azure button-text"
             >
-              Free Clarity Call
+              {data.ctaLabel}
             </button>
             <div className="flex justify-center mt-4 space-x-6">
               <a href="https://www.facebook.com/innerjourneywithshanila/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-white text-2xl hover:text-orange-400">

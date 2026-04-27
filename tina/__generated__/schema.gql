@@ -74,6 +74,10 @@ type Query {
   postConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PostFilter): PostConnection!
   podcast(relativePath: String): Podcast!
   podcastConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PodcastFilter): PodcastConnection!
+  navbar(relativePath: String): Navbar!
+  navbarConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: NavbarFilter): NavbarConnection!
+  bookingForm(relativePath: String): BookingForm!
+  bookingFormConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: BookingFormFilter): BookingFormConnection!
   footer(relativePath: String): Footer!
   footerConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: FooterFilter): FooterConnection!
   theme(relativePath: String): Theme!
@@ -93,6 +97,8 @@ input DocumentFilter {
   contact: ContactFilter
   post: PostFilter
   podcast: PodcastFilter
+  navbar: NavbarFilter
+  bookingForm: BookingFormFilter
   footer: FooterFilter
   theme: ThemeFilter
   testimonials: TestimonialsFilter
@@ -121,7 +127,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Home | Services | About | ClarityCoaching | CareerCoaching | Numerology | Resources | Contact | Post | Podcast | Footer | Theme | Testimonials | Folder
+union DocumentNode = Home | Services | About | ClarityCoaching | CareerCoaching | Numerology | Resources | Contact | Post | Podcast | Navbar | BookingForm | Footer | Theme | Testimonials | Folder
 
 type Home implements Node & Document {
   heroImage: String
@@ -957,6 +963,109 @@ type PodcastConnection implements Connection {
   edges: [PodcastConnectionEdges]
 }
 
+type NavbarLinks {
+  label: String
+  href: String
+  showDropdown: Boolean
+}
+
+type NavbarWorkWithMeDropdown {
+  label: String
+  href: String
+}
+
+type Navbar implements Node & Document {
+  brandLabel: String
+  ctaLabel: String
+  links: [NavbarLinks]
+  workWithMeDropdown: [NavbarWorkWithMeDropdown]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input BooleanFilter {
+  eq: Boolean
+  exists: Boolean
+}
+
+input NavbarLinksFilter {
+  label: StringFilter
+  href: StringFilter
+  showDropdown: BooleanFilter
+}
+
+input NavbarWorkWithMeDropdownFilter {
+  label: StringFilter
+  href: StringFilter
+}
+
+input NavbarFilter {
+  brandLabel: StringFilter
+  ctaLabel: StringFilter
+  links: NavbarLinksFilter
+  workWithMeDropdown: NavbarWorkWithMeDropdownFilter
+}
+
+type NavbarConnectionEdges {
+  cursor: String!
+  node: Navbar
+}
+
+type NavbarConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [NavbarConnectionEdges]
+}
+
+type BookingForm implements Node & Document {
+  overlayTitle: String
+  firstNameLabel: String
+  lastNameLabel: String
+  emailLabel: String
+  countryCodeLabel: String
+  phoneLabel: String
+  serviceLabel: String
+  messageLabel: String
+  messagePlaceholder: String
+  submitLabel: String
+  submittingLabel: String
+  successMessage: String
+  errorMessage: String
+  services: [String]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input BookingFormFilter {
+  overlayTitle: StringFilter
+  firstNameLabel: StringFilter
+  lastNameLabel: StringFilter
+  emailLabel: StringFilter
+  countryCodeLabel: StringFilter
+  phoneLabel: StringFilter
+  serviceLabel: StringFilter
+  messageLabel: StringFilter
+  messagePlaceholder: StringFilter
+  submitLabel: StringFilter
+  submittingLabel: StringFilter
+  successMessage: StringFilter
+  errorMessage: StringFilter
+  services: StringFilter
+}
+
+type BookingFormConnectionEdges {
+  cursor: String!
+  node: BookingForm
+}
+
+type BookingFormConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [BookingFormConnectionEdges]
+}
+
 type FooterQuickLinks {
   label: String
   href: String
@@ -1121,6 +1230,10 @@ type Mutation {
   createPost(relativePath: String!, params: PostMutation!): Post!
   updatePodcast(relativePath: String!, params: PodcastMutation!): Podcast!
   createPodcast(relativePath: String!, params: PodcastMutation!): Podcast!
+  updateNavbar(relativePath: String!, params: NavbarMutation!): Navbar!
+  createNavbar(relativePath: String!, params: NavbarMutation!): Navbar!
+  updateBookingForm(relativePath: String!, params: BookingFormMutation!): BookingForm!
+  createBookingForm(relativePath: String!, params: BookingFormMutation!): BookingForm!
   updateFooter(relativePath: String!, params: FooterMutation!): Footer!
   createFooter(relativePath: String!, params: FooterMutation!): Footer!
   updateTheme(relativePath: String!, params: ThemeMutation!): Theme!
@@ -1140,6 +1253,8 @@ input DocumentUpdateMutation {
   contact: ContactMutation
   post: PostMutation
   podcast: PodcastMutation
+  navbar: NavbarMutation
+  bookingForm: BookingFormMutation
   footer: FooterMutation
   theme: ThemeMutation
   testimonials: TestimonialsMutation
@@ -1157,6 +1272,8 @@ input DocumentMutation {
   contact: ContactMutation
   post: PostMutation
   podcast: PodcastMutation
+  navbar: NavbarMutation
+  bookingForm: BookingFormMutation
   footer: FooterMutation
   theme: ThemeMutation
   testimonials: TestimonialsMutation
@@ -1493,6 +1610,41 @@ input PodcastMutation {
   gradient: String
   badgeColor: String
   body: JSON
+}
+
+input NavbarLinksMutation {
+  label: String
+  href: String
+  showDropdown: Boolean
+}
+
+input NavbarWorkWithMeDropdownMutation {
+  label: String
+  href: String
+}
+
+input NavbarMutation {
+  brandLabel: String
+  ctaLabel: String
+  links: [NavbarLinksMutation]
+  workWithMeDropdown: [NavbarWorkWithMeDropdownMutation]
+}
+
+input BookingFormMutation {
+  overlayTitle: String
+  firstNameLabel: String
+  lastNameLabel: String
+  emailLabel: String
+  countryCodeLabel: String
+  phoneLabel: String
+  serviceLabel: String
+  messageLabel: String
+  messagePlaceholder: String
+  submitLabel: String
+  submittingLabel: String
+  successMessage: String
+  errorMessage: String
+  services: [String]
 }
 
 input FooterQuickLinksMutation {
