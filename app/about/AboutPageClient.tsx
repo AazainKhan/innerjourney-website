@@ -2,6 +2,7 @@
 
 import { useTina } from 'tinacms/dist/react'
 import BookingButton from '@/components/BookingButton'
+import RichText from '@/components/RichText'
 
 interface AboutData {
   about: {
@@ -48,12 +49,8 @@ export default function AboutPageClient(props: Props) {
         <div className="absolute inset-0 bg-oxford/90"></div>
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white font-dancing font-bold mb-6 leading-tight drop-shadow-2xl">
-              {d.heroHeading}
-            </h1>
-            <p className="text-lg md:text-xl body-text-light text-white/90 leading-relaxed max-w-3xl mx-auto">
-              {d.heroSubtext}
-            </p>
+            <RichText as="h1" className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white font-dancing font-bold mb-6 leading-tight drop-shadow-2xl">{d.heroHeading}</RichText>
+            <RichText as="p" className="text-lg md:text-xl body-text-light text-white/90 leading-relaxed max-w-3xl mx-auto">{d.heroSubtext}</RichText>
           </div>
         </div>
       </section>
@@ -73,7 +70,7 @@ export default function AboutPageClient(props: Props) {
                 {d.storyParagraph2}
               </p>
               <div className="flex items-center space-x-2">
-                <i className="fas fa-check-circle text-orange-500 text-xl"></i>
+                <i className="fas fa-check-circle text-carrot text-xl"></i>
                 <span className="text-gray-700 font-medium">Certified Coach</span>
               </div>
             </div>
@@ -99,12 +96,12 @@ export default function AboutPageClient(props: Props) {
 
       {/* Credentials + Values */}
       <div className="relative overflow-hidden" style={{ marginTop: '-5px' }}>
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-blue-100 to-indigo-100"></div>
-        <div className="absolute top-0 right-10 w-[30rem] h-[30rem] bg-orange-400/30 rounded-full blur-3xl"></div>
-        <div className="absolute top-10 left-10 w-[28rem] h-[28rem] bg-blue-400/30 rounded-full blur-3xl"></div>
-        <div className="absolute top-[30%] right-[20%] w-96 h-96 bg-purple-400/25 rounded-full blur-3xl"></div>
-        <div className="absolute top-[55%] left-[10%] w-[26rem] h-[26rem] bg-indigo-400/30 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-10 right-[15%] w-96 h-96 bg-blue-400/30 rounded-full blur-3xl"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-azure/5 via-azure/10 to-azure/10"></div>
+        <div className="absolute top-0 right-10 w-[30rem] h-[30rem] bg-carrot/30 rounded-full blur-3xl"></div>
+        <div className="absolute top-10 left-10 w-[28rem] h-[28rem] bg-azure/30 rounded-full blur-3xl"></div>
+        <div className="absolute top-[30%] right-[20%] w-96 h-96 bg-oxford/25 rounded-full blur-3xl"></div>
+        <div className="absolute top-[55%] left-[10%] w-[26rem] h-[26rem] bg-azure/30 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-10 right-[15%] w-96 h-96 bg-azure/30 rounded-full blur-3xl"></div>
 
         <section className="py-20 relative">
           <div className="container mx-auto px-6 relative z-10">
@@ -143,7 +140,7 @@ export default function AboutPageClient(props: Props) {
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
               {(d.values ?? []).map((v) => (
                 <div key={v.title} className="text-center animate-on-scroll">
-                  <div className="w-20 h-20 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                  <div className="w-20 h-20 bg-gradient-to-r from-carrot/50 to-carrot rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
                     <i className={`fas ${v.icon} text-white text-3xl`}></i>
                   </div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-4">{v.title}</h3>

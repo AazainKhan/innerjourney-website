@@ -66,7 +66,7 @@ export default async function PodcastEpisodePage({ params }: { params: Promise<{
                 href={p.audioUrl!}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 bg-carrot hover:bg-orange-600 text-white px-8 py-3 rounded-full font-semibold transition-all"
+                className="inline-flex items-center gap-3 bg-carrot hover:bg-carrot text-white px-8 py-3 rounded-full font-semibold transition-all"
               >
                 <i className="fas fa-play"></i> Listen now
               </a>

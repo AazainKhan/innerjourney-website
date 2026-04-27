@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { useTina } from 'tinacms/dist/react'
 import BookingButton from '@/components/BookingButton'
+import RichText from '@/components/RichText'
 
 interface ContactData {
   contact: {
@@ -88,12 +89,8 @@ export default function ContactPageClient(props: Props) {
         </div>
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white font-dancing font-bold mb-6 leading-tight drop-shadow-2xl">
-              {d.heroHeading}
-            </h1>
-            <p className="text-lg md:text-xl body-text-light text-white/90 leading-relaxed max-w-3xl mx-auto">
-              {d.heroSubtext}
-            </p>
+            <RichText as="h1" className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white font-dancing font-bold mb-6 leading-tight drop-shadow-2xl">{d.heroHeading}</RichText>
+            <RichText as="p" className="text-lg md:text-xl body-text-light text-white/90 leading-relaxed max-w-3xl mx-auto">{d.heroSubtext}</RichText>
           </div>
         </div>
       </section>
@@ -116,7 +113,7 @@ export default function ContactPageClient(props: Props) {
               <div className="space-y-6">
                 {contactItems.map((item) => (
                   <div key={item.title} className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-blue-900 to-black rounded-lg flex items-center justify-center">
+                    <div className="w-12 h-12 bg-gradient-to-br from-oxford to-black rounded-lg flex items-center justify-center">
                       <i className={`fas ${item.icon} text-white text-xl`}></i>
                     </div>
                     <div>
@@ -132,7 +129,7 @@ export default function ContactPageClient(props: Props) {
 
                 <div className="flex space-x-6 mt-8 justify-start">
                   {[
-                    { href: 'https://www.facebook.com/innerjourneywithshanila/', icon: 'fa-facebook', gradient: 'from-blue-600 to-blue-400', label: 'Facebook' },
+                    { href: 'https://www.facebook.com/innerjourneywithshanila/', icon: 'fa-facebook', gradient: 'from-azure to-azure/40', label: 'Facebook' },
                     { href: 'https://www.instagram.com/_.innerjourney_/', icon: 'fa-instagram', gradient: 'from-pink-500 to-yellow-400', label: 'Instagram' },
                     { href: 'https://www.youtube.com/channel/UCJbRrCiY4zXfojPTa17EKMg', icon: 'fa-youtube', gradient: 'from-red-600 to-red-400', label: 'YouTube' },
                     { href: 'https://api.whatsapp.com/send?phone=447387973382&', icon: 'fa-whatsapp', gradient: 'from-green-500 to-green-400', label: 'WhatsApp' },
@@ -152,7 +149,7 @@ export default function ContactPageClient(props: Props) {
             </div>
 
             {/* Contact Form */}
-            <div className="bg-gradient-to-br from-gray-50 to-orange-50 p-8 rounded-lg shadow-xl">
+            <div className="bg-gradient-to-br from-gray-50 to-carrot/5 p-8 rounded-lg shadow-xl">
               <form onSubmit={handleSubmit} className="space-y-6">
                 {status && (
                   <div className={`p-4 mb-4 rounded-lg ${status.type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
@@ -164,21 +161,21 @@ export default function ContactPageClient(props: Props) {
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
                   <input type="text" id="name" name="name" required
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-azure focus:border-transparent transition-all duration-200"
                     placeholder="Your full name" />
                 </div>
 
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
                   <input type="email" id="email" name="email" required
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-azure focus:border-transparent transition-all duration-200"
                     placeholder="your@email.com" />
                 </div>
 
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-gray-700">Phone Number</label>
                   <div className="flex space-x-2">
-                    <select name="country_code" aria-label="Country code" className="w-1/4 px-3 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                    <select name="country_code" aria-label="Country code" className="w-1/4 px-3 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-azure focus:border-transparent">
                       <option value="44">+44 (UK)</option>
                       <option value="1">+1 (US/CA)</option>
                       <option value="61">+61 (AU)</option>
@@ -187,7 +184,7 @@ export default function ContactPageClient(props: Props) {
                       <option value="92">+92 (PK)</option>
                     </select>
                     <input type="tel" id="phone" name="phone"
-                      className="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                      className="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-azure focus:border-transparent"
                       placeholder="07xxx xxxxxx" />
                   </div>
                 </div>
@@ -195,12 +192,12 @@ export default function ContactPageClient(props: Props) {
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">Message *</label>
                   <textarea id="message" name="message" required rows={5}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200 resize-none"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-azure focus:border-transparent transition-all duration-200 resize-none"
                     placeholder="Tell me about your goals, challenges, or questions..." />
                 </div>
 
                 <button type="submit" disabled={submitting}
-                  className="w-full bg-azure hover:bg-blue-600 text-white font-bold py-4 px-6 rounded-lg transition-all duration-200 transform hover:scale-[1.02] flex items-center justify-center disabled:opacity-60">
+                  className="w-full bg-azure hover:bg-azure text-white font-bold py-4 px-6 rounded-lg transition-all duration-200 transform hover:scale-[1.02] flex items-center justify-center disabled:opacity-60">
                   {submitting ? (
                     <>
                       <svg className="animate-spin h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24">

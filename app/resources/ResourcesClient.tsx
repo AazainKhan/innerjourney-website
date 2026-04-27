@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { useTina } from 'tinacms/dist/react'
 import BookingButton from '@/components/BookingButton'
+import RichText from '@/components/RichText'
 
 interface BlogPost {
   slug: string
@@ -85,20 +86,18 @@ export default function ResourcesClient(props: Props) {
           <div className="max-w-4xl mx-auto text-center">
             <span className="inline-block text-carrot font-semibold text-sm uppercase tracking-widest mb-6">{d.heroBadge}</span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white font-dancing font-bold mb-6 leading-tight">
-              {d.heroHeading} <span className="text-carrot">{d.heroHeadingHighlight}</span>
+              <RichText>{d.heroHeading}</RichText> <span className="text-carrot"><RichText>{d.heroHeadingHighlight}</RichText></span>
             </h1>
-            <p className="text-lg md:text-xl text-white/90 leading-relaxed">
-              {d.heroSubtext}
-            </p>
+            <RichText as="p" className="text-lg md:text-xl text-white/90 leading-relaxed">{d.heroSubtext}</RichText>
           </div>
         </div>
       </section>
 
       {/* Content Wrapper */}
       <div className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-indigo-100"></div>
-        <div className="absolute top-0 right-10 w-[30rem] h-[30rem] bg-orange-400/20 rounded-full blur-3xl"></div>
-        <div className="absolute top-10 left-10 w-[28rem] h-[28rem] bg-blue-400/20 rounded-full blur-3xl"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-azure/5 via-white to-azure/10"></div>
+        <div className="absolute top-0 right-10 w-[30rem] h-[30rem] bg-carrot/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-10 left-10 w-[28rem] h-[28rem] bg-azure/20 rounded-full blur-3xl"></div>
 
         {/* Filter Tabs */}
         <section className="py-16 relative">
@@ -114,7 +113,7 @@ export default function ResourcesClient(props: Props) {
                   onClick={() => setFilter(t.key)}
                   className={`px-8 py-3 rounded-full shadow-md hover:shadow-lg font-semibold border border-gray-200 transition-all ${
                     filter === t.key
-                      ? 'bg-gradient-to-br from-azure to-blue-600 text-white scale-105'
+                      ? 'bg-gradient-to-br from-azure to-azure text-white scale-105'
                       : 'bg-white text-gray-700'
                   }`}
                 >
@@ -136,7 +135,7 @@ export default function ResourcesClient(props: Props) {
                 </h2>
                 <div className="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300">
                   <div className="grid lg:grid-cols-2 gap-0">
-                    <div className="relative h-64 lg:h-auto bg-gradient-to-br from-azure/20 to-blue-100">
+                    <div className="relative h-64 lg:h-auto bg-gradient-to-br from-azure/20 to-azure/10">
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div className="text-center p-8">
                           <i className="fas fa-newspaper text-6xl text-azure/40 mb-4"></i>
@@ -146,7 +145,7 @@ export default function ResourcesClient(props: Props) {
                     </div>
                     <div className="p-8 lg:p-12 flex flex-col justify-center">
                       <div className="flex items-center gap-3 mb-4">
-                        <span className="px-4 py-1 bg-gradient-to-r from-azure to-blue-500 text-white text-sm rounded-full font-semibold">
+                        <span className="px-4 py-1 bg-gradient-to-r from-azure to-azure/50 text-white text-sm rounded-full font-semibold">
                           {d.featuredBlogCategory}
                         </span>
                         <span className="text-gray-500 text-sm">{d.featuredBlogStatus}</span>
@@ -320,7 +319,7 @@ export default function ResourcesClient(props: Props) {
                     />
                     <button
                       type="submit"
-                      className="bg-carrot hover:bg-orange-600 text-white px-8 py-3 rounded-lg font-semibold transition-all"
+                      className="bg-carrot hover:bg-carrot text-white px-8 py-3 rounded-lg font-semibold transition-all"
                     >
                       {d.newsletterButton}
                     </button>

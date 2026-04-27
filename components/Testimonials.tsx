@@ -55,9 +55,9 @@ export default function Testimonials({ items }: TestimonialsProps = {}) {
             >
               <div className="max-w-3xl mx-auto text-center">
                 <p className="text-lg md:text-2xl text-gray-800 leading-relaxed mb-4 font-medium relative px-10 md:px-16" style={{ minHeight: '140px' }}>
-                  <span className="absolute left-0 top-0 text-7xl text-orange-500 -mt-4 font-serif italic">&ldquo;</span>
+                  <span className="absolute left-0 top-0 text-7xl text-carrot -mt-4 font-serif italic">&ldquo;</span>
                   {t.quote}
-                  <span className="absolute right-0 bottom-0 text-7xl text-orange-500 -mb-4 font-serif italic">&rdquo;</span>
+                  <span className="absolute right-0 bottom-0 text-7xl text-carrot -mb-4 font-serif italic">&rdquo;</span>
                 </p>
                 <div className="text-xl md:text-2xl text-gray-700 font-semibold mt-2">
                   — {t.author}

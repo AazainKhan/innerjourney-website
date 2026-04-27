@@ -8,7 +8,7 @@ const variantClass: Record<Variant, string> = {
   // Filled azure on light backgrounds — main CTA
   primary: 'bg-azure text-white hover:brightness-110 shadow-azure',
   // White-filled on azure/dark backgrounds — for sections that already use brand-gradient-azure
-  primaryOnDark: 'bg-white text-azure hover:bg-blue-50 shadow-azure border border-white/40',
+  primaryOnDark: 'bg-white text-azure hover:bg-azure/5 shadow-azure border border-white/40',
   // Outlined azure on light backgrounds — secondary action
   secondary: 'bg-transparent text-azure border-2 border-azure hover:bg-azure/10',
   // White outline on dark backgrounds — tertiary action on heroes

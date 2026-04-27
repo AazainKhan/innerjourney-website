@@ -23,7 +23,7 @@ export default function HomeClient({ buttonOnly, ctaLabel, variant = 'outline' }
 
   if (buttonOnly) {
     const className = variant === 'onAzure'
-      ? 'bg-white text-azure hover:bg-blue-50 px-10 py-4 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-azure border border-white/40 button-text animate-on-scroll'
+      ? 'bg-white text-azure hover:bg-azure/5 px-10 py-4 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-azure border border-white/40 button-text animate-on-scroll'
       : 'btn-azure-outline text-lg px-8 py-3 button-text font-semibold animate-on-scroll'
     return (
       <button onClick={openBooking} className={className}>

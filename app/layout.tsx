@@ -7,10 +7,12 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import BookingOverlay from '@/components/BookingOverlay'
 import ScrollAnimator from '@/components/ScrollAnimator'
+import ThemeApplier from '@/components/ThemeApplier'
 import { BookingProvider } from '@/context/BookingContext'
 import themeData from '@/content/theme.json'
 import navbarData from '@/content/navbar.json'
 import bookingFormData from '@/content/booking-form.json'
+import typographyData from '@/content/typography.json'
 import client from '@/tina/__generated__/client'
 
 const caslonDisplay = Libre_Caslon_Display({
@@ -61,10 +63,49 @@ export const metadata: Metadata = {
 async function loadTheme() {
   try {
     const res = await client.queries.theme({ relativePath: 'theme.json' })
-    return res.data.theme
+    return res
   } catch {
-    return themeData
+    return null
   }
+}
+
+async function loadTypography() {
+  try {
+    const res = await client.queries.typography({ relativePath: 'typography.json' })
+    return res?.data?.typography ?? typographyData
+  } catch {
+    return typographyData
+  }
+}
+
+const FONT_VAR: Record<string, string> = {
+  caslon: 'var(--font-caslon)',
+  dancing: 'var(--font-dancing)',
+  titillium: 'var(--font-titillium)',
+}
+
+interface Typography {
+  headingFont?: string | null
+  headingWeight?: string | null
+  headingStyle?: string | null
+  bodyFont?: string | null
+  bodyWeight?: string | null
+  baseFontSize?: number | null
+}
+
+function buildTypographyStyle(t: Typography) {
+  const heading = FONT_VAR[(t.headingFont || 'caslon') as keyof typeof FONT_VAR] || FONT_VAR.caslon
+  const body = FONT_VAR[(t.bodyFont || 'titillium') as keyof typeof FONT_VAR] || FONT_VAR.titillium
+  return `:root {
+  --heading-font: ${heading};
+  --heading-weight: ${t.headingWeight || '400'};
+  --heading-style: ${t.headingStyle || 'normal'};
+  --body-font: ${body};
+  --body-weight: ${t.bodyWeight || '400'};
+  --body-size: ${t.baseFontSize || 16}px;
+}
+.heading-primary, .heading-secondary { font-family: var(--heading-font), serif !important; font-weight: var(--heading-weight); font-style: var(--heading-style); }
+body { font-family: var(--body-font), sans-serif; font-weight: var(--body-weight); font-size: var(--body-size); }`
 }
 
 function hexToRgbTriplet(hex: string): string {
@@ -103,8 +144,10 @@ function buildThemeStyle(t: { primaryColor?: string | null; secondaryColor?: str
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const theme = await loadTheme()
-  const themeStyle = buildThemeStyle(theme)
+  const themeRes = await loadTheme()
+  const themeStyle = buildThemeStyle(themeRes?.data?.theme ?? themeData)
+  const typography = await loadTypography()
+  const typographyStyle = buildTypographyStyle(typography)
   return (
     <html lang="en" className={`${caslonDisplay.variable} ${titilliumWeb.variable} ${dancingScript.variable}`} suppressHydrationWarning>
       <head>
@@ -113,9 +156,18 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         />
         <style dangerouslySetInnerHTML={{ __html: themeStyle }} />
+        <style dangerouslySetInnerHTML={{ __html: typographyStyle }} />
       </head>
       <body>
         <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[10000] focus:bg-azure focus:text-white focus:px-4 focus:py-2 focus:rounded">Skip to content</a>
+        {themeRes && (
+          <ThemeApplier
+            query={themeRes.query}
+            variables={themeRes.variables}
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            data={themeRes.data as any}
+          />
+        )}
         <BookingProvider>
           <Navbar data={navbarData} />
           <main id="main">{children}</main>

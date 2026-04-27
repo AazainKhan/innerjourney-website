@@ -25,7 +25,7 @@ export default function Footer() {
       <div className="container mx-auto px-6">
         <div className="grid md:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-2xl font-bold text-orange-500 mb-4">{f.brandHeading}</h3>
+            <h3 className="text-2xl font-bold text-carrot mb-4">{f.brandHeading}</h3>
             <p className="text-platinum">{f.brandDescription}</p>
           </div>
           <div>

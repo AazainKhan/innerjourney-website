@@ -98,11 +98,11 @@ export default function NumerologyClient(props: Props) {
 
       {/* Unified Gradient Background Wrapper */}
       <div className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-indigo-100"></div>
-        <div className="absolute top-0 right-10 w-[30rem] h-[30rem] bg-orange-400/20 rounded-full blur-3xl"></div>
-        <div className="absolute top-10 left-10 w-[28rem] h-[28rem] bg-blue-400/20 rounded-full blur-3xl"></div>
-        <div className="absolute top-[30%] right-[40%] w-96 h-96 bg-purple-400/15 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-[20%] left-[35%] w-96 h-96 bg-orange-300/15 rounded-full blur-3xl"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-azure/5 via-white to-azure/10"></div>
+        <div className="absolute top-0 right-10 w-[30rem] h-[30rem] bg-carrot/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-10 left-10 w-[28rem] h-[28rem] bg-azure/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-[30%] right-[40%] w-96 h-96 bg-oxford/15 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-[20%] left-[35%] w-96 h-96 bg-carrot/15 rounded-full blur-3xl"></div>
 
         {/* Self-Discovery */}
         <section className="py-28 relative">
@@ -153,7 +153,7 @@ export default function NumerologyClient(props: Props) {
                     <p className="text-lg text-gray-700 leading-relaxed">{d.whatIsIsntParagraph}</p>
                   </div>
                 </div>
-                <div className="bg-gradient-to-r from-azure/10 to-blue-50 rounded-2xl p-8 border border-azure/20 shadow-md">
+                <div className="bg-gradient-to-r from-azure/10 to-azure/5 rounded-2xl p-8 border border-azure/20 shadow-md">
                   <div className="flex items-start gap-4">
                     <span className="w-12 h-12 bg-azure/20 rounded-full flex items-center justify-center text-xl flex-shrink-0">✨</span>
                     <div className="space-y-4">
@@ -214,7 +214,7 @@ export default function NumerologyClient(props: Props) {
               </div>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {(d.includes ?? []).map((item) => (
-                  <div key={item.title} className="bg-gradient-to-br from-white to-blue-50 rounded-3xl p-6 shadow-lg hover:shadow-xl border border-azure/10 transition-all duration-300 hover:-translate-y-1">
+                  <div key={item.title} className="bg-gradient-to-br from-white to-azure/5 rounded-3xl p-6 shadow-lg hover:shadow-xl border border-azure/10 transition-all duration-300 hover:-translate-y-1">
                     <div className="w-14 h-14 bg-azure/10 rounded-xl flex items-center justify-center mb-4">
                       <span className="text-2xl">{item.emoji}</span>
                     </div>

@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useTina } from 'tinacms/dist/react'
 import BookingButton from '@/components/BookingButton'
+import RichText from '@/components/RichText'
 
 interface ServicesData {
   services: {
@@ -41,7 +42,7 @@ const cards = [
     href: '/career-coaching',
     btnText: 'Realign my career',
     gradient: 'brand-gradient-orange',
-    btnColor: 'text-orange-600',
+    btnColor: 'text-carrot',
     highlights: ['12 personalised sessions', 'Career clarity roadmap', 'CV & interview support', 'Mindset & confidence coaching'],
     isThisForYou: "If your career isn't lighting you up or you're at a crossroads professionally — this programme is for you. We'll get you clear, confident, and ready to take decisive action.",
   },
@@ -66,24 +67,20 @@ export default function ServicesPageClient(props: Props) {
   return (
     <>
       <section className="page-hero bg-oxford">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-orange-200/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-200/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-carrot/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-azure/10 rounded-full blur-3xl"></div>
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white font-dancing font-bold mb-6 leading-tight">
-              {d.heroHeading}
-            </h1>
-            <p className="text-lg md:text-xl body-text-light text-white/90 leading-relaxed max-w-3xl mx-auto">
-              {d.heroSubtext}
-            </p>
+            <RichText as="h1" className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white font-dancing font-bold mb-6 leading-tight">{d.heroHeading}</RichText>
+            <RichText as="p" className="text-lg md:text-xl body-text-light text-white/90 leading-relaxed max-w-3xl mx-auto">{d.heroSubtext}</RichText>
           </div>
         </div>
       </section>
 
       <div className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-blue-100 to-indigo-100"></div>
-        <div className="absolute top-0 right-10 w-[30rem] h-[30rem] bg-orange-400/30 rounded-full blur-3xl"></div>
-        <div className="absolute top-10 left-10 w-[28rem] h-[28rem] bg-blue-400/30 rounded-full blur-3xl"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-azure/5 via-azure/10 to-azure/10"></div>
+        <div className="absolute top-0 right-10 w-[30rem] h-[30rem] bg-carrot/30 rounded-full blur-3xl"></div>
+        <div className="absolute top-10 left-10 w-[28rem] h-[28rem] bg-azure/30 rounded-full blur-3xl"></div>
 
         <section className="py-20 relative">
           <div className="container mx-auto px-6 relative z-10">

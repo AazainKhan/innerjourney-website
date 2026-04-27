@@ -82,8 +82,8 @@ interface Props {
 }
 
 function stepNumberClasses(accent: string) {
-  if (accent === 'azure') return 'bg-gradient-to-br from-azure to-blue-700'
-  return 'bg-gradient-to-br from-carrot to-orange-600'
+  if (accent === 'azure') return 'bg-gradient-to-br from-azure to-azure'
+  return 'bg-gradient-to-br from-carrot to-carrot'
 }
 function accentText(accent: string) {
   return accent === 'azure' ? 'text-azure' : 'text-carrot'
@@ -92,7 +92,7 @@ function accentBorder(accent: string) {
   return accent === 'azure' ? 'border-azure' : 'border-carrot'
 }
 function accentFrom(accent: string) {
-  return accent === 'azure' ? 'from-blue-50' : 'from-orange-50'
+  return accent === 'azure' ? 'from-azure/5' : 'from-carrot/5'
 }
 
 export default function ClarityCoachingClient(props: Props) {
@@ -103,10 +103,10 @@ export default function ClarityCoachingClient(props: Props) {
     <>
       {/* Wrapper with background */}
       <div className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-indigo-100"></div>
-        <div className="absolute top-0 right-10 w-[30rem] h-[30rem] bg-orange-400/20 rounded-full blur-3xl"></div>
-        <div className="absolute top-10 left-10 w-[28rem] h-[28rem] bg-blue-400/20 rounded-full blur-3xl"></div>
-        <div className="absolute top-[45%] right-[15%] w-[26rem] h-[26rem] bg-purple-400/20 rounded-full blur-3xl"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-azure/5 via-white to-azure/10"></div>
+        <div className="absolute top-0 right-10 w-[30rem] h-[30rem] bg-carrot/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-10 left-10 w-[28rem] h-[28rem] bg-azure/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-[45%] right-[15%] w-[26rem] h-[26rem] bg-oxford/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 left-[20%] w-[30rem] h-[30rem] bg-azure/20 rounded-full blur-3xl"></div>
 
         {/* Hero */}

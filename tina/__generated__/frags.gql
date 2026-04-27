@@ -396,6 +396,16 @@ fragment FooterParts on Footer {
   copyright
 }
 
+fragment TypographyParts on Typography {
+  __typename
+  headingFont
+  headingWeight
+  headingStyle
+  bodyFont
+  bodyWeight
+  baseFontSize
+}
+
 fragment ThemeParts on Theme {
   __typename
   primaryColor

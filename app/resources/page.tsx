@@ -24,7 +24,7 @@ export default async function ResourcesPage() {
     status: p.status ?? '',
     icon: p.icon ?? 'fa-pen-fancy',
     iconColor: p.iconColor ?? 'text-carrot/40',
-    gradient: p.gradient ?? 'from-orange-100 to-orange-200',
+    gradient: p.gradient ?? 'from-carrot/10 to-carrot/20',
     badgeColor: p.badgeColor ?? 'bg-carrot',
   }))
 
@@ -36,7 +36,7 @@ export default async function ResourcesPage() {
     status: p.status ?? '',
     audioUrl: p.audioUrl ?? '',
     icon: p.icon ?? 'fa-microphone-alt',
-    gradient: p.gradient ?? 'from-carrot/30 to-orange-500/30',
+    gradient: p.gradient ?? 'from-carrot/30 to-carrot/50/30',
     badgeColor: p.badgeColor ?? 'bg-carrot',
   }))
 

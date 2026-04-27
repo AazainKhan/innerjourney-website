@@ -83,7 +83,7 @@ export default function CareerCoachingClient(props: Props) {
       {/* Hero */}
       <section className="page-hero">
         <div className="absolute inset-0 bg-gradient-to-br from-oxford/95 via-[#1a2d50] to-[#0f1a2e]"></div>
-        <div className="absolute top-20 left-20 w-32 h-32 bg-orange-500/20 rounded-full blur-xl animate-pulse"></div>
+        <div className="absolute top-20 left-20 w-32 h-32 bg-carrot/20 rounded-full blur-xl animate-pulse"></div>
         <div className="absolute bottom-40 right-20 w-40 h-40 bg-azure/20 rounded-full blur-xl animate-pulse delay-1000"></div>
         <div className="absolute top-1/3 right-1/4 w-24 h-24 bg-white/5 rounded-full blur-lg animate-pulse delay-500"></div>
 
@@ -102,10 +102,10 @@ export default function CareerCoachingClient(props: Props) {
 
       {/* Wrapper */}
       <div className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-indigo-100"></div>
-        <div className="absolute top-0 right-10 w-[30rem] h-[30rem] bg-orange-400/20 rounded-full blur-3xl"></div>
-        <div className="absolute top-10 left-10 w-[28rem] h-[28rem] bg-blue-400/20 rounded-full blur-3xl"></div>
-        <div className="absolute top-[45%] right-[15%] w-[26rem] h-[26rem] bg-purple-400/20 rounded-full blur-3xl"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-azure/5 via-white to-azure/10"></div>
+        <div className="absolute top-0 right-10 w-[30rem] h-[30rem] bg-carrot/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-10 left-10 w-[28rem] h-[28rem] bg-azure/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-[45%] right-[15%] w-[26rem] h-[26rem] bg-oxford/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 left-[20%] w-[30rem] h-[30rem] bg-azure/20 rounded-full blur-3xl"></div>
 
         {/* Results */}
@@ -122,7 +122,7 @@ export default function CareerCoachingClient(props: Props) {
                 <p className="text-xl text-gray-800 font-semibold mb-8 text-center">{d.perhapsLabel}</p>
                 <div className="grid md:grid-cols-2 gap-6">
                   {(d.situations ?? []).map((s, i) => (
-                    <div key={i} className="flex items-start p-4 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                    <div key={i} className="flex items-start p-4 rounded-xl bg-gradient-to-br from-azure/5 to-azure/5 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                       <p className="text-gray-700 text-lg">{s}</p>
                     </div>
                   ))}
@@ -166,8 +166,8 @@ export default function CareerCoachingClient(props: Props) {
 
       {/* Philosophy (on dark oxford bg) */}
       <section className="py-20 brand-gradient-oxford relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-orange-200/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-200/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-carrot/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-azure/10 rounded-full blur-3xl"></div>
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
@@ -190,7 +190,7 @@ export default function CareerCoachingClient(props: Props) {
 
       {/* Imagine */}
       <div className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-indigo-100"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-azure/5 via-white to-azure/10"></div>
         <section className="py-20 relative">
           <div className="container mx-auto px-6 relative z-10">
             <div className="max-w-4xl mx-auto">
@@ -249,8 +249,8 @@ export default function CareerCoachingClient(props: Props) {
 
       {/* Experience (dark) */}
       <section className="py-20 brand-gradient-oxford relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-orange-200/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-200/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-carrot/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-azure/10 rounded-full blur-3xl"></div>
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">

@@ -53,7 +53,7 @@ export default function Navbar({ data }: { data: NavbarData }) {
                 className="h-14 w-auto"
                 priority
               />
-              <div className="text-2xl heading-primary text-white">{data.brandLabel}</div>
+              <div className="text-3xl font-dancing font-bold text-white leading-none">{data.brandLabel}</div>
             </Link>
 
             {/* Desktop nav */}
@@ -136,16 +136,16 @@ export default function Navbar({ data }: { data: NavbarData }) {
               {data.ctaLabel}
             </button>
             <div className="flex justify-center mt-4 space-x-6">
-              <a href="https://www.facebook.com/innerjourneywithshanila/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-white text-2xl hover:text-orange-400">
+              <a href="https://www.facebook.com/innerjourneywithshanila/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-white text-2xl hover:text-carrot">
                 <i className="fab fa-facebook"></i>
               </a>
-              <a href="https://www.instagram.com/_.innerjourney_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-white text-2xl hover:text-orange-400">
+              <a href="https://www.instagram.com/_.innerjourney_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-white text-2xl hover:text-carrot">
                 <i className="fab fa-instagram"></i>
               </a>
-              <a href="https://www.youtube.com/channel/UCJbRrCiY4zXfojPTa17EKMg" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="text-white text-2xl hover:text-orange-400">
+              <a href="https://www.youtube.com/channel/UCJbRrCiY4zXfojPTa17EKMg" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="text-white text-2xl hover:text-carrot">
                 <i className="fab fa-youtube"></i>
               </a>
-              <a href="https://api.whatsapp.com/send?phone=447387973382&" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="text-white text-2xl hover:text-orange-400">
+              <a href="https://api.whatsapp.com/send?phone=447387973382&" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="text-white text-2xl hover:text-carrot">
                 <i className="fab fa-whatsapp"></i>
               </a>
             </div>

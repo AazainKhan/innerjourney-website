@@ -108,6 +108,8 @@ export type Query = {
   bookingFormConnection: BookingFormConnection;
   footer: Footer;
   footerConnection: FooterConnection;
+  typography: Typography;
+  typographyConnection: TypographyConnection;
   theme: Theme;
   themeConnection: ThemeConnection;
   testimonials: Testimonials;
@@ -331,6 +333,21 @@ export type QueryFooterConnectionArgs = {
 };
 
 
+export type QueryTypographyArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryTypographyConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<TypographyFilter>;
+};
+
+
 export type QueryThemeArgs = {
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
@@ -374,6 +391,7 @@ export type DocumentFilter = {
   navbar?: InputMaybe<NavbarFilter>;
   bookingForm?: InputMaybe<BookingFormFilter>;
   footer?: InputMaybe<FooterFilter>;
+  typography?: InputMaybe<TypographyFilter>;
   theme?: InputMaybe<ThemeFilter>;
   testimonials?: InputMaybe<TestimonialsFilter>;
 };
@@ -415,7 +433,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Home | Services | About | ClarityCoaching | CareerCoaching | Numerology | Resources | Contact | Post | Podcast | Navbar | BookingForm | Footer | Theme | Testimonials | Folder;
+export type DocumentNode = Home | Services | About | ClarityCoaching | CareerCoaching | Numerology | Resources | Contact | Post | Podcast | Navbar | BookingForm | Footer | Typography | Theme | Testimonials | Folder;
 
 export type Home = Node & Document & {
   __typename?: 'Home';
@@ -1486,6 +1504,51 @@ export type FooterConnection = Connection & {
   edges?: Maybe<Array<Maybe<FooterConnectionEdges>>>;
 };
 
+export type Typography = Node & Document & {
+  __typename?: 'Typography';
+  headingFont?: Maybe<Scalars['String']['output']>;
+  headingWeight?: Maybe<Scalars['String']['output']>;
+  headingStyle?: Maybe<Scalars['String']['output']>;
+  bodyFont?: Maybe<Scalars['String']['output']>;
+  bodyWeight?: Maybe<Scalars['String']['output']>;
+  baseFontSize?: Maybe<Scalars['Float']['output']>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type NumberFilter = {
+  lt?: InputMaybe<Scalars['Float']['input']>;
+  lte?: InputMaybe<Scalars['Float']['input']>;
+  gte?: InputMaybe<Scalars['Float']['input']>;
+  gt?: InputMaybe<Scalars['Float']['input']>;
+  eq?: InputMaybe<Scalars['Float']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+};
+
+export type TypographyFilter = {
+  headingFont?: InputMaybe<StringFilter>;
+  headingWeight?: InputMaybe<StringFilter>;
+  headingStyle?: InputMaybe<StringFilter>;
+  bodyFont?: InputMaybe<StringFilter>;
+  bodyWeight?: InputMaybe<StringFilter>;
+  baseFontSize?: InputMaybe<NumberFilter>;
+};
+
+export type TypographyConnectionEdges = {
+  __typename?: 'TypographyConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Typography>;
+};
+
+export type TypographyConnection = Connection & {
+  __typename?: 'TypographyConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<TypographyConnectionEdges>>>;
+};
+
 export type Theme = Node & Document & {
   __typename?: 'Theme';
   primaryColor?: Maybe<Scalars['String']['output']>;
@@ -1586,6 +1649,8 @@ export type Mutation = {
   createBookingForm: BookingForm;
   updateFooter: Footer;
   createFooter: Footer;
+  updateTypography: Typography;
+  createTypography: Typography;
   updateTheme: Theme;
   createTheme: Theme;
   updateTestimonials: Testimonials;
@@ -1782,6 +1847,18 @@ export type MutationCreateFooterArgs = {
 };
 
 
+export type MutationUpdateTypographyArgs = {
+  relativePath: Scalars['String']['input'];
+  params: TypographyMutation;
+};
+
+
+export type MutationCreateTypographyArgs = {
+  relativePath: Scalars['String']['input'];
+  params: TypographyMutation;
+};
+
+
 export type MutationUpdateThemeArgs = {
   relativePath: Scalars['String']['input'];
   params: ThemeMutation;
@@ -1819,6 +1896,7 @@ export type DocumentUpdateMutation = {
   navbar?: InputMaybe<NavbarMutation>;
   bookingForm?: InputMaybe<BookingFormMutation>;
   footer?: InputMaybe<FooterMutation>;
+  typography?: InputMaybe<TypographyMutation>;
   theme?: InputMaybe<ThemeMutation>;
   testimonials?: InputMaybe<TestimonialsMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
@@ -1838,6 +1916,7 @@ export type DocumentMutation = {
   navbar?: InputMaybe<NavbarMutation>;
   bookingForm?: InputMaybe<BookingFormMutation>;
   footer?: InputMaybe<FooterMutation>;
+  typography?: InputMaybe<TypographyMutation>;
   theme?: InputMaybe<ThemeMutation>;
   testimonials?: InputMaybe<TestimonialsMutation>;
 };
@@ -2242,6 +2321,15 @@ export type FooterMutation = {
   copyright?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type TypographyMutation = {
+  headingFont?: InputMaybe<Scalars['String']['input']>;
+  headingWeight?: InputMaybe<Scalars['String']['input']>;
+  headingStyle?: InputMaybe<Scalars['String']['input']>;
+  bodyFont?: InputMaybe<Scalars['String']['input']>;
+  bodyWeight?: InputMaybe<Scalars['String']['input']>;
+  baseFontSize?: InputMaybe<Scalars['Float']['input']>;
+};
+
 export type ThemeMutation = {
   primaryColor?: InputMaybe<Scalars['String']['input']>;
   secondaryColor?: InputMaybe<Scalars['String']['input']>;
@@ -2283,6 +2371,8 @@ export type NavbarPartsFragment = { __typename: 'Navbar', brandLabel?: string | 
 export type BookingFormPartsFragment = { __typename: 'BookingForm', overlayTitle?: string | null, firstNameLabel?: string | null, lastNameLabel?: string | null, emailLabel?: string | null, countryCodeLabel?: string | null, phoneLabel?: string | null, serviceLabel?: string | null, messageLabel?: string | null, messagePlaceholder?: string | null, submitLabel?: string | null, submittingLabel?: string | null, successMessage?: string | null, errorMessage?: string | null, services?: Array<string | null> | null };
 
 export type FooterPartsFragment = { __typename: 'Footer', brandHeading?: string | null, brandDescription?: string | null, quickLinksHeading?: string | null, servicesHeading?: string | null, connectHeading?: string | null, emailLabel?: string | null, email?: string | null, phoneLabel?: string | null, phone?: string | null, copyright?: string | null, quickLinks?: Array<{ __typename: 'FooterQuickLinks', label?: string | null, href?: string | null } | null> | null, serviceLinks?: Array<{ __typename: 'FooterServiceLinks', label?: string | null, href?: string | null } | null> | null, socialLinks?: Array<{ __typename: 'FooterSocialLinks', label?: string | null, icon?: string | null, href?: string | null } | null> | null };
+
+export type TypographyPartsFragment = { __typename: 'Typography', headingFont?: string | null, headingWeight?: string | null, headingStyle?: string | null, bodyFont?: string | null, bodyWeight?: string | null, baseFontSize?: number | null };
 
 export type ThemePartsFragment = { __typename: 'Theme', primaryColor?: string | null, secondaryColor?: string | null, accentColor?: string | null, neutralColor?: string | null };
 
@@ -2534,6 +2624,25 @@ export type FooterConnectionQueryVariables = Exact<{
 
 
 export type FooterConnectionQuery = { __typename?: 'Query', footerConnection: { __typename?: 'FooterConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'FooterConnectionEdges', cursor: string, node?: { __typename: 'Footer', id: string, brandHeading?: string | null, brandDescription?: string | null, quickLinksHeading?: string | null, servicesHeading?: string | null, connectHeading?: string | null, emailLabel?: string | null, email?: string | null, phoneLabel?: string | null, phone?: string | null, copyright?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, quickLinks?: Array<{ __typename: 'FooterQuickLinks', label?: string | null, href?: string | null } | null> | null, serviceLinks?: Array<{ __typename: 'FooterServiceLinks', label?: string | null, href?: string | null } | null> | null, socialLinks?: Array<{ __typename: 'FooterSocialLinks', label?: string | null, icon?: string | null, href?: string | null } | null> | null } | null } | null> | null } };
+
+export type TypographyQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type TypographyQuery = { __typename?: 'Query', typography: { __typename: 'Typography', id: string, headingFont?: string | null, headingWeight?: string | null, headingStyle?: string | null, bodyFont?: string | null, bodyWeight?: string | null, baseFontSize?: number | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+
+export type TypographyConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<TypographyFilter>;
+}>;
+
+
+export type TypographyConnectionQuery = { __typename?: 'Query', typographyConnection: { __typename?: 'TypographyConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'TypographyConnectionEdges', cursor: string, node?: { __typename: 'Typography', id: string, headingFont?: string | null, headingWeight?: string | null, headingStyle?: string | null, bodyFont?: string | null, bodyWeight?: string | null, baseFontSize?: number | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type ThemeQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -2982,6 +3091,17 @@ export const FooterPartsFragmentDoc = gql`
   phoneLabel
   phone
   copyright
+}
+    `;
+export const TypographyPartsFragmentDoc = gql`
+    fragment TypographyParts on Typography {
+  __typename
+  headingFont
+  headingWeight
+  headingStyle
+  bodyFont
+  bodyWeight
+  baseFontSize
 }
     `;
 export const ThemePartsFragmentDoc = gql`
@@ -3744,6 +3864,63 @@ export const FooterConnectionDocument = gql`
   }
 }
     ${FooterPartsFragmentDoc}`;
+export const TypographyDocument = gql`
+    query typography($relativePath: String!) {
+  typography(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...TypographyParts
+  }
+}
+    ${TypographyPartsFragmentDoc}`;
+export const TypographyConnectionDocument = gql`
+    query typographyConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: TypographyFilter) {
+  typographyConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...TypographyParts
+      }
+    }
+  }
+}
+    ${TypographyPartsFragmentDoc}`;
 export const ThemeDocument = gql`
     query theme($relativePath: String!) {
   theme(relativePath: $relativePath) {
@@ -3938,6 +4115,12 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     footerConnection(variables?: FooterConnectionQueryVariables, options?: C): Promise<{data: FooterConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FooterConnectionQueryVariables, query: string}> {
         return requester<{data: FooterConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FooterConnectionQueryVariables, query: string}, FooterConnectionQueryVariables>(FooterConnectionDocument, variables, options);
+      },
+    typography(variables: TypographyQueryVariables, options?: C): Promise<{data: TypographyQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TypographyQueryVariables, query: string}> {
+        return requester<{data: TypographyQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TypographyQueryVariables, query: string}, TypographyQueryVariables>(TypographyDocument, variables, options);
+      },
+    typographyConnection(variables?: TypographyConnectionQueryVariables, options?: C): Promise<{data: TypographyConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TypographyConnectionQueryVariables, query: string}> {
+        return requester<{data: TypographyConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TypographyConnectionQueryVariables, query: string}, TypographyConnectionQueryVariables>(TypographyConnectionDocument, variables, options);
       },
     theme(variables: ThemeQueryVariables, options?: C): Promise<{data: ThemeQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ThemeQueryVariables, query: string}> {
         return requester<{data: ThemeQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ThemeQueryVariables, query: string}, ThemeQueryVariables>(ThemeDocument, variables, options);

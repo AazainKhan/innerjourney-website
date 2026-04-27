@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useTina } from 'tinacms/dist/react'
 import Testimonials from '@/components/Testimonials'
 import HomeClient from '@/components/HomeClient'
+import RichText from '@/components/RichText'
 
 interface HomeData {
   home: {
@@ -57,7 +58,7 @@ export default function HomePageClient(props: Props) {
     <>
       {/* Hero Section */}
       <section id="home" className="relative hero-section flex items-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-orange-900/20 z-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-carrot/20 z-10"></div>
         <div className="absolute inset-0 overflow-hidden hero-media" aria-hidden="true">
           <Image
             src={d.heroImage || '/images/hero_img-1200.webp'}
@@ -70,18 +71,14 @@ export default function HomePageClient(props: Props) {
           />
         </div>
 
-        <div className="absolute top-20 left-20 w-32 h-32 bg-orange-500/20 rounded-full blur-xl animate-pulse"></div>
+        <div className="absolute top-20 left-20 w-32 h-32 bg-carrot/20 rounded-full blur-xl animate-pulse"></div>
         <div className="absolute bottom-20 right-20 w-24 h-24 bg-oxford/25 rounded-full blur-xl animate-pulse delay-1000"></div>
         <div className="absolute top-1/2 left-10 w-16 h-16 bg-white/10 rounded-full blur-lg animate-pulse delay-500"></div>
 
         <div className="container mx-auto px-6 relative z-20 h-full flex items-end pb-32 md:pb-20 md:items-end">
           <div className="max-w-2xl w-full md:ml-auto text-center md:text-right">
-            <h1 className="text-5xl md:text-7xl heading-primary text-white mb-6 leading-tight drop-shadow-2xl font-dancing font-bold animate-on-scroll">
-              {d.heroHeading}
-            </h1>
-            <p className="text-xl md:text-2xl body-text-light text-white/90 mb-8 leading-relaxed animate-on-scroll">
-              {d.heroSubtext}
-            </p>
+            <RichText as="h1" className="text-5xl md:text-7xl heading-primary text-white mb-6 leading-tight drop-shadow-2xl font-dancing font-bold animate-on-scroll">{d.heroHeading}</RichText>
+            <RichText as="p" className="text-xl md:text-2xl body-text-light text-white/90 mb-8 leading-relaxed animate-on-scroll">{d.heroSubtext}</RichText>
             <HomeClient />
             <div className="hidden md:flex justify-end mt-6 space-x-4 hero-social-icons">
               <a href="https://www.facebook.com/innerjourneywithshanila/" className="link-muted transition-colors text-2xl opacity-90 hover:opacity-100" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
@@ -103,25 +100,25 @@ export default function HomePageClient(props: Props) {
         {/* Mobile Social Bar */}
         <div className="md:hidden absolute bottom-0 left-0 right-0 bg-oxford py-4 px-4 z-20">
           <div className="flex justify-center space-x-8">
-            <a href="https://www.facebook.com/innerjourneywithshanila/" className="text-white text-xl hover:text-orange-400 transition-colors" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i className="fab fa-facebook"></i></a>
-            <a href="https://www.instagram.com/_.innerjourney_/" className="text-white text-xl hover:text-orange-400 transition-colors" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i className="fab fa-instagram"></i></a>
-            <a href="https://www.youtube.com/channel/UCJbRrCiY4zXfojPTa17EKMg" className="text-white text-xl hover:text-orange-400 transition-colors" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i className="fab fa-youtube"></i></a>
-            <a href="https://api.whatsapp.com/send?phone=447387973382&" className="text-white text-xl hover:text-orange-400 transition-colors" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i className="fab fa-whatsapp"></i></a>
+            <a href="https://www.facebook.com/innerjourneywithshanila/" className="text-white text-xl hover:text-carrot transition-colors" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i className="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/_.innerjourney_/" className="text-white text-xl hover:text-carrot transition-colors" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i className="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/channel/UCJbRrCiY4zXfojPTa17EKMg" className="text-white text-xl hover:text-carrot transition-colors" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i className="fab fa-youtube"></i></a>
+            <a href="https://api.whatsapp.com/send?phone=447387973382&" className="text-white text-xl hover:text-carrot transition-colors" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i className="fab fa-whatsapp"></i></a>
           </div>
         </div>
       </section>
 
       {/* Unified Background Wrapper */}
       <div className="relative overflow-hidden" style={{ marginTop: '-5px' }}>
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-blue-100 to-indigo-100"></div>
-        <div className="absolute top-0 right-10 w-[30rem] h-[30rem] bg-orange-400/30 rounded-full blur-3xl"></div>
-        <div className="absolute top-10 left-10 w-[28rem] h-[28rem] bg-blue-400/30 rounded-full blur-3xl"></div>
-        <div className="absolute top-[20%] right-[40%] w-96 h-96 bg-purple-400/25 rounded-full blur-3xl"></div>
-        <div className="absolute top-[35%] left-[5%] w-[26rem] h-[26rem] bg-indigo-400/30 rounded-full blur-3xl"></div>
-        <div className="absolute top-[50%] right-[15%] w-[28rem] h-[28rem] bg-blue-500/30 rounded-full blur-3xl"></div>
-        <div className="absolute top-[65%] left-[35%] w-96 h-96 bg-indigo-500/30 rounded-full blur-3xl"></div>
-        <div className="absolute top-[80%] right-[25%] w-[26rem] h-[26rem] bg-purple-500/28 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-5 left-[15%] w-96 h-96 bg-blue-400/30 rounded-full blur-3xl"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-azure/5 via-azure/10 to-azure/10"></div>
+        <div className="absolute top-0 right-10 w-[30rem] h-[30rem] bg-carrot/30 rounded-full blur-3xl"></div>
+        <div className="absolute top-10 left-10 w-[28rem] h-[28rem] bg-azure/30 rounded-full blur-3xl"></div>
+        <div className="absolute top-[20%] right-[40%] w-96 h-96 bg-oxford/25 rounded-full blur-3xl"></div>
+        <div className="absolute top-[35%] left-[5%] w-[26rem] h-[26rem] bg-azure/30 rounded-full blur-3xl"></div>
+        <div className="absolute top-[50%] right-[15%] w-[28rem] h-[28rem] bg-azure/30 rounded-full blur-3xl"></div>
+        <div className="absolute top-[65%] left-[35%] w-96 h-96 bg-azure/30 rounded-full blur-3xl"></div>
+        <div className="absolute top-[80%] right-[25%] w-[26rem] h-[26rem] bg-oxford/28 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-5 left-[15%] w-96 h-96 bg-azure/30 rounded-full blur-3xl"></div>
 
         {/* CTA Section */}
         <section className="pt-20 pb-12 relative">
@@ -152,8 +149,8 @@ export default function HomePageClient(props: Props) {
 
         {/* About Section */}
         <section id="about" className="py-16 brand-gradient-oxford relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-orange-200/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-200/10 rounded-full blur-3xl"></div>
+          <div className="absolute top-0 right-0 w-96 h-96 bg-carrot/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-azure/10 rounded-full blur-3xl"></div>
           <div className="container mx-auto px-6 relative z-10">
             <div className="text-left">
               <h2 className="text-4xl md:text-5xl heading-secondary text-white mb-8 animate-on-scroll">
@@ -163,7 +160,7 @@ export default function HomePageClient(props: Props) {
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div className="space-y-6 animate-on-scroll">
                 <div className="flex items-center space-x-4 mb-6">
-                  <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-r from-carrot/50 to-carrot rounded-full flex items-center justify-center">
                     <i className="fas fa-star text-white text-xl"></i>
                   </div>
                   <div>
@@ -256,7 +253,7 @@ export default function HomePageClient(props: Props) {
                   href: '/career-coaching',
                   btnText: 'Realign my career',
                   gradient: 'brand-gradient-orange',
-                  btnColor: 'text-orange-600',
+                  btnColor: 'text-carrot',
                 },
                 {
                   icon: 'fa-star',

@@ -26,8 +26,8 @@ var config_default = defineConfig({
         ui: { router: () => "/" },
         fields: [
           { name: "heroImage", label: "Hero Background Image", type: "image" },
-          { name: "heroHeading", label: "Hero Heading", type: "string" },
-          { name: "heroSubtext", label: "Hero Subtext", type: "string", ui: { component: "textarea" } },
+          { name: "heroHeading", label: "Hero Heading", type: "string", description: "Use **bold**, *italic*, __underline__ for inline formatting" },
+          { name: "heroSubtext", label: "Hero Subtext", type: "string", ui: { component: "textarea" }, description: "Use **bold**, *italic*, __underline__ for inline formatting" },
           { name: "heroCTALabel", label: "Hero CTA Button Label", type: "string" },
           { name: "heroBottomCTALabel", label: "Hero Secondary CTA Label", type: "string" },
           { name: "ctaHeading", label: "Mid-CTA Heading", type: "string" },
@@ -409,8 +409,8 @@ var config_default = defineConfig({
         ui: { router: () => "/contact" },
         fields: [
           { name: "heroImage", label: "Hero Background Image", type: "image" },
-          { name: "heroHeading", label: "Hero Heading", type: "string" },
-          { name: "heroSubtext", label: "Hero Subtext", type: "string", ui: { component: "textarea" } },
+          { name: "heroHeading", label: "Hero Heading", type: "string", description: "Use **bold**, *italic*, __underline__ for inline formatting" },
+          { name: "heroSubtext", label: "Hero Subtext", type: "string", ui: { component: "textarea" }, description: "Use **bold**, *italic*, __underline__ for inline formatting" },
           { name: "sectionHeading", label: "Form Section Heading", type: "string" },
           { name: "sectionSubtext", label: "Form Section Subtext", type: "string", ui: { component: "textarea" } },
           { name: "email", label: "Email Address", type: "string" },
@@ -612,6 +612,71 @@ var config_default = defineConfig({
           { name: "phoneLabel", label: "Phone Label", type: "string" },
           { name: "phone", label: "Phone Number", type: "string" },
           { name: "copyright", label: "Copyright Text", type: "string" }
+        ]
+      },
+      {
+        name: "typography",
+        label: "Site Typography",
+        path: "content",
+        match: { include: "typography" },
+        format: "json",
+        ui: { router: () => "/" },
+        fields: [
+          {
+            name: "headingFont",
+            label: "Heading Font Family",
+            type: "string",
+            options: [
+              { value: "caslon", label: "Libre Caslon (current \u2014 elegant serif)" },
+              { value: "dancing", label: "Dancing Script (cursive)" },
+              { value: "titillium", label: "Titillium Web (clean sans-serif)" }
+            ],
+            description: "Used for h2/h3 across the site"
+          },
+          {
+            name: "headingWeight",
+            label: "Heading Weight",
+            type: "string",
+            options: [
+              { value: "400", label: "Regular" },
+              { value: "600", label: "Semibold" },
+              { value: "700", label: "Bold" }
+            ]
+          },
+          {
+            name: "headingStyle",
+            label: "Heading Style",
+            type: "string",
+            options: [
+              { value: "normal", label: "Normal" },
+              { value: "italic", label: "Italic" }
+            ]
+          },
+          {
+            name: "bodyFont",
+            label: "Body Font Family",
+            type: "string",
+            options: [
+              { value: "titillium", label: "Titillium Web (current)" },
+              { value: "caslon", label: "Libre Caslon" }
+            ]
+          },
+          {
+            name: "bodyWeight",
+            label: "Body Weight",
+            type: "string",
+            options: [
+              { value: "300", label: "Light" },
+              { value: "400", label: "Regular" },
+              { value: "600", label: "Semibold" }
+            ]
+          },
+          {
+            name: "baseFontSize",
+            label: "Base Font Size (px)",
+            type: "number",
+            description: "Affects body text only. Default: 16"
+          }
         ]
       },
       {
