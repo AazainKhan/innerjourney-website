@@ -89,7 +89,7 @@ export default function ContactPageClient(props: Props) {
         </div>
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
-            <RichText as="h1" className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white mb-6 leading-tight drop-shadow-2xl">{d.heroHeading}</RichText>
+            <RichText as="h1" className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white font-dancing font-bold mb-6 leading-tight drop-shadow-2xl">{d.heroHeading}</RichText>
             <RichText as="p" className="text-lg md:text-xl body-text-light text-white/90 leading-relaxed max-w-3xl mx-auto">{d.heroSubtext}</RichText>
           </div>
         </div>

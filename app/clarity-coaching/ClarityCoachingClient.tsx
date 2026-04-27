@@ -120,7 +120,7 @@ export default function ClarityCoachingClient(props: Props) {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="text-center lg:text-left order-2 lg:order-1">
                 <span className="inline-block text-carrot font-semibold text-sm uppercase tracking-widest mb-4">{d.heroBadge}</span>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white lg:text-gray-900 mb-6 leading-tight">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white lg:text-gray-900 font-dancing font-bold mb-6 leading-tight">
                   {d.heroHeading}
                 </h1>
                 <p className="text-lg md:text-xl body-text text-white/90 lg:text-gray-600 mb-8 leading-relaxed max-w-xl">

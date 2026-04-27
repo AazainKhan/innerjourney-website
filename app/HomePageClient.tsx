@@ -77,7 +77,7 @@ export default function HomePageClient(props: Props) {
 
         <div className="container mx-auto px-6 relative z-20 h-full flex items-end pb-32 md:pb-20 md:items-end">
           <div className="max-w-2xl w-full md:ml-auto text-center md:text-right">
-            <RichText as="h1" className="text-5xl md:text-7xl heading-primary text-white mb-6 leading-tight drop-shadow-2xl animate-on-scroll">{d.heroHeading}</RichText>
+            <RichText as="h1" className="text-5xl md:text-7xl heading-primary text-white mb-6 leading-tight drop-shadow-2xl font-dancing font-bold animate-on-scroll">{d.heroHeading}</RichText>
             <RichText as="p" className="text-xl md:text-2xl body-text-light text-white/90 mb-8 leading-relaxed animate-on-scroll">{d.heroSubtext}</RichText>
             <HomeClient />
             <div className="hidden md:flex justify-end mt-6 space-x-4 hero-social-icons">
