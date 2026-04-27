@@ -62,7 +62,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 <span className="text-white/60 text-sm">{formatDate(post.publishedAt)}</span>
               )}
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white mb-4 leading-tight font-dancing font-bold">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white mb-4 leading-tight">
               {post.title}
             </h1>
             {post.excerpt && <p className="text-xl text-white/90 leading-relaxed">{post.excerpt}</p>}

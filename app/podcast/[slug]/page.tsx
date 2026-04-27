@@ -57,7 +57,7 @@ export default async function PodcastEpisodePage({ params }: { params: Promise<{
                 <span className="text-white/60 text-sm">{formatDate(p.publishedAt)}</span>
               )}
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white mb-4 leading-tight font-dancing font-bold">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white mb-4 leading-tight">
               {p.title}
             </h1>
             {p.excerpt && <p className="text-xl text-white/90 leading-relaxed mb-6">{p.excerpt}</p>}

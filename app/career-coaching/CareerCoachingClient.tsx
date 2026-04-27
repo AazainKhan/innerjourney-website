@@ -89,7 +89,7 @@ export default function CareerCoachingClient(props: Props) {
 
         <div className="container mx-auto px-6 relative z-20">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white font-dancing font-bold mb-6 leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white mb-6 leading-tight">
               {d.heroHeading}
             </h1>
             <p className="text-lg md:text-xl body-text-light text-white/90 mb-8 leading-relaxed max-w-3xl mx-auto">
