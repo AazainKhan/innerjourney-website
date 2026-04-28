@@ -4,10 +4,19 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useTina } from 'tinacms/dist/react'
 import { TinaMarkdown, type TinaMarkdownContent } from 'tinacms/dist/rich-text'
+import type { ComponentProps } from 'react'
 import Testimonials from '@/components/Testimonials'
 import HomeClient from '@/components/HomeClient'
 
-const inlineComponents = { p: ({ children }: { children: React.ReactNode }) => <>{children}</> }
+// Render hero rich-text inline — strip the wrapping <p> so the surrounding
+// <h1>/<p> in the JSX is the only block element. The `as any` is unavoidable:
+// Tina's `Components<>` generic constrains custom keys to take `(props: object)`
+// which doesn't compose with the typed base `p` shape.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const inlineComponents: ComponentProps<typeof TinaMarkdown>['components'] = {
+  p: (props: { children: React.ReactNode }) => <>{props.children}</>,
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+} as any
 
 interface HomeData {
   home: {

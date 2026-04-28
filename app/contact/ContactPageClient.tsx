@@ -4,9 +4,16 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { useTina } from 'tinacms/dist/react'
 import { TinaMarkdown, type TinaMarkdownContent } from 'tinacms/dist/rich-text'
+import type { ComponentProps } from 'react'
 import BookingButton from '@/components/BookingButton'
 
-const inlineComponents = { p: ({ children }: { children: React.ReactNode }) => <>{children}</> }
+// Render hero rich-text inline — strip the wrapping <p> so the surrounding
+// <h1>/<p> in the JSX is the only block element. The `as any` works around
+// Tina's `Components<>` generic constraint not composing with the base shape.
+const inlineComponents: ComponentProps<typeof TinaMarkdown>['components'] = {
+  p: (props: { children: React.ReactNode }) => <>{props.children}</>,
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+} as any
 
 interface ContactData {
   contact: {
