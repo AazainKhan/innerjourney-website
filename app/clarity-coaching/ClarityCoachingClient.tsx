@@ -96,7 +96,12 @@ function accentFrom(accent: string) {
 }
 
 export default function ClarityCoachingClient(props: Props) {
-  const { data } = useTina<ClarityData>(props)
+  const { data } = useTina<ClarityData>({
+    ...props,
+    experimental___selectFormByFormId() {
+      return `content/pages/${props.variables.relativePath}`
+    },
+  })
   const d = data.clarityCoaching
 
   return (

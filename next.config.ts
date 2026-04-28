@@ -12,6 +12,7 @@ const nextConfig: NextConfig = {
       { source: '/resources.html', destination: '/resources', permanent: true },
       { source: '/contact.html', destination: '/contact', permanent: true },
       { source: '/blog', destination: '/resources', permanent: true },
+      { source: '/podcast', destination: '/resources', permanent: true },
     ]
   },
   images: {

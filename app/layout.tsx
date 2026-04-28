@@ -8,6 +8,7 @@ import Footer from '@/components/Footer'
 import BookingOverlay from '@/components/BookingOverlay'
 import ScrollAnimator from '@/components/ScrollAnimator'
 import ThemeApplier from '@/components/ThemeApplier'
+import TypographyApplier from '@/components/TypographyApplier'
 import { BookingProvider } from '@/context/BookingContext'
 import themeData from '@/content/theme.json'
 import navbarData from '@/content/navbar.json'
@@ -71,10 +72,9 @@ async function loadTheme() {
 
 async function loadTypography() {
   try {
-    const res = await client.queries.typography({ relativePath: 'typography.json' })
-    return res?.data?.typography ?? typographyData
+    return await client.queries.typography({ relativePath: 'typography.json' })
   } catch {
-    return typographyData
+    return null
   }
 }
 
@@ -104,7 +104,9 @@ function buildTypographyStyle(t: Typography) {
   --body-weight: ${t.bodyWeight || '400'};
   --body-size: ${t.baseFontSize || 16}px;
 }
-.heading-primary, .heading-secondary { font-family: var(--heading-font), serif !important; font-weight: var(--heading-weight); font-style: var(--heading-style); }
+.heading-primary, .heading-secondary { font-weight: var(--heading-weight); font-style: var(--heading-style); }
+.heading-primary:not(.font-dancing):not(.font-caslon):not(.font-titillium),
+.heading-secondary:not(.font-dancing):not(.font-caslon):not(.font-titillium) { font-family: var(--heading-font), serif; }
 body { font-family: var(--body-font), sans-serif; font-weight: var(--body-weight); font-size: var(--body-size); }`
 }
 
@@ -146,8 +148,8 @@ function buildThemeStyle(t: { primaryColor?: string | null; secondaryColor?: str
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const themeRes = await loadTheme()
   const themeStyle = buildThemeStyle(themeRes?.data?.theme ?? themeData)
-  const typography = await loadTypography()
-  const typographyStyle = buildTypographyStyle(typography)
+  const typographyRes = await loadTypography()
+  const typographyStyle = buildTypographyStyle(typographyRes?.data?.typography ?? typographyData)
   return (
     <html lang="en" className={`${caslonDisplay.variable} ${titilliumWeb.variable} ${dancingScript.variable}`} suppressHydrationWarning>
       <head>
@@ -166,6 +168,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             variables={themeRes.variables}
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             data={themeRes.data as any}
+          />
+        )}
+        {typographyRes && (
+          <TypographyApplier
+            query={typographyRes.query}
+            variables={typographyRes.variables}
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            data={typographyRes.data as any}
           />
         )}
         <BookingProvider>

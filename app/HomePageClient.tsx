@@ -3,16 +3,18 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useTina } from 'tinacms/dist/react'
+import { TinaMarkdown, type TinaMarkdownContent } from 'tinacms/dist/rich-text'
 import Testimonials from '@/components/Testimonials'
 import HomeClient from '@/components/HomeClient'
-import RichText from '@/components/RichText'
+
+const inlineComponents = { p: ({ children }: { children: React.ReactNode }) => <>{children}</> }
 
 interface HomeData {
   home: {
     heroImage?: string | null
     aboutImage?: string | null
-    heroHeading: string
-    heroSubtext: string
+    heroHeading: TinaMarkdownContent
+    heroSubtext: TinaMarkdownContent
     heroCTALabel: string
     heroBottomCTALabel: string
     ctaHeading: string
@@ -44,7 +46,15 @@ interface Props {
 }
 
 export default function HomePageClient(props: Props) {
-  const { data } = useTina<HomeData>(props)
+  const { data } = useTina<HomeData>({
+    ...props,
+    // Make the page form the active one in the Tina sidebar, beating layout-level
+    // useTina hooks (ThemeApplier / TypographyApplier). Without this, the sidebar
+    // stays stuck on whichever layout form was registered first.
+    experimental___selectFormByFormId() {
+      return `content/pages/${props.variables.relativePath}`
+    },
+  })
   const d = data.home
 
   const feelLikeYouQuestions = [
@@ -77,8 +87,12 @@ export default function HomePageClient(props: Props) {
 
         <div className="container mx-auto px-6 relative z-20 h-full flex items-end pb-32 md:pb-20 md:items-end">
           <div className="max-w-2xl w-full md:ml-auto text-center md:text-right">
-            <RichText as="h1" className="text-5xl md:text-7xl heading-primary text-white mb-6 leading-tight drop-shadow-2xl font-dancing font-bold animate-on-scroll">{d.heroHeading}</RichText>
-            <RichText as="p" className="text-xl md:text-2xl body-text-light text-white/90 mb-8 leading-relaxed animate-on-scroll">{d.heroSubtext}</RichText>
+            <h1 className="text-5xl md:text-7xl heading-primary text-white mb-6 leading-tight drop-shadow-2xl font-dancing font-bold animate-on-scroll">
+              <TinaMarkdown content={d.heroHeading} components={inlineComponents} />
+            </h1>
+            <p className="text-xl md:text-2xl body-text-light text-white/90 mb-8 leading-relaxed animate-on-scroll">
+              <TinaMarkdown content={d.heroSubtext} components={inlineComponents} />
+            </p>
             <HomeClient />
             <div className="hidden md:flex justify-end mt-6 space-x-4 hero-social-icons">
               <a href="https://www.facebook.com/innerjourneywithshanila/" className="link-muted transition-colors text-2xl opacity-90 hover:opacity-100" target="_blank" rel="noopener noreferrer" aria-label="Facebook">

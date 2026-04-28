@@ -39,7 +39,12 @@ interface Props {
 }
 
 export default function AboutPageClient(props: Props) {
-  const { data } = useTina<AboutData>(props)
+  const { data } = useTina<AboutData>({
+    ...props,
+    experimental___selectFormByFormId() {
+      return `content/pages/${props.variables.relativePath}`
+    },
+  })
   const d = data.about
 
   return (

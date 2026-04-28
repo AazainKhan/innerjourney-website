@@ -438,8 +438,8 @@ export type DocumentNode = Home | Services | About | ClarityCoaching | CareerCoa
 export type Home = Node & Document & {
   __typename?: 'Home';
   heroImage?: Maybe<Scalars['String']['output']>;
-  heroHeading?: Maybe<Scalars['String']['output']>;
-  heroSubtext?: Maybe<Scalars['String']['output']>;
+  heroHeading?: Maybe<Scalars['JSON']['output']>;
+  heroSubtext?: Maybe<Scalars['JSON']['output']>;
   heroCTALabel?: Maybe<Scalars['String']['output']>;
   heroBottomCTALabel?: Maybe<Scalars['String']['output']>;
   ctaHeading?: Maybe<Scalars['String']['output']>;
@@ -474,6 +474,12 @@ export type ImageFilter = {
   in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
+export type RichTextFilter = {
+  startsWith?: InputMaybe<Scalars['String']['input']>;
+  eq?: InputMaybe<Scalars['String']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 export type StringFilter = {
   startsWith?: InputMaybe<Scalars['String']['input']>;
   eq?: InputMaybe<Scalars['String']['input']>;
@@ -483,8 +489,8 @@ export type StringFilter = {
 
 export type HomeFilter = {
   heroImage?: InputMaybe<ImageFilter>;
-  heroHeading?: InputMaybe<StringFilter>;
-  heroSubtext?: InputMaybe<StringFilter>;
+  heroHeading?: InputMaybe<RichTextFilter>;
+  heroSubtext?: InputMaybe<RichTextFilter>;
   heroCTALabel?: InputMaybe<StringFilter>;
   heroBottomCTALabel?: InputMaybe<StringFilter>;
   ctaHeading?: InputMaybe<StringFilter>;
@@ -1112,6 +1118,7 @@ export type Resources = Node & Document & {
   featuredBlogExcerpt?: Maybe<Scalars['String']['output']>;
   featuredBlogReadTime?: Maybe<Scalars['String']['output']>;
   featuredBlogCTA?: Maybe<Scalars['String']['output']>;
+  featuredBlogImage?: Maybe<Scalars['String']['output']>;
   featuredBlogSlug?: Maybe<Scalars['String']['output']>;
   blogSectionHeading?: Maybe<Scalars['String']['output']>;
   podcastSectionHeading?: Maybe<Scalars['String']['output']>;
@@ -1140,6 +1147,7 @@ export type ResourcesFilter = {
   featuredBlogExcerpt?: InputMaybe<StringFilter>;
   featuredBlogReadTime?: InputMaybe<StringFilter>;
   featuredBlogCTA?: InputMaybe<StringFilter>;
+  featuredBlogImage?: InputMaybe<ImageFilter>;
   featuredBlogSlug?: InputMaybe<StringFilter>;
   blogSectionHeading?: InputMaybe<StringFilter>;
   podcastSectionHeading?: InputMaybe<StringFilter>;
@@ -1169,8 +1177,8 @@ export type ResourcesConnection = Connection & {
 export type Contact = Node & Document & {
   __typename?: 'Contact';
   heroImage?: Maybe<Scalars['String']['output']>;
-  heroHeading?: Maybe<Scalars['String']['output']>;
-  heroSubtext?: Maybe<Scalars['String']['output']>;
+  heroHeading?: Maybe<Scalars['JSON']['output']>;
+  heroSubtext?: Maybe<Scalars['JSON']['output']>;
   sectionHeading?: Maybe<Scalars['String']['output']>;
   sectionSubtext?: Maybe<Scalars['String']['output']>;
   email?: Maybe<Scalars['String']['output']>;
@@ -1186,8 +1194,8 @@ export type Contact = Node & Document & {
 
 export type ContactFilter = {
   heroImage?: InputMaybe<ImageFilter>;
-  heroHeading?: InputMaybe<StringFilter>;
-  heroSubtext?: InputMaybe<StringFilter>;
+  heroHeading?: InputMaybe<RichTextFilter>;
+  heroSubtext?: InputMaybe<RichTextFilter>;
   sectionHeading?: InputMaybe<StringFilter>;
   sectionSubtext?: InputMaybe<StringFilter>;
   email?: InputMaybe<StringFilter>;
@@ -1233,12 +1241,6 @@ export type DatetimeFilter = {
   eq?: InputMaybe<Scalars['String']['input']>;
   exists?: InputMaybe<Scalars['Boolean']['input']>;
   in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-export type RichTextFilter = {
-  startsWith?: InputMaybe<Scalars['String']['input']>;
-  eq?: InputMaybe<Scalars['String']['input']>;
-  exists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type PostFilter = {
@@ -1923,8 +1925,8 @@ export type DocumentMutation = {
 
 export type HomeMutation = {
   heroImage?: InputMaybe<Scalars['String']['input']>;
-  heroHeading?: InputMaybe<Scalars['String']['input']>;
-  heroSubtext?: InputMaybe<Scalars['String']['input']>;
+  heroHeading?: InputMaybe<Scalars['JSON']['input']>;
+  heroSubtext?: InputMaybe<Scalars['JSON']['input']>;
   heroCTALabel?: InputMaybe<Scalars['String']['input']>;
   heroBottomCTALabel?: InputMaybe<Scalars['String']['input']>;
   ctaHeading?: InputMaybe<Scalars['String']['input']>;
@@ -2202,6 +2204,7 @@ export type ResourcesMutation = {
   featuredBlogExcerpt?: InputMaybe<Scalars['String']['input']>;
   featuredBlogReadTime?: InputMaybe<Scalars['String']['input']>;
   featuredBlogCTA?: InputMaybe<Scalars['String']['input']>;
+  featuredBlogImage?: InputMaybe<Scalars['String']['input']>;
   featuredBlogSlug?: InputMaybe<Scalars['String']['input']>;
   blogSectionHeading?: InputMaybe<Scalars['String']['input']>;
   podcastSectionHeading?: InputMaybe<Scalars['String']['input']>;
@@ -2217,8 +2220,8 @@ export type ResourcesMutation = {
 
 export type ContactMutation = {
   heroImage?: InputMaybe<Scalars['String']['input']>;
-  heroHeading?: InputMaybe<Scalars['String']['input']>;
-  heroSubtext?: InputMaybe<Scalars['String']['input']>;
+  heroHeading?: InputMaybe<Scalars['JSON']['input']>;
+  heroSubtext?: InputMaybe<Scalars['JSON']['input']>;
   sectionHeading?: InputMaybe<Scalars['String']['input']>;
   sectionSubtext?: InputMaybe<Scalars['String']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
@@ -2346,7 +2349,7 @@ export type TestimonialsMutation = {
   items?: InputMaybe<Array<InputMaybe<TestimonialsItemsMutation>>>;
 };
 
-export type HomePartsFragment = { __typename: 'Home', heroImage?: string | null, heroHeading?: string | null, heroSubtext?: string | null, heroCTALabel?: string | null, heroBottomCTALabel?: string | null, ctaHeading?: string | null, ctaLine1?: string | null, ctaLine2?: string | null, ctaLine3?: string | null, ctaMessage1?: string | null, ctaMessage2?: string | null, aboutHeading?: string | null, aboutImage?: string | null, aboutCredentialTitle?: string | null, aboutParagraph1?: string | null, aboutParagraph2?: string | null, feelLikeYouHeading?: string | null, feelLikeYouTagline?: string | null, feelLikeYouQuestion1?: string | null, feelLikeYouQuestion2?: string | null, feelLikeYouQuestion3?: string | null, feelLikeYouQuestion4?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, bottomCTAText?: string | null };
+export type HomePartsFragment = { __typename: 'Home', heroImage?: string | null, heroHeading?: any | null, heroSubtext?: any | null, heroCTALabel?: string | null, heroBottomCTALabel?: string | null, ctaHeading?: string | null, ctaLine1?: string | null, ctaLine2?: string | null, ctaLine3?: string | null, ctaMessage1?: string | null, ctaMessage2?: string | null, aboutHeading?: string | null, aboutImage?: string | null, aboutCredentialTitle?: string | null, aboutParagraph1?: string | null, aboutParagraph2?: string | null, feelLikeYouHeading?: string | null, feelLikeYouTagline?: string | null, feelLikeYouQuestion1?: string | null, feelLikeYouQuestion2?: string | null, feelLikeYouQuestion3?: string | null, feelLikeYouQuestion4?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, bottomCTAText?: string | null };
 
 export type ServicesPartsFragment = { __typename: 'Services', heroHeading?: string | null, heroSubtext?: string | null, ctaHeading?: string | null, ctaSubtext?: string | null, ctaButtonLabel?: string | null };
 
@@ -2358,9 +2361,9 @@ export type CareerCoachingPartsFragment = { __typename: 'CareerCoaching', heroHe
 
 export type NumerologyPartsFragment = { __typename: 'Numerology', heroBadge?: string | null, heroHeading?: string | null, heroTagline?: string | null, heroSubtext?: string | null, heroCTALabel?: string | null, selfDiscoveryHeadingPrefix?: string | null, selfDiscoveryHeadingHighlight?: string | null, selfDiscoverySubtext?: string | null, selfDiscoveryStatementPrefix?: string | null, selfDiscoveryStatementHighlight?: string | null, whatIsLabel?: string | null, whatIsHeadingPrefix?: string | null, whatIsHeadingHighlight?: string | null, whatIsIsntParagraph?: string | null, whatIsIsParagraph1?: string | null, whatIsIsParagraph2?: string | null, processLabel?: string | null, processHeadingPrefix?: string | null, processHeadingHighlight?: string | null, includesLabel?: string | null, includesHeadingPrefix?: string | null, includesHeadingHighlight?: string | null, includesSubtext?: string | null, philosophyLabel?: string | null, philosophyHeadingPrefix?: string | null, philosophyHeadingHighlight?: string | null, philosophyQuote?: string | null, philosophyParagraph1?: string | null, philosophyParagraph2?: string | null, philosophyBanner?: string | null, philosophyClosingPrefix?: string | null, philosophyClosingHighlight?: string | null, ctaSectionHeading?: string | null, ctaButtonLabel?: string | null, selfDiscoveryItems?: Array<{ __typename: 'NumerologySelfDiscoveryItems', emoji?: string | null, text?: string | null, borderColor?: string | null } | null> | null, processSteps?: Array<{ __typename: 'NumerologyProcessSteps', emoji?: string | null, stepLabel?: string | null, title?: string | null, description?: string | null } | null> | null, includes?: Array<{ __typename: 'NumerologyIncludes', emoji?: string | null, title?: string | null, description?: string | null } | null> | null };
 
-export type ResourcesPartsFragment = { __typename: 'Resources', heroBadge?: string | null, heroHeading?: string | null, heroHeadingHighlight?: string | null, heroSubtext?: string | null, featuredHeading?: string | null, featuredBlogCategory?: string | null, featuredBlogStatus?: string | null, featuredBlogTitle?: string | null, featuredBlogExcerpt?: string | null, featuredBlogReadTime?: string | null, featuredBlogCTA?: string | null, featuredBlogSlug?: string | null, blogSectionHeading?: string | null, podcastSectionHeading?: string | null, newsletterHeading?: string | null, newsletterSubtext?: string | null, newsletterPlaceholder?: string | null, newsletterButton?: string | null, newsletterSuccessMessage?: string | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null };
+export type ResourcesPartsFragment = { __typename: 'Resources', heroBadge?: string | null, heroHeading?: string | null, heroHeadingHighlight?: string | null, heroSubtext?: string | null, featuredHeading?: string | null, featuredBlogCategory?: string | null, featuredBlogStatus?: string | null, featuredBlogTitle?: string | null, featuredBlogExcerpt?: string | null, featuredBlogReadTime?: string | null, featuredBlogCTA?: string | null, featuredBlogImage?: string | null, featuredBlogSlug?: string | null, blogSectionHeading?: string | null, podcastSectionHeading?: string | null, newsletterHeading?: string | null, newsletterSubtext?: string | null, newsletterPlaceholder?: string | null, newsletterButton?: string | null, newsletterSuccessMessage?: string | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null };
 
-export type ContactPartsFragment = { __typename: 'Contact', heroImage?: string | null, heroHeading?: string | null, heroSubtext?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, email?: string | null, phone?: string | null, videoText?: string | null, location?: string | null, bookingCTALabel?: string | null, formHeading?: string | null };
+export type ContactPartsFragment = { __typename: 'Contact', heroImage?: string | null, heroHeading?: any | null, heroSubtext?: any | null, sectionHeading?: string | null, sectionSubtext?: string | null, email?: string | null, phone?: string | null, videoText?: string | null, location?: string | null, bookingCTALabel?: string | null, formHeading?: string | null };
 
 export type PostPartsFragment = { __typename: 'Post', title: string, publishedAt?: string | null, status?: string | null, excerpt?: string | null, icon?: string | null, iconColor?: string | null, gradient?: string | null, badgeColor?: string | null, body?: any | null };
 
@@ -2383,7 +2386,7 @@ export type HomeQueryVariables = Exact<{
 }>;
 
 
-export type HomeQuery = { __typename?: 'Query', home: { __typename: 'Home', id: string, heroImage?: string | null, heroHeading?: string | null, heroSubtext?: string | null, heroCTALabel?: string | null, heroBottomCTALabel?: string | null, ctaHeading?: string | null, ctaLine1?: string | null, ctaLine2?: string | null, ctaLine3?: string | null, ctaMessage1?: string | null, ctaMessage2?: string | null, aboutHeading?: string | null, aboutImage?: string | null, aboutCredentialTitle?: string | null, aboutParagraph1?: string | null, aboutParagraph2?: string | null, feelLikeYouHeading?: string | null, feelLikeYouTagline?: string | null, feelLikeYouQuestion1?: string | null, feelLikeYouQuestion2?: string | null, feelLikeYouQuestion3?: string | null, feelLikeYouQuestion4?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, bottomCTAText?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type HomeQuery = { __typename?: 'Query', home: { __typename: 'Home', id: string, heroImage?: string | null, heroHeading?: any | null, heroSubtext?: any | null, heroCTALabel?: string | null, heroBottomCTALabel?: string | null, ctaHeading?: string | null, ctaLine1?: string | null, ctaLine2?: string | null, ctaLine3?: string | null, ctaMessage1?: string | null, ctaMessage2?: string | null, aboutHeading?: string | null, aboutImage?: string | null, aboutCredentialTitle?: string | null, aboutParagraph1?: string | null, aboutParagraph2?: string | null, feelLikeYouHeading?: string | null, feelLikeYouTagline?: string | null, feelLikeYouQuestion1?: string | null, feelLikeYouQuestion2?: string | null, feelLikeYouQuestion3?: string | null, feelLikeYouQuestion4?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, bottomCTAText?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type HomeConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -2395,7 +2398,7 @@ export type HomeConnectionQueryVariables = Exact<{
 }>;
 
 
-export type HomeConnectionQuery = { __typename?: 'Query', homeConnection: { __typename?: 'HomeConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'HomeConnectionEdges', cursor: string, node?: { __typename: 'Home', id: string, heroImage?: string | null, heroHeading?: string | null, heroSubtext?: string | null, heroCTALabel?: string | null, heroBottomCTALabel?: string | null, ctaHeading?: string | null, ctaLine1?: string | null, ctaLine2?: string | null, ctaLine3?: string | null, ctaMessage1?: string | null, ctaMessage2?: string | null, aboutHeading?: string | null, aboutImage?: string | null, aboutCredentialTitle?: string | null, aboutParagraph1?: string | null, aboutParagraph2?: string | null, feelLikeYouHeading?: string | null, feelLikeYouTagline?: string | null, feelLikeYouQuestion1?: string | null, feelLikeYouQuestion2?: string | null, feelLikeYouQuestion3?: string | null, feelLikeYouQuestion4?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, bottomCTAText?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type HomeConnectionQuery = { __typename?: 'Query', homeConnection: { __typename?: 'HomeConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'HomeConnectionEdges', cursor: string, node?: { __typename: 'Home', id: string, heroImage?: string | null, heroHeading?: any | null, heroSubtext?: any | null, heroCTALabel?: string | null, heroBottomCTALabel?: string | null, ctaHeading?: string | null, ctaLine1?: string | null, ctaLine2?: string | null, ctaLine3?: string | null, ctaMessage1?: string | null, ctaMessage2?: string | null, aboutHeading?: string | null, aboutImage?: string | null, aboutCredentialTitle?: string | null, aboutParagraph1?: string | null, aboutParagraph2?: string | null, feelLikeYouHeading?: string | null, feelLikeYouTagline?: string | null, feelLikeYouQuestion1?: string | null, feelLikeYouQuestion2?: string | null, feelLikeYouQuestion3?: string | null, feelLikeYouQuestion4?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, bottomCTAText?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type ServicesQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -2497,7 +2500,7 @@ export type ResourcesQueryVariables = Exact<{
 }>;
 
 
-export type ResourcesQuery = { __typename?: 'Query', resources: { __typename: 'Resources', id: string, heroBadge?: string | null, heroHeading?: string | null, heroHeadingHighlight?: string | null, heroSubtext?: string | null, featuredHeading?: string | null, featuredBlogCategory?: string | null, featuredBlogStatus?: string | null, featuredBlogTitle?: string | null, featuredBlogExcerpt?: string | null, featuredBlogReadTime?: string | null, featuredBlogCTA?: string | null, featuredBlogSlug?: string | null, blogSectionHeading?: string | null, podcastSectionHeading?: string | null, newsletterHeading?: string | null, newsletterSubtext?: string | null, newsletterPlaceholder?: string | null, newsletterButton?: string | null, newsletterSuccessMessage?: string | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type ResourcesQuery = { __typename?: 'Query', resources: { __typename: 'Resources', id: string, heroBadge?: string | null, heroHeading?: string | null, heroHeadingHighlight?: string | null, heroSubtext?: string | null, featuredHeading?: string | null, featuredBlogCategory?: string | null, featuredBlogStatus?: string | null, featuredBlogTitle?: string | null, featuredBlogExcerpt?: string | null, featuredBlogReadTime?: string | null, featuredBlogCTA?: string | null, featuredBlogImage?: string | null, featuredBlogSlug?: string | null, blogSectionHeading?: string | null, podcastSectionHeading?: string | null, newsletterHeading?: string | null, newsletterSubtext?: string | null, newsletterPlaceholder?: string | null, newsletterButton?: string | null, newsletterSuccessMessage?: string | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type ResourcesConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -2509,14 +2512,14 @@ export type ResourcesConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ResourcesConnectionQuery = { __typename?: 'Query', resourcesConnection: { __typename?: 'ResourcesConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ResourcesConnectionEdges', cursor: string, node?: { __typename: 'Resources', id: string, heroBadge?: string | null, heroHeading?: string | null, heroHeadingHighlight?: string | null, heroSubtext?: string | null, featuredHeading?: string | null, featuredBlogCategory?: string | null, featuredBlogStatus?: string | null, featuredBlogTitle?: string | null, featuredBlogExcerpt?: string | null, featuredBlogReadTime?: string | null, featuredBlogCTA?: string | null, featuredBlogSlug?: string | null, blogSectionHeading?: string | null, podcastSectionHeading?: string | null, newsletterHeading?: string | null, newsletterSubtext?: string | null, newsletterPlaceholder?: string | null, newsletterButton?: string | null, newsletterSuccessMessage?: string | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type ResourcesConnectionQuery = { __typename?: 'Query', resourcesConnection: { __typename?: 'ResourcesConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ResourcesConnectionEdges', cursor: string, node?: { __typename: 'Resources', id: string, heroBadge?: string | null, heroHeading?: string | null, heroHeadingHighlight?: string | null, heroSubtext?: string | null, featuredHeading?: string | null, featuredBlogCategory?: string | null, featuredBlogStatus?: string | null, featuredBlogTitle?: string | null, featuredBlogExcerpt?: string | null, featuredBlogReadTime?: string | null, featuredBlogCTA?: string | null, featuredBlogImage?: string | null, featuredBlogSlug?: string | null, blogSectionHeading?: string | null, podcastSectionHeading?: string | null, newsletterHeading?: string | null, newsletterSubtext?: string | null, newsletterPlaceholder?: string | null, newsletterButton?: string | null, newsletterSuccessMessage?: string | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type ContactQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type ContactQuery = { __typename?: 'Query', contact: { __typename: 'Contact', id: string, heroImage?: string | null, heroHeading?: string | null, heroSubtext?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, email?: string | null, phone?: string | null, videoText?: string | null, location?: string | null, bookingCTALabel?: string | null, formHeading?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type ContactQuery = { __typename?: 'Query', contact: { __typename: 'Contact', id: string, heroImage?: string | null, heroHeading?: any | null, heroSubtext?: any | null, sectionHeading?: string | null, sectionSubtext?: string | null, email?: string | null, phone?: string | null, videoText?: string | null, location?: string | null, bookingCTALabel?: string | null, formHeading?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type ContactConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -2528,7 +2531,7 @@ export type ContactConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ContactConnectionQuery = { __typename?: 'Query', contactConnection: { __typename?: 'ContactConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ContactConnectionEdges', cursor: string, node?: { __typename: 'Contact', id: string, heroImage?: string | null, heroHeading?: string | null, heroSubtext?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, email?: string | null, phone?: string | null, videoText?: string | null, location?: string | null, bookingCTALabel?: string | null, formHeading?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type ContactConnectionQuery = { __typename?: 'Query', contactConnection: { __typename?: 'ContactConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ContactConnectionEdges', cursor: string, node?: { __typename: 'Contact', id: string, heroImage?: string | null, heroHeading?: any | null, heroSubtext?: any | null, sectionHeading?: string | null, sectionSubtext?: string | null, email?: string | null, phone?: string | null, videoText?: string | null, location?: string | null, bookingCTALabel?: string | null, formHeading?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type PostQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -2967,6 +2970,7 @@ export const ResourcesPartsFragmentDoc = gql`
   featuredBlogExcerpt
   featuredBlogReadTime
   featuredBlogCTA
+  featuredBlogImage
   featuredBlogSlug
   blogSectionHeading
   podcastSectionHeading

@@ -276,6 +276,7 @@ fragment ResourcesParts on Resources {
   featuredBlogExcerpt
   featuredBlogReadTime
   featuredBlogCTA
+  featuredBlogImage
   featuredBlogSlug
   blogSectionHeading
   podcastSectionHeading

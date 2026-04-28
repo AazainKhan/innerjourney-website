@@ -3,6 +3,8 @@ import contactData from '@/content/pages/contact.json'
 import client from '@/tina/__generated__/client'
 import ContactPageClient from './ContactPageClient'
 
+const inline = (s: string) => ({ type: 'root', children: [{ type: 'p', children: [{ type: 'text', text: s }] }] })
+
 export const metadata: Metadata = {
   title: 'Contact Shanila - Clarity and Mindset Coach | Get In Touch',
   description: "Ready to start your transformation? Contact Shanila today to book a free consultation or ask any questions about clarity and mindset coaching.",
@@ -25,7 +27,8 @@ export default async function ContactPage() {
       <ContactPageClient
         query=""
         variables={{ relativePath: 'contact.json' }}
-        data={{ contact: contactData }}
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        data={{ contact: { ...contactData, heroHeading: inline(contactData.heroHeading), heroSubtext: inline(contactData.heroSubtext) } as any }}
       />
     )
   }

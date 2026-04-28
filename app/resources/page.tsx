@@ -8,6 +8,12 @@ export const metadata: Metadata = {
   title: 'Resources - Blog Posts & Podcasts for Inner Growth',
   description: 'Explore free resources including blog posts and podcasts on clarity, mindset, personal development and transformation. Start your inner journey today.',
   alternates: { canonical: 'https://innerjourney-with-shanila.com/resources' },
+  openGraph: {
+    title: 'Resources - Shanila Khan | Blog Posts & Podcasts',
+    description: 'Free resources on clarity, mindset, and personal development. Start your inner journey today.',
+    url: 'https://innerjourney-with-shanila.com/resources',
+    images: [{ url: '/images/og-default.jpg', width: 1200, height: 630, alt: 'Resources from Inner Journey' }],
+  },
 }
 
 export default async function ResourcesPage() {

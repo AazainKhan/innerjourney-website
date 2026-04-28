@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 import { useTina } from 'tinacms/dist/react'
@@ -42,6 +43,7 @@ interface ResourcesData {
     featuredBlogExcerpt: string
     featuredBlogReadTime: string
     featuredBlogCTA: string
+    featuredBlogImage?: string | null
     featuredBlogSlug?: string | null
     blogSectionHeading: string
     podcastSectionHeading: string
@@ -67,7 +69,14 @@ interface Props {
 type Filter = 'all' | 'blog' | 'podcast'
 
 export default function ResourcesClient(props: Props) {
-  const { data } = useTina<ResourcesData>({ query: props.query, variables: props.variables, data: props.data })
+  const { data } = useTina<ResourcesData>({
+    query: props.query,
+    variables: props.variables,
+    data: props.data,
+    experimental___selectFormByFormId() {
+      return `content/pages/${props.variables.relativePath}`
+    },
+  })
   const d = data.resources
   const [filter, setFilter] = useState<Filter>('all')
   const [newsletterStatus, setNewsletterStatus] = useState<'idle' | 'success'>('idle')
@@ -135,13 +144,23 @@ export default function ResourcesClient(props: Props) {
                 </h2>
                 <div className="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300">
                   <div className="grid lg:grid-cols-2 gap-0">
-                    <div className="relative h-64 lg:h-auto bg-gradient-to-br from-azure/20 to-azure/10">
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-center p-8">
-                          <i className="fas fa-newspaper text-6xl text-azure/40 mb-4"></i>
-                          <p className="text-gray-600">Featured Image</p>
+                    <div className="relative h-64 lg:h-auto bg-gradient-to-br from-azure/20 to-azure/10 min-h-[16rem]">
+                      {d.featuredBlogImage ? (
+                        <Image
+                          src={d.featuredBlogImage}
+                          alt={d.featuredBlogTitle}
+                          fill
+                          className="object-cover"
+                          sizes="(min-width: 1024px) 50vw, 100vw"
+                        />
+                      ) : (
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="text-center p-8">
+                            <i className="fas fa-newspaper text-6xl text-azure/40 mb-4"></i>
+                            <p className="text-gray-600">Featured Image</p>
+                          </div>
                         </div>
-                      </div>
+                      )}
                     </div>
                     <div className="p-8 lg:p-12 flex flex-col justify-center">
                       <div className="flex items-center gap-3 mb-4">

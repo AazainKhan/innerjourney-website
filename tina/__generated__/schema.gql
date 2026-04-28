@@ -134,8 +134,8 @@ union DocumentNode = Home | Services | About | ClarityCoaching | CareerCoaching 
 
 type Home implements Node & Document {
   heroImage: String
-  heroHeading: String
-  heroSubtext: String
+  heroHeading: JSON
+  heroSubtext: JSON
   heroCTALabel: String
   heroBottomCTALabel: String
   ctaHeading: String
@@ -170,6 +170,12 @@ input ImageFilter {
   in: [String]
 }
 
+input RichTextFilter {
+  startsWith: String
+  eq: String
+  exists: Boolean
+}
+
 input StringFilter {
   startsWith: String
   eq: String
@@ -179,8 +185,8 @@ input StringFilter {
 
 input HomeFilter {
   heroImage: ImageFilter
-  heroHeading: StringFilter
-  heroSubtext: StringFilter
+  heroHeading: RichTextFilter
+  heroSubtext: RichTextFilter
   heroCTALabel: StringFilter
   heroBottomCTALabel: StringFilter
   ctaHeading: StringFilter
@@ -780,6 +786,7 @@ type Resources implements Node & Document {
   featuredBlogExcerpt: String
   featuredBlogReadTime: String
   featuredBlogCTA: String
+  featuredBlogImage: String
   featuredBlogSlug: String
   blogSectionHeading: String
   podcastSectionHeading: String
@@ -808,6 +815,7 @@ input ResourcesFilter {
   featuredBlogExcerpt: StringFilter
   featuredBlogReadTime: StringFilter
   featuredBlogCTA: StringFilter
+  featuredBlogImage: ImageFilter
   featuredBlogSlug: StringFilter
   blogSectionHeading: StringFilter
   podcastSectionHeading: StringFilter
@@ -834,8 +842,8 @@ type ResourcesConnection implements Connection {
 
 type Contact implements Node & Document {
   heroImage: String
-  heroHeading: String
-  heroSubtext: String
+  heroHeading: JSON
+  heroSubtext: JSON
   sectionHeading: String
   sectionSubtext: String
   email: String
@@ -851,8 +859,8 @@ type Contact implements Node & Document {
 
 input ContactFilter {
   heroImage: ImageFilter
-  heroHeading: StringFilter
-  heroSubtext: StringFilter
+  heroHeading: RichTextFilter
+  heroSubtext: RichTextFilter
   sectionHeading: StringFilter
   sectionSubtext: StringFilter
   email: StringFilter
@@ -895,12 +903,6 @@ input DatetimeFilter {
   eq: String
   exists: Boolean
   in: [String]
-}
-
-input RichTextFilter {
-  startsWith: String
-  eq: String
-  exists: Boolean
 }
 
 input PostFilter {
@@ -1330,8 +1332,8 @@ input DocumentMutation {
 
 input HomeMutation {
   heroImage: String
-  heroHeading: String
-  heroSubtext: String
+  heroHeading: JSON
+  heroSubtext: JSON
   heroCTALabel: String
   heroBottomCTALabel: String
   ctaHeading: String
@@ -1609,6 +1611,7 @@ input ResourcesMutation {
   featuredBlogExcerpt: String
   featuredBlogReadTime: String
   featuredBlogCTA: String
+  featuredBlogImage: String
   featuredBlogSlug: String
   blogSectionHeading: String
   podcastSectionHeading: String
@@ -1624,8 +1627,8 @@ input ResourcesMutation {
 
 input ContactMutation {
   heroImage: String
-  heroHeading: String
-  heroSubtext: String
+  heroHeading: JSON
+  heroSubtext: JSON
   sectionHeading: String
   sectionSubtext: String
   email: String

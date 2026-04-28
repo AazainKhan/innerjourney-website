@@ -61,7 +61,12 @@ const cards = [
 ]
 
 export default function ServicesPageClient(props: Props) {
-  const { data } = useTina<ServicesData>(props)
+  const { data } = useTina<ServicesData>({
+    ...props,
+    experimental___selectFormByFormId() {
+      return `content/pages/${props.variables.relativePath}`
+    },
+  })
   const d = data.services
 
   return (

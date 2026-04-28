@@ -3,14 +3,16 @@
 import Image from 'next/image'
 import { useState } from 'react'
 import { useTina } from 'tinacms/dist/react'
+import { TinaMarkdown, type TinaMarkdownContent } from 'tinacms/dist/rich-text'
 import BookingButton from '@/components/BookingButton'
-import RichText from '@/components/RichText'
+
+const inlineComponents = { p: ({ children }: { children: React.ReactNode }) => <>{children}</> }
 
 interface ContactData {
   contact: {
     heroImage?: string | null
-    heroHeading: string
-    heroSubtext: string
+    heroHeading: TinaMarkdownContent
+    heroSubtext: TinaMarkdownContent
     sectionHeading: string
     sectionSubtext: string
     email: string
@@ -29,7 +31,12 @@ interface Props {
 }
 
 export default function ContactPageClient(props: Props) {
-  const { data } = useTina<ContactData>(props)
+  const { data } = useTina<ContactData>({
+    ...props,
+    experimental___selectFormByFormId() {
+      return `content/pages/${props.variables.relativePath}`
+    },
+  })
   const d = data.contact
 
   const [submitting, setSubmitting] = useState(false)
@@ -89,8 +96,12 @@ export default function ContactPageClient(props: Props) {
         </div>
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
-            <RichText as="h1" className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white font-dancing font-bold mb-6 leading-tight drop-shadow-2xl">{d.heroHeading}</RichText>
-            <RichText as="p" className="text-lg md:text-xl body-text-light text-white/90 leading-relaxed max-w-3xl mx-auto">{d.heroSubtext}</RichText>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white font-dancing font-bold mb-6 leading-tight drop-shadow-2xl">
+              <TinaMarkdown content={d.heroHeading} components={inlineComponents} />
+            </h1>
+            <p className="text-lg md:text-xl body-text-light text-white/90 leading-relaxed max-w-3xl mx-auto">
+              <TinaMarkdown content={d.heroSubtext} components={inlineComponents} />
+            </p>
           </div>
         </div>
       </section>

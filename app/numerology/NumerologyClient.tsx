@@ -58,7 +58,12 @@ interface Props {
 }
 
 export default function NumerologyClient(props: Props) {
-  const { data } = useTina<NumerologyData>(props)
+  const { data } = useTina<NumerologyData>({
+    ...props,
+    experimental___selectFormByFormId() {
+      return `content/pages/${props.variables.relativePath}`
+    },
+  })
   const d = data.numerology
 
   const floatingNumbers = [

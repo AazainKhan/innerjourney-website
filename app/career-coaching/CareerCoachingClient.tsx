@@ -75,7 +75,12 @@ interface Props {
 }
 
 export default function CareerCoachingClient(props: Props) {
-  const { data } = useTina<CareerData>(props)
+  const { data } = useTina<CareerData>({
+    ...props,
+    experimental___selectFormByFormId() {
+      return `content/pages/${props.variables.relativePath}`
+    },
+  })
   const d = data.careerCoaching
 
   return (

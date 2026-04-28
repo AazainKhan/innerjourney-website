@@ -23,11 +23,11 @@ export default defineConfig({
         path: 'content/pages',
         match: { include: 'home' },
         format: 'json',
-        ui: { router: () => '/' },
+        ui: { router: () => '/', allowedActions: { create: false, delete: false } },
         fields: [
           { name: 'heroImage', label: 'Hero Background Image', type: 'image' },
-          { name: 'heroHeading', label: 'Hero Heading', type: 'string', description: 'Use **bold**, *italic*, __underline__ for inline formatting' },
-          { name: 'heroSubtext', label: 'Hero Subtext', type: 'string', ui: { component: 'textarea' }, description: 'Use **bold**, *italic*, __underline__ for inline formatting' },
+          { name: 'heroHeading', label: 'Hero Heading', type: 'rich-text' },
+          { name: 'heroSubtext', label: 'Hero Subtext', type: 'rich-text' },
           { name: 'heroCTALabel', label: 'Hero CTA Button Label', type: 'string' },
           { name: 'heroBottomCTALabel', label: 'Hero Secondary CTA Label', type: 'string' },
           { name: 'ctaHeading', label: 'Mid-CTA Heading', type: 'string' },
@@ -58,7 +58,7 @@ export default defineConfig({
         path: 'content/pages',
         match: { include: 'services' },
         format: 'json',
-        ui: { router: () => '/services' },
+        ui: { router: () => '/services', allowedActions: { create: false, delete: false } },
         fields: [
           { name: 'heroHeading', label: 'Hero Heading', type: 'string' },
           { name: 'heroSubtext', label: 'Hero Subtext', type: 'string', ui: { component: 'textarea' } },
@@ -73,7 +73,7 @@ export default defineConfig({
         path: 'content/pages',
         match: { include: 'about' },
         format: 'json',
-        ui: { router: () => '/about' },
+        ui: { router: () => '/about', allowedActions: { create: false, delete: false } },
         fields: [
           { name: 'heroHeading', label: 'Hero Heading', type: 'string' },
           { name: 'heroSubtext', label: 'Hero Subtext', type: 'string', ui: { component: 'textarea' } },
@@ -118,7 +118,7 @@ export default defineConfig({
         path: 'content/pages',
         match: { include: 'clarity-coaching' },
         format: 'json',
-        ui: { router: () => '/clarity-coaching' },
+        ui: { router: () => '/clarity-coaching', allowedActions: { create: false, delete: false } },
         fields: [
           { name: 'heroBadge', label: 'Hero Badge', type: 'string' },
           { name: 'heroHeading', label: 'Hero Heading', type: 'string' },
@@ -213,7 +213,7 @@ export default defineConfig({
         path: 'content/pages',
         match: { include: 'career-coaching' },
         format: 'json',
-        ui: { router: () => '/career-coaching' },
+        ui: { router: () => '/career-coaching', allowedActions: { create: false, delete: false } },
         fields: [
           { name: 'heroHeading', label: 'Hero Heading', type: 'string' },
           { name: 'heroSubtextPrefix', label: 'Hero Subtext', type: 'string' },
@@ -294,7 +294,7 @@ export default defineConfig({
         path: 'content/pages',
         match: { include: 'numerology' },
         format: 'json',
-        ui: { router: () => '/numerology' },
+        ui: { router: () => '/numerology', allowedActions: { create: false, delete: false } },
         fields: [
           { name: 'heroBadge', label: 'Hero Badge', type: 'string' },
           { name: 'heroHeading', label: 'Hero Heading', type: 'string' },
@@ -369,7 +369,7 @@ export default defineConfig({
         path: 'content/pages',
         match: { include: 'resources' },
         format: 'json',
-        ui: { router: () => '/resources' },
+        ui: { router: () => '/resources', allowedActions: { create: false, delete: false } },
         fields: [
           { name: 'heroBadge', label: 'Hero Badge Text', type: 'string' },
           { name: 'heroHeading', label: 'Hero Heading', type: 'string' },
@@ -382,6 +382,7 @@ export default defineConfig({
           { name: 'featuredBlogExcerpt', label: 'Featured Blog Excerpt', type: 'string', ui: { component: 'textarea' } },
           { name: 'featuredBlogReadTime', label: 'Featured Read Time', type: 'string' },
           { name: 'featuredBlogCTA', label: 'Featured CTA Label', type: 'string' },
+          { name: 'featuredBlogImage', label: 'Featured Cover Image (replaces the icon placeholder)', type: 'image' },
           { name: 'featuredBlogSlug', label: 'Featured Blog Slug (filename in content/posts, optional)', type: 'string' },
           { name: 'blogSectionHeading', label: 'Blog Section Heading', type: 'string' },
           { name: 'podcastSectionHeading', label: 'Podcast Section Heading', type: 'string' },
@@ -401,11 +402,11 @@ export default defineConfig({
         path: 'content/pages',
         match: { include: 'contact' },
         format: 'json',
-        ui: { router: () => '/contact' },
+        ui: { router: () => '/contact', allowedActions: { create: false, delete: false } },
         fields: [
           { name: 'heroImage', label: 'Hero Background Image', type: 'image' },
-          { name: 'heroHeading', label: 'Hero Heading', type: 'string', description: 'Use **bold**, *italic*, __underline__ for inline formatting' },
-          { name: 'heroSubtext', label: 'Hero Subtext', type: 'string', ui: { component: 'textarea' }, description: 'Use **bold**, *italic*, __underline__ for inline formatting' },
+          { name: 'heroHeading', label: 'Hero Heading', type: 'rich-text' },
+          { name: 'heroSubtext', label: 'Hero Subtext', type: 'rich-text' },
           { name: 'sectionHeading', label: 'Form Section Heading', type: 'string' },
           { name: 'sectionSubtext', label: 'Form Section Subtext', type: 'string', ui: { component: 'textarea' } },
           { name: 'email', label: 'Email Address', type: 'string' },
@@ -497,7 +498,7 @@ export default defineConfig({
         path: 'content',
         match: { include: 'navbar' },
         format: 'json',
-        ui: { router: () => '/' },
+        ui: { allowedActions: { create: false, delete: false } },
         fields: [
           { name: 'brandLabel', label: 'Brand Label (next to logo)', type: 'string' },
           { name: 'ctaLabel', label: 'Sticky CTA Button Label', type: 'string' },
@@ -526,7 +527,7 @@ export default defineConfig({
         path: 'content',
         match: { include: 'booking-form' },
         format: 'json',
-        ui: { router: () => '/' },
+        ui: { allowedActions: { create: false, delete: false } },
         fields: [
           { name: 'overlayTitle', label: 'Overlay Title', type: 'string' },
           { name: 'firstNameLabel', label: 'First Name Label', type: 'string' },
@@ -552,7 +553,7 @@ export default defineConfig({
         path: 'content',
         match: { include: 'footer' },
         format: 'json',
-        ui: { router: () => '/' },
+        ui: { allowedActions: { create: false, delete: false } },
         fields: [
           { name: 'brandHeading', label: 'Brand Heading', type: 'string' },
           { name: 'brandDescription', label: 'Brand Description', type: 'string', ui: { component: 'textarea' } },
@@ -597,7 +598,7 @@ export default defineConfig({
         path: 'content',
         match: { include: 'typography' },
         format: 'json',
-        ui: { router: () => '/' },
+        ui: { allowedActions: { create: false, delete: false } },
         fields: [
           {
             name: 'headingFont',
@@ -662,7 +663,7 @@ export default defineConfig({
         path: 'content',
         match: { include: 'theme' },
         format: 'json',
-        ui: { router: () => '/' },
+        ui: { allowedActions: { create: false, delete: false } },
         fields: [
           {
             name: 'primaryColor',
@@ -696,7 +697,7 @@ export default defineConfig({
         path: 'content',
         match: { include: 'testimonials' },
         format: 'json',
-        ui: { router: () => '/' },
+        ui: { allowedActions: { create: false, delete: false } },
         fields: [
           {
             name: 'items',
