@@ -270,16 +270,10 @@ fragment ResourcesParts on Resources {
   heroHeadingHighlight
   heroSubtext
   featuredHeading
-  featuredBlogCategory
-  featuredBlogStatus
-  featuredBlogTitle
-  featuredBlogExcerpt
-  featuredBlogReadTime
-  featuredBlogCTA
-  featuredBlogImage
-  featuredBlogSlug
-  blogSectionHeading
-  podcastSectionHeading
+  featuredPosts
+  featuredPodcasts
+  blogLibraryHeading
+  podcastLibraryHeading
   newsletterHeading
   newsletterSubtext
   newsletterPlaceholder

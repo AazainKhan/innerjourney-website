@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 import { useTina } from 'tinacms/dist/react'
@@ -37,16 +36,10 @@ interface ResourcesData {
     heroHeadingHighlight: string
     heroSubtext: string
     featuredHeading: string
-    featuredBlogCategory: string
-    featuredBlogStatus: string
-    featuredBlogTitle: string
-    featuredBlogExcerpt: string
-    featuredBlogReadTime: string
-    featuredBlogCTA: string
-    featuredBlogImage?: string | null
-    featuredBlogSlug?: string | null
-    blogSectionHeading: string
-    podcastSectionHeading: string
+    featuredPosts?: (string | null)[] | null
+    featuredPodcasts?: (string | null)[] | null
+    blogLibraryHeading: string
+    podcastLibraryHeading: string
     newsletterHeading: string
     newsletterSubtext: string
     newsletterPlaceholder: string
@@ -66,7 +59,63 @@ interface Props {
   podcasts: Podcast[]
 }
 
-type Filter = 'all' | 'blog' | 'podcast'
+function BlogCard({ post }: { post: BlogPost }) {
+  return (
+    <Link
+      href={`/blog/${post.slug}`}
+      className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 flex flex-col"
+    >
+      <div className={`relative h-48 bg-gradient-to-br ${post.gradient}`}>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <i className={`fas ${post.icon} text-5xl ${post.iconColor}`}></i>
+        </div>
+        <span className={`absolute top-4 left-4 px-3 py-1 ${post.badgeColor} text-white text-xs rounded-full font-semibold`}>
+          Blog
+        </span>
+      </div>
+      <div className="p-6 flex flex-col flex-grow">
+        <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-azure transition-colors">{post.title}</h3>
+        <p className="text-gray-600 mb-4 text-sm leading-relaxed line-clamp-3 flex-grow">{post.excerpt}</p>
+        <div className="flex items-center justify-between text-sm mt-auto">
+          <span className="text-gray-500">{post.status}</span>
+          <span className="text-azure font-semibold">Read more →</span>
+        </div>
+      </div>
+    </Link>
+  )
+}
+
+function PodcastCard({ episode }: { episode: Podcast }) {
+  return (
+    <Link
+      href={`/podcast/${episode.slug}`}
+      className="group block rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+      style={{ background: 'linear-gradient(135deg, #14213d 0%, #1a2d50 100%)' }}
+    >
+      <div className="grid md:grid-cols-3 gap-0">
+        <div className={`relative h-48 md:h-auto bg-gradient-to-br ${episode.gradient} flex items-center justify-center`}>
+          <i className={`fas ${episode.icon} text-6xl text-white/60 group-hover:scale-110 transition-transform`}></i>
+        </div>
+        <div className="md:col-span-2 p-8">
+          <div className="flex items-center gap-3 mb-4">
+            <span className={`px-4 py-1 ${episode.badgeColor} text-white text-xs rounded-full font-semibold`}>
+              <i className="fas fa-podcast mr-1"></i> Podcast
+            </span>
+            <span className="text-white/70 text-sm">{episode.episode}</span>
+          </div>
+          <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-carrot transition-colors">{episode.title}</h3>
+          <p className="text-white/80 mb-6 leading-relaxed line-clamp-3">{episode.excerpt}</p>
+          <div className="flex items-center gap-4 flex-wrap">
+            <span className="text-white/60 text-sm">{episode.status}</span>
+            <span className="bg-white/20 group-hover:bg-white/30 text-white px-6 py-2 rounded-full text-sm font-semibold transition-all">
+              <i className="fas fa-arrow-right mr-2"></i> View episode
+            </span>
+          </div>
+        </div>
+      </div>
+    </Link>
+  )
+}
 
 export default function ResourcesClient(props: Props) {
   const { data } = useTina<ResourcesData>({
@@ -78,10 +127,24 @@ export default function ResourcesClient(props: Props) {
     },
   })
   const d = data.resources
-  const [filter, setFilter] = useState<Filter>('all')
   const [newsletterStatus, setNewsletterStatus] = useState<'idle' | 'success'>('idle')
 
-  const featuredHref = d.featuredBlogSlug ? `/blog/${d.featuredBlogSlug}` : null
+  // Resolve featured slugs against the all-posts/all-podcasts lists. Drop slugs
+  // that don't match anything (typo / deleted post) so the section never breaks.
+  const postBySlug = new Map(props.posts.map((p) => [p.slug, p]))
+  const podcastBySlug = new Map(props.podcasts.map((p) => [p.slug, p]))
+
+  const featuredPosts = (d.featuredPosts ?? [])
+    .filter((s): s is string => typeof s === 'string' && s.length > 0)
+    .map((slug) => postBySlug.get(slug))
+    .filter((p): p is BlogPost => Boolean(p))
+
+  const featuredPodcasts = (d.featuredPodcasts ?? [])
+    .filter((s): s is string => typeof s === 'string' && s.length > 0)
+    .map((slug) => podcastBySlug.get(slug))
+    .filter((p): p is Podcast => Boolean(p))
+
+  const hasFeatured = featuredPosts.length > 0 || featuredPodcasts.length > 0
 
   return (
     <>
@@ -98,6 +161,25 @@ export default function ResourcesClient(props: Props) {
               <RichText>{d.heroHeading}</RichText> <span className="text-carrot"><RichText>{d.heroHeadingHighlight}</RichText></span>
             </h1>
             <RichText as="p" className="text-lg md:text-xl text-white/90 leading-relaxed">{d.heroSubtext}</RichText>
+            {(props.posts.length > 0 || props.podcasts.length > 0) && (
+              <nav className="mt-10 flex flex-wrap justify-center gap-4 text-sm font-semibold">
+                {hasFeatured && (
+                  <a href="#featured" className="px-5 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors backdrop-blur-sm">
+                    <i className="fas fa-star mr-2"></i> Featured
+                  </a>
+                )}
+                {props.posts.length > 0 && (
+                  <a href="#blog-library" className="px-5 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors backdrop-blur-sm">
+                    <i className="fas fa-pen-fancy mr-2"></i> Blog Library
+                  </a>
+                )}
+                {props.podcasts.length > 0 && (
+                  <a href="#podcast-library" className="px-5 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors backdrop-blur-sm">
+                    <i className="fas fa-podcast mr-2"></i> Podcast Library
+                  </a>
+                )}
+              </nav>
+            )}
           </div>
         </div>
       </section>
@@ -108,193 +190,78 @@ export default function ResourcesClient(props: Props) {
         <div className="absolute top-0 right-10 w-[30rem] h-[30rem] bg-carrot/20 rounded-full blur-3xl"></div>
         <div className="absolute top-10 left-10 w-[28rem] h-[28rem] bg-azure/20 rounded-full blur-3xl"></div>
 
-        {/* Filter Tabs */}
-        <section className="py-16 relative">
-          <div className="container mx-auto px-6 relative z-10">
-            <div className="flex flex-wrap justify-center gap-4 mb-12">
-              {([
-                { key: 'all', label: 'All Resources', icon: null },
-                { key: 'blog', label: 'Blog Posts', icon: 'fa-pen-fancy' },
-                { key: 'podcast', label: 'Podcasts', icon: 'fa-podcast' },
-              ] as const).map((t) => (
-                <button
-                  key={t.key}
-                  onClick={() => setFilter(t.key)}
-                  className={`px-8 py-3 rounded-full shadow-md hover:shadow-lg font-semibold border border-gray-200 transition-all ${
-                    filter === t.key
-                      ? 'bg-gradient-to-br from-azure to-azure text-white scale-105'
-                      : 'bg-white text-gray-700'
-                  }`}
-                >
-                  {t.icon && <i className={`fas ${t.icon} mr-2`}></i>}
-                  {t.label}
-                </button>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Featured Content */}
-        {filter !== 'podcast' && (
-          <section className="py-12 relative">
+        {/* Featured */}
+        {hasFeatured && (
+          <section id="featured" className="py-20 relative scroll-mt-24">
             <div className="container mx-auto px-6 relative z-10">
-              <div className="max-w-6xl mx-auto">
-                <h2 className="text-3xl md:text-4xl heading-secondary text-gray-900 mb-8 text-center">
-                  {d.featuredHeading}
-                </h2>
-                <div className="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300">
-                  <div className="grid lg:grid-cols-2 gap-0">
-                    <div className="relative h-64 lg:h-auto bg-gradient-to-br from-azure/20 to-azure/10 min-h-[16rem]">
-                      {d.featuredBlogImage ? (
-                        <Image
-                          src={d.featuredBlogImage}
-                          alt={d.featuredBlogTitle}
-                          fill
-                          className="object-cover"
-                          sizes="(min-width: 1024px) 50vw, 100vw"
-                        />
-                      ) : (
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="text-center p-8">
-                            <i className="fas fa-newspaper text-6xl text-azure/40 mb-4"></i>
-                            <p className="text-gray-600">Featured Image</p>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                    <div className="p-8 lg:p-12 flex flex-col justify-center">
-                      <div className="flex items-center gap-3 mb-4">
-                        <span className="px-4 py-1 bg-gradient-to-r from-azure to-azure/50 text-white text-sm rounded-full font-semibold">
-                          {d.featuredBlogCategory}
-                        </span>
-                        <span className="text-gray-500 text-sm">{d.featuredBlogStatus}</span>
-                      </div>
-                      <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-                        {d.featuredBlogTitle}
-                      </h3>
-                      <p className="text-gray-600 mb-6 leading-relaxed">
-                        {d.featuredBlogExcerpt}
-                      </p>
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm text-gray-500">{d.featuredBlogReadTime}</span>
-                        {featuredHref ? (
-                          <Link href={featuredHref} className="btn-azure-outline px-6 py-2 text-sm">
-                            {d.featuredBlogCTA} <i className="fas fa-arrow-right ml-2"></i>
-                          </Link>
-                        ) : (
-                          <span className="text-sm text-gray-400 italic">Link a post by setting Featured Blog Slug in Tina</span>
-                        )}
-                      </div>
-                    </div>
-                  </div>
+              <div className="max-w-7xl mx-auto">
+                <div className="flex items-center justify-center gap-3 mb-12">
+                  <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-carrot/15 text-carrot text-sm font-semibold uppercase tracking-wider">
+                    <i className="fas fa-star"></i> {d.featuredHeading}
+                  </span>
+                </div>
+                <div className="grid lg:grid-cols-2 gap-8">
+                  {featuredPosts.map((post) => (
+                    <BlogCard key={`featured-blog-${post.slug}`} post={post} />
+                  ))}
+                  {featuredPodcasts.map((episode) => (
+                    <PodcastCard key={`featured-podcast-${episode.slug}`} episode={episode} />
+                  ))}
                 </div>
               </div>
             </div>
           </section>
         )}
 
-        {/* Blog Posts Grid */}
-        {filter !== 'podcast' && (
-          <section className="py-20 relative">
-            <div className="container mx-auto px-6 relative z-10">
-              <div className="max-w-7xl mx-auto">
-                <h2 className="text-3xl md:text-4xl heading-secondary text-gray-900 mb-12 text-center">
-                  {d.blogSectionHeading}
-                </h2>
-                {props.posts.length === 0 ? (
-                  <p className="text-center text-gray-500 italic">New posts coming soon — add one in Tina&apos;s Blog Posts collection.</p>
-                ) : (
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {props.posts.map((post) => (
-                      <Link
-                        key={post.slug}
-                        href={`/blog/${post.slug}`}
-                        className="bg-white rounded-2xl shadow-lg hover:shadow-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 flex flex-col"
-                      >
-                        <div className={`relative h-48 bg-gradient-to-br ${post.gradient}`}>
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <i className={`fas ${post.icon} text-5xl ${post.iconColor}`}></i>
-                          </div>
-                          <span className={`absolute top-4 left-4 px-3 py-1 ${post.badgeColor} text-white text-xs rounded-full font-semibold`}>
-                            Blog
-                          </span>
-                        </div>
-                        <div className="p-6 flex flex-col flex-grow">
-                          <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">{post.title}</h3>
-                          <p className="text-gray-600 mb-4 text-sm leading-relaxed line-clamp-3 flex-grow">{post.excerpt}</p>
-                          <div className="flex items-center justify-between text-sm mt-auto">
-                            <span className="text-gray-500">{post.status}</span>
-                            <span className="text-azure font-semibold">Read more →</span>
-                          </div>
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
+        {/* Blog Library */}
+        <section id="blog-library" className="py-20 relative scroll-mt-24">
+          <div className="container mx-auto px-6 relative z-10">
+            <div className="max-w-7xl mx-auto">
+              <h2 className="text-3xl md:text-4xl heading-secondary text-gray-900 mb-3 text-center">
+                {d.blogLibraryHeading}
+              </h2>
+              <p className="text-center text-gray-500 mb-12">
+                {props.posts.length === 0
+                  ? 'New posts coming soon.'
+                  : `${props.posts.length} ${props.posts.length === 1 ? 'post' : 'posts'}`}
+              </p>
+              {props.posts.length === 0 ? (
+                <p className="text-center text-gray-500 italic">Add one in Tina&apos;s Blog Posts collection to populate the library.</p>
+              ) : (
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {props.posts.map((post) => (
+                    <BlogCard key={post.slug} post={post} />
+                  ))}
+                </div>
+              )}
             </div>
-          </section>
-        )}
+          </div>
+        </section>
 
-        {/* Podcasts */}
-        {filter !== 'blog' && (
-          <section className="py-20 relative">
-            <div className="container mx-auto px-6 relative z-10">
-              <div className="max-w-6xl mx-auto">
-                <h2 className="text-3xl md:text-4xl heading-secondary text-gray-900 mb-12 text-center">
-                  {d.podcastSectionHeading}
-                </h2>
-                {props.podcasts.length === 0 ? (
-                  <p className="text-center text-gray-500 italic">New episodes coming soon — add one in Tina&apos;s Podcast Episodes collection.</p>
-                ) : (
-                  <div className="space-y-6">
-                    {props.podcasts.map((p) => (
-                      <div key={p.slug} className="rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:-translate-y-2" style={{ background: 'linear-gradient(135deg, #14213d 0%, #1a2d50 100%)' }}>
-                        <div className="grid md:grid-cols-3 gap-0">
-                          <Link href={`/podcast/${p.slug}`} className={`relative h-48 md:h-auto bg-gradient-to-br ${p.gradient} flex items-center justify-center group`}>
-                            <i className={`fas ${p.icon} text-6xl text-white/60 group-hover:scale-110 transition-transform`}></i>
-                          </Link>
-                          <div className="md:col-span-2 p-8">
-                            <div className="flex items-center gap-3 mb-4">
-                              <span className={`px-4 py-1 ${p.badgeColor} text-white text-xs rounded-full font-semibold`}>
-                                <i className="fas fa-podcast mr-1"></i> Podcast
-                              </span>
-                              <span className="text-white/70 text-sm">{p.episode}</span>
-                            </div>
-                            <Link href={`/podcast/${p.slug}`} className="block group">
-                              <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-carrot transition-colors">{p.title}</h3>
-                            </Link>
-                            <p className="text-white/80 mb-6 leading-relaxed">{p.excerpt}</p>
-                            <div className="flex items-center gap-4 flex-wrap">
-                              <span className="text-white/60 text-sm">{p.status}</span>
-                              {p.audioUrl ? (
-                                <a
-                                  href={p.audioUrl}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="bg-white/20 hover:bg-white/30 text-white px-6 py-2 rounded-full text-sm font-semibold transition-all"
-                                >
-                                  <i className="fas fa-play mr-2"></i> Play Episode
-                                </a>
-                              ) : (
-                                <Link
-                                  href={`/podcast/${p.slug}`}
-                                  className="bg-white/20 hover:bg-white/30 text-white px-6 py-2 rounded-full text-sm font-semibold transition-all"
-                                >
-                                  <i className="fas fa-arrow-right mr-2"></i> View episode
-                                </Link>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
+        {/* Podcast Library */}
+        <section id="podcast-library" className="py-20 relative scroll-mt-24">
+          <div className="container mx-auto px-6 relative z-10">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-3xl md:text-4xl heading-secondary text-gray-900 mb-3 text-center">
+                {d.podcastLibraryHeading}
+              </h2>
+              <p className="text-center text-gray-500 mb-12">
+                {props.podcasts.length === 0
+                  ? 'New episodes coming soon.'
+                  : `${props.podcasts.length} ${props.podcasts.length === 1 ? 'episode' : 'episodes'}`}
+              </p>
+              {props.podcasts.length === 0 ? (
+                <p className="text-center text-gray-500 italic">Add one in Tina&apos;s Podcast Episodes collection to populate the library.</p>
+              ) : (
+                <div className="space-y-6">
+                  {props.podcasts.map((episode) => (
+                    <PodcastCard key={episode.slug} episode={episode} />
+                  ))}
+                </div>
+              )}
             </div>
-          </section>
-        )}
+          </div>
+        </section>
 
         {/* Newsletter */}
         <section className="py-20 relative">

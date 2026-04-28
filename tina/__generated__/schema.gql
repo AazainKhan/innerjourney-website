@@ -780,16 +780,10 @@ type Resources implements Node & Document {
   heroHeadingHighlight: String
   heroSubtext: String
   featuredHeading: String
-  featuredBlogCategory: String
-  featuredBlogStatus: String
-  featuredBlogTitle: String
-  featuredBlogExcerpt: String
-  featuredBlogReadTime: String
-  featuredBlogCTA: String
-  featuredBlogImage: String
-  featuredBlogSlug: String
-  blogSectionHeading: String
-  podcastSectionHeading: String
+  featuredPosts: [String]
+  featuredPodcasts: [String]
+  blogLibraryHeading: String
+  podcastLibraryHeading: String
   newsletterHeading: String
   newsletterSubtext: String
   newsletterPlaceholder: String
@@ -809,16 +803,10 @@ input ResourcesFilter {
   heroHeadingHighlight: StringFilter
   heroSubtext: StringFilter
   featuredHeading: StringFilter
-  featuredBlogCategory: StringFilter
-  featuredBlogStatus: StringFilter
-  featuredBlogTitle: StringFilter
-  featuredBlogExcerpt: StringFilter
-  featuredBlogReadTime: StringFilter
-  featuredBlogCTA: StringFilter
-  featuredBlogImage: ImageFilter
-  featuredBlogSlug: StringFilter
-  blogSectionHeading: StringFilter
-  podcastSectionHeading: StringFilter
+  featuredPosts: StringFilter
+  featuredPodcasts: StringFilter
+  blogLibraryHeading: StringFilter
+  podcastLibraryHeading: StringFilter
   newsletterHeading: StringFilter
   newsletterSubtext: StringFilter
   newsletterPlaceholder: StringFilter
@@ -1605,16 +1593,10 @@ input ResourcesMutation {
   heroHeadingHighlight: String
   heroSubtext: String
   featuredHeading: String
-  featuredBlogCategory: String
-  featuredBlogStatus: String
-  featuredBlogTitle: String
-  featuredBlogExcerpt: String
-  featuredBlogReadTime: String
-  featuredBlogCTA: String
-  featuredBlogImage: String
-  featuredBlogSlug: String
-  blogSectionHeading: String
-  podcastSectionHeading: String
+  featuredPosts: [String]
+  featuredPodcasts: [String]
+  blogLibraryHeading: String
+  podcastLibraryHeading: String
   newsletterHeading: String
   newsletterSubtext: String
   newsletterPlaceholder: String
