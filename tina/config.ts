@@ -379,16 +379,42 @@ export default defineConfig({
           {
             name: 'featuredPosts',
             label: 'Featured Blog Posts',
-            description: 'Filenames (without .md) of blog posts to promote at the top of the page. Order matters. Leave empty to hide the featured section for blogs.',
-            type: 'string',
+            description: 'Pick one or many blog posts to promote at the top of the page. Order matters. Leave empty to hide the featured section for blogs.',
+            type: 'object',
             list: true,
+            ui: {
+              itemProps: (item) => {
+                const ref = (item as { post?: unknown })?.post
+                if (typeof ref === 'string') {
+                  const m = ref.match(/(?:^|\/)([^/]+)\.md$/)
+                  return { label: m ? m[1] : ref }
+                }
+                return { label: 'Pick a blog post' }
+              },
+            },
+            fields: [
+              { name: 'post', label: 'Blog Post', type: 'reference', collections: ['post'] },
+            ],
           },
           {
             name: 'featuredPodcasts',
             label: 'Featured Podcast Episodes',
-            description: 'Filenames (without .md) of podcast episodes to promote at the top of the page. Order matters. Leave empty to hide the featured section for podcasts.',
-            type: 'string',
+            description: 'Pick one or many podcast episodes to promote at the top of the page. Order matters. Leave empty to hide the featured section for podcasts.',
+            type: 'object',
             list: true,
+            ui: {
+              itemProps: (item) => {
+                const ref = (item as { podcast?: unknown })?.podcast
+                if (typeof ref === 'string') {
+                  const m = ref.match(/(?:^|\/)([^/]+)\.md$/)
+                  return { label: m ? m[1] : ref }
+                }
+                return { label: 'Pick an episode' }
+              },
+            },
+            fields: [
+              { name: 'podcast', label: 'Podcast Episode', type: 'reference', collections: ['podcast'] },
+            ],
           },
           { name: 'blogLibraryHeading', label: 'Blog Library Heading', type: 'string' },
           { name: 'podcastLibraryHeading', label: 'Podcast Library Heading', type: 'string' },

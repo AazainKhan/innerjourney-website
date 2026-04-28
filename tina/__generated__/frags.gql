@@ -270,8 +270,65 @@ fragment ResourcesParts on Resources {
   heroHeadingHighlight
   heroSubtext
   featuredHeading
-  featuredPosts
-  featuredPodcasts
+  featuredPosts {
+    __typename
+    post {
+      ... on Post {
+        __typename
+        title
+        publishedAt
+        status
+        excerpt
+        icon
+        iconColor
+        gradient
+        badgeColor
+        body
+      }
+      ... on Document {
+        _sys {
+          filename
+          basename
+          hasReferences
+          breadcrumbs
+          path
+          relativePath
+          extension
+        }
+        id
+      }
+    }
+  }
+  featuredPodcasts {
+    __typename
+    podcast {
+      ... on Podcast {
+        __typename
+        title
+        episode
+        publishedAt
+        status
+        audioUrl
+        excerpt
+        icon
+        gradient
+        badgeColor
+        body
+      }
+      ... on Document {
+        _sys {
+          filename
+          basename
+          hasReferences
+          breadcrumbs
+          path
+          relativePath
+          extension
+        }
+        id
+      }
+    }
+  }
   blogLibraryHeading
   podcastLibraryHeading
   newsletterHeading

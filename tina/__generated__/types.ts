@@ -1105,6 +1105,20 @@ export type NumerologyConnection = Connection & {
   edges?: Maybe<Array<Maybe<NumerologyConnectionEdges>>>;
 };
 
+export type ResourcesFeaturedPostsPost = Post;
+
+export type ResourcesFeaturedPosts = {
+  __typename?: 'ResourcesFeaturedPosts';
+  post?: Maybe<ResourcesFeaturedPostsPost>;
+};
+
+export type ResourcesFeaturedPodcastsPodcast = Podcast;
+
+export type ResourcesFeaturedPodcasts = {
+  __typename?: 'ResourcesFeaturedPodcasts';
+  podcast?: Maybe<ResourcesFeaturedPodcastsPodcast>;
+};
+
 export type Resources = Node & Document & {
   __typename?: 'Resources';
   heroBadge?: Maybe<Scalars['String']['output']>;
@@ -1112,8 +1126,8 @@ export type Resources = Node & Document & {
   heroHeadingHighlight?: Maybe<Scalars['String']['output']>;
   heroSubtext?: Maybe<Scalars['String']['output']>;
   featuredHeading?: Maybe<Scalars['String']['output']>;
-  featuredPosts?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  featuredPodcasts?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  featuredPosts?: Maybe<Array<Maybe<ResourcesFeaturedPosts>>>;
+  featuredPodcasts?: Maybe<Array<Maybe<ResourcesFeaturedPodcasts>>>;
   blogLibraryHeading?: Maybe<Scalars['String']['output']>;
   podcastLibraryHeading?: Maybe<Scalars['String']['output']>;
   newsletterHeading?: Maybe<Scalars['String']['output']>;
@@ -1129,14 +1143,30 @@ export type Resources = Node & Document & {
   _values: Scalars['JSON']['output'];
 };
 
+export type ResourcesFeaturedPostsPostFilter = {
+  post?: InputMaybe<PostFilter>;
+};
+
+export type ResourcesFeaturedPostsFilter = {
+  post?: InputMaybe<ResourcesFeaturedPostsPostFilter>;
+};
+
+export type ResourcesFeaturedPodcastsPodcastFilter = {
+  podcast?: InputMaybe<PodcastFilter>;
+};
+
+export type ResourcesFeaturedPodcastsFilter = {
+  podcast?: InputMaybe<ResourcesFeaturedPodcastsPodcastFilter>;
+};
+
 export type ResourcesFilter = {
   heroBadge?: InputMaybe<StringFilter>;
   heroHeading?: InputMaybe<StringFilter>;
   heroHeadingHighlight?: InputMaybe<StringFilter>;
   heroSubtext?: InputMaybe<StringFilter>;
   featuredHeading?: InputMaybe<StringFilter>;
-  featuredPosts?: InputMaybe<StringFilter>;
-  featuredPodcasts?: InputMaybe<StringFilter>;
+  featuredPosts?: InputMaybe<ResourcesFeaturedPostsFilter>;
+  featuredPodcasts?: InputMaybe<ResourcesFeaturedPodcastsFilter>;
   blogLibraryHeading?: InputMaybe<StringFilter>;
   podcastLibraryHeading?: InputMaybe<StringFilter>;
   newsletterHeading?: InputMaybe<StringFilter>;
@@ -2180,14 +2210,22 @@ export type NumerologyMutation = {
   ctaButtonLabel?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type ResourcesFeaturedPostsMutation = {
+  post?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ResourcesFeaturedPodcastsMutation = {
+  podcast?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type ResourcesMutation = {
   heroBadge?: InputMaybe<Scalars['String']['input']>;
   heroHeading?: InputMaybe<Scalars['String']['input']>;
   heroHeadingHighlight?: InputMaybe<Scalars['String']['input']>;
   heroSubtext?: InputMaybe<Scalars['String']['input']>;
   featuredHeading?: InputMaybe<Scalars['String']['input']>;
-  featuredPosts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  featuredPodcasts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  featuredPosts?: InputMaybe<Array<InputMaybe<ResourcesFeaturedPostsMutation>>>;
+  featuredPodcasts?: InputMaybe<Array<InputMaybe<ResourcesFeaturedPodcastsMutation>>>;
   blogLibraryHeading?: InputMaybe<Scalars['String']['input']>;
   podcastLibraryHeading?: InputMaybe<Scalars['String']['input']>;
   newsletterHeading?: InputMaybe<Scalars['String']['input']>;
@@ -2343,7 +2381,7 @@ export type CareerCoachingPartsFragment = { __typename: 'CareerCoaching', heroHe
 
 export type NumerologyPartsFragment = { __typename: 'Numerology', heroBadge?: string | null, heroHeading?: string | null, heroTagline?: string | null, heroSubtext?: string | null, heroCTALabel?: string | null, selfDiscoveryHeadingPrefix?: string | null, selfDiscoveryHeadingHighlight?: string | null, selfDiscoverySubtext?: string | null, selfDiscoveryStatementPrefix?: string | null, selfDiscoveryStatementHighlight?: string | null, whatIsLabel?: string | null, whatIsHeadingPrefix?: string | null, whatIsHeadingHighlight?: string | null, whatIsIsntParagraph?: string | null, whatIsIsParagraph1?: string | null, whatIsIsParagraph2?: string | null, processLabel?: string | null, processHeadingPrefix?: string | null, processHeadingHighlight?: string | null, includesLabel?: string | null, includesHeadingPrefix?: string | null, includesHeadingHighlight?: string | null, includesSubtext?: string | null, philosophyLabel?: string | null, philosophyHeadingPrefix?: string | null, philosophyHeadingHighlight?: string | null, philosophyQuote?: string | null, philosophyParagraph1?: string | null, philosophyParagraph2?: string | null, philosophyBanner?: string | null, philosophyClosingPrefix?: string | null, philosophyClosingHighlight?: string | null, ctaSectionHeading?: string | null, ctaButtonLabel?: string | null, selfDiscoveryItems?: Array<{ __typename: 'NumerologySelfDiscoveryItems', emoji?: string | null, text?: string | null, borderColor?: string | null } | null> | null, processSteps?: Array<{ __typename: 'NumerologyProcessSteps', emoji?: string | null, stepLabel?: string | null, title?: string | null, description?: string | null } | null> | null, includes?: Array<{ __typename: 'NumerologyIncludes', emoji?: string | null, title?: string | null, description?: string | null } | null> | null };
 
-export type ResourcesPartsFragment = { __typename: 'Resources', heroBadge?: string | null, heroHeading?: string | null, heroHeadingHighlight?: string | null, heroSubtext?: string | null, featuredHeading?: string | null, featuredPosts?: Array<string | null> | null, featuredPodcasts?: Array<string | null> | null, blogLibraryHeading?: string | null, podcastLibraryHeading?: string | null, newsletterHeading?: string | null, newsletterSubtext?: string | null, newsletterPlaceholder?: string | null, newsletterButton?: string | null, newsletterSuccessMessage?: string | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null };
+export type ResourcesPartsFragment = { __typename: 'Resources', heroBadge?: string | null, heroHeading?: string | null, heroHeadingHighlight?: string | null, heroSubtext?: string | null, featuredHeading?: string | null, blogLibraryHeading?: string | null, podcastLibraryHeading?: string | null, newsletterHeading?: string | null, newsletterSubtext?: string | null, newsletterPlaceholder?: string | null, newsletterButton?: string | null, newsletterSuccessMessage?: string | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null, featuredPosts?: Array<{ __typename: 'ResourcesFeaturedPosts', post?: { __typename: 'Post', title: string, publishedAt?: string | null, status?: string | null, excerpt?: string | null, icon?: string | null, iconColor?: string | null, gradient?: string | null, badgeColor?: string | null, body?: any | null, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null, featuredPodcasts?: Array<{ __typename: 'ResourcesFeaturedPodcasts', podcast?: { __typename: 'Podcast', title: string, episode?: string | null, publishedAt?: string | null, status?: string | null, audioUrl?: string | null, excerpt?: string | null, icon?: string | null, gradient?: string | null, badgeColor?: string | null, body?: any | null, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null };
 
 export type ContactPartsFragment = { __typename: 'Contact', heroImage?: string | null, heroHeading?: any | null, heroSubtext?: any | null, sectionHeading?: string | null, sectionSubtext?: string | null, email?: string | null, phone?: string | null, videoText?: string | null, location?: string | null, bookingCTALabel?: string | null, formHeading?: string | null };
 
@@ -2482,7 +2520,7 @@ export type ResourcesQueryVariables = Exact<{
 }>;
 
 
-export type ResourcesQuery = { __typename?: 'Query', resources: { __typename: 'Resources', id: string, heroBadge?: string | null, heroHeading?: string | null, heroHeadingHighlight?: string | null, heroSubtext?: string | null, featuredHeading?: string | null, featuredPosts?: Array<string | null> | null, featuredPodcasts?: Array<string | null> | null, blogLibraryHeading?: string | null, podcastLibraryHeading?: string | null, newsletterHeading?: string | null, newsletterSubtext?: string | null, newsletterPlaceholder?: string | null, newsletterButton?: string | null, newsletterSuccessMessage?: string | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type ResourcesQuery = { __typename?: 'Query', resources: { __typename: 'Resources', id: string, heroBadge?: string | null, heroHeading?: string | null, heroHeadingHighlight?: string | null, heroSubtext?: string | null, featuredHeading?: string | null, blogLibraryHeading?: string | null, podcastLibraryHeading?: string | null, newsletterHeading?: string | null, newsletterSubtext?: string | null, newsletterPlaceholder?: string | null, newsletterButton?: string | null, newsletterSuccessMessage?: string | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, featuredPosts?: Array<{ __typename: 'ResourcesFeaturedPosts', post?: { __typename: 'Post', title: string, publishedAt?: string | null, status?: string | null, excerpt?: string | null, icon?: string | null, iconColor?: string | null, gradient?: string | null, badgeColor?: string | null, body?: any | null, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null, featuredPodcasts?: Array<{ __typename: 'ResourcesFeaturedPodcasts', podcast?: { __typename: 'Podcast', title: string, episode?: string | null, publishedAt?: string | null, status?: string | null, audioUrl?: string | null, excerpt?: string | null, icon?: string | null, gradient?: string | null, badgeColor?: string | null, body?: any | null, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type ResourcesConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -2494,7 +2532,7 @@ export type ResourcesConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ResourcesConnectionQuery = { __typename?: 'Query', resourcesConnection: { __typename?: 'ResourcesConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ResourcesConnectionEdges', cursor: string, node?: { __typename: 'Resources', id: string, heroBadge?: string | null, heroHeading?: string | null, heroHeadingHighlight?: string | null, heroSubtext?: string | null, featuredHeading?: string | null, featuredPosts?: Array<string | null> | null, featuredPodcasts?: Array<string | null> | null, blogLibraryHeading?: string | null, podcastLibraryHeading?: string | null, newsletterHeading?: string | null, newsletterSubtext?: string | null, newsletterPlaceholder?: string | null, newsletterButton?: string | null, newsletterSuccessMessage?: string | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type ResourcesConnectionQuery = { __typename?: 'Query', resourcesConnection: { __typename?: 'ResourcesConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ResourcesConnectionEdges', cursor: string, node?: { __typename: 'Resources', id: string, heroBadge?: string | null, heroHeading?: string | null, heroHeadingHighlight?: string | null, heroSubtext?: string | null, featuredHeading?: string | null, blogLibraryHeading?: string | null, podcastLibraryHeading?: string | null, newsletterHeading?: string | null, newsletterSubtext?: string | null, newsletterPlaceholder?: string | null, newsletterButton?: string | null, newsletterSuccessMessage?: string | null, ctaSectionHeading?: string | null, ctaSectionSubtext?: string | null, ctaButtonLabel?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, featuredPosts?: Array<{ __typename: 'ResourcesFeaturedPosts', post?: { __typename: 'Post', title: string, publishedAt?: string | null, status?: string | null, excerpt?: string | null, icon?: string | null, iconColor?: string | null, gradient?: string | null, badgeColor?: string | null, body?: any | null, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null, featuredPodcasts?: Array<{ __typename: 'ResourcesFeaturedPodcasts', podcast?: { __typename: 'Podcast', title: string, episode?: string | null, publishedAt?: string | null, status?: string | null, audioUrl?: string | null, excerpt?: string | null, icon?: string | null, gradient?: string | null, badgeColor?: string | null, body?: any | null, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } | null } | null> | null } };
 
 export type ContactQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -2946,8 +2984,65 @@ export const ResourcesPartsFragmentDoc = gql`
   heroHeadingHighlight
   heroSubtext
   featuredHeading
-  featuredPosts
-  featuredPodcasts
+  featuredPosts {
+    __typename
+    post {
+      ... on Post {
+        __typename
+        title
+        publishedAt
+        status
+        excerpt
+        icon
+        iconColor
+        gradient
+        badgeColor
+        body
+      }
+      ... on Document {
+        _sys {
+          filename
+          basename
+          hasReferences
+          breadcrumbs
+          path
+          relativePath
+          extension
+        }
+        id
+      }
+    }
+  }
+  featuredPodcasts {
+    __typename
+    podcast {
+      ... on Podcast {
+        __typename
+        title
+        episode
+        publishedAt
+        status
+        audioUrl
+        excerpt
+        icon
+        gradient
+        badgeColor
+        body
+      }
+      ... on Document {
+        _sys {
+          filename
+          basename
+          hasReferences
+          breadcrumbs
+          path
+          relativePath
+          extension
+        }
+        id
+      }
+    }
+  }
   blogLibraryHeading
   podcastLibraryHeading
   newsletterHeading

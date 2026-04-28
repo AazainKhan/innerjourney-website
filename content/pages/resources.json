@@ -4,8 +4,12 @@
   "heroHeadingHighlight": "Inner Journey",
   "heroSubtext": "Explore insights, stories, and tools to help you cultivate clarity, confidence, and purpose",
   "featuredHeading": "Featured",
-  "featuredPosts": ["finding-clarity-in-uncertain-times"],
-  "featuredPodcasts": ["introduction-to-your-inner-journey"],
+  "featuredPosts": [
+    { "post": "content/posts/finding-clarity-in-uncertain-times.md" }
+  ],
+  "featuredPodcasts": [
+    { "podcast": "content/podcasts/introduction-to-your-inner-journey.md" }
+  ],
   "blogLibraryHeading": "Blog Library",
   "podcastLibraryHeading": "Podcast Library",
   "newsletterHeading": "Stay Updated on New Resources",

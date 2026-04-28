@@ -774,14 +774,26 @@ type NumerologyConnection implements Connection {
   edges: [NumerologyConnectionEdges]
 }
 
+union ResourcesFeaturedPostsPost = Post
+
+type ResourcesFeaturedPosts {
+  post: ResourcesFeaturedPostsPost
+}
+
+union ResourcesFeaturedPodcastsPodcast = Podcast
+
+type ResourcesFeaturedPodcasts {
+  podcast: ResourcesFeaturedPodcastsPodcast
+}
+
 type Resources implements Node & Document {
   heroBadge: String
   heroHeading: String
   heroHeadingHighlight: String
   heroSubtext: String
   featuredHeading: String
-  featuredPosts: [String]
-  featuredPodcasts: [String]
+  featuredPosts: [ResourcesFeaturedPosts]
+  featuredPodcasts: [ResourcesFeaturedPodcasts]
   blogLibraryHeading: String
   podcastLibraryHeading: String
   newsletterHeading: String
@@ -797,14 +809,30 @@ type Resources implements Node & Document {
   _values: JSON!
 }
 
+input ResourcesFeaturedPostsPostFilter {
+  post: PostFilter
+}
+
+input ResourcesFeaturedPostsFilter {
+  post: ResourcesFeaturedPostsPostFilter
+}
+
+input ResourcesFeaturedPodcastsPodcastFilter {
+  podcast: PodcastFilter
+}
+
+input ResourcesFeaturedPodcastsFilter {
+  podcast: ResourcesFeaturedPodcastsPodcastFilter
+}
+
 input ResourcesFilter {
   heroBadge: StringFilter
   heroHeading: StringFilter
   heroHeadingHighlight: StringFilter
   heroSubtext: StringFilter
   featuredHeading: StringFilter
-  featuredPosts: StringFilter
-  featuredPodcasts: StringFilter
+  featuredPosts: ResourcesFeaturedPostsFilter
+  featuredPodcasts: ResourcesFeaturedPodcastsFilter
   blogLibraryHeading: StringFilter
   podcastLibraryHeading: StringFilter
   newsletterHeading: StringFilter
@@ -1587,14 +1615,22 @@ input NumerologyMutation {
   ctaButtonLabel: String
 }
 
+input ResourcesFeaturedPostsMutation {
+  post: String
+}
+
+input ResourcesFeaturedPodcastsMutation {
+  podcast: String
+}
+
 input ResourcesMutation {
   heroBadge: String
   heroHeading: String
   heroHeadingHighlight: String
   heroSubtext: String
   featuredHeading: String
-  featuredPosts: [String]
-  featuredPodcasts: [String]
+  featuredPosts: [ResourcesFeaturedPostsMutation]
+  featuredPodcasts: [ResourcesFeaturedPodcastsMutation]
   blogLibraryHeading: String
   podcastLibraryHeading: String
   newsletterHeading: String

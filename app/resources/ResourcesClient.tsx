@@ -36,8 +36,6 @@ interface ResourcesData {
     heroHeadingHighlight: string
     heroSubtext: string
     featuredHeading: string
-    featuredPosts?: (string | null)[] | null
-    featuredPodcasts?: (string | null)[] | null
     blogLibraryHeading: string
     podcastLibraryHeading: string
     newsletterHeading: string
@@ -57,6 +55,69 @@ interface Props {
   data: ResourcesData
   posts: BlogPost[]
   podcasts: Podcast[]
+  /** Slugs resolved server-side from `resources.featuredPosts` references. */
+  featuredPostSlugs: string[]
+  /** Slugs resolved server-side from `resources.featuredPodcasts` references. */
+  featuredPodcastSlugs: string[]
+}
+
+/**
+ * Unified card used in the Featured row — same vertical shape for both blog
+ * posts and podcast episodes, so the 2-up grid stays balanced. Library
+ * sections below render their own type-specific shapes (BlogCard / PodcastCard).
+ */
+function FeaturedCard({
+  href,
+  kind,
+  meta,
+  title,
+  excerpt,
+  status,
+  icon,
+  iconColor,
+  gradient,
+  badgeColor,
+}: {
+  href: string
+  kind: 'Blog' | 'Podcast'
+  meta?: string
+  title: string
+  excerpt: string
+  status: string
+  icon: string
+  iconColor: string
+  gradient: string
+  badgeColor: string
+}) {
+  return (
+    <Link
+      href={href}
+      className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 flex flex-col"
+    >
+      <div className={`relative h-48 bg-gradient-to-br ${gradient}`}>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <i className={`fas ${icon} text-5xl ${iconColor}`}></i>
+        </div>
+        <span className={`absolute top-4 left-4 px-3 py-1 ${badgeColor} text-white text-xs rounded-full font-semibold`}>
+          {kind === 'Podcast' && <i className="fas fa-podcast mr-1"></i>}
+          {kind}
+        </span>
+        {meta && (
+          <span className="absolute top-4 right-4 px-3 py-1 bg-black/30 text-white text-xs rounded-full font-semibold backdrop-blur-sm">
+            {meta}
+          </span>
+        )}
+      </div>
+      <div className="p-6 flex flex-col flex-grow">
+        <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-azure transition-colors">{title}</h3>
+        <p className="text-gray-600 mb-4 text-sm leading-relaxed line-clamp-3 flex-grow">{excerpt}</p>
+        <div className="flex items-center justify-between text-sm mt-auto">
+          <span className="text-gray-500">{status}</span>
+          <span className="text-azure font-semibold">{kind === 'Podcast' ? 'View episode →' : 'Read more →'}</span>
+        </div>
+      </div>
+    </Link>
+  )
 }
 
 function BlogCard({ post }: { post: BlogPost }) {
@@ -134,13 +195,11 @@ export default function ResourcesClient(props: Props) {
   const postBySlug = new Map(props.posts.map((p) => [p.slug, p]))
   const podcastBySlug = new Map(props.podcasts.map((p) => [p.slug, p]))
 
-  const featuredPosts = (d.featuredPosts ?? [])
-    .filter((s): s is string => typeof s === 'string' && s.length > 0)
+  const featuredPosts = props.featuredPostSlugs
     .map((slug) => postBySlug.get(slug))
     .filter((p): p is BlogPost => Boolean(p))
 
-  const featuredPodcasts = (d.featuredPodcasts ?? [])
-    .filter((s): s is string => typeof s === 'string' && s.length > 0)
+  const featuredPodcasts = props.featuredPodcastSlugs
     .map((slug) => podcastBySlug.get(slug))
     .filter((p): p is Podcast => Boolean(p))
 
@@ -202,10 +261,33 @@ export default function ResourcesClient(props: Props) {
                 </div>
                 <div className="grid lg:grid-cols-2 gap-8">
                   {featuredPosts.map((post) => (
-                    <BlogCard key={`featured-blog-${post.slug}`} post={post} />
+                    <FeaturedCard
+                      key={`featured-blog-${post.slug}`}
+                      href={`/blog/${post.slug}`}
+                      kind="Blog"
+                      title={post.title}
+                      excerpt={post.excerpt}
+                      status={post.status}
+                      icon={post.icon}
+                      iconColor={post.iconColor}
+                      gradient={post.gradient}
+                      badgeColor={post.badgeColor}
+                    />
                   ))}
                   {featuredPodcasts.map((episode) => (
-                    <PodcastCard key={`featured-podcast-${episode.slug}`} episode={episode} />
+                    <FeaturedCard
+                      key={`featured-podcast-${episode.slug}`}
+                      href={`/podcast/${episode.slug}`}
+                      kind="Podcast"
+                      meta={episode.episode}
+                      title={episode.title}
+                      excerpt={episode.excerpt}
+                      status={episode.status}
+                      icon={episode.icon}
+                      iconColor="text-white/60"
+                      gradient={episode.gradient}
+                      badgeColor={episode.badgeColor}
+                    />
                   ))}
                 </div>
               </div>

@@ -4,6 +4,23 @@ import client from '@/tina/__generated__/client'
 import { listPosts, listPodcasts } from '@/lib/posts'
 import ResourcesClient from './ResourcesClient'
 
+// References can come back from Tina as either:
+//   - the raw file path stored on disk: "content/posts/foo.md"
+//   - an expanded document object with `_sys.filename`
+//   - a bare slug (when read directly from the static JSON fallback)
+// This collapses all three to the slug we use in URLs.
+function refToSlug(ref: unknown): string | null {
+  if (typeof ref === 'string') {
+    const m = ref.match(/(?:^|\/)([^/]+)\.md$/)
+    return m ? m[1] : ref
+  }
+  if (ref && typeof ref === 'object') {
+    const sys = (ref as { _sys?: { filename?: string } })._sys
+    if (sys?.filename) return sys.filename
+  }
+  return null
+}
+
 export const metadata: Metadata = {
   title: 'Resources - Blog Posts & Podcasts for Inner Growth',
   description: 'Explore free resources including blog posts and podcasts on clarity, mindset, personal development and transformation. Start your inner journey today.',
@@ -46,6 +63,15 @@ export default async function ResourcesPage() {
     badgeColor: p.badgeColor ?? 'bg-carrot',
   }))
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const resourcesPayload: any = res?.data?.resources ?? resourcesData
+  const featuredPostSlugs = ((resourcesPayload.featuredPosts ?? []) as { post?: unknown }[])
+    .map((item) => refToSlug(item?.post))
+    .filter((s): s is string => Boolean(s))
+  const featuredPodcastSlugs = ((resourcesPayload.featuredPodcasts ?? []) as { podcast?: unknown }[])
+    .map((item) => refToSlug(item?.podcast))
+    .filter((s): s is string => Boolean(s))
+
   if (!res) {
     return (
       <ResourcesClient
@@ -54,6 +80,8 @@ export default async function ResourcesPage() {
         data={{ resources: resourcesData }}
         posts={posts}
         podcasts={podcasts}
+        featuredPostSlugs={featuredPostSlugs}
+        featuredPodcastSlugs={featuredPodcastSlugs}
       />
     )
   }
@@ -66,6 +94,8 @@ export default async function ResourcesPage() {
       data={res.data as any}
       posts={posts}
       podcasts={podcasts}
+      featuredPostSlugs={featuredPostSlugs}
+      featuredPodcastSlugs={featuredPodcastSlugs}
     />
   )
 }
