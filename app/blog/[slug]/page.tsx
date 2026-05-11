@@ -90,7 +90,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             Ready for your own <span className="text-carrot font-bold">inner journey?</span>
           </h2>
           <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-            Book a free clarity call and let&apos;s explore how coaching can help.
+            Book a free discovery call and let&apos;s explore how coaching can help.
           </p>
           <BookingButton variant="primaryOnDark" />
         </div>

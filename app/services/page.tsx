@@ -5,11 +5,11 @@ import ServicesPageClient from './ServicesPageClient'
 
 export const metadata: Metadata = {
   title: 'Services - Coaching & Numerology',
-  description: 'Explore Shanila\'s coaching services including Clarity Coaching, Career Coaching, and Numerology for Clarity. Find the right path for your transformation.',
+  description: 'Explore Shanila\'s coaching services including Mindset Coaching, Career Coaching, and Numerology. Find the right path for your transformation.',
   alternates: { canonical: 'https://innerjourney-with-shanila.com/services' },
   openGraph: {
     title: 'Services - Shanila Khan | Coaching & Numerology',
-    description: 'Clarity Coaching, Career Coaching, and Numerology for Clarity — find the right path for your transformation.',
+    description: 'Mindset Coaching, Career Coaching, and Numerology — find the right path for your transformation.',
     url: 'https://innerjourney-with-shanila.com/services',
     images: [{ url: '/images/og-default.jpg', width: 1200, height: 630, alt: 'Services with Shanila' }],
   },

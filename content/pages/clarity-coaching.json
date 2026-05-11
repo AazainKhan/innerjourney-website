@@ -5,9 +5,9 @@
   "heroCTALabel": "Take the first step",
   "heroSideEmoji": "✨",
   "heroSideWeeks": "12 Weeks",
-  "heroSideSubtext": "To lasting clarity",
+  "heroSideSubtext": "To lasting development",
 
-  "resultsHeadingPrefix": "Clarity Coaching that",
+  "resultsHeadingPrefix": "Mindset Coaching that",
   "resultsHeadingHighlight": "gets results",
   "resultsSubtext": "There comes a time in life when you find yourself on a challenging path, but can't find a clear way through.",
   "perhapsLabel": "Perhaps you're…",
@@ -46,7 +46,7 @@
   "philosophyClosingHighlight": "let me be your guide.",
 
   "timelineLabel": "Your Transformation Journey",
-  "timelineHeadingPrefix": "What Clarity Coaching",
+  "timelineHeadingPrefix": "What Mindset Coaching",
   "timelineHeadingHighlight": "looks like",
   "timelineSubtext": "This roadmap helps you move from overthinking to clear, confident action, so that you can build a life you're proud of.",
   "timelineSteps": [
@@ -75,7 +75,7 @@
       "accent": "carrot"
     }
   ],
-  "timelineCTALabel": "Start my clarity journey",
+  "timelineCTALabel": "Start my mindset journey",
 
   "experienceLabel": "What's Included",
   "experienceHeadingPrefix": "A Compassionate Coaching",
@@ -92,9 +92,9 @@
   "bonusPrefix": "Plus:",
   "bonusText": "Resources for continued growth beyond the programme",
 
-  "ctaSectionHeadingPrefix": "Unclear if Clarity Coaching is",
+  "ctaSectionHeadingPrefix": "Unclear if Mindset Coaching is",
   "ctaSectionHeadingHighlight": "right for you?",
-  "ctaSectionParagraph1": "Decisions might feel hard right now. Start with a free clarity call to find out if my coaching can help you.",
+  "ctaSectionParagraph1": "Decisions might feel hard right now. Start with a free discovery call to find out if my coaching can help you.",
   "ctaSectionParagraph2": "We'll do the figuring out together.",
-  "ctaButtonLabel": "Book my free clarity call"
+  "ctaButtonLabel": "Book my free discovery call"
 }

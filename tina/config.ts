@@ -114,11 +114,11 @@ export default defineConfig({
       },
       {
         name: 'clarityCoaching',
-        label: 'Clarity Coaching Page',
+        label: 'Mindset Coaching Page',
         path: 'content/pages',
         match: { include: 'clarity-coaching' },
         format: 'json',
-        ui: { router: () => '/clarity-coaching', allowedActions: { create: false, delete: false } },
+        ui: { router: () => '/mindset-coaching', allowedActions: { create: false, delete: false } },
         fields: [
           { name: 'heroBadge', label: 'Hero Badge', type: 'string' },
           { name: 'heroHeading', label: 'Hero Heading', type: 'string' },

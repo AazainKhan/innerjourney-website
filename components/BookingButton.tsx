@@ -11,7 +11,7 @@ interface BookingButtonProps {
 }
 
 export default function BookingButton({
-  label = 'Book A Free Clarity Call',
+  label = 'Book A Free Discovery Call',
   variant = 'primary',
   size = 'lg',
   className,

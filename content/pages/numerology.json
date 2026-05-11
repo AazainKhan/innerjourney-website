@@ -1,6 +1,6 @@
 {
   "heroBadge": "Vedic Numerology Session",
-  "heroHeading": "Numerology for Clarity",
+  "heroHeading": "Numerology",
   "heroTagline": "Get answers fast, and find your focus",
   "heroSubtext": "Invaluable insight into your life choices, backed by ancient vedic practices",
   "heroCTALabel": "Get my numerology insights",
@@ -18,8 +18,8 @@
   "selfDiscoveryStatementHighlight": "hold the answer.",
 
   "whatIsLabel": "Understanding Numerology",
-  "whatIsHeadingPrefix": "What is Numerology",
-  "whatIsHeadingHighlight": "for Clarity?",
+  "whatIsHeadingPrefix": "What is",
+  "whatIsHeadingHighlight": "Numerology?",
   "whatIsIsntParagraph": "First of all, let's address what numerology isn't: this is not a magic wand that can predict your future.",
   "whatIsIsParagraph1": "But it is a powerful reflective tool, which draws upon ancient vedic principles that numbers hold vibrations. These energies can provide invaluable context and insight to your life situation, if you know how to read them.",
   "whatIsIsParagraph2": "Guided by a certified numerologist, this session will take the guesswork out of that big decision you're looking to make, and help to strengthen your intuition around your relationships, career, or living situation, so you can take that next step with confidence.",
@@ -57,7 +57,7 @@
   "includesLabel": "What You'll Receive",
   "includesHeadingPrefix": "Enlightening",
   "includesHeadingHighlight": "Numerology Analysis",
-  "includesSubtext": "Your Numerology for Clarity evaluation includes:",
+  "includesSubtext": "Your numerology evaluation includes:",
   "includes": [
     { "emoji": "📜", "title": "Personalised Numerology Chart", "description": "A full reading based on your name and birth date, revealing the energy patterns shaping your life purpose, relationships, and decisions." },
     { "emoji": "🎯", "title": "1:1 Numerology Consultation", "description": "An explorative 60-minute session where we'll interpret your chart, and I'll help you apply its insights to your real-life goals and decisions." },

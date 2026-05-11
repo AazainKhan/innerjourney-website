@@ -7,7 +7,7 @@ const STATIC_ROUTES: Array<{ path: string; changeFrequency: MetadataRoute.Sitema
   { path: '/', changeFrequency: 'weekly', priority: 1.0 },
   { path: '/about', changeFrequency: 'monthly', priority: 0.8 },
   { path: '/services', changeFrequency: 'monthly', priority: 0.9 },
-  { path: '/clarity-coaching', changeFrequency: 'monthly', priority: 0.9 },
+  { path: '/mindset-coaching', changeFrequency: 'monthly', priority: 0.9 },
   { path: '/career-coaching', changeFrequency: 'monthly', priority: 0.9 },
   { path: '/numerology', changeFrequency: 'monthly', priority: 0.9 },
   { path: '/resources', changeFrequency: 'weekly', priority: 0.7 },

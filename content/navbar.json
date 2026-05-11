@@ -1,6 +1,6 @@
 {
   "brandLabel": "Shanila Khan",
-  "ctaLabel": "Free Clarity Call",
+  "ctaLabel": "Free Discovery Call",
   "links": [
     { "label": "Work with me", "href": "/services", "showDropdown": true },
     { "label": "About", "href": "/about", "showDropdown": false },
@@ -8,8 +8,8 @@
     { "label": "Contact", "href": "/contact", "showDropdown": false }
   ],
   "workWithMeDropdown": [
-    { "label": "Clarity Coaching", "href": "/clarity-coaching" },
+    { "label": "Mindset Coaching", "href": "/mindset-coaching" },
     { "label": "Career Coaching", "href": "/career-coaching" },
-    { "label": "Numerology for Clarity", "href": "/numerology" }
+    { "label": "Numerology", "href": "/numerology" }
   ]
 }

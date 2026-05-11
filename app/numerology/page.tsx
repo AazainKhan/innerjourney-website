@@ -4,14 +4,14 @@ import client from '@/tina/__generated__/client'
 import NumerologyClient from './NumerologyClient'
 
 export const metadata: Metadata = {
-  title: 'Numerology for Clarity - Vedic Numerology Readings',
-  description: 'Get answers fast with Numerology for Clarity. Invaluable insight into your life choices backed by ancient vedic practices. Book your personalised numerology session today.',
+  title: 'Numerology - Vedic Numerology Readings',
+  description: 'Get answers fast with a personalised numerology reading. Invaluable insight into your life choices, backed by ancient vedic practices. Book your session today.',
   alternates: { canonical: 'https://innerjourney-with-shanila.com/numerology' },
   openGraph: {
-    title: 'Numerology for Clarity - Shanila Khan | Vedic Numerology Readings',
+    title: 'Numerology - Shanila Khan | Vedic Numerology Readings',
     description: 'Get answers fast with personalised numerology readings backed by ancient vedic practices.',
     url: 'https://innerjourney-with-shanila.com/numerology',
-    images: [{ url: '/images/og-default.jpg', width: 1200, height: 630, alt: 'Numerology for Clarity' }],
+    images: [{ url: '/images/og-default.jpg', width: 1200, height: 630, alt: 'Numerology with Shanila' }],
   },
 }
 

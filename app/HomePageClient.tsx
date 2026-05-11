@@ -262,17 +262,17 @@ export default function HomePageClient(props: Props) {
               {[
                 {
                   icon: 'fa-lightbulb',
-                  title: 'Clarity Coaching',
+                  title: 'Mindset Coaching',
                   description: "My signature 12-week coaching programme for women ready to get clear on their goals, values, decision-making, and life's direction.",
-                  href: '/clarity-coaching',
-                  btnText: 'Start my clarity journey',
+                  href: '/mindset-coaching',
+                  btnText: 'Start my mindset journey',
                   gradient: 'brand-gradient-oxford',
                   btnColor: 'text-oxford',
                 },
                 {
                   icon: 'fa-chart-line',
                   title: 'Career Coaching',
-                  description: "The career edition of my clarity coaching. Whether you're a graduate, considering a career change, or feeling unsatisfied at work, you'll get clear and confident on your career path.",
+                  description: "The career edition of my mindset coaching. Whether you're a graduate, considering a career change, or feeling unsatisfied at work, you'll get clear and confident on your career path.",
                   href: '/career-coaching',
                   btnText: 'Realign my career',
                   gradient: 'brand-gradient-orange',
@@ -280,8 +280,8 @@ export default function HomePageClient(props: Props) {
                 },
                 {
                   icon: 'fa-star',
-                  title: 'Numerology for Clarity',
-                  description: 'Need answers now? My 1-hour Numerology for Clarity session will help you glean crucial insight into your life path and relationships, giving you the tools and confidence to take action today.',
+                  title: 'Numerology',
+                  description: 'Need answers now? My 1-hour Numerology session will help you glean crucial insight into your life path and relationships, giving you the tools and confidence to take action today.',
                   href: '/numerology',
                   btnText: 'Book my numerology session',
                   gradient: 'brand-gradient-oxford',

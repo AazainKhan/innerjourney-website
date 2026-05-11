@@ -97,7 +97,7 @@ export default async function PodcastEpisodePage({ params }: { params: Promise<{
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Want to go deeper?</h2>
           <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-            Book a free clarity call and let&apos;s talk about what&apos;s holding you back.
+            Book a free discovery call and let&apos;s talk about what&apos;s holding you back.
           </p>
           <BookingButton variant="primaryOnDark" />
         </div>

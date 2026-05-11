@@ -1,5 +1,5 @@
 {
-  "overlayTitle": "Book A Free Clarity Call",
+  "overlayTitle": "Book A Free Discovery Call",
   "firstNameLabel": "First Name",
   "lastNameLabel": "Last Name",
   "emailLabel": "Email Address",
@@ -8,14 +8,14 @@
   "serviceLabel": "Service Interested In",
   "messageLabel": "Tell me about yourself",
   "messagePlaceholder": "What are your main goals or challenges?",
-  "submitLabel": "Book My Free Clarity Call",
+  "submitLabel": "Book My Free Discovery Call",
   "submittingLabel": "Sending…",
   "successMessage": "Thank you! I'll be in touch within 1 business day to schedule our call.",
   "errorMessage": "Something went wrong. Please try again or email me directly.",
   "services": [
-    "Clarity Coaching (12-week programme)",
+    "Mindset Coaching (12-week programme)",
     "Career Coaching",
-    "Numerology for Clarity (1-hour session)",
+    "Numerology (1-hour session)",
     "Not sure yet — just exploring"
   ]
 }
