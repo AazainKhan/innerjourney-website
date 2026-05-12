@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 
 interface BookingContextType {
   isOpen: boolean
@@ -16,6 +16,18 @@ const BookingContext = createContext<BookingContextType>({
 
 export function BookingProvider({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false)
+
+  // Auto-open the modal when ?previewBooking=1 is in the URL — used by Tina
+  // admin to render the booking form alongside the editor for side-by-side
+  // preview of bookingForm.json edits.
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const params = new URLSearchParams(window.location.search)
+    if (params.get('previewBooking') === '1') {
+      setIsOpen(true)
+      document.body.style.overflow = 'hidden'
+    }
+  }, [])
 
   return (
     <BookingContext.Provider

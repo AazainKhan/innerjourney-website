@@ -444,17 +444,29 @@ export default function ThemeStudioClient({ current, initialCustomPalettes }: Pr
   const hasEdits = edited != null && sourceColors != null && !colorsEqual(edited, sourceColors)
   const sourceLabel = active ? active.palette.name : 'Current saved theme'
 
+  // Detect whether writes will work in this environment. On Vercel
+  // (production-deployed) the fs+git pipeline can't run, so Apply will 403.
+  // We surface that up front instead of waiting for the user to hit the wall.
+  const isProd = typeof window !== 'undefined' && !/localhost|127\.0\.0\.1/.test(window.location.host)
+
   return (
     <div className="fixed inset-0 z-[60] flex h-screen w-screen overflow-hidden bg-gray-100">
       <aside className="w-[420px] flex-shrink-0 overflow-y-auto border-r border-gray-200 bg-white">
         <header className="sticky top-0 z-10 border-b border-gray-200 bg-white p-5">
           <div className="flex items-baseline justify-between">
             <h1 className="text-xl font-bold text-gray-900">Theme Studio</h1>
-            <span className="rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-amber-800">Dev only</span>
+            <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${isProd ? 'bg-amber-100 text-amber-800' : 'bg-green-100 text-green-800'}`}>
+              {isProd ? 'Preview only' : 'Live edit'}
+            </span>
           </div>
           <p className="mt-1 text-xs text-gray-500">
             Pick a palette, then tweak any role with the color wheel or eyedropper. <b>Apply</b> writes to <code className="rounded bg-gray-100 px-1">content/theme.json</code>.
           </p>
+          {isProd && (
+            <p className="mt-2 rounded-md bg-amber-50 px-2 py-1.5 text-[11px] text-amber-900">
+              You&apos;re viewing this on the live site. Preview works, but <b>Apply</b> needs a Vercel-side <code>GITHUB_TOKEN</code> to commit via the GitHub API. For now, run <code>npm run dev</code> locally to save changes.
+            </p>
+          )}
         </header>
 
         <div className="p-5 space-y-4">

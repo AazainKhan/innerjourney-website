@@ -1,5 +1,24 @@
 // tina/config.ts
 import { defineConfig } from "tinacms";
+import React from "react";
+function ThemeStudioIcon() {
+  return React.createElement(
+    "svg",
+    { viewBox: "0 0 24 24", width: 24, height: 24, fill: "none", stroke: "currentColor", strokeWidth: 2, strokeLinecap: "round", strokeLinejoin: "round" },
+    React.createElement("circle", { cx: 13.5, cy: 6.5, r: ".5", fill: "currentColor" }),
+    React.createElement("circle", { cx: 17.5, cy: 10.5, r: ".5", fill: "currentColor" }),
+    React.createElement("circle", { cx: 8.5, cy: 7.5, r: ".5", fill: "currentColor" }),
+    React.createElement("circle", { cx: 6.5, cy: 12.5, r: ".5", fill: "currentColor" }),
+    React.createElement("path", { d: "M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z" })
+  );
+}
+function ThemeStudioScreen() {
+  return React.createElement("iframe", {
+    src: "/theme-studio",
+    style: { width: "100%", height: "100%", border: 0, display: "block" },
+    title: "Theme Studio"
+  });
+}
 var config_default = defineConfig({
   branch: process.env.GITHUB_BRANCH || process.env.VERCEL_GIT_COMMIT_REF || "main",
   clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID || "",
@@ -7,6 +26,20 @@ var config_default = defineConfig({
   build: {
     outputFolder: "admin",
     publicFolder: "public"
+  },
+  // Register a fullscreen "Theme Studio" screen accessible from the Tina admin
+  // sidebar under the "Site" category. Opens the existing /theme-studio page in
+  // an iframe so the editor stays a single source of truth.
+  cmsCallback: (cms) => {
+    cms.plugins.add({
+      __type: "screen",
+      name: "Theme Studio",
+      Icon: ThemeStudioIcon,
+      layout: "fullscreen",
+      navCategory: "Site",
+      Component: ThemeStudioScreen
+    });
+    return cms;
   },
   media: {
     tina: {
@@ -535,7 +568,8 @@ var config_default = defineConfig({
         path: "content",
         match: { include: "navbar" },
         format: "json",
-        ui: { allowedActions: { create: false, delete: false } },
+        // Site-wide chrome — preview against the home page so edits update live alongside the form
+        ui: { router: () => "/", allowedActions: { create: false, delete: false } },
         fields: [
           { name: "brandLabel", label: "Brand Label (next to logo)", type: "string" },
           { name: "ctaLabel", label: "Sticky CTA Button Label", type: "string" },
@@ -570,7 +604,8 @@ var config_default = defineConfig({
         path: "content",
         match: { include: "booking-form" },
         format: "json",
-        ui: { allowedActions: { create: false, delete: false } },
+        // The booking form lives in a modal — preview opens it automatically via ?previewBooking=1
+        ui: { router: () => "/contact?previewBooking=1", allowedActions: { create: false, delete: false } },
         fields: [
           { name: "overlayTitle", label: "Overlay Title", type: "string" },
           { name: "firstNameLabel", label: "First Name Label", type: "string" },
@@ -599,7 +634,8 @@ var config_default = defineConfig({
         path: "content",
         match: { include: "footer" },
         format: "json",
-        ui: { allowedActions: { create: false, delete: false } },
+        // Footer is on every page — preview against home; scroll down inside the iframe to see edits live
+        ui: { router: () => "/", allowedActions: { create: false, delete: false } },
         fields: [
           { name: "brandHeading", label: "Brand Heading", type: "string" },
           { name: "brandDescription", label: "Brand Description", type: "string", ui: { component: "textarea" } },
@@ -653,7 +689,8 @@ var config_default = defineConfig({
         path: "content",
         match: { include: "typography" },
         format: "json",
-        ui: { allowedActions: { create: false, delete: false } },
+        // Typography applies globally — preview against home where text variety is richest
+        ui: { router: () => "/", allowedActions: { create: false, delete: false } },
         fields: [
           {
             name: "headingFont",
@@ -718,7 +755,9 @@ var config_default = defineConfig({
         path: "content",
         match: { include: "theme" },
         format: "json",
-        ui: { allowedActions: { create: false, delete: false } },
+        // Theme applies globally — preview against home. For the full palette
+        // studio with eyedropper + custom palette saving, visit /theme-studio
+        ui: { router: () => "/", allowedActions: { create: false, delete: false } },
         fields: [
           {
             name: "primaryColor",
@@ -752,7 +791,8 @@ var config_default = defineConfig({
         path: "content",
         match: { include: "testimonials" },
         format: "json",
-        ui: { allowedActions: { create: false, delete: false } },
+        // Testimonials section lives on the home page — preview there
+        ui: { router: () => "/", allowedActions: { create: false, delete: false } },
         fields: [
           {
             name: "items",
