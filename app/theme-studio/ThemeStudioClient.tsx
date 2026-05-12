@@ -312,15 +312,25 @@ export default function ThemeStudioClient({ current, initialCustomPalettes }: Pr
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(edited),
       })
+      const j = await res.json().catch(() => ({}))
       if (!res.ok) {
-        const j = await res.json().catch(() => ({}))
         setStatus({ kind: 'error', msg: j.error || `HTTP ${res.status}` })
         return
       }
       const active = findActive()
       const sourceName = active ? active.palette.name : 'custom theme'
       const suffix = active && !colorsEqual(edited, active.palette.colors) ? ' (edited)' : ''
-      setStatus({ kind: 'success', msg: `Saved “${sourceName}${suffix}” to content/theme.json` })
+      const deploy = j.deploy as { attempted: boolean; ok: boolean; message: string; commit?: string } | undefined
+      let msg = `Saved “${sourceName}${suffix}” to content/theme.json.`
+      if (deploy?.attempted && deploy.ok) {
+        msg += ` ${deploy.message}.`
+      } else if (deploy?.attempted && !deploy.ok) {
+        setStatus({ kind: 'error', msg: `Saved locally, but deploy failed: ${deploy.message}` })
+        return
+      } else if (deploy && !deploy.attempted) {
+        msg += ` ${deploy.message}.`
+      }
+      setStatus({ kind: 'success', msg })
     } catch (e) {
       setStatus({ kind: 'error', msg: e instanceof Error ? e.message : 'request failed' })
     }
