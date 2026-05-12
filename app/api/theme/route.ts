@@ -3,6 +3,7 @@ import { writeFile, readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { execFile } from 'node:child_process'
 import { promisify } from 'node:util'
+import { commitFileViaGitHub, isGitHubCommitAvailable } from '@/lib/github-commit'
 
 const execFileAsync = promisify(execFile)
 
@@ -20,49 +21,50 @@ interface DeployResult {
   ok: boolean
   message: string
   commit?: string
+  via?: 'github-api' | 'local-git'
 }
 
-async function commitAndPush(summary: string): Promise<DeployResult> {
-  // Bail early if not inside a git repo
+function summarizeColors(colors: Record<string, string>): string {
+  return FIELDS.map((f) => `${f.replace('Color', '')}=${colors[f]}`).join(', ')
+}
+
+// In Vercel's serverless runtime the filesystem is read-only and there's no
+// git CLI. Detect that and route through the GitHub Contents API instead.
+function shouldUseGitHubApi(): boolean {
+  return !!process.env.VERCEL || (process.env.NODE_ENV === 'production' && isGitHubCommitAvailable())
+}
+
+async function commitAndPushLocally(content: string, summary: string): Promise<DeployResult> {
+  // Bail if not a git repo (e.g. a deploy that doesn't include .git)
   try {
     await git(['rev-parse', '--is-inside-work-tree'])
   } catch {
-    return { attempted: false, ok: false, message: 'not a git repo — file written locally only' }
+    return { attempted: false, ok: false, message: 'not a git repo — theme.json written locally only', via: 'local-git' }
   }
 
-  // Stage the theme file
   try {
     await git(['add', FILE_REL_PATH])
   } catch (e) {
-    return { attempted: true, ok: false, message: `git add failed: ${(e as Error).message}` }
+    return { attempted: true, ok: false, message: `git add failed: ${(e as Error).message}`, via: 'local-git' }
   }
 
-  // Bail if no staged changes (theme.json unchanged from HEAD)
   try {
     await git(['diff', '--cached', '--quiet', '--exit-code'])
-    return { attempted: false, ok: true, message: 'theme already matches HEAD — nothing to commit' }
+    return { attempted: false, ok: true, message: 'theme already matches HEAD — nothing to commit', via: 'local-git' }
   } catch {
-    // exit code 1 = there are staged diffs — proceed
+    // diffs present — proceed
   }
 
-  // Commit
   let commitSha = ''
   try {
     await git(['commit', '-m', `Apply theme via Theme Studio: ${summary}`])
     const { stdout } = await git(['rev-parse', 'HEAD'])
     commitSha = stdout.trim().slice(0, 7)
   } catch (e) {
-    return { attempted: true, ok: false, message: `git commit failed: ${(e as Error).message}` }
+    return { attempted: true, ok: false, message: `git commit failed: ${(e as Error).message}`, via: 'local-git' }
   }
 
-  // Rebase against latest origin/main in case other commits landed.
-  // --autostash stashes any in-progress source/screenshot edits the dev has
-  // unstaged so the rebase doesn't refuse to run, then pops them back after.
-  try {
-    await git(['fetch', 'origin', 'main'])
-  } catch {
-    // Non-fatal: we'll attempt the push anyway
-  }
+  try { await git(['fetch', 'origin', 'main']) } catch { /* non-fatal */ }
   try {
     await git(['rebase', '--autostash', 'origin/main'])
   } catch (e) {
@@ -71,13 +73,11 @@ async function commitAndPush(summary: string): Promise<DeployResult> {
       attempted: true,
       ok: false,
       commit: commitSha,
-      message: `rebase against origin/main failed: ${(e as Error).message}. Commit was created locally; resolve and push manually.`,
+      message: `rebase against origin/main failed: ${(e as Error).message}. Commit was created locally; resolve manually.`,
+      via: 'local-git',
     }
   }
 
-  // Push HEAD to origin main (this works regardless of whether the current
-  // branch is main or a feature/worktree branch — we always want the new
-  // theme on the deployed branch)
   try {
     await git(['push', 'origin', 'HEAD:main'])
   } catch (e) {
@@ -86,34 +86,43 @@ async function commitAndPush(summary: string): Promise<DeployResult> {
       ok: false,
       commit: commitSha,
       message: `git push failed: ${(e as Error).message}. Commit exists locally; push manually.`,
+      via: 'local-git',
     }
   }
 
-  // Update local main ref so other worktrees see the new tip
-  try {
-    await git(['update-ref', 'refs/heads/main', 'HEAD'])
-  } catch {
-    // Non-fatal: the push succeeded, this just keeps the local refs tidy
-  }
+  try { await git(['update-ref', 'refs/heads/main', 'HEAD']) } catch { /* non-fatal */ }
 
+  // content arg is unused for local path but kept for symmetry with the GitHub
+  // version (which doesn't get to read the on-disk file in serverless).
+  void content
   return {
     attempted: true,
     ok: true,
     commit: commitSha,
     message: `Committed ${commitSha} and pushed to origin/main — Vercel will deploy shortly`,
+    via: 'local-git',
   }
 }
 
-function summarizeColors(colors: Record<string, string>): string {
-  // Compact one-liner: "primary=#xxx, secondary=#xxx, ..."
-  return FIELDS.map((f) => `${f.replace('Color', '')}=${colors[f]}`).join(', ')
+async function commitViaGitHub(content: string, summary: string): Promise<DeployResult> {
+  const result = await commitFileViaGitHub({
+    path: FILE_REL_PATH,
+    content,
+    message: `Apply theme via Theme Studio: ${summary}`,
+  })
+  if (!result.ok) {
+    return { attempted: true, ok: false, message: result.error || 'GitHub API failed', via: 'github-api' }
+  }
+  return {
+    attempted: true,
+    ok: true,
+    commit: result.commit,
+    message: `Committed ${result.commit} via GitHub API — Vercel will redeploy shortly`,
+    via: 'github-api',
+  }
 }
 
 export async function POST(req: Request) {
-  if (process.env.NODE_ENV === 'production') {
-    return NextResponse.json({ error: 'theme studio is disabled in production' }, { status: 403 })
-  }
-
   let body: Record<string, unknown>
   try {
     body = await req.json()
@@ -130,7 +139,19 @@ export async function POST(req: Request) {
     out[f] = v.length === 9 ? v.slice(0, 7) : v
   }
 
-  // Short-circuit: if file already matches, skip write + commit
+  const newContent = JSON.stringify(out, null, 2) + '\n'
+  const summary = summarizeColors(out)
+
+  if (shouldUseGitHubApi()) {
+    // Vercel: skip the fs write entirely (read-only filesystem) and go
+    // straight through the GitHub Contents API. The new commit triggers a
+    // Vercel deploy which picks up the new theme.json.
+    const deploy = await commitViaGitHub(newContent, summary)
+    return NextResponse.json({ ok: deploy.ok, wrote: false, deploy }, { status: deploy.ok ? 200 : 502 })
+  }
+
+  // Dev: write locally first, then short-circuit if no changes, otherwise
+  // commit + push via local git.
   try {
     const current = JSON.parse(await readFile(FILE_ABS_PATH, 'utf8'))
     const same = FIELDS.every((f) => (current?.[f] || '').toLowerCase() === out[f].toLowerCase())
@@ -138,16 +159,14 @@ export async function POST(req: Request) {
       return NextResponse.json({
         ok: true,
         wrote: false,
-        deploy: { attempted: false, ok: true, message: 'theme.json already matches — nothing changed' },
+        deploy: { attempted: false, ok: true, message: 'theme.json already matches — nothing changed', via: 'local-git' },
       })
     }
   } catch {
-    // file might not exist or be invalid JSON — proceed to write it
+    // file might be missing — proceed to write
   }
 
-  await writeFile(FILE_ABS_PATH, JSON.stringify(out, null, 2) + '\n', 'utf8')
-
-  const deploy = await commitAndPush(summarizeColors(out))
-
+  await writeFile(FILE_ABS_PATH, newContent, 'utf8')
+  const deploy = await commitAndPushLocally(newContent, summary)
   return NextResponse.json({ ok: true, wrote: true, deploy })
 }

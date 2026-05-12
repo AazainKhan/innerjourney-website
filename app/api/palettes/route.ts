@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { readFile, writeFile, mkdir } from 'node:fs/promises'
 import { dirname, join } from 'node:path'
 import { randomUUID } from 'node:crypto'
+import { commitFileViaGitHub, isGitHubCommitAvailable } from '@/lib/github-commit'
 
 const HEX_RE = /^#[0-9a-fA-F]{6}$/
 const ROLE_KEYS = ['primaryColor', 'secondaryColor', 'accentColor', 'neutralColor'] as const
@@ -14,18 +15,51 @@ interface CustomPalette {
   updatedAt?: string
 }
 
-const FILE_PATH = join(process.cwd(), 'content', 'custom-palettes.json')
+const FILE_REL_PATH = 'content/custom-palettes.json'
+const FILE_ABS_PATH = join(process.cwd(), 'content', 'custom-palettes.json')
 
-function devGuard() {
-  if (process.env.NODE_ENV === 'production') {
-    return NextResponse.json({ error: 'palettes API is disabled in production' }, { status: 403 })
+function shouldUseGitHubApi(): boolean {
+  return !!process.env.VERCEL || (process.env.NODE_ENV === 'production' && isGitHubCommitAvailable())
+}
+
+// On Vercel the filesystem is read-only — `loadPalettes` would only see the
+// bundled-at-build version. So in production we read from GitHub directly
+// (raw API) to get the latest state including writes made after the last
+// deploy.
+async function loadPalettesFromGitHub(): Promise<CustomPalette[]> {
+  const token = process.env.GITHUB_TOKEN
+  if (!token) return []
+  const owner = process.env.GITHUB_REPO?.split('/')[0] || process.env.VERCEL_GIT_REPO_OWNER
+  const repo = process.env.GITHUB_REPO?.split('/')[1] || process.env.VERCEL_GIT_REPO_SLUG
+  const branch = process.env.GITHUB_BRANCH || 'main'
+  if (!owner || !repo) return []
+  try {
+    const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${FILE_REL_PATH}?ref=${branch}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28',
+      },
+      // Bypass any aggressive Next.js caching layers — we want fresh content
+      cache: 'no-store',
+    })
+    if (!res.ok) return []
+    const data = (await res.json()) as { content?: string; encoding?: string }
+    if (!data.content) return []
+    const raw = Buffer.from(data.content, (data.encoding || 'base64') as BufferEncoding).toString('utf8')
+    const parsed = JSON.parse(raw)
+    return Array.isArray(parsed) ? parsed : []
+  } catch {
+    return []
   }
-  return null
 }
 
 async function loadPalettes(): Promise<CustomPalette[]> {
+  if (shouldUseGitHubApi()) {
+    return loadPalettesFromGitHub()
+  }
   try {
-    const raw = await readFile(FILE_PATH, 'utf8')
+    const raw = await readFile(FILE_ABS_PATH, 'utf8')
     const parsed = JSON.parse(raw)
     if (!Array.isArray(parsed)) return []
     return parsed
@@ -34,9 +68,24 @@ async function loadPalettes(): Promise<CustomPalette[]> {
   }
 }
 
-async function savePalettes(palettes: CustomPalette[]): Promise<void> {
-  await mkdir(dirname(FILE_PATH), { recursive: true })
-  await writeFile(FILE_PATH, JSON.stringify(palettes, null, 2) + '\n', 'utf8')
+async function savePalettes(palettes: CustomPalette[], commitMessage: string): Promise<{ ok: boolean; error?: string }> {
+  const content = JSON.stringify(palettes, null, 2) + '\n'
+  if (shouldUseGitHubApi()) {
+    const result = await commitFileViaGitHub({
+      path: FILE_REL_PATH,
+      content,
+      message: commitMessage,
+    })
+    if (!result.ok) return { ok: false, error: result.error }
+    return { ok: true }
+  }
+  try {
+    await mkdir(dirname(FILE_ABS_PATH), { recursive: true })
+    await writeFile(FILE_ABS_PATH, content, 'utf8')
+    return { ok: true }
+  } catch (e) {
+    return { ok: false, error: (e as Error).message }
+  }
 }
 
 function validateColors(input: unknown): { ok: true; colors: CustomPalette['colors'] } | { ok: false; error: string } {
@@ -61,16 +110,11 @@ function validateName(input: unknown): { ok: true; name: string } | { ok: false;
 }
 
 export async function GET() {
-  const blocked = devGuard()
-  if (blocked) return blocked
   const palettes = await loadPalettes()
   return NextResponse.json({ palettes })
 }
 
 export async function POST(req: Request) {
-  const blocked = devGuard()
-  if (blocked) return blocked
-
   let body: Record<string, unknown>
   try {
     body = await req.json()
@@ -96,14 +140,12 @@ export async function POST(req: Request) {
     createdAt: new Date().toISOString(),
   }
   palettes.push(palette)
-  await savePalettes(palettes)
+  const saveRes = await savePalettes(palettes, `Theme Studio: add custom palette "${palette.name}"`)
+  if (!saveRes.ok) return NextResponse.json({ error: saveRes.error || 'save failed' }, { status: 502 })
   return NextResponse.json({ palette })
 }
 
 export async function PUT(req: Request) {
-  const blocked = devGuard()
-  if (blocked) return blocked
-
   let body: Record<string, unknown>
   try {
     body = await req.json()
@@ -119,7 +161,6 @@ export async function PUT(req: Request) {
   const idx = palettes.findIndex((p) => p.id === body.id)
   if (idx === -1) return NextResponse.json({ error: 'palette not found' }, { status: 404 })
 
-  // Allow partial updates: name and/or colors
   const updated: CustomPalette = { ...palettes[idx] }
 
   if (body.name !== undefined) {
@@ -139,23 +180,23 @@ export async function PUT(req: Request) {
 
   updated.updatedAt = new Date().toISOString()
   palettes[idx] = updated
-  await savePalettes(palettes)
+  const saveRes = await savePalettes(palettes, `Theme Studio: update custom palette "${updated.name}"`)
+  if (!saveRes.ok) return NextResponse.json({ error: saveRes.error || 'save failed' }, { status: 502 })
   return NextResponse.json({ palette: updated })
 }
 
 export async function DELETE(req: Request) {
-  const blocked = devGuard()
-  if (blocked) return blocked
-
   const url = new URL(req.url)
   const id = url.searchParams.get('id')
   if (!id) return NextResponse.json({ error: 'id query param is required' }, { status: 400 })
 
   const palettes = await loadPalettes()
+  const target = palettes.find((p) => p.id === id)
   const next = palettes.filter((p) => p.id !== id)
   if (next.length === palettes.length) {
     return NextResponse.json({ error: 'palette not found' }, { status: 404 })
   }
-  await savePalettes(next)
+  const saveRes = await savePalettes(next, `Theme Studio: delete custom palette "${target?.name || id}"`)
+  if (!saveRes.ok) return NextResponse.json({ error: saveRes.error || 'save failed' }, { status: 502 })
   return NextResponse.json({ ok: true })
 }

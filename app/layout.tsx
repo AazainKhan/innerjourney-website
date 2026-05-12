@@ -7,7 +7,6 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import BookingOverlay from '@/components/BookingOverlay'
 import ScrollAnimator from '@/components/ScrollAnimator'
-import ThemeApplier from '@/components/ThemeApplier'
 import ThemePreviewListener from '@/components/ThemePreviewListener'
 import TypographyApplier from '@/components/TypographyApplier'
 import { BookingProvider } from '@/context/BookingContext'
@@ -61,15 +60,6 @@ export const metadata: Metadata = {
     apple: { url: '/images/favicon/apple-touch-icon.png', sizes: '180x180' },
   },
   manifest: '/images/favicon/site.webmanifest',
-}
-
-async function loadTheme() {
-  try {
-    const res = await client.queries.theme({ relativePath: 'theme.json' })
-    return res
-  } catch {
-    return null
-  }
 }
 
 async function loadTypography() {
@@ -147,8 +137,10 @@ function buildThemeStyle(t: { primaryColor?: string | null; secondaryColor?: str
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const themeRes = await loadTheme()
-  const themeStyle = buildThemeStyle(themeRes?.data?.theme ?? themeData)
+  // Theme is read directly from content/theme.json (no Tina query) — the
+  // Website Theme collection was removed in favour of the Theme Studio screen,
+  // which writes to the same file via /api/theme.
+  const themeStyle = buildThemeStyle(themeData)
   const typographyRes = await loadTypography()
   const typographyStyle = buildTypographyStyle(typographyRes?.data?.typography ?? typographyData)
   return (
@@ -163,14 +155,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body>
         <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[10000] focus:bg-azure focus:text-white focus:px-4 focus:py-2 focus:rounded">Skip to content</a>
-        {themeRes && (
-          <ThemeApplier
-            query={themeRes.query}
-            variables={themeRes.variables}
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            data={themeRes.data as any}
-          />
-        )}
         {typographyRes && (
           <TypographyApplier
             query={typographyRes.query}

@@ -444,10 +444,23 @@ export default function ThemeStudioClient({ current, initialCustomPalettes }: Pr
   const hasEdits = edited != null && sourceColors != null && !colorsEqual(edited, sourceColors)
   const sourceLabel = active ? active.palette.name : 'Current saved theme'
 
-  // Detect whether writes will work in this environment. On Vercel
-  // (production-deployed) the fs+git pipeline can't run, so Apply will 403.
-  // We surface that up front instead of waiting for the user to hit the wall.
-  const isProd = typeof window !== 'undefined' && !/localhost|127\.0\.0\.1/.test(window.location.host)
+  // Ask the server whether Apply will actually persist in this environment.
+  // The status endpoint reports back whether we're running locally (fs+git
+  // available) or via GitHub Contents API in production.
+  const [applyStatus, setApplyStatus] = useState<{ canApply: boolean; pathUsed: string; isVercel: boolean; githubConfigured: boolean } | null>(null)
+  useEffect(() => {
+    fetch('/api/theme-studio-status')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => setApplyStatus(j))
+      .catch(() => setApplyStatus(null))
+  }, [])
+
+  const badgeTone =
+    applyStatus == null
+      ? { bg: 'bg-gray-100', text: 'text-gray-600', label: 'Checking…' }
+      : applyStatus.canApply
+      ? { bg: 'bg-green-100', text: 'text-green-800', label: applyStatus.pathUsed === 'github-api' ? 'Live → GitHub' : 'Live edit' }
+      : { bg: 'bg-amber-100', text: 'text-amber-800', label: 'Read only' }
 
   return (
     <div className="fixed inset-0 z-[60] flex h-screen w-screen overflow-hidden bg-gray-100">
@@ -455,16 +468,16 @@ export default function ThemeStudioClient({ current, initialCustomPalettes }: Pr
         <header className="sticky top-0 z-10 border-b border-gray-200 bg-white p-5">
           <div className="flex items-baseline justify-between">
             <h1 className="text-xl font-bold text-gray-900">Theme Studio</h1>
-            <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${isProd ? 'bg-amber-100 text-amber-800' : 'bg-green-100 text-green-800'}`}>
-              {isProd ? 'Preview only' : 'Live edit'}
+            <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${badgeTone.bg} ${badgeTone.text}`}>
+              {badgeTone.label}
             </span>
           </div>
           <p className="mt-1 text-xs text-gray-500">
-            Pick a palette, then tweak any role with the color wheel or eyedropper. <b>Apply</b> writes to <code className="rounded bg-gray-100 px-1">content/theme.json</code>.
+            Pick a palette, then tweak any role with the color wheel or eyedropper. <b>Apply</b> writes to <code className="rounded bg-gray-100 px-1">content/theme.json</code>{applyStatus?.pathUsed === 'github-api' ? ' and pushes to GitHub' : ''}.
           </p>
-          {isProd && (
+          {applyStatus && !applyStatus.canApply && (
             <p className="mt-2 rounded-md bg-amber-50 px-2 py-1.5 text-[11px] text-amber-900">
-              You&apos;re viewing this on the live site. Preview works, but <b>Apply</b> needs a Vercel-side <code>GITHUB_TOKEN</code> to commit via the GitHub API. For now, run <code>npm run dev</code> locally to save changes.
+              Apply needs a <code>GITHUB_TOKEN</code> env var on Vercel (fine-grained PAT with <em>contents:write</em>). Set it in your Vercel project and redeploy.
             </p>
           )}
         </header>

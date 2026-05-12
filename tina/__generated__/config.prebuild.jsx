@@ -749,42 +749,10 @@ var config_default = defineConfig({
           }
         ]
       },
-      {
-        name: "theme",
-        label: "Website Theme",
-        path: "content",
-        match: { include: "theme" },
-        format: "json",
-        // Theme applies globally — preview against home. For the full palette
-        // studio with eyedropper + custom palette saving, visit /theme-studio
-        ui: { router: () => "/", allowedActions: { create: false, delete: false } },
-        fields: [
-          {
-            name: "primaryColor",
-            label: "Primary Color (Carrot Orange \u2014 buttons, accents, hover states)",
-            type: "string",
-            ui: { component: "color" }
-          },
-          {
-            name: "secondaryColor",
-            label: "Secondary Color (Oxford Blue \u2014 dark backgrounds, headings)",
-            type: "string",
-            ui: { component: "color" }
-          },
-          {
-            name: "accentColor",
-            label: "Accent Color (Azure Blue \u2014 CTAs, links)",
-            type: "string",
-            ui: { component: "color" }
-          },
-          {
-            name: "neutralColor",
-            label: "Neutral Color (Platinum \u2014 soft backgrounds)",
-            type: "string",
-            ui: { component: "color" }
-          }
-        ]
-      },
+      // Theme is intentionally NOT registered as a Tina collection — theme
+      // editing lives exclusively in the Theme Studio screen (registered via
+      // cmsCallback above). content/theme.json is still the source of truth
+      // and is loaded directly by app/layout.tsx via the static import.
       {
         name: "testimonials",
         label: "Testimonials",

@@ -110,8 +110,6 @@ export type Query = {
   footerConnection: FooterConnection;
   typography: Typography;
   typographyConnection: TypographyConnection;
-  theme: Theme;
-  themeConnection: ThemeConnection;
   testimonials: Testimonials;
   testimonialsConnection: TestimonialsConnection;
 };
@@ -348,21 +346,6 @@ export type QueryTypographyConnectionArgs = {
 };
 
 
-export type QueryThemeArgs = {
-  relativePath?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-export type QueryThemeConnectionArgs = {
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<ThemeFilter>;
-};
-
-
 export type QueryTestimonialsArgs = {
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
@@ -392,7 +375,6 @@ export type DocumentFilter = {
   bookingForm?: InputMaybe<BookingFormFilter>;
   footer?: InputMaybe<FooterFilter>;
   typography?: InputMaybe<TypographyFilter>;
-  theme?: InputMaybe<ThemeFilter>;
   testimonials?: InputMaybe<TestimonialsFilter>;
 };
 
@@ -433,7 +415,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Home | Services | About | ClarityCoaching | CareerCoaching | Numerology | Resources | Contact | Post | Podcast | Navbar | BookingForm | Footer | Typography | Theme | Testimonials | Folder;
+export type DocumentNode = Home | Services | About | ClarityCoaching | CareerCoaching | Numerology | Resources | Contact | Post | Podcast | Navbar | BookingForm | Footer | Typography | Testimonials | Folder;
 
 export type Home = Node & Document & {
   __typename?: 'Home';
@@ -1569,37 +1551,6 @@ export type TypographyConnection = Connection & {
   edges?: Maybe<Array<Maybe<TypographyConnectionEdges>>>;
 };
 
-export type Theme = Node & Document & {
-  __typename?: 'Theme';
-  primaryColor?: Maybe<Scalars['String']['output']>;
-  secondaryColor?: Maybe<Scalars['String']['output']>;
-  accentColor?: Maybe<Scalars['String']['output']>;
-  neutralColor?: Maybe<Scalars['String']['output']>;
-  id: Scalars['ID']['output'];
-  _sys: SystemInfo;
-  _values: Scalars['JSON']['output'];
-};
-
-export type ThemeFilter = {
-  primaryColor?: InputMaybe<StringFilter>;
-  secondaryColor?: InputMaybe<StringFilter>;
-  accentColor?: InputMaybe<StringFilter>;
-  neutralColor?: InputMaybe<StringFilter>;
-};
-
-export type ThemeConnectionEdges = {
-  __typename?: 'ThemeConnectionEdges';
-  cursor: Scalars['String']['output'];
-  node?: Maybe<Theme>;
-};
-
-export type ThemeConnection = Connection & {
-  __typename?: 'ThemeConnection';
-  pageInfo: PageInfo;
-  totalCount: Scalars['Float']['output'];
-  edges?: Maybe<Array<Maybe<ThemeConnectionEdges>>>;
-};
-
 export type TestimonialsItems = {
   __typename?: 'TestimonialsItems';
   quote?: Maybe<Scalars['String']['output']>;
@@ -1671,8 +1622,6 @@ export type Mutation = {
   createFooter: Footer;
   updateTypography: Typography;
   createTypography: Typography;
-  updateTheme: Theme;
-  createTheme: Theme;
   updateTestimonials: Testimonials;
   createTestimonials: Testimonials;
 };
@@ -1879,18 +1828,6 @@ export type MutationCreateTypographyArgs = {
 };
 
 
-export type MutationUpdateThemeArgs = {
-  relativePath: Scalars['String']['input'];
-  params: ThemeMutation;
-};
-
-
-export type MutationCreateThemeArgs = {
-  relativePath: Scalars['String']['input'];
-  params: ThemeMutation;
-};
-
-
 export type MutationUpdateTestimonialsArgs = {
   relativePath: Scalars['String']['input'];
   params: TestimonialsMutation;
@@ -1917,7 +1854,6 @@ export type DocumentUpdateMutation = {
   bookingForm?: InputMaybe<BookingFormMutation>;
   footer?: InputMaybe<FooterMutation>;
   typography?: InputMaybe<TypographyMutation>;
-  theme?: InputMaybe<ThemeMutation>;
   testimonials?: InputMaybe<TestimonialsMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
@@ -1937,7 +1873,6 @@ export type DocumentMutation = {
   bookingForm?: InputMaybe<BookingFormMutation>;
   footer?: InputMaybe<FooterMutation>;
   typography?: InputMaybe<TypographyMutation>;
-  theme?: InputMaybe<ThemeMutation>;
   testimonials?: InputMaybe<TestimonialsMutation>;
 };
 
@@ -2353,13 +2288,6 @@ export type TypographyMutation = {
   baseFontSize?: InputMaybe<Scalars['Float']['input']>;
 };
 
-export type ThemeMutation = {
-  primaryColor?: InputMaybe<Scalars['String']['input']>;
-  secondaryColor?: InputMaybe<Scalars['String']['input']>;
-  accentColor?: InputMaybe<Scalars['String']['input']>;
-  neutralColor?: InputMaybe<Scalars['String']['input']>;
-};
-
 export type TestimonialsItemsMutation = {
   quote?: InputMaybe<Scalars['String']['input']>;
   author?: InputMaybe<Scalars['String']['input']>;
@@ -2396,8 +2324,6 @@ export type BookingFormPartsFragment = { __typename: 'BookingForm', overlayTitle
 export type FooterPartsFragment = { __typename: 'Footer', brandHeading?: string | null, brandDescription?: string | null, quickLinksHeading?: string | null, servicesHeading?: string | null, connectHeading?: string | null, emailLabel?: string | null, email?: string | null, phoneLabel?: string | null, phone?: string | null, copyright?: string | null, quickLinks?: Array<{ __typename: 'FooterQuickLinks', label?: string | null, href?: string | null } | null> | null, serviceLinks?: Array<{ __typename: 'FooterServiceLinks', label?: string | null, href?: string | null } | null> | null, socialLinks?: Array<{ __typename: 'FooterSocialLinks', label?: string | null, icon?: string | null, href?: string | null } | null> | null };
 
 export type TypographyPartsFragment = { __typename: 'Typography', headingFont?: string | null, headingWeight?: string | null, headingStyle?: string | null, bodyFont?: string | null, bodyWeight?: string | null, baseFontSize?: number | null };
-
-export type ThemePartsFragment = { __typename: 'Theme', primaryColor?: string | null, secondaryColor?: string | null, accentColor?: string | null, neutralColor?: string | null };
 
 export type TestimonialsPartsFragment = { __typename: 'Testimonials', items?: Array<{ __typename: 'TestimonialsItems', quote?: string | null, author?: string | null } | null> | null };
 
@@ -2666,25 +2592,6 @@ export type TypographyConnectionQueryVariables = Exact<{
 
 
 export type TypographyConnectionQuery = { __typename?: 'Query', typographyConnection: { __typename?: 'TypographyConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'TypographyConnectionEdges', cursor: string, node?: { __typename: 'Typography', id: string, headingFont?: string | null, headingWeight?: string | null, headingStyle?: string | null, bodyFont?: string | null, bodyWeight?: string | null, baseFontSize?: number | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
-
-export type ThemeQueryVariables = Exact<{
-  relativePath: Scalars['String']['input'];
-}>;
-
-
-export type ThemeQuery = { __typename?: 'Query', theme: { __typename: 'Theme', id: string, primaryColor?: string | null, secondaryColor?: string | null, accentColor?: string | null, neutralColor?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
-
-export type ThemeConnectionQueryVariables = Exact<{
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<ThemeFilter>;
-}>;
-
-
-export type ThemeConnectionQuery = { __typename?: 'Query', themeConnection: { __typename?: 'ThemeConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ThemeConnectionEdges', cursor: string, node?: { __typename: 'Theme', id: string, primaryColor?: string | null, secondaryColor?: string | null, accentColor?: string | null, neutralColor?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type TestimonialsQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -3177,15 +3084,6 @@ export const TypographyPartsFragmentDoc = gql`
   bodyFont
   bodyWeight
   baseFontSize
-}
-    `;
-export const ThemePartsFragmentDoc = gql`
-    fragment ThemeParts on Theme {
-  __typename
-  primaryColor
-  secondaryColor
-  accentColor
-  neutralColor
 }
     `;
 export const TestimonialsPartsFragmentDoc = gql`
@@ -3996,63 +3894,6 @@ export const TypographyConnectionDocument = gql`
   }
 }
     ${TypographyPartsFragmentDoc}`;
-export const ThemeDocument = gql`
-    query theme($relativePath: String!) {
-  theme(relativePath: $relativePath) {
-    ... on Document {
-      _sys {
-        filename
-        basename
-        hasReferences
-        breadcrumbs
-        path
-        relativePath
-        extension
-      }
-      id
-    }
-    ...ThemeParts
-  }
-}
-    ${ThemePartsFragmentDoc}`;
-export const ThemeConnectionDocument = gql`
-    query themeConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: ThemeFilter) {
-  themeConnection(
-    before: $before
-    after: $after
-    first: $first
-    last: $last
-    sort: $sort
-    filter: $filter
-  ) {
-    pageInfo {
-      hasPreviousPage
-      hasNextPage
-      startCursor
-      endCursor
-    }
-    totalCount
-    edges {
-      cursor
-      node {
-        ... on Document {
-          _sys {
-            filename
-            basename
-            hasReferences
-            breadcrumbs
-            path
-            relativePath
-            extension
-          }
-          id
-        }
-        ...ThemeParts
-      }
-    }
-  }
-}
-    ${ThemePartsFragmentDoc}`;
 export const TestimonialsDocument = gql`
     query testimonials($relativePath: String!) {
   testimonials(relativePath: $relativePath) {
@@ -4196,12 +4037,6 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     typographyConnection(variables?: TypographyConnectionQueryVariables, options?: C): Promise<{data: TypographyConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TypographyConnectionQueryVariables, query: string}> {
         return requester<{data: TypographyConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TypographyConnectionQueryVariables, query: string}, TypographyConnectionQueryVariables>(TypographyConnectionDocument, variables, options);
-      },
-    theme(variables: ThemeQueryVariables, options?: C): Promise<{data: ThemeQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ThemeQueryVariables, query: string}> {
-        return requester<{data: ThemeQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ThemeQueryVariables, query: string}, ThemeQueryVariables>(ThemeDocument, variables, options);
-      },
-    themeConnection(variables?: ThemeConnectionQueryVariables, options?: C): Promise<{data: ThemeConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ThemeConnectionQueryVariables, query: string}> {
-        return requester<{data: ThemeConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ThemeConnectionQueryVariables, query: string}, ThemeConnectionQueryVariables>(ThemeConnectionDocument, variables, options);
       },
     testimonials(variables: TestimonialsQueryVariables, options?: C): Promise<{data: TestimonialsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TestimonialsQueryVariables, query: string}> {
         return requester<{data: TestimonialsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TestimonialsQueryVariables, query: string}, TestimonialsQueryVariables>(TestimonialsDocument, variables, options);

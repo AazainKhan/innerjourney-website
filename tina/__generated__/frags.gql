@@ -458,14 +458,6 @@ fragment TypographyParts on Typography {
   baseFontSize
 }
 
-fragment ThemeParts on Theme {
-  __typename
-  primaryColor
-  secondaryColor
-  accentColor
-  neutralColor
-}
-
 fragment TestimonialsParts on Testimonials {
   __typename
   items {

@@ -82,8 +82,6 @@ type Query {
   footerConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: FooterFilter): FooterConnection!
   typography(relativePath: String): Typography!
   typographyConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: TypographyFilter): TypographyConnection!
-  theme(relativePath: String): Theme!
-  themeConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ThemeFilter): ThemeConnection!
   testimonials(relativePath: String): Testimonials!
   testimonialsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: TestimonialsFilter): TestimonialsConnection!
 }
@@ -103,7 +101,6 @@ input DocumentFilter {
   bookingForm: BookingFormFilter
   footer: FooterFilter
   typography: TypographyFilter
-  theme: ThemeFilter
   testimonials: TestimonialsFilter
 }
 
@@ -130,7 +127,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Home | Services | About | ClarityCoaching | CareerCoaching | Numerology | Resources | Contact | Post | Podcast | Navbar | BookingForm | Footer | Typography | Theme | Testimonials | Folder
+union DocumentNode = Home | Services | About | ClarityCoaching | CareerCoaching | Numerology | Resources | Contact | Post | Podcast | Navbar | BookingForm | Footer | Typography | Testimonials | Folder
 
 type Home implements Node & Document {
   heroImage: String
@@ -1207,34 +1204,6 @@ type TypographyConnection implements Connection {
   edges: [TypographyConnectionEdges]
 }
 
-type Theme implements Node & Document {
-  primaryColor: String
-  secondaryColor: String
-  accentColor: String
-  neutralColor: String
-  id: ID!
-  _sys: SystemInfo!
-  _values: JSON!
-}
-
-input ThemeFilter {
-  primaryColor: StringFilter
-  secondaryColor: StringFilter
-  accentColor: StringFilter
-  neutralColor: StringFilter
-}
-
-type ThemeConnectionEdges {
-  cursor: String!
-  node: Theme
-}
-
-type ThemeConnection implements Connection {
-  pageInfo: PageInfo!
-  totalCount: Float!
-  edges: [ThemeConnectionEdges]
-}
-
 type TestimonialsItems {
   quote: String
   author: String
@@ -1301,8 +1270,6 @@ type Mutation {
   createFooter(relativePath: String!, params: FooterMutation!): Footer!
   updateTypography(relativePath: String!, params: TypographyMutation!): Typography!
   createTypography(relativePath: String!, params: TypographyMutation!): Typography!
-  updateTheme(relativePath: String!, params: ThemeMutation!): Theme!
-  createTheme(relativePath: String!, params: ThemeMutation!): Theme!
   updateTestimonials(relativePath: String!, params: TestimonialsMutation!): Testimonials!
   createTestimonials(relativePath: String!, params: TestimonialsMutation!): Testimonials!
 }
@@ -1322,7 +1289,6 @@ input DocumentUpdateMutation {
   bookingForm: BookingFormMutation
   footer: FooterMutation
   typography: TypographyMutation
-  theme: ThemeMutation
   testimonials: TestimonialsMutation
   relativePath: String
 }
@@ -1342,7 +1308,6 @@ input DocumentMutation {
   bookingForm: BookingFormMutation
   footer: FooterMutation
   typography: TypographyMutation
-  theme: ThemeMutation
   testimonials: TestimonialsMutation
 }
 
@@ -1756,13 +1721,6 @@ input TypographyMutation {
   bodyFont: String
   bodyWeight: String
   baseFontSize: Float
-}
-
-input ThemeMutation {
-  primaryColor: String
-  secondaryColor: String
-  accentColor: String
-  neutralColor: String
 }
 
 input TestimonialsItemsMutation {
