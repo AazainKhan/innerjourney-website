@@ -40,38 +40,38 @@ export default async function PodcastEpisodePage({ params }: { params: Promise<{
   return (
     <>
       {/* Hero */}
-      <section className="page-hero" style={{ background: 'linear-gradient(135deg, #14213d 0%, #1a2d50 100%)' }}>
+      <section className="page-hero brand-gradient-oxford-deep">
         <div className="absolute top-20 right-20 w-72 h-72 bg-carrot/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 left-20 w-64 h-64 bg-azure/20 rounded-full blur-3xl"></div>
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-3xl mx-auto">
-            <Link href="/resources" className="inline-flex items-center gap-2 text-white/70 hover:text-white text-sm uppercase tracking-widest mb-6">
+            <Link href="/resources" className="inline-flex items-center gap-2 text-on-secondary/70 hover:text-on-secondary text-sm uppercase tracking-widest mb-6">
               <i className="fas fa-arrow-left"></i> Back to resources
             </Link>
             <div className="flex flex-wrap items-center gap-3 mb-4">
-              <span className={`px-3 py-1 ${p.badgeColor || 'bg-carrot'} text-white text-xs rounded-full font-semibold`}>
+              <span className={`px-3 py-1 ${p.badgeColor || 'bg-carrot'} text-on-primary text-xs rounded-full font-semibold`}>
                 <i className="fas fa-podcast mr-1"></i> Podcast
               </span>
-              {p.episode && <span className="text-white/70 text-sm">{p.episode}</span>}
+              {p.episode && <span className="text-on-secondary/70 text-sm">{p.episode}</span>}
               {formatDate(p.publishedAt) && (
-                <span className="text-white/60 text-sm">{formatDate(p.publishedAt)}</span>
+                <span className="text-on-secondary/60 text-sm">{formatDate(p.publishedAt)}</span>
               )}
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white mb-4 leading-tight font-dancing font-bold">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-on-secondary mb-4 leading-tight font-dancing font-bold">
               {p.title}
             </h1>
-            {p.excerpt && <p className="text-xl text-white/90 leading-relaxed mb-6">{p.excerpt}</p>}
+            {p.excerpt && <p className="text-xl text-on-secondary/90 leading-relaxed mb-6">{p.excerpt}</p>}
             {hasAudio ? (
               <a
                 href={p.audioUrl!}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 bg-carrot hover:bg-carrot text-white px-8 py-3 rounded-full font-semibold transition-all"
+                className="inline-flex items-center gap-3 bg-carrot hover:bg-carrot text-on-primary px-8 py-3 rounded-full font-semibold transition-all"
               >
                 <i className="fas fa-play"></i> Listen now
               </a>
             ) : (
-              <span className="inline-flex items-center gap-3 bg-white/10 text-white/70 px-8 py-3 rounded-full font-semibold">
+              <span className="inline-flex items-center gap-3 bg-on-secondary/10 text-on-secondary/70 px-8 py-3 rounded-full font-semibold">
                 <i className="fas fa-clock"></i> {p.status || 'Coming soon'}
               </span>
             )}
@@ -95,8 +95,8 @@ export default async function PodcastEpisodePage({ params }: { params: Promise<{
       {/* CTA */}
       <section className="py-16 brand-gradient-azure">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Want to go deeper?</h2>
-          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-on-accent mb-4">Want to go deeper?</h2>
+          <p className="text-lg text-on-accent/90 mb-8 max-w-2xl mx-auto">
             Book a free discovery call and let&apos;s talk about what&apos;s holding you back.
           </p>
           <BookingButton variant="primaryOnDark" />

@@ -44,28 +44,28 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   return (
     <>
       {/* Hero */}
-      <section className="page-hero bg-gradient-to-br from-oxford via-[#1a2d50] to-azure">
+      <section className="page-hero brand-gradient-oxford-azure">
         <div className="absolute top-20 right-20 w-72 h-72 bg-carrot/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 left-20 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-3xl mx-auto">
-            <Link href="/blog" className="inline-flex items-center gap-2 text-white/70 hover:text-white text-sm uppercase tracking-widest mb-6">
+            <Link href="/blog" className="inline-flex items-center gap-2 text-on-secondary/70 hover:text-on-secondary text-sm uppercase tracking-widest mb-6">
               <i className="fas fa-arrow-left"></i> Back to all posts
             </Link>
             <div className="flex flex-wrap items-center gap-3 mb-4">
               {post.status && (
-                <span className={`px-3 py-1 ${post.badgeColor || 'bg-carrot'} text-white text-xs rounded-full font-semibold uppercase tracking-wider`}>
+                <span className={`px-3 py-1 ${post.badgeColor || 'bg-carrot'} text-on-primary text-xs rounded-full font-semibold uppercase tracking-wider`}>
                   {post.status}
                 </span>
               )}
               {formatDate(post.publishedAt) && (
-                <span className="text-white/60 text-sm">{formatDate(post.publishedAt)}</span>
+                <span className="text-on-secondary/60 text-sm">{formatDate(post.publishedAt)}</span>
               )}
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white mb-4 leading-tight font-dancing font-bold">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-on-secondary mb-4 leading-tight font-dancing font-bold">
               {post.title}
             </h1>
-            {post.excerpt && <p className="text-xl text-white/90 leading-relaxed">{post.excerpt}</p>}
+            {post.excerpt && <p className="text-xl text-on-secondary/90 leading-relaxed">{post.excerpt}</p>}
           </div>
         </div>
       </section>
@@ -86,10 +86,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       {/* CTA */}
       <section className="py-16 brand-gradient-azure">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-on-accent mb-4">
             Ready for your own <span className="text-carrot font-bold">inner journey?</span>
           </h2>
-          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg text-on-accent/90 mb-8 max-w-2xl mx-auto">
             Book a free discovery call and let&apos;s explore how coaching can help.
           </p>
           <BookingButton variant="primaryOnDark" />

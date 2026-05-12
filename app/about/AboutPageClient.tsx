@@ -54,8 +54,8 @@ export default function AboutPageClient(props: Props) {
         <div className="absolute inset-0 bg-oxford/90"></div>
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
-            <RichText as="h1" className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white font-dancing font-bold mb-6 leading-tight drop-shadow-2xl">{d.heroHeading}</RichText>
-            <RichText as="p" className="text-lg md:text-xl body-text-light text-white/90 leading-relaxed max-w-3xl mx-auto">{d.heroSubtext}</RichText>
+            <RichText as="h1" className="text-4xl md:text-5xl lg:text-6xl heading-primary text-on-secondary font-dancing font-bold mb-6 leading-tight drop-shadow-2xl">{d.heroHeading}</RichText>
+            <RichText as="p" className="text-lg md:text-xl body-text-light text-on-secondary/90 leading-relaxed max-w-3xl mx-auto">{d.heroSubtext}</RichText>
           </div>
         </div>
       </section>
@@ -146,7 +146,7 @@ export default function AboutPageClient(props: Props) {
               {(d.values ?? []).map((v) => (
                 <div key={v.title} className="text-center animate-on-scroll">
                   <div className="w-20 h-20 bg-gradient-to-r from-carrot/50 to-carrot rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-                    <i className={`fas ${v.icon} text-white text-3xl`}></i>
+                    <i className={`fas ${v.icon} text-on-primary text-3xl`}></i>
                   </div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-4">{v.title}</h3>
                   <p className="text-gray-600 leading-relaxed">{v.description}</p>

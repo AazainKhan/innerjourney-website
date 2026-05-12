@@ -150,25 +150,24 @@ function PodcastCard({ episode }: { episode: Podcast }) {
   return (
     <Link
       href={`/podcast/${episode.slug}`}
-      className="group block rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
-      style={{ background: 'linear-gradient(135deg, #14213d 0%, #1a2d50 100%)' }}
+      className="group block rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl brand-gradient-oxford-deep"
     >
       <div className="grid md:grid-cols-3 gap-0">
         <div className={`relative h-48 md:h-auto bg-gradient-to-br ${episode.gradient} flex items-center justify-center`}>
-          <i className={`fas ${episode.icon} text-6xl text-white/60 group-hover:scale-110 transition-transform`}></i>
+          <i className={`fas ${episode.icon} text-6xl text-on-secondary/60 group-hover:scale-110 transition-transform`}></i>
         </div>
         <div className="md:col-span-2 p-8">
           <div className="flex items-center gap-3 mb-4">
-            <span className={`px-4 py-1 ${episode.badgeColor} text-white text-xs rounded-full font-semibold`}>
+            <span className={`px-4 py-1 ${episode.badgeColor} text-on-primary text-xs rounded-full font-semibold`}>
               <i className="fas fa-podcast mr-1"></i> Podcast
             </span>
-            <span className="text-white/70 text-sm">{episode.episode}</span>
+            <span className="text-on-secondary/70 text-sm">{episode.episode}</span>
           </div>
-          <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-carrot transition-colors">{episode.title}</h3>
-          <p className="text-white/80 mb-6 leading-relaxed line-clamp-3">{episode.excerpt}</p>
+          <h3 className="text-2xl font-bold text-on-secondary mb-3 group-hover:text-carrot transition-colors">{episode.title}</h3>
+          <p className="text-on-secondary/80 mb-6 leading-relaxed line-clamp-3">{episode.excerpt}</p>
           <div className="flex items-center gap-4 flex-wrap">
-            <span className="text-white/60 text-sm">{episode.status}</span>
-            <span className="bg-white/20 group-hover:bg-white/30 text-white px-6 py-2 rounded-full text-sm font-semibold transition-all">
+            <span className="text-on-secondary/60 text-sm">{episode.status}</span>
+            <span className="bg-on-secondary/10 group-hover:bg-on-secondary/20 text-on-secondary px-6 py-2 rounded-full text-sm font-semibold transition-all">
               <i className="fas fa-arrow-right mr-2"></i> View episode
             </span>
           </div>
@@ -208,7 +207,7 @@ export default function ResourcesClient(props: Props) {
   return (
     <>
       {/* Hero */}
-      <section className="page-hero bg-gradient-to-br from-oxford via-[#1a2d50] to-azure">
+      <section className="page-hero brand-gradient-oxford-azure">
         <div className="absolute top-20 right-20 w-72 h-72 bg-carrot/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-20 left-20 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
         <div className="absolute top-1/2 right-1/3 w-48 h-48 bg-azure/20 rounded-full blur-2xl"></div>
@@ -216,24 +215,24 @@ export default function ResourcesClient(props: Props) {
         <div className="container mx-auto px-6 relative z-20">
           <div className="max-w-4xl mx-auto text-center">
             <span className="inline-block text-carrot font-semibold text-sm uppercase tracking-widest mb-6">{d.heroBadge}</span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white font-dancing font-bold mb-6 leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-on-secondary font-dancing font-bold mb-6 leading-tight">
               <RichText>{d.heroHeading}</RichText> <span className="text-carrot"><RichText>{d.heroHeadingHighlight}</RichText></span>
             </h1>
-            <RichText as="p" className="text-lg md:text-xl text-white/90 leading-relaxed">{d.heroSubtext}</RichText>
+            <RichText as="p" className="text-lg md:text-xl text-on-secondary/90 leading-relaxed">{d.heroSubtext}</RichText>
             {(props.posts.length > 0 || props.podcasts.length > 0) && (
               <nav className="mt-10 flex flex-wrap justify-center gap-4 text-sm font-semibold">
                 {hasFeatured && (
-                  <a href="#featured" className="px-5 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors backdrop-blur-sm">
+                  <a href="#featured" className="px-5 py-2 rounded-full bg-on-secondary/10 hover:bg-on-secondary/20 text-on-secondary transition-colors backdrop-blur-sm">
                     <i className="fas fa-star mr-2"></i> Featured
                   </a>
                 )}
                 {props.posts.length > 0 && (
-                  <a href="#blog-library" className="px-5 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors backdrop-blur-sm">
+                  <a href="#blog-library" className="px-5 py-2 rounded-full bg-on-secondary/10 hover:bg-on-secondary/20 text-on-secondary transition-colors backdrop-blur-sm">
                     <i className="fas fa-pen-fancy mr-2"></i> Blog Library
                   </a>
                 )}
                 {props.podcasts.length > 0 && (
-                  <a href="#podcast-library" className="px-5 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors backdrop-blur-sm">
+                  <a href="#podcast-library" className="px-5 py-2 rounded-full bg-on-secondary/10 hover:bg-on-secondary/20 text-on-secondary transition-colors backdrop-blur-sm">
                     <i className="fas fa-podcast mr-2"></i> Podcast Library
                   </a>
                 )}
@@ -349,12 +348,12 @@ export default function ResourcesClient(props: Props) {
         <section className="py-20 relative">
           <div className="container mx-auto px-6 relative z-10">
             <div className="max-w-4xl mx-auto">
-              <div className="bg-gradient-to-r from-oxford to-azure rounded-3xl p-12 text-center shadow-2xl">
+              <div className="brand-gradient-oxford-azure rounded-3xl p-12 text-center shadow-2xl">
                 <i className="fas fa-envelope-open-text text-5xl text-carrot mb-6"></i>
-                <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">{d.newsletterHeading}</h2>
-                <p className="text-xl text-white/90 mb-8">{d.newsletterSubtext}</p>
+                <h2 className="text-3xl md:text-4xl font-bold text-on-secondary mb-4">{d.newsletterHeading}</h2>
+                <p className="text-xl text-on-secondary/90 mb-8">{d.newsletterSubtext}</p>
                 {newsletterStatus === 'success' ? (
-                  <p className="text-white text-lg bg-white/10 rounded-lg px-6 py-3 inline-block">
+                  <p className="text-on-secondary text-lg bg-on-secondary/10 rounded-lg px-6 py-3 inline-block">
                     {d.newsletterSuccessMessage}
                   </p>
                 ) : (
@@ -387,7 +386,7 @@ export default function ResourcesClient(props: Props) {
                     />
                     <button
                       type="submit"
-                      className="bg-carrot hover:bg-carrot text-white px-8 py-3 rounded-lg font-semibold transition-all"
+                      className="bg-carrot hover:bg-carrot text-on-primary px-8 py-3 rounded-lg font-semibold transition-all"
                     >
                       {d.newsletterButton}
                     </button>
@@ -402,10 +401,10 @@ export default function ResourcesClient(props: Props) {
       {/* Bottom CTA */}
       <section className="py-20 brand-gradient-azure">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-on-accent mb-6">
             {d.ctaSectionHeading}
           </h2>
-          <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">{d.ctaSectionSubtext}</p>
+          <p className="text-xl text-on-accent/90 mb-8 max-w-2xl mx-auto">{d.ctaSectionSubtext}</p>
           <BookingButton label={d.ctaButtonLabel} variant="primaryOnDark" />
         </div>
       </section>

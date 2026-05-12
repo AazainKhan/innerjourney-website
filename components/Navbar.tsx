@@ -53,14 +53,14 @@ export default function Navbar({ data }: { data: NavbarData }) {
                 className="h-14 w-auto"
                 priority
               />
-              <div className="text-2xl heading-primary text-white">{data.brandLabel}</div>
+              <div className="text-2xl heading-primary text-on-secondary">{data.brandLabel}</div>
             </Link>
 
             {/* Desktop nav */}
             <div className="hidden md:flex items-center space-x-8">
               {data.links.map((link) => link.showDropdown ? (
                 <div key={link.href} className="nav-dropdown">
-                  <Link href={link.href} className="nav-link nav-text text-white hover:text-carrot transition-colors uppercase">
+                  <Link href={link.href} className="nav-link nav-text text-on-secondary hover:text-carrot transition-colors uppercase">
                     {link.label} <i className="fas fa-chevron-down ml-1 text-xs"></i>
                   </Link>
                   <div className="nav-dropdown-menu">
@@ -70,7 +70,7 @@ export default function Navbar({ data }: { data: NavbarData }) {
                   </div>
                 </div>
               ) : (
-                <Link key={link.href} href={link.href} className="nav-link nav-text text-white hover:text-carrot transition-colors uppercase">{link.label}</Link>
+                <Link key={link.href} href={link.href} className="nav-link nav-text text-on-secondary hover:text-carrot transition-colors uppercase">{link.label}</Link>
               ))}
             </div>
 
@@ -86,7 +86,7 @@ export default function Navbar({ data }: { data: NavbarData }) {
               <button
                 onClick={() => setMobileOpen(true)}
                 aria-label="Toggle navigation menu"
-                className="text-white text-2xl"
+                className="text-on-secondary text-2xl"
               >
                 <i className="fas fa-bars" aria-hidden="true"></i>
               </button>

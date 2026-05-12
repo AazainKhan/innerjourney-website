@@ -30,6 +30,9 @@ const cards = [
     href: '/mindset-coaching',
     btnText: 'Start my mindset journey',
     gradient: 'brand-gradient-oxford',
+    textClass: 'text-on-secondary',
+    textSoftClass: 'text-on-secondary/90',
+    textMutedClass: 'text-on-secondary/60',
     btnColor: 'text-oxford',
     highlights: ['12 one-to-one sessions', 'Personalised coaching plan', 'Practical tools & exercises', 'Email support between sessions'],
     isThisForYou: "If you feel stuck, lost, or like you're going through the motions — this programme is for you. We'll work together to uncover what you truly want and build the courage to go after it.",
@@ -42,6 +45,9 @@ const cards = [
     href: '/career-coaching',
     btnText: 'Realign my career',
     gradient: 'brand-gradient-orange',
+    textClass: 'text-on-primary',
+    textSoftClass: 'text-on-primary/90',
+    textMutedClass: 'text-on-primary/60',
     btnColor: 'text-carrot',
     highlights: ['12 personalised sessions', 'Career roadmap', 'CV & interview support', 'Mindset & confidence coaching'],
     isThisForYou: "If your career isn't lighting you up or you're at a crossroads professionally — this programme is for you. We'll get you clear, confident, and ready to take decisive action.",
@@ -54,6 +60,9 @@ const cards = [
     href: '/numerology',
     btnText: 'Book my numerology session',
     gradient: 'brand-gradient-oxford',
+    textClass: 'text-on-secondary',
+    textSoftClass: 'text-on-secondary/90',
+    textMutedClass: 'text-on-secondary/60',
     btnColor: 'text-oxford',
     highlights: ['1-hour personalised session', 'Life path & expression numbers', 'Personal year cycle reading', 'Detailed follow-up notes'],
     isThisForYou: "If you need fast, focused insight and want a different perspective on your life's questions — this session is for you. Perfect when you need answers but aren't ready for a longer coaching commitment.",
@@ -76,8 +85,8 @@ export default function ServicesPageClient(props: Props) {
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-azure/10 rounded-full blur-3xl"></div>
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
-            <RichText as="h1" className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white font-dancing font-bold mb-6 leading-tight">{d.heroHeading}</RichText>
-            <RichText as="p" className="text-lg md:text-xl body-text-light text-white/90 leading-relaxed max-w-3xl mx-auto">{d.heroSubtext}</RichText>
+            <RichText as="h1" className="text-4xl md:text-5xl lg:text-6xl heading-primary text-on-secondary font-dancing font-bold mb-6 leading-tight">{d.heroHeading}</RichText>
+            <RichText as="p" className="text-lg md:text-xl body-text-light text-on-secondary/90 leading-relaxed max-w-3xl mx-auto">{d.heroSubtext}</RichText>
           </div>
         </div>
       </section>
@@ -92,16 +101,16 @@ export default function ServicesPageClient(props: Props) {
             <div className="space-y-16 max-w-5xl mx-auto">
               {cards.map((s, i) => (
                 <div key={s.title} className={`grid lg:grid-cols-2 gap-12 items-center ${i % 2 === 1 ? 'lg:flex-row-reverse' : ''} animate-on-scroll`}>
-                  <div className={`${s.gradient} p-10 rounded-2xl text-white shadow-2xl ${i % 2 === 1 ? 'lg:order-2' : ''}`}>
+                  <div className={`${s.gradient} ${s.textClass} p-10 rounded-2xl shadow-2xl ${i % 2 === 1 ? 'lg:order-2' : ''}`}>
                     <div className="text-5xl mb-6"><i className={`fas ${s.icon}`}></i></div>
-                    <span className="inline-block text-white/60 text-sm uppercase tracking-widest mb-2">{s.duration}</span>
+                    <span className={`inline-block ${s.textMutedClass} text-sm uppercase tracking-widest mb-2`}>{s.duration}</span>
                     <h2 className="text-3xl font-bold mb-4">{s.title}</h2>
-                    <p className="text-white/90 mb-6 text-lg leading-relaxed">{s.description}</p>
+                    <p className={`${s.textSoftClass} mb-6 text-lg leading-relaxed`}>{s.description}</p>
                     <ul className="space-y-2 mb-8">
                       {s.highlights.map((h) => (
                         <li key={h} className="flex items-center gap-3">
                           <i className="fas fa-check text-carrot flex-shrink-0"></i>
-                          <span className="text-white/90">{h}</span>
+                          <span className={s.textSoftClass}>{h}</span>
                         </li>
                       ))}
                     </ul>

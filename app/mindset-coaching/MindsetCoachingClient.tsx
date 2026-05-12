@@ -116,7 +116,7 @@ export default function MindsetCoachingClient(props: Props) {
 
         {/* Hero */}
         <section className="page-hero">
-          <div className="absolute inset-0 bg-gradient-to-br from-oxford via-[#1a2d50] to-azure z-10"></div>
+          <div className="absolute inset-0 brand-gradient-oxford-azure z-10"></div>
           <div className="absolute right-1/4 top-1/4 w-64 h-64 bg-carrot/20 rounded-full blur-3xl hidden lg:block z-10"></div>
           <div className="absolute right-10 bottom-20 w-48 h-48 bg-white/10 rounded-full blur-2xl hidden lg:block z-10"></div>
           <div className="absolute left-10 top-20 w-56 h-56 bg-azure/20 rounded-full blur-3xl hidden lg:block z-10"></div>
@@ -125,19 +125,19 @@ export default function MindsetCoachingClient(props: Props) {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="text-center lg:text-left order-2 lg:order-1 lg:max-w-xl lg:justify-self-center">
                 <span className="inline-block text-carrot font-semibold text-sm uppercase tracking-widest mb-4">{d.heroBadge}</span>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white font-dancing font-bold mb-6 leading-tight">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-on-secondary font-dancing font-bold mb-6 leading-tight">
                   {d.heroHeading}
                 </h1>
-                <p className="text-lg md:text-xl body-text text-white/90 mb-8 leading-relaxed">
+                <p className="text-lg md:text-xl body-text text-on-secondary/90 mb-8 leading-relaxed">
                   {d.heroSubtext}
                 </p>
                 <BookingButton label={d.heroCTALabel} />
               </div>
               <div className="hidden lg:flex items-center justify-center order-1 lg:order-2">
-                <div className="text-center text-white">
+                <div className="text-center text-on-secondary">
                   <p className="text-8xl mb-4">{d.heroSideEmoji}</p>
                   <p className="text-2xl font-semibold mb-2">{d.heroSideWeeks}</p>
-                  <p className="text-lg text-white/80">{d.heroSideSubtext}</p>
+                  <p className="text-lg text-on-secondary/80">{d.heroSideSubtext}</p>
                 </div>
               </div>
             </div>
@@ -166,10 +166,10 @@ export default function MindsetCoachingClient(props: Props) {
                 </div>
               </div>
               <div className="relative overflow-hidden rounded-3xl">
-                <div className="absolute inset-0 bg-gradient-to-r from-oxford to-azure"></div>
+                <div className="absolute inset-0 brand-gradient-oxford-azure"></div>
                 <div className="absolute top-0 right-0 w-1/2 h-full bg-carrot/20 -skew-x-12 translate-x-20"></div>
                 <div className="relative p-10 md:p-14 text-center">
-                  <p className="text-xl md:text-2xl leading-relaxed text-white">
+                  <p className="text-xl md:text-2xl leading-relaxed text-on-secondary">
                     {d.bannerText}<br />
                     <span className="text-carrot font-bold text-2xl md:text-3xl">{d.bannerHighlight}</span>
                   </p>
@@ -236,8 +236,8 @@ export default function MindsetCoachingClient(props: Props) {
                 </blockquote>
                 <p className="text-lg text-gray-600 leading-relaxed">{d.philosophyParagraph1}</p>
                 <p className="text-lg text-gray-600 leading-relaxed">{d.philosophyParagraph2}</p>
-                <div className="bg-gradient-to-r from-oxford to-[#1a2d50] rounded-2xl p-8 text-center">
-                  <p className="text-xl md:text-2xl text-white font-semibold">
+                <div className="brand-gradient-oxford-deep rounded-2xl p-8 text-center">
+                  <p className="text-xl md:text-2xl text-on-secondary font-semibold">
                     {d.philosophyBannerPrefix} <span className="text-carrot">{d.philosophyBannerHighlight}</span>
                   </p>
                 </div>
@@ -331,10 +331,10 @@ export default function MindsetCoachingClient(props: Props) {
                   </div>
                 ))}
               </div>
-              <div className="mt-8 bg-gradient-to-r from-oxford to-[#1a2d50] rounded-2xl p-6 text-center">
+              <div className="mt-8 brand-gradient-oxford-deep rounded-2xl p-6 text-center">
                 <div className="flex items-center justify-center gap-4">
                   <span className="text-3xl">{d.bonusEmoji}</span>
-                  <p className="text-white text-lg">
+                  <p className="text-on-secondary text-lg">
                     <span className="font-bold">{d.bonusPrefix}</span> {d.bonusText}
                   </p>
                 </div>
@@ -347,11 +347,11 @@ export default function MindsetCoachingClient(props: Props) {
       {/* Bottom CTA */}
       <section className="py-20 brand-gradient-azure">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-on-accent mb-6">
             {d.ctaSectionHeadingPrefix} <span className="text-carrot font-bold">{d.ctaSectionHeadingHighlight}</span>
           </h2>
-          <p className="text-lg md:text-xl text-white/90 mb-4 max-w-2xl mx-auto">{d.ctaSectionParagraph1}</p>
-          <p className="text-xl md:text-2xl text-white font-semibold mb-10 max-w-2xl mx-auto">{d.ctaSectionParagraph2}</p>
+          <p className="text-lg md:text-xl text-on-accent/90 mb-4 max-w-2xl mx-auto">{d.ctaSectionParagraph1}</p>
+          <p className="text-xl md:text-2xl text-on-accent font-semibold mb-10 max-w-2xl mx-auto">{d.ctaSectionParagraph2}</p>
           <BookingButton label={d.ctaButtonLabel} variant="primaryOnDark" />
         </div>
       </section>

@@ -8,6 +8,7 @@ import Footer from '@/components/Footer'
 import BookingOverlay from '@/components/BookingOverlay'
 import ScrollAnimator from '@/components/ScrollAnimator'
 import ThemeApplier from '@/components/ThemeApplier'
+import ThemePreviewListener from '@/components/ThemePreviewListener'
 import TypographyApplier from '@/components/TypographyApplier'
 import { BookingProvider } from '@/context/BookingContext'
 import themeData from '@/content/theme.json'
@@ -15,6 +16,7 @@ import navbarData from '@/content/navbar.json'
 import bookingFormData from '@/content/booking-form.json'
 import typographyData from '@/content/typography.json'
 import client from '@/tina/__generated__/client'
+import { pickForeground, hexToRgbTriplet } from '@/lib/color-utils'
 
 const caslonDisplay = Libre_Caslon_Display({
   weight: '400',
@@ -110,21 +112,14 @@ function buildTypographyStyle(t: Typography) {
 body { font-family: var(--body-font), sans-serif; font-weight: var(--body-weight); font-size: var(--body-size); }`
 }
 
-function hexToRgbTriplet(hex: string): string {
-  const cleaned = hex.replace('#', '').trim()
-  const expanded = cleaned.length === 3 ? cleaned.split('').map((c) => c + c).join('') : cleaned.slice(0, 6)
-  if (!/^[0-9a-fA-F]{6}$/.test(expanded)) return '0 0 0'
-  const r = parseInt(expanded.slice(0, 2), 16)
-  const g = parseInt(expanded.slice(2, 4), 16)
-  const b = parseInt(expanded.slice(4, 6), 16)
-  return `${r} ${g} ${b}`
-}
-
 function buildThemeStyle(t: { primaryColor?: string | null; secondaryColor?: string | null; accentColor?: string | null; neutralColor?: string | null }) {
   const primary = t.primaryColor || themeData.primaryColor
   const secondary = t.secondaryColor || themeData.secondaryColor
   const accent = t.accentColor || themeData.accentColor
   const neutral = t.neutralColor || themeData.neutralColor
+  const textOnPrimary = pickForeground(primary)
+  const textOnSecondary = pickForeground(secondary)
+  const textOnAccent = pickForeground(accent)
   return `:root {
   --carrot-orange: ${primary};
   --oxford-blue: ${secondary};
@@ -138,9 +133,15 @@ function buildThemeStyle(t: { primaryColor?: string | null; secondaryColor?: str
   --secondary: ${secondary};
   --brand-azure: ${accent};
   --accent: ${neutral};
-  --gradient-primary: linear-gradient(135deg, ${primary} 0%, #f39c12 100%);
-  --gradient-secondary: linear-gradient(135deg, ${secondary} 0%, #1e3a8a 100%);
-  --gradient-azure: linear-gradient(135deg, ${accent} 0%, #1e63c9 100%);
+  --text-on-primary: ${textOnPrimary};
+  --text-on-secondary: ${textOnSecondary};
+  --text-on-accent: ${textOnAccent};
+  --text-on-primary-rgb: ${hexToRgbTriplet(textOnPrimary)};
+  --text-on-secondary-rgb: ${hexToRgbTriplet(textOnSecondary)};
+  --text-on-accent-rgb: ${hexToRgbTriplet(textOnAccent)};
+  --gradient-primary: linear-gradient(135deg, ${primary} 0%, color-mix(in srgb, ${primary} 80%, black) 100%);
+  --gradient-secondary: linear-gradient(135deg, ${secondary} 0%, color-mix(in srgb, ${secondary} 80%, black) 100%);
+  --gradient-azure: linear-gradient(135deg, ${accent} 0%, color-mix(in srgb, ${accent} 80%, black) 100%);
   --gradient-dark: linear-gradient(135deg, #000000 0%, ${secondary} 100%);
 }`
 }
@@ -178,6 +179,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             data={typographyRes.data as any}
           />
         )}
+        <ThemePreviewListener />
         <BookingProvider>
           <Navbar data={navbarData} />
           <main id="main">{children}</main>

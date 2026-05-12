@@ -79,7 +79,7 @@ export default function NumerologyClient(props: Props) {
     <>
       {/* Hero */}
       <section className="page-hero">
-        <div className="absolute inset-0 bg-gradient-to-br from-oxford via-[#1a2d50] to-[#0d1829]"></div>
+        <div className="absolute inset-0 brand-gradient-oxford-deep"></div>
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           {floatingNumbers.map((f, i) => (
             <span key={i} className={`absolute ${f.pos} ${f.size} font-bold ${f.color}`}>{f.n}</span>
@@ -91,11 +91,11 @@ export default function NumerologyClient(props: Props) {
         <div className="container mx-auto px-6 relative z-20">
           <div className="max-w-4xl mx-auto text-center">
             <span className="inline-block text-carrot font-semibold text-sm uppercase tracking-widest mb-6">{d.heroBadge}</span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white font-dancing font-bold mb-4 leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-on-secondary font-dancing font-bold mb-4 leading-tight">
               {d.heroHeading}
             </h1>
             <p className="text-xl md:text-2xl text-carrot font-semibold mb-4">{d.heroTagline}</p>
-            <p className="text-lg md:text-xl text-white/80 mb-8 max-w-2xl mx-auto leading-relaxed">{d.heroSubtext}</p>
+            <p className="text-lg md:text-xl text-on-secondary/80 mb-8 max-w-2xl mx-auto leading-relaxed">{d.heroSubtext}</p>
             <BookingButton label={d.heroCTALabel} />
           </div>
         </div>
@@ -187,10 +187,7 @@ export default function NumerologyClient(props: Props) {
                   const labelColor = i % 2 === 0 ? 'text-carrot' : 'text-azure'
                   return (
                     <div key={i} className={`flex flex-col md:flex-row ${i % 2 === 1 ? 'md:flex-row-reverse' : ''} gap-8 items-center transition-all duration-300 hover:-translate-y-1`}>
-                      <div
-                        className="w-20 h-20 rounded-full flex items-center justify-center text-3xl text-white flex-shrink-0 shadow-lg"
-                        style={{ background: i % 2 === 1 ? 'linear-gradient(135deg, #ea9223 0%, #d17f1a 100%)' : 'linear-gradient(135deg, #14213d 0%, #237bea 100%)' }}
-                      >
+                      <div className={`w-20 h-20 rounded-full flex items-center justify-center text-3xl flex-shrink-0 shadow-lg ${i % 2 === 1 ? 'brand-gradient-orange text-on-primary' : 'brand-gradient-oxford-azure text-on-secondary'}`}>
                         <span>{step.emoji}</span>
                       </div>
                       <div className="flex-1 bg-white rounded-2xl p-8 shadow-lg">
@@ -250,8 +247,8 @@ export default function NumerologyClient(props: Props) {
                 </blockquote>
                 <p className="text-lg text-gray-600 leading-relaxed">{d.philosophyParagraph1}</p>
                 <p className="text-lg text-gray-600 leading-relaxed">{d.philosophyParagraph2}</p>
-                <div className="bg-gradient-to-r from-oxford to-[#1a2d50] rounded-2xl p-8 text-center">
-                  <p className="text-xl md:text-2xl text-white font-semibold">{d.philosophyBanner}</p>
+                <div className="brand-gradient-oxford-deep rounded-2xl p-8 text-center">
+                  <p className="text-xl md:text-2xl text-on-secondary font-semibold">{d.philosophyBanner}</p>
                 </div>
                 <p className="text-lg text-gray-600 leading-relaxed text-center">
                   {d.philosophyClosingPrefix} <span className="text-oxford font-semibold">{d.philosophyClosingHighlight}</span>
@@ -265,7 +262,7 @@ export default function NumerologyClient(props: Props) {
       {/* Bottom CTA */}
       <section className="py-24 brand-gradient-azure">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">{d.ctaSectionHeading}</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-on-accent mb-8">{d.ctaSectionHeading}</h2>
           <BookingButton label={d.ctaButtonLabel} variant="primaryOnDark" />
         </div>
       </section>

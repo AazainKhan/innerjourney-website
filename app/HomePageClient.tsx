@@ -123,10 +123,10 @@ export default function HomePageClient(props: Props) {
         {/* Mobile Social Bar */}
         <div className="md:hidden absolute bottom-0 left-0 right-0 bg-oxford py-4 px-4 z-20">
           <div className="flex justify-center space-x-8">
-            <a href="https://www.facebook.com/innerjourneywithshanila/" className="text-white text-xl hover:text-carrot transition-colors" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i className="fab fa-facebook"></i></a>
-            <a href="https://www.instagram.com/_.innerjourney_/" className="text-white text-xl hover:text-carrot transition-colors" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i className="fab fa-instagram"></i></a>
-            <a href="https://www.youtube.com/channel/UCJbRrCiY4zXfojPTa17EKMg" className="text-white text-xl hover:text-carrot transition-colors" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i className="fab fa-youtube"></i></a>
-            <a href="https://api.whatsapp.com/send?phone=447387973382&" className="text-white text-xl hover:text-carrot transition-colors" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i className="fab fa-whatsapp"></i></a>
+            <a href="https://www.facebook.com/innerjourneywithshanila/" className="text-on-secondary text-xl hover:text-carrot transition-colors" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i className="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/_.innerjourney_/" className="text-on-secondary text-xl hover:text-carrot transition-colors" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i className="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/channel/UCJbRrCiY4zXfojPTa17EKMg" className="text-on-secondary text-xl hover:text-carrot transition-colors" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i className="fab fa-youtube"></i></a>
+            <a href="https://api.whatsapp.com/send?phone=447387973382&" className="text-on-secondary text-xl hover:text-carrot transition-colors" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i className="fab fa-whatsapp"></i></a>
           </div>
         </div>
       </section>
@@ -176,7 +176,7 @@ export default function HomePageClient(props: Props) {
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-azure/10 rounded-full blur-3xl"></div>
           <div className="container mx-auto px-6 relative z-10">
             <div className="text-left">
-              <h2 className="text-4xl md:text-5xl heading-secondary text-white mb-8 animate-on-scroll">
+              <h2 className="text-4xl md:text-5xl heading-secondary text-on-secondary mb-8 animate-on-scroll">
                 {d.aboutHeading}
               </h2>
             </div>
@@ -184,16 +184,16 @@ export default function HomePageClient(props: Props) {
               <div className="space-y-6 animate-on-scroll">
                 <div className="flex items-center space-x-4 mb-6">
                   <div className="w-12 h-12 bg-gradient-to-r from-carrot/50 to-carrot rounded-full flex items-center justify-center">
-                    <i className="fas fa-star text-white text-xl"></i>
+                    <i className="fas fa-star text-on-primary text-xl"></i>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-white">{d.aboutCredentialTitle}</h3>
+                    <h3 className="text-xl font-semibold text-on-secondary">{d.aboutCredentialTitle}</h3>
                   </div>
                 </div>
-                <p className="text-lg text-gray-200 leading-relaxed">
+                <p className="text-lg text-on-secondary/85 leading-relaxed">
                   {d.aboutParagraph1}
                 </p>
-                <p className="text-lg text-gray-200 leading-relaxed">
+                <p className="text-lg text-on-secondary/85 leading-relaxed">
                   {d.aboutParagraph2}
                 </p>
                 <div className="flex flex-wrap gap-4">
@@ -267,6 +267,8 @@ export default function HomePageClient(props: Props) {
                   href: '/mindset-coaching',
                   btnText: 'Start my mindset journey',
                   gradient: 'brand-gradient-oxford',
+                  textClass: 'text-on-secondary',
+                  textSoftClass: 'text-on-secondary/90',
                   btnColor: 'text-oxford',
                 },
                 {
@@ -276,6 +278,8 @@ export default function HomePageClient(props: Props) {
                   href: '/career-coaching',
                   btnText: 'Realign my career',
                   gradient: 'brand-gradient-orange',
+                  textClass: 'text-on-primary',
+                  textSoftClass: 'text-on-primary/90',
                   btnColor: 'text-carrot',
                 },
                 {
@@ -285,14 +289,16 @@ export default function HomePageClient(props: Props) {
                   href: '/numerology',
                   btnText: 'Book my numerology session',
                   gradient: 'brand-gradient-oxford',
+                  textClass: 'text-on-secondary',
+                  textSoftClass: 'text-on-secondary/90',
                   btnColor: 'text-oxford',
                 },
               ].map((service) => (
                 <div key={service.title} className="service-card group animate-on-scroll">
-                  <div className={`${service.gradient} p-8 rounded-2xl text-white h-full transition-all duration-500 transform group-hover:scale-105 shadow-xl flex flex-col`}>
+                  <div className={`${service.gradient} ${service.textClass} p-8 rounded-2xl h-full transition-all duration-500 transform group-hover:scale-105 shadow-xl flex flex-col`}>
                     <div className="text-4xl mb-6"><i className={`fas ${service.icon}`}></i></div>
                     <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
-                    <p className="text-white/90 mb-6 flex-grow">{service.description}</p>
+                    <p className={`${service.textSoftClass} mb-6 flex-grow`}>{service.description}</p>
                     <Link href={service.href} className={`bg-white ${service.btnColor} hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold transition-all duration-300 mt-auto inline-block text-center`}>
                       {service.btnText}
                     </Link>
@@ -307,7 +313,7 @@ export default function HomePageClient(props: Props) {
       {/* Bottom CTA */}
       <section className="py-20 brand-gradient-azure">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-6 animate-on-scroll">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-on-accent mb-6 animate-on-scroll">
             {d.bottomCTAText}
           </h2>
           <HomeClient buttonOnly variant="onAzure" ctaLabel={d.heroBottomCTALabel} />

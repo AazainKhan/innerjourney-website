@@ -21,12 +21,12 @@ export default function Footer() {
   const telDigits = (f.phone ?? '').replace(/[^+\d]/g, '')
 
   return (
-    <footer className="bg-oxford text-platinum py-12">
+    <footer className="bg-oxford text-on-secondary py-12">
       <div className="container mx-auto px-6">
         <div className="grid md:grid-cols-4 gap-8">
           <div>
             <h3 className="text-2xl font-bold text-carrot mb-4">{f.brandHeading}</h3>
-            <p className="text-platinum">{f.brandDescription}</p>
+            <p className="text-on-secondary/85">{f.brandDescription}</p>
           </div>
           <div>
             <h4 className="text-lg font-semibold mb-4">{f.quickLinksHeading}</h4>
@@ -64,7 +64,7 @@ export default function Footer() {
                 </a>
               ))}
             </div>
-            <div className="space-y-2 text-platinum text-sm">
+            <div className="space-y-2 text-on-secondary/85 text-sm">
               {f.email && (
                 <div>
                   <span className="font-semibold">{f.emailLabel}</span><br />
@@ -80,7 +80,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="border-t border-white/10 mt-8 pt-8 text-center text-platinum/80">
+        <div className="border-t border-white/10 mt-8 pt-8 text-center text-on-secondary/70">
           <p>{f.copyright}</p>
         </div>
       </div>

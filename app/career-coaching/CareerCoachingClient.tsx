@@ -87,17 +87,17 @@ export default function CareerCoachingClient(props: Props) {
     <>
       {/* Hero */}
       <section className="page-hero">
-        <div className="absolute inset-0 bg-gradient-to-br from-oxford/95 via-[#1a2d50] to-[#0f1a2e]"></div>
+        <div className="absolute inset-0 brand-gradient-oxford-deep"></div>
         <div className="absolute top-20 left-20 w-32 h-32 bg-carrot/20 rounded-full blur-xl animate-pulse"></div>
         <div className="absolute bottom-40 right-20 w-40 h-40 bg-azure/20 rounded-full blur-xl animate-pulse delay-1000"></div>
         <div className="absolute top-1/3 right-1/4 w-24 h-24 bg-white/5 rounded-full blur-lg animate-pulse delay-500"></div>
 
         <div className="container mx-auto px-6 relative z-20">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white font-dancing font-bold mb-6 leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-on-secondary font-dancing font-bold mb-6 leading-tight">
               {d.heroHeading}
             </h1>
-            <p className="text-lg md:text-xl body-text-light text-white/90 mb-8 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl body-text-light text-on-secondary/90 mb-8 leading-relaxed max-w-3xl mx-auto">
               {d.heroSubtextPrefix} <span className="text-carrot font-bold">{d.heroSubtextHighlight}</span>
             </p>
             <BookingButton label={d.heroCTALabel} />
@@ -133,9 +133,9 @@ export default function CareerCoachingClient(props: Props) {
                   ))}
                 </div>
               </div>
-              <div className="text-center bg-gradient-to-r from-oxford to-[#1a2d50] rounded-2xl p-10">
+              <div className="text-center brand-gradient-oxford-deep rounded-2xl p-10">
                 <p className="text-xl md:text-2xl leading-relaxed">
-                  <span className="text-white">{d.bannerPrefix} </span>
+                  <span className="text-on-secondary">{d.bannerPrefix} </span>
                   <span className="text-carrot font-bold">{d.bannerHighlight}</span>
                 </p>
               </div>
@@ -176,17 +176,17 @@ export default function CareerCoachingClient(props: Props) {
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl heading-secondary text-white mb-6">
+              <h2 className="text-4xl md:text-5xl heading-secondary text-on-secondary mb-6">
                 {d.philosophyHeadingPrefix} <span className="text-carrot font-bold">{d.philosophyHeadingHighlight}</span>
               </h2>
             </div>
-            <div className="space-y-6 text-lg text-gray-200 leading-relaxed">
+            <div className="space-y-6 text-lg text-on-secondary/85 leading-relaxed">
               <p>{d.philosophyParagraph1}</p>
               <p>
                 {d.philosophyParagraph2Prefix} <span className="text-carrot font-semibold">{d.philosophyParagraph2Highlight}</span>
               </p>
               <p>{d.philosophyParagraph3}</p>
-              <p className="text-xl text-white font-semibold">{d.philosophyEmphasis}</p>
+              <p className="text-xl text-on-secondary font-semibold">{d.philosophyEmphasis}</p>
               <p>{d.philosophyClosing}</p>
             </div>
           </div>
@@ -231,7 +231,7 @@ export default function CareerCoachingClient(props: Props) {
                 <div key={step.number} className="relative mb-12 md:mb-16 last:mb-0">
                   <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-start">
                     <div className="flex items-center gap-4 md:flex-col md:items-center">
-                      <div className="w-16 h-16 rounded-full text-white text-2xl font-bold flex items-center justify-center shadow-lg" style={{ background: 'linear-gradient(to bottom, #ea9223, #237bea)' }}>
+                      <div className="w-16 h-16 rounded-full text-white text-2xl font-bold flex items-center justify-center shadow-lg" style={{ background: 'linear-gradient(to bottom, var(--carrot-orange), var(--azure-blue))' }}>
                         {step.number}
                       </div>
                       <div className="text-sm font-semibold text-gray-500 uppercase tracking-wide md:mt-2">{step.weeks}</div>
@@ -259,16 +259,16 @@ export default function CareerCoachingClient(props: Props) {
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl heading-secondary text-white mb-4">
+              <h2 className="text-4xl md:text-5xl heading-secondary text-on-secondary mb-4">
                 {d.experienceHeadingPrefix} <span className="text-carrot font-bold">{d.experienceHeadingHighlight}</span>
               </h2>
-              <p className="text-xl text-gray-200">{d.experienceSubtext}</p>
+              <p className="text-xl text-on-secondary/85">{d.experienceSubtext}</p>
             </div>
             <div className="grid md:grid-cols-2 gap-6">
               {(d.experienceItems ?? []).map((item, i) => (
-                <div key={i} className={`flex items-start space-x-4 py-4 border-b border-white/10 ${i === (d.experienceItems ?? []).length - 1 ? 'md:col-span-2 border-b-0' : ''}`}>
+                <div key={i} className={`flex items-start space-x-4 py-4 border-on-secondary/40 border-b ${i === (d.experienceItems ?? []).length - 1 ? 'md:col-span-2 border-b-0' : ''}`}>
                   <span className="text-carrot text-xl mt-1">✓</span>
-                  <p className="text-gray-200 text-lg">{item}</p>
+                  <p className="text-on-secondary/85 text-lg">{item}</p>
                 </div>
               ))}
             </div>
@@ -279,11 +279,11 @@ export default function CareerCoachingClient(props: Props) {
       {/* Bottom CTA */}
       <section className="py-20 brand-gradient-azure">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-on-accent mb-6">
             {d.ctaSectionHeadingPrefix} <span className="text-carrot font-bold">{d.ctaSectionHeadingHighlight}</span>
           </h2>
-          <p className="text-lg md:text-xl text-white/90 mb-4 max-w-2xl mx-auto">{d.ctaSectionParagraph1}</p>
-          <p className="text-xl md:text-2xl text-white font-semibold mb-10 max-w-2xl mx-auto">{d.ctaSectionParagraph2}</p>
+          <p className="text-lg md:text-xl text-on-accent/90 mb-4 max-w-2xl mx-auto">{d.ctaSectionParagraph1}</p>
+          <p className="text-xl md:text-2xl text-on-accent font-semibold mb-10 max-w-2xl mx-auto">{d.ctaSectionParagraph2}</p>
           <BookingButton label={d.ctaButtonLabel} variant="primaryOnDark" />
         </div>
       </section>
