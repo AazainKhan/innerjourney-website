@@ -1,10 +1,44 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useTina } from 'tinacms/dist/react'
 import BookingButton from '@/components/BookingButton'
 import RichText from '@/components/RichText'
+
+type SortKey = 'newest' | 'oldest' | 'title' | 'status'
+
+const INITIAL_VISIBLE = 6
+
+// Shared "kind" tag style — theme-aware, consistent across every card so the
+// per-item badgeColor doesn't introduce contrast issues. Blog uses azure
+// (accent), Podcast uses carrot (primary).
+const BLOG_TAG_CLASS = 'bg-azure text-on-accent'
+const PODCAST_TAG_CLASS = 'bg-carrot text-on-primary'
+
+function sortByKey<T extends { title: string; publishedAt?: string; status?: string }>(items: T[], key: SortKey, featured?: Set<string>, slugOf?: (item: T) => string): T[] {
+  const next = [...items]
+  if (key === 'newest') {
+    next.sort((a, b) => Date.parse(b.publishedAt || '') - Date.parse(a.publishedAt || ''))
+  } else if (key === 'oldest') {
+    next.sort((a, b) => Date.parse(a.publishedAt || '') - Date.parse(b.publishedAt || ''))
+  } else if (key === 'title') {
+    next.sort((a, b) => a.title.localeCompare(b.title))
+  } else if (key === 'status') {
+    // Published → Coming Soon → Draft (or any unknown)
+    const rank = (s?: string) => (s === 'Published' ? 0 : s === 'Coming Soon' ? 1 : 2)
+    next.sort((a, b) => rank(a.status) - rank(b.status) || Date.parse(b.publishedAt || '') - Date.parse(a.publishedAt || ''))
+  }
+  // If featured set provided, hoist featured items to the top while preserving the chosen sort within each group
+  if (featured && featured.size > 0 && slugOf) {
+    next.sort((a, b) => {
+      const af = featured.has(slugOf(a)) ? 0 : 1
+      const bf = featured.has(slugOf(b)) ? 0 : 1
+      return af - bf
+    })
+  }
+  return next
+}
 
 interface BlogPost {
   slug: string
@@ -76,7 +110,6 @@ function FeaturedCard({
   icon,
   iconColor,
   gradient,
-  badgeColor,
 }: {
   href: string
   kind: 'Blog' | 'Podcast'
@@ -87,8 +120,8 @@ function FeaturedCard({
   icon: string
   iconColor: string
   gradient: string
-  badgeColor: string
 }) {
+  const tagClass = kind === 'Podcast' ? PODCAST_TAG_CLASS : BLOG_TAG_CLASS
   return (
     <Link
       href={href}
@@ -98,12 +131,12 @@ function FeaturedCard({
         <div className="absolute inset-0 flex items-center justify-center">
           <i className={`fas ${icon} text-5xl ${iconColor}`}></i>
         </div>
-        <span className={`absolute top-4 left-4 px-3 py-1 ${badgeColor} text-white text-xs rounded-full font-semibold`}>
-          {kind === 'Podcast' && <i className="fas fa-podcast mr-1"></i>}
+        <span className={`absolute top-4 left-4 px-3 py-1 ${tagClass} text-xs rounded-full font-semibold inline-flex items-center gap-1`}>
+          {kind === 'Podcast' && <i className="fas fa-podcast"></i>}
           {kind}
         </span>
         {meta && (
-          <span className="absolute top-4 right-4 px-3 py-1 bg-black/30 text-white text-xs rounded-full font-semibold backdrop-blur-sm">
+          <span className="absolute top-4 right-4 px-3 py-1 bg-black/40 text-white text-xs rounded-full font-semibold backdrop-blur-sm">
             {meta}
           </span>
         )}
@@ -130,7 +163,7 @@ function BlogCard({ post }: { post: BlogPost }) {
         <div className="absolute inset-0 flex items-center justify-center">
           <i className={`fas ${post.icon} text-5xl ${post.iconColor}`}></i>
         </div>
-        <span className={`absolute top-4 left-4 px-3 py-1 ${post.badgeColor} text-white text-xs rounded-full font-semibold`}>
+        <span className={`absolute top-4 left-4 px-3 py-1 ${BLOG_TAG_CLASS} text-xs rounded-full font-semibold`}>
           Blog
         </span>
       </div>
@@ -158,8 +191,8 @@ function PodcastCard({ episode }: { episode: Podcast }) {
         </div>
         <div className="md:col-span-2 p-8">
           <div className="flex items-center gap-3 mb-4">
-            <span className={`px-4 py-1 ${episode.badgeColor} text-on-primary text-xs rounded-full font-semibold`}>
-              <i className="fas fa-podcast mr-1"></i> Podcast
+            <span className={`px-4 py-1 ${PODCAST_TAG_CLASS} text-xs rounded-full font-semibold inline-flex items-center gap-1`}>
+              <i className="fas fa-podcast"></i> Podcast
             </span>
             <span className="text-on-secondary/70 text-sm">{episode.episode}</span>
           </div>
@@ -188,6 +221,10 @@ export default function ResourcesClient(props: Props) {
   })
   const d = data.resources
   const [newsletterStatus, setNewsletterStatus] = useState<'idle' | 'success'>('idle')
+  const [blogSort, setBlogSort] = useState<SortKey>('newest')
+  const [podcastSort, setPodcastSort] = useState<SortKey>('newest')
+  const [blogShowAll, setBlogShowAll] = useState(false)
+  const [podcastShowAll, setPodcastShowAll] = useState(false)
 
   // Resolve featured slugs against the all-posts/all-podcasts lists. Drop slugs
   // that don't match anything (typo / deleted post) so the section never breaks.
@@ -203,6 +240,24 @@ export default function ResourcesClient(props: Props) {
     .filter((p): p is Podcast => Boolean(p))
 
   const hasFeatured = featuredPosts.length > 0 || featuredPodcasts.length > 0
+
+  const featuredPostSlugSet = useMemo(() => new Set(props.featuredPostSlugs), [props.featuredPostSlugs])
+  const featuredPodcastSlugSet = useMemo(() => new Set(props.featuredPodcastSlugs), [props.featuredPodcastSlugs])
+
+  // Sorted lists for the library sections — sort is applied client-side so the
+  // user can switch ordering without a roundtrip. Featured items are hoisted to
+  // the top for any sort, then the chosen sort applies within each group.
+  const sortedPosts = useMemo(
+    () => sortByKey(props.posts, blogSort, featuredPostSlugSet, (p) => p.slug),
+    [props.posts, blogSort, featuredPostSlugSet],
+  )
+  const sortedPodcasts = useMemo(
+    () => sortByKey(props.podcasts, podcastSort, featuredPodcastSlugSet, (p) => p.slug),
+    [props.podcasts, podcastSort, featuredPodcastSlugSet],
+  )
+
+  const visiblePosts = blogShowAll ? sortedPosts : sortedPosts.slice(0, INITIAL_VISIBLE)
+  const visiblePodcasts = podcastShowAll ? sortedPodcasts : sortedPodcasts.slice(0, INITIAL_VISIBLE)
 
   return (
     <>
@@ -270,7 +325,6 @@ export default function ResourcesClient(props: Props) {
                       icon={post.icon}
                       iconColor={post.iconColor}
                       gradient={post.gradient}
-                      badgeColor={post.badgeColor}
                     />
                   ))}
                   {featuredPodcasts.map((episode) => (
@@ -285,7 +339,6 @@ export default function ResourcesClient(props: Props) {
                       icon={episode.icon}
                       iconColor="text-white/60"
                       gradient={episode.gradient}
-                      badgeColor={episode.badgeColor}
                     />
                   ))}
                 </div>
@@ -298,22 +351,43 @@ export default function ResourcesClient(props: Props) {
         <section id="blog-library" className="py-20 relative scroll-mt-24">
           <div className="container mx-auto px-6 relative z-10">
             <div className="max-w-7xl mx-auto">
-              <h2 className="text-3xl md:text-4xl heading-secondary text-gray-900 mb-3 text-center">
-                {d.blogLibraryHeading}
-              </h2>
-              <p className="text-center text-gray-500 mb-12">
-                {props.posts.length === 0
-                  ? 'New posts coming soon.'
-                  : `${props.posts.length} ${props.posts.length === 1 ? 'post' : 'posts'}`}
-              </p>
+              <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+                <div className="text-center md:text-left">
+                  <h2 className="text-3xl md:text-4xl heading-secondary text-gray-900 mb-2">{d.blogLibraryHeading}</h2>
+                  <p className="text-gray-500 text-sm">
+                    {props.posts.length === 0
+                      ? 'New posts coming soon.'
+                      : `${props.posts.length} ${props.posts.length === 1 ? 'post' : 'posts'}${blogShowAll || props.posts.length <= INITIAL_VISIBLE ? '' : ` · showing latest ${visiblePosts.length}`}`}
+                  </p>
+                </div>
+                {props.posts.length > 1 && (
+                  <SortControl id="blog-sort" label="Sort posts" value={blogSort} onChange={setBlogSort} />
+                )}
+              </div>
               {props.posts.length === 0 ? (
                 <p className="text-center text-gray-500 italic">Add one in Tina&apos;s Blog Posts collection to populate the library.</p>
               ) : (
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {props.posts.map((post) => (
-                    <BlogCard key={post.slug} post={post} />
-                  ))}
-                </div>
+                <>
+                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {visiblePosts.map((post) => (
+                      <BlogCard key={post.slug} post={post} />
+                    ))}
+                  </div>
+                  {sortedPosts.length > INITIAL_VISIBLE && (
+                    <div className="text-center mt-10">
+                      <button
+                        onClick={() => setBlogShowAll((v) => !v)}
+                        className="inline-flex items-center gap-2 rounded-full bg-azure text-on-accent px-6 py-3 text-sm font-semibold shadow-azure hover:brightness-110 transition-all"
+                      >
+                        {blogShowAll ? (
+                          <>Show less <i className="fas fa-chevron-up"></i></>
+                        ) : (
+                          <>View all {sortedPosts.length} posts <i className="fas fa-chevron-down"></i></>
+                        )}
+                      </button>
+                    </div>
+                  )}
+                </>
               )}
             </div>
           </div>
@@ -323,22 +397,43 @@ export default function ResourcesClient(props: Props) {
         <section id="podcast-library" className="py-20 relative scroll-mt-24">
           <div className="container mx-auto px-6 relative z-10">
             <div className="max-w-6xl mx-auto">
-              <h2 className="text-3xl md:text-4xl heading-secondary text-gray-900 mb-3 text-center">
-                {d.podcastLibraryHeading}
-              </h2>
-              <p className="text-center text-gray-500 mb-12">
-                {props.podcasts.length === 0
-                  ? 'New episodes coming soon.'
-                  : `${props.podcasts.length} ${props.podcasts.length === 1 ? 'episode' : 'episodes'}`}
-              </p>
+              <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+                <div className="text-center md:text-left">
+                  <h2 className="text-3xl md:text-4xl heading-secondary text-gray-900 mb-2">{d.podcastLibraryHeading}</h2>
+                  <p className="text-gray-500 text-sm">
+                    {props.podcasts.length === 0
+                      ? 'New episodes coming soon.'
+                      : `${props.podcasts.length} ${props.podcasts.length === 1 ? 'episode' : 'episodes'}${podcastShowAll || props.podcasts.length <= INITIAL_VISIBLE ? '' : ` · showing latest ${visiblePodcasts.length}`}`}
+                  </p>
+                </div>
+                {props.podcasts.length > 1 && (
+                  <SortControl id="podcast-sort" label="Sort episodes" value={podcastSort} onChange={setPodcastSort} />
+                )}
+              </div>
               {props.podcasts.length === 0 ? (
                 <p className="text-center text-gray-500 italic">Add one in Tina&apos;s Podcast Episodes collection to populate the library.</p>
               ) : (
-                <div className="space-y-6">
-                  {props.podcasts.map((episode) => (
-                    <PodcastCard key={episode.slug} episode={episode} />
-                  ))}
-                </div>
+                <>
+                  <div className="space-y-6">
+                    {visiblePodcasts.map((episode) => (
+                      <PodcastCard key={episode.slug} episode={episode} />
+                    ))}
+                  </div>
+                  {sortedPodcasts.length > INITIAL_VISIBLE && (
+                    <div className="text-center mt-10">
+                      <button
+                        onClick={() => setPodcastShowAll((v) => !v)}
+                        className="inline-flex items-center gap-2 rounded-full bg-azure text-on-accent px-6 py-3 text-sm font-semibold shadow-azure hover:brightness-110 transition-all"
+                      >
+                        {podcastShowAll ? (
+                          <>Show less <i className="fas fa-chevron-up"></i></>
+                        ) : (
+                          <>View all {sortedPodcasts.length} episodes <i className="fas fa-chevron-down"></i></>
+                        )}
+                      </button>
+                    </div>
+                  )}
+                </>
               )}
             </div>
           </div>
@@ -409,5 +504,26 @@ export default function ResourcesClient(props: Props) {
         </div>
       </section>
     </>
+  )
+}
+
+function SortControl({ id, label, value, onChange }: { id: string; label: string; value: SortKey; onChange: (v: SortKey) => void }) {
+  return (
+    <div className="flex items-center gap-2 self-center md:self-end">
+      <label htmlFor={id} className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+        {label}
+      </label>
+      <select
+        id={id}
+        value={value}
+        onChange={(e) => onChange(e.target.value as SortKey)}
+        className="rounded-full border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-azure"
+      >
+        <option value="newest">Newest first</option>
+        <option value="oldest">Oldest first</option>
+        <option value="title">Title (A–Z)</option>
+        <option value="status">Status</option>
+      </select>
+    </div>
   )
 }

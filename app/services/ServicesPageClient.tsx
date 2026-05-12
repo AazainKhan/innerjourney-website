@@ -109,7 +109,7 @@ export default function ServicesPageClient(props: Props) {
                     <ul className="space-y-2 mb-8">
                       {s.highlights.map((h) => (
                         <li key={h} className="flex items-center gap-3">
-                          <i className="fas fa-check text-carrot flex-shrink-0"></i>
+                          <i className={`fas fa-check ${s.textClass} flex-shrink-0`}></i>
                           <span className={s.textSoftClass}>{h}</span>
                         </li>
                       ))}
