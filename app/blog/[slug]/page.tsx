@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import BookingButton from '@/components/BookingButton'
 import { getPost, listPosts } from '@/lib/posts'
 
 export async function generateStaticParams() {
@@ -98,19 +97,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </div>
         </div>
       </article>
-
-      {/* CTA */}
-      <section className="py-16 brand-gradient-azure">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-on-accent mb-4">
-            Ready for your own <span className="text-carrot font-bold">inner journey?</span>
-          </h2>
-          <p className="text-lg text-on-accent/90 mb-8 max-w-2xl mx-auto">
-            Book a free discovery call and let&apos;s explore how coaching can help.
-          </p>
-          <BookingButton variant="primaryOnDark" />
-        </div>
-      </section>
     </>
   )
 }

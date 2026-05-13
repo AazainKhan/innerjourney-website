@@ -488,10 +488,7 @@ var config_default = defineConfig({
           { name: "newsletterSubtext", label: "Newsletter Subtext", type: "string", ui: { component: "textarea" } },
           { name: "newsletterPlaceholder", label: "Newsletter Email Placeholder", type: "string" },
           { name: "newsletterButton", label: "Newsletter Button Label", type: "string" },
-          { name: "newsletterSuccessMessage", label: "Newsletter Success Message", type: "string" },
-          { name: "ctaSectionHeading", label: "Bottom CTA Heading", type: "string" },
-          { name: "ctaSectionSubtext", label: "Bottom CTA Subtext", type: "string", ui: { component: "textarea" } },
-          { name: "ctaButtonLabel", label: "Bottom CTA Button Label", type: "string" }
+          { name: "newsletterSuccessMessage", label: "Newsletter Success Message", type: "string" }
         ]
       },
       {

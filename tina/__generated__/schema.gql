@@ -776,9 +776,6 @@ type Resources implements Node & Document {
   newsletterPlaceholder: String
   newsletterButton: String
   newsletterSuccessMessage: String
-  ctaSectionHeading: String
-  ctaSectionSubtext: String
-  ctaButtonLabel: String
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -815,9 +812,6 @@ input ResourcesFilter {
   newsletterPlaceholder: StringFilter
   newsletterButton: StringFilter
   newsletterSuccessMessage: StringFilter
-  ctaSectionHeading: StringFilter
-  ctaSectionSubtext: StringFilter
-  ctaButtonLabel: StringFilter
 }
 
 type ResourcesConnectionEdges {
@@ -1574,9 +1568,6 @@ input ResourcesMutation {
   newsletterPlaceholder: String
   newsletterButton: String
   newsletterSuccessMessage: String
-  ctaSectionHeading: String
-  ctaSectionSubtext: String
-  ctaButtonLabel: String
 }
 
 input ContactMutation {

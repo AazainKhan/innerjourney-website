@@ -4,7 +4,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useMemo, useState } from 'react'
 import { useTina } from 'tinacms/dist/react'
-import BookingButton from '@/components/BookingButton'
 import RichText from '@/components/RichText'
 
 type SortKey = 'newest' | 'oldest' | 'title' | 'status'
@@ -80,9 +79,6 @@ interface ResourcesData {
     newsletterPlaceholder: string
     newsletterButton: string
     newsletterSuccessMessage: string
-    ctaSectionHeading: string
-    ctaSectionSubtext: string
-    ctaButtonLabel: string
   }
 }
 
@@ -566,17 +562,6 @@ export default function ResourcesClient(props: Props) {
           </div>
         </section>
       </div>
-
-      {/* Bottom CTA */}
-      <section className="py-20 brand-gradient-azure">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-on-accent mb-6">
-            {d.ctaSectionHeading}
-          </h2>
-          <p className="text-xl text-on-accent/90 mb-8 max-w-2xl mx-auto">{d.ctaSectionSubtext}</p>
-          <BookingButton label={d.ctaButtonLabel} variant="primaryOnDark" />
-        </div>
-      </section>
     </>
   )
 }

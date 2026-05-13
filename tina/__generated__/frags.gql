@@ -325,9 +325,6 @@ fragment ResourcesParts on Resources {
   newsletterPlaceholder
   newsletterButton
   newsletterSuccessMessage
-  ctaSectionHeading
-  ctaSectionSubtext
-  ctaButtonLabel
 }
 
 fragment ContactParts on Contact {
