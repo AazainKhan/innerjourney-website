@@ -56,8 +56,10 @@ export default function Navbar({ data }: { data: NavbarData }) {
               <div className="text-2xl heading-primary text-on-secondary whitespace-nowrap">{data.brandLabel}</div>
             </Link>
 
-            {/* Desktop nav */}
-            <div className="hidden md:flex items-center space-x-8">
+            {/* Desktop nav — only shows from lg up. At md (768-1023) the
+             * combined logo + brand + 4 nav links + CTA can't breathe so we
+             * stay on the hamburger menu for that range. */}
+            <div className="hidden lg:flex items-center space-x-8">
               {data.links.map((link) => link.showDropdown ? (
                 <div key={link.href} className="nav-dropdown">
                   <Link href={link.href} className="nav-link nav-text text-on-secondary hover:text-carrot transition-colors uppercase">
@@ -76,9 +78,8 @@ export default function Navbar({ data }: { data: NavbarData }) {
 
             {/* Desktop-only booking CTA. We wrap in a div with the hidden/inline
              * toggle so .btn-azure's inherent `display: inline-block` doesn't
-             * override Tailwind's `hidden` utility (source order conflict that
-             * was causing the button to appear on mobile). */}
-            <div className="hidden md:inline-flex">
+             * override Tailwind's `hidden` utility (source order conflict). */}
+            <div className="hidden lg:inline-flex">
               <button
                 id="booking-btn"
                 onClick={openBooking}
@@ -88,17 +89,21 @@ export default function Navbar({ data }: { data: NavbarData }) {
               </button>
             </div>
 
-            <div className="md:hidden mr-2">
-              <button
-                onClick={() => setMobileOpen(true)}
-                aria-label="Toggle navigation menu"
-                aria-expanded={mobileOpen}
-                aria-controls="mobile-menu"
-                className="text-on-secondary text-2xl"
-              >
-                <i className="fas fa-bars" aria-hidden="true"></i>
-              </button>
-            </div>
+            {/* Hamburger — visible below lg. Hidden while the mobile menu is
+             * open so it doesn't stack visually behind the menu's X close. */}
+            {!mobileOpen && (
+              <div className="lg:hidden mr-2">
+                <button
+                  onClick={() => setMobileOpen(true)}
+                  aria-label="Open navigation menu"
+                  aria-expanded={mobileOpen}
+                  aria-controls="mobile-menu"
+                  className="text-on-secondary text-2xl"
+                >
+                  <i className="fas fa-bars" aria-hidden="true"></i>
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </nav>
