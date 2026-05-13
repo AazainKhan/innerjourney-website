@@ -41,10 +41,10 @@ const dancingScript = Dancing_Script({
 export const metadata: Metadata = {
   metadataBase: new URL('https://innerjourney-with-shanila.com'),
   title: {
-    default: 'Shanila - Clarity and Mindset Coach | Transform Your Journey',
+    default: 'Shanila - Confidence and Mindset Coach | Transform Your Journey',
     template: '%s | Shanila Khan',
   },
-  description: 'Transform your life with Shanila\'s expert Clarity and Mindset Coaching. Book A Consultation today and start your journey to success.',
+  description: 'Transform your life with Shanila\'s expert Confidence and Mindset Coaching. Book A Consultation today and start your journey to success.',
   openGraph: {
     type: 'website',
     siteName: 'Inner Journey with Shanila',

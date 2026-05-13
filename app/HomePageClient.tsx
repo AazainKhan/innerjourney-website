@@ -220,7 +220,7 @@ export default function HomePageClient(props: Props) {
                 <div className="w-full h-auto md:h-[32rem] overflow-visible relative">
                   <Image
                     src={d.aboutImage || '/images/about-image-1200.webp'}
-                    alt="Shanila - Clarity and Mindset Coach"
+                    alt="Shanila - Confidence and Mindset Coach"
                     width={1200}
                     height={800}
                     className="w-full md:w-auto md:max-h-full mx-auto object-cover md:object-contain shadow-2xl"

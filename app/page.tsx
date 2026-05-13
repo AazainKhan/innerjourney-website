@@ -6,12 +6,12 @@ import HomePageClient from './HomePageClient'
 const inline = (s: string) => ({ type: 'root', children: [{ type: 'p', children: [{ type: 'text', text: s }] }] })
 
 export const metadata: Metadata = {
-  title: 'Shanila - Clarity and Mindset Coach | Transform Your Journey',
-  description: 'Transform your life with Shanila\'s expert Clarity and Mindset Coaching. Book A Consultation today and start your journey to success.',
+  title: 'Shanila - Confidence and Mindset Coach | Transform Your Journey',
+  description: 'Transform your life with Shanila\'s expert Confidence and Mindset Coaching. Book A Consultation today and start your journey to success.',
   alternates: { canonical: 'https://innerjourney-with-shanila.com/' },
   openGraph: {
-    title: 'Shanila - Clarity and Mindset Coach | Transform Your Journey',
-    description: 'Transform your journey with Shanila\'s Clarity and Mindset Coaching.',
+    title: 'Shanila - Confidence and Mindset Coach | Transform Your Journey',
+    description: 'Transform your journey with Shanila\'s Confidence and Mindset Coaching.',
     url: 'https://innerjourney-with-shanila.com/',
     images: [{ url: '/images/og-default.jpg', width: 1200, height: 630, alt: 'Your Path back to Purpose' }],
   },

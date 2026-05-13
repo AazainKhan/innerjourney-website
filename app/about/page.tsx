@@ -4,12 +4,12 @@ import client from '@/tina/__generated__/client'
 import AboutPageClient from './AboutPageClient'
 
 export const metadata: Metadata = {
-  title: 'About Shanila - Clarity and Mindset Coach',
-  description: 'Learn more about Shanila, a certified Clarity and Mindset Coach with over 10 years of experience helping people rewrite their story with clarity and confidence.',
+  title: 'About Shanila - Confidence and Mindset Coach',
+  description: 'Learn more about Shanila, a certified Confidence and Mindset Coach with over 10 years of experience helping people rewrite their story with clarity and confidence.',
   alternates: { canonical: 'https://innerjourney-with-shanila.com/about' },
   openGraph: {
-    title: 'About Shanila - Clarity and Mindset Coach | Your Journey to Success',
-    description: 'Learn more about Shanila, a certified Clarity and Mindset Coach with years of experience helping people build clarity and confidence.',
+    title: 'About Shanila - Confidence and Mindset Coach | Your Journey to Success',
+    description: 'Learn more about Shanila, a certified Confidence and Mindset Coach with years of experience helping people build clarity and confidence.',
     url: 'https://innerjourney-with-shanila.com/about',
     images: [{ url: '/images/og-about.jpg', width: 1200, height: 630, alt: 'Meet Shanila Khan' }],
   },

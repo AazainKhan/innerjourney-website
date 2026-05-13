@@ -6,11 +6,11 @@ import ContactPageClient from './ContactPageClient'
 const inline = (s: string) => ({ type: 'root', children: [{ type: 'p', children: [{ type: 'text', text: s }] }] })
 
 export const metadata: Metadata = {
-  title: 'Contact Shanila - Clarity and Mindset Coach | Get In Touch',
-  description: "Ready to start your transformation? Contact Shanila today to book a free consultation or ask any questions about clarity and mindset coaching.",
+  title: 'Contact Shanila - Confidence and Mindset Coach | Get In Touch',
+  description: "Ready to start your transformation? Contact Shanila today to book a free consultation or ask any questions about confidence and mindset coaching.",
   alternates: { canonical: 'https://innerjourney-with-shanila.com/contact' },
   openGraph: {
-    title: 'Contact Shanila - Clarity and Mindset Coach',
+    title: 'Contact Shanila - Confidence and Mindset Coach',
     description: 'Get in touch for a free consultation or to start your coaching journey.',
     url: 'https://innerjourney-with-shanila.com/contact',
     images: [{ url: '/images/og-contact.jpg', width: 1200, height: 630, alt: "Let's Connect" }],
