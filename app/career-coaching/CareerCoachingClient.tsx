@@ -1,42 +1,31 @@
 'use client'
 
 import { useTina } from 'tinacms/dist/react'
+import { TinaMarkdown, type TinaMarkdownContent } from 'tinacms/dist/rich-text'
 import BookingButton from '@/components/BookingButton'
 
 interface CareerData {
   careerCoaching: {
     heroHeading: string
-    heroSubtextPrefix: string
-    heroSubtextHighlight: string
+    heroSubtext: TinaMarkdownContent
     heroCTALabel: string
 
     resultsHeadingPrefix: string
     resultsHeadingHighlight: string
     resultsSubtext: string
     perhapsLabel: string
-    situations: string[]
+    situations: string
     bannerPrefix: string
     bannerHighlight: string
 
     clarityHeadingPrefix: string
     clarityHeadingHighlight: string
-    clarityParagraph1: string
-    clarityQuestion: string
-    clarityParagraph2: string
-    clarityParagraph3: string
-    clarityEmphasis: string
-    clarityParagraph4: string
-    clarityParagraph5: string
+    clarityBody: TinaMarkdownContent
     clarityBigWord: string
 
     philosophyHeadingPrefix: string
     philosophyHeadingHighlight: string
-    philosophyParagraph1: string
-    philosophyParagraph2Prefix: string
-    philosophyParagraph2Highlight: string
-    philosophyParagraph3: string
-    philosophyEmphasis: string
-    philosophyClosing: string
+    philosophyBody: TinaMarkdownContent
 
     imagineHeadingHighlight: string
     imagineItems: Array<{ emoji: string; text: string; borderColor: string; bg: string }>
@@ -58,12 +47,11 @@ interface CareerData {
     experienceHeadingPrefix: string
     experienceHeadingHighlight: string
     experienceSubtext: string
-    experienceItems: string[]
+    experienceItems: string
 
     ctaSectionHeadingPrefix: string
     ctaSectionHeadingHighlight: string
-    ctaSectionParagraph1: string
-    ctaSectionParagraph2: string
+    ctaSectionBody: TinaMarkdownContent
     ctaButtonLabel: string
   }
 }
@@ -82,6 +70,8 @@ export default function CareerCoachingClient(props: Props) {
     },
   })
   const d = data.careerCoaching
+  const situations = (d.situations || '').split('\n').map((s) => s.trim()).filter(Boolean)
+  const experienceItems = (d.experienceItems || '').split('\n').map((s) => s.trim()).filter(Boolean)
 
   return (
     <>
@@ -97,9 +87,9 @@ export default function CareerCoachingClient(props: Props) {
             <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-on-secondary font-dancing font-bold mb-6 leading-tight">
               {d.heroHeading}
             </h1>
-            <p className="text-lg md:text-xl body-text-light text-on-secondary/90 mb-8 leading-relaxed max-w-3xl mx-auto">
-              {d.heroSubtextPrefix} <span className="text-carrot font-bold">{d.heroSubtextHighlight}</span>
-            </p>
+            <div className="text-lg md:text-xl body-text-light text-on-secondary/90 mb-8 leading-relaxed max-w-3xl mx-auto space-y-4 [&_strong]:text-carrot [&_strong]:font-bold [&_em]:italic">
+              <TinaMarkdown content={d.heroSubtext} />
+            </div>
             <BookingButton label={d.heroCTALabel} />
           </div>
         </div>
@@ -126,7 +116,7 @@ export default function CareerCoachingClient(props: Props) {
               <div className="mb-12">
                 <p className="text-xl text-gray-800 font-semibold mb-8 text-center">{d.perhapsLabel}</p>
                 <div className="grid md:grid-cols-2 gap-6">
-                  {(d.situations ?? []).map((s, i) => (
+                  {situations.map((s, i) => (
                     <div key={i} className="flex items-start p-4 rounded-xl bg-gradient-to-br from-azure/5 to-azure/5 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                       <p className="text-gray-700 text-lg">{s}</p>
                     </div>
@@ -153,14 +143,10 @@ export default function CareerCoachingClient(props: Props) {
                 </h2>
               </div>
               <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 md:p-12 shadow-xl">
-                <p className="text-lg text-gray-700 leading-relaxed mb-6">{d.clarityParagraph1}</p>
-                <p className="text-xl text-gray-900 font-semibold mb-6">{d.clarityQuestion}</p>
-                <p className="text-lg text-gray-700 leading-relaxed mb-8">{d.clarityParagraph2}</p>
-                <p className="text-lg text-gray-700 leading-relaxed mb-6">{d.clarityParagraph3}</p>
-                <p className="text-xl text-carrot font-bold mb-8">{d.clarityEmphasis}</p>
-                <p className="text-lg text-gray-700 leading-relaxed mb-6">{d.clarityParagraph4}</p>
-                <p className="text-lg text-gray-700 leading-relaxed mb-4">{d.clarityParagraph5}</p>
-                <p className="text-3xl md:text-4xl heading-secondary text-azure font-bold text-center py-6">
+                <div className="space-y-6 text-lg text-gray-700 leading-relaxed [&_strong]:text-carrot [&_strong]:text-xl [&_strong]:font-bold [&_em]:italic">
+                  <TinaMarkdown content={d.clarityBody} />
+                </div>
+                <p className="text-3xl md:text-4xl heading-secondary text-azure font-bold text-center py-6 mt-6">
                   {d.clarityBigWord}
                 </p>
               </div>
@@ -180,14 +166,8 @@ export default function CareerCoachingClient(props: Props) {
                 {d.philosophyHeadingPrefix} <span className="text-carrot font-bold">{d.philosophyHeadingHighlight}</span>
               </h2>
             </div>
-            <div className="space-y-6 text-lg text-on-secondary/85 leading-relaxed">
-              <p>{d.philosophyParagraph1}</p>
-              <p>
-                {d.philosophyParagraph2Prefix} <span className="text-carrot font-semibold">{d.philosophyParagraph2Highlight}</span>
-              </p>
-              <p>{d.philosophyParagraph3}</p>
-              <p className="text-xl text-on-secondary font-semibold">{d.philosophyEmphasis}</p>
-              <p>{d.philosophyClosing}</p>
+            <div className="space-y-6 text-lg text-on-secondary/85 leading-relaxed [&_strong]:text-carrot [&_strong]:font-semibold [&_em]:italic">
+              <TinaMarkdown content={d.philosophyBody} />
             </div>
           </div>
         </div>
@@ -265,8 +245,8 @@ export default function CareerCoachingClient(props: Props) {
               <p className="text-xl text-on-secondary/85">{d.experienceSubtext}</p>
             </div>
             <div className="grid md:grid-cols-2 gap-6">
-              {(d.experienceItems ?? []).map((item, i) => (
-                <div key={i} className={`flex items-start space-x-4 py-4 border-on-secondary/40 border-b ${i === (d.experienceItems ?? []).length - 1 ? 'md:col-span-2 border-b-0' : ''}`}>
+              {experienceItems.map((item, i) => (
+                <div key={i} className={`flex items-start space-x-4 py-4 border-on-secondary/40 border-b ${i === experienceItems.length - 1 ? 'md:col-span-2 border-b-0' : ''}`}>
                   <span className="text-carrot text-xl mt-1">✓</span>
                   <p className="text-on-secondary/85 text-lg">{item}</p>
                 </div>
@@ -282,8 +262,9 @@ export default function CareerCoachingClient(props: Props) {
           <h2 className="text-3xl md:text-4xl font-bold text-on-accent mb-6">
             {d.ctaSectionHeadingPrefix} <span className="text-carrot font-bold">{d.ctaSectionHeadingHighlight}</span>
           </h2>
-          <p className="text-lg md:text-xl text-on-accent/90 mb-4 max-w-2xl mx-auto">{d.ctaSectionParagraph1}</p>
-          <p className="text-xl md:text-2xl text-on-accent font-semibold mb-10 max-w-2xl mx-auto">{d.ctaSectionParagraph2}</p>
+          <div className="text-lg md:text-xl text-on-accent/90 mb-10 max-w-2xl mx-auto space-y-4 [&_strong]:text-on-accent [&_strong]:text-xl [&_strong]:md:text-2xl [&_strong]:font-semibold [&_em]:italic">
+            <TinaMarkdown content={d.ctaSectionBody} />
+          </div>
           <BookingButton label={d.ctaButtonLabel} variant="primaryOnDark" />
         </div>
       </section>

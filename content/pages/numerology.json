@@ -2,7 +2,7 @@
   "heroBadge": "Vedic Numerology Session",
   "heroHeading": "Numerology",
   "heroTagline": "Get answers fast, and find your focus",
-  "heroSubtext": "Invaluable insight into your life choices, backed by ancient vedic practices",
+  "heroSubtext": "Invaluable insight into your life choices, backed by ancient vedic practices\n",
   "heroCTALabel": "Get my numerology insights",
 
   "selfDiscoveryHeadingPrefix": "Self-discovery",
@@ -21,8 +21,7 @@
   "whatIsHeadingPrefix": "What is",
   "whatIsHeadingHighlight": "Numerology?",
   "whatIsIsntParagraph": "First of all, let's address what numerology isn't: this is not a magic wand that can predict your future.",
-  "whatIsIsParagraph1": "But it is a powerful reflective tool, which draws upon ancient vedic principles that numbers hold vibrations. These energies can provide invaluable context and insight to your life situation, if you know how to read them.",
-  "whatIsIsParagraph2": "Guided by a certified numerologist, this session will take the guesswork out of that big decision you're looking to make, and help to strengthen your intuition around your relationships, career, or living situation, so you can take that next step with confidence.",
+  "whatIsIsBody": "But it is a powerful reflective tool, which draws upon ancient vedic principles that numbers hold vibrations. These energies can provide invaluable context and insight to your life situation, if you know how to read them.\n\nGuided by a certified numerologist, this session will take the guesswork out of that big decision you're looking to make, and help to strengthen your intuition around your relationships, career, or living situation, so you can take that next step with confidence.\n",
 
   "processLabel": "The Process",
   "processHeadingPrefix": "Vedic Astrology —",
@@ -71,8 +70,7 @@
   "philosophyHeadingPrefix": "My Coaching",
   "philosophyHeadingHighlight": "Philosophy",
   "philosophyQuote": "Success in your outer journey starts with your inner journey.",
-  "philosophyParagraph1": "My own experience of two decades has taught me this profound truth.",
-  "philosophyParagraph2": "Traditional coaching or advice doesn't properly teach us how to get curious, develop self-compassion, or gently grow our confidence as we find the answer, because we're too focussed on the external. Our judgement stays clouded.",
+  "philosophyBody": "My own experience of two decades has taught me this profound truth.\n\nTraditional coaching or advice doesn't properly teach us how to get curious, develop self-compassion, or gently grow our confidence as we find the answer, because we're too focussed on the external. Our judgement stays clouded.\n",
   "philosophyBanner": "But when you know the first step is looking inward, everything changes.",
   "philosophyClosingPrefix": "My numerology assessment is a powerful introduction to this concept, and will get you answers around",
   "philosophyClosingHighlight": "life, career, or relationships.",

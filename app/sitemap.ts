@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next'
-import { listPosts, listPodcasts } from '@/lib/posts'
+import { listPosts } from '@/lib/posts'
 
 const SITE_URL = 'https://innerjourney-with-shanila.com'
 
@@ -15,7 +15,7 @@ const STATIC_ROUTES: Array<{ path: string; changeFrequency: MetadataRoute.Sitema
 ]
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [posts, podcasts] = await Promise.all([listPosts(), listPodcasts()])
+  const posts = await listPosts()
   const now = new Date()
 
   return [
@@ -27,12 +27,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
     ...posts.map((p) => ({
       url: `${SITE_URL}/blog/${p.slug}`,
-      lastModified: p.publishedAt ? new Date(p.publishedAt) : now,
-      changeFrequency: 'monthly' as const,
-      priority: 0.6,
-    })),
-    ...podcasts.map((p) => ({
-      url: `${SITE_URL}/podcast/${p.slug}`,
       lastModified: p.publishedAt ? new Date(p.publishedAt) : now,
       changeFrequency: 'monthly' as const,
       priority: 0.6,

@@ -102,9 +102,13 @@ interface Props {
  * Unified card used in the Featured row — same vertical shape for both blog
  * posts and podcast episodes, so the 2-up grid stays balanced. Library
  * sections below render their own type-specific shapes (BlogCard / PodcastCard).
+ *
+ * Podcast cards open the external listen URL in a new tab (Spotify / Apple /
+ * YouTube). Blog cards use the internal Next router via <Link>.
  */
 function FeaturedCard({
   href,
+  external,
   kind,
   meta,
   title,
@@ -116,6 +120,7 @@ function FeaturedCard({
   gradient,
 }: {
   href: string
+  external?: boolean
   kind: 'Blog' | 'Podcast'
   meta?: string
   title: string
@@ -127,9 +132,26 @@ function FeaturedCard({
   gradient: string
 }) {
   const tagClass = kind === 'Podcast' ? PODCAST_TAG_CLASS : BLOG_TAG_CLASS
+  const isPlaceholderHref = !href || href === '#'
+  // External + has a real URL → open in new tab. Internal → Next router. No
+  // href (podcasts without a listen link yet) → non-clickable div so we don't
+  // ship a broken anchor.
+  const Wrapper = isPlaceholderHref
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ? ({ children, className }: any) => (
+        <div className={`${className} cursor-not-allowed opacity-90`}>{children}</div>
+      )
+    : external
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ? ({ children, ...rest }: any) => (
+        <a href={href} target="_blank" rel="noopener noreferrer" {...rest}>{children}</a>
+      )
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    : ({ children, ...rest }: any) => (
+        <Link href={href} {...rest}>{children}</Link>
+      )
   return (
-    <Link
-      href={href}
+    <Wrapper
       className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 flex flex-col"
     >
       <div className={`relative h-48 ${image ? '' : `bg-gradient-to-br ${gradient}`}`}>
@@ -161,10 +183,14 @@ function FeaturedCard({
         <p className="text-gray-600 mb-4 text-sm leading-relaxed line-clamp-3 flex-grow">{excerpt}</p>
         <div className="flex items-center justify-between text-sm mt-auto">
           <span className="text-gray-500">{status}</span>
-          <span className="text-azure font-semibold">{kind === 'Podcast' ? 'View episode →' : 'Read more →'}</span>
+          <span className="text-azure font-semibold">
+            {kind === 'Podcast'
+              ? (isPlaceholderHref ? 'Coming soon' : 'Listen now ↗')
+              : 'Read more →'}
+          </span>
         </div>
       </div>
-    </Link>
+    </Wrapper>
   )
 }
 
@@ -205,11 +231,17 @@ function BlogCard({ post }: { post: BlogPost }) {
 }
 
 function PodcastCard({ episode }: { episode: Podcast }) {
+  const hasAudio = Boolean(episode.audioUrl && episode.audioUrl.trim())
+  const cardClass = 'group block rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl brand-gradient-oxford-deep'
+  const Wrapper = hasAudio
+    ? ({ children }: { children: React.ReactNode }) => (
+        <a href={episode.audioUrl} target="_blank" rel="noopener noreferrer" className={cardClass}>{children}</a>
+      )
+    : ({ children }: { children: React.ReactNode }) => (
+        <div className={`${cardClass} cursor-not-allowed opacity-90`}>{children}</div>
+      )
   return (
-    <Link
-      href={`/podcast/${episode.slug}`}
-      className="group block rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl brand-gradient-oxford-deep"
-    >
+    <Wrapper>
       <div className="grid md:grid-cols-3 gap-0">
         <div className={`relative h-48 md:h-auto ${episode.image ? '' : `bg-gradient-to-br ${episode.gradient}`} flex items-center justify-center overflow-hidden`}>
           {episode.image ? (
@@ -236,12 +268,16 @@ function PodcastCard({ episode }: { episode: Podcast }) {
           <div className="flex items-center gap-4 flex-wrap">
             <span className="text-on-secondary/60 text-sm">{episode.status}</span>
             <span className="bg-on-secondary/10 group-hover:bg-on-secondary/20 text-on-secondary px-6 py-2 rounded-full text-sm font-semibold transition-all">
-              <i className="fas fa-arrow-right mr-2"></i> View episode
+              {hasAudio ? (
+                <><i className="fas fa-external-link-alt mr-2"></i> Listen now</>
+              ) : (
+                <><i className="fas fa-clock mr-2"></i> Coming soon</>
+              )}
             </span>
           </div>
         </div>
       </div>
-    </Link>
+    </Wrapper>
   )
 }
 
@@ -366,7 +402,8 @@ export default function ResourcesClient(props: Props) {
                   {featuredPodcasts.map((episode) => (
                     <FeaturedCard
                       key={`featured-podcast-${episode.slug}`}
-                      href={`/podcast/${episode.slug}`}
+                      href={episode.audioUrl || '#'}
+                      external
                       kind="Podcast"
                       meta={episode.episode}
                       title={episode.title}

@@ -27,26 +27,41 @@ interface HomeData {
     heroCTALabel: string
     heroBottomCTALabel: string
     ctaHeading: string
-    ctaLine1: string
-    ctaLine2: string
-    ctaLine3: string
-    ctaMessage1: string
-    ctaMessage2: string
+    ctaBody: TinaMarkdownContent
     aboutHeading: string
     aboutCredentialTitle: string
-    aboutParagraph1: string
-    aboutParagraph2: string
-    feelLikeYouQuestion1: string
-    feelLikeYouQuestion2: string
-    feelLikeYouQuestion3: string
-    feelLikeYouQuestion4: string
+    aboutBody: TinaMarkdownContent
+    feelLikeYouQuestions: string
     feelLikeYouHeading: string
     feelLikeYouTagline: string
     servicesHeading: string
     servicesSubtext: string
+    services: ({
+      title?: string | null
+      description?: string | null
+      icon?: string | null
+      href?: string | null
+      buttonLabel?: string | null
+      colorScheme?: string | null
+    } | null)[] | null
     bottomCTAText: string
   }
 }
+
+const SERVICE_COLOR_BUNDLES = {
+  oxford: {
+    gradient: 'brand-gradient-oxford',
+    textClass: 'text-on-secondary',
+    textSoftClass: 'text-on-secondary/90',
+    btnColor: 'text-oxford',
+  },
+  orange: {
+    gradient: 'brand-gradient-orange',
+    textClass: 'text-on-primary',
+    textSoftClass: 'text-on-primary/90',
+    btnColor: 'text-carrot',
+  },
+} as const
 
 interface Props {
   query: string
@@ -66,12 +81,10 @@ export default function HomePageClient(props: Props) {
   })
   const d = data.home
 
-  const feelLikeYouQuestions = [
-    d.feelLikeYouQuestion1,
-    d.feelLikeYouQuestion2,
-    d.feelLikeYouQuestion3,
-    d.feelLikeYouQuestion4,
-  ].filter(Boolean)
+  const feelLikeYouQuestions = (d.feelLikeYouQuestions || '')
+    .split('\n')
+    .map((q) => q.trim())
+    .filter(Boolean)
 
   return (
     <>
@@ -99,10 +112,10 @@ export default function HomePageClient(props: Props) {
             <h1 className="text-5xl md:text-7xl heading-primary text-white mb-6 leading-tight drop-shadow-2xl font-dancing font-bold animate-on-scroll">
               <TinaMarkdown content={d.heroHeading} components={inlineComponents} />
             </h1>
-            <p className="text-xl md:text-2xl body-text-light text-white/90 mb-8 leading-relaxed animate-on-scroll">
-              <TinaMarkdown content={d.heroSubtext} components={inlineComponents} />
-            </p>
-            <HomeClient />
+            <div className="text-xl md:text-2xl body-text-light text-white/90 mb-8 leading-relaxed animate-on-scroll space-y-4 [&_strong]:font-semibold [&_em]:italic">
+              <TinaMarkdown content={d.heroSubtext} />
+            </div>
+            <HomeClient ctaLabel={d.heroCTALabel} />
             <div className="hidden md:flex justify-end mt-6 space-x-4 hero-social-icons">
               <a href="https://www.facebook.com/innerjourneywithshanila/" className="link-muted transition-colors text-2xl opacity-90 hover:opacity-100" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                 <i className="fab fa-facebook"></i>
@@ -150,18 +163,8 @@ export default function HomePageClient(props: Props) {
               <h2 className="text-4xl md:text-5xl heading-secondary text-gray-900 mb-8 animate-on-scroll">
                 {d.ctaHeading}
               </h2>
-              <div className="space-y-4 text-lg md:text-xl text-gray-700 leading-relaxed animate-on-scroll">
-                <p>{d.ctaLine1}</p>
-                <p>{d.ctaLine2}</p>
-                <p>{d.ctaLine3}</p>
-              </div>
-              <div className="py-6 animate-on-scroll">
-                <p className="text-lg md:text-xl text-gray-800 leading-relaxed mb-2">
-                  {d.ctaMessage1}
-                </p>
-                <p className="text-xl md:text-2xl text-gray-900 font-semibold">
-                  {d.ctaMessage2}
-                </p>
+              <div className="space-y-4 text-lg md:text-xl text-gray-700 leading-relaxed animate-on-scroll [&_strong]:text-gray-900 [&_strong]:font-semibold [&_em]:italic">
+                <TinaMarkdown content={d.ctaBody} />
               </div>
               {/* Softer mid-page link rather than a third "Book a call" button —
                * scrolls the user to the services section so they can see what
@@ -204,12 +207,9 @@ export default function HomePageClient(props: Props) {
                     <h3 className="text-xl font-semibold text-on-secondary">{d.aboutCredentialTitle}</h3>
                   </div>
                 </div>
-                <p className="text-lg text-on-secondary/85 leading-relaxed">
-                  {d.aboutParagraph1}
-                </p>
-                <p className="text-lg text-on-secondary/85 leading-relaxed">
-                  {d.aboutParagraph2}
-                </p>
+                <div className="space-y-6 text-lg text-on-secondary/85 leading-relaxed [&_strong]:text-on-secondary [&_strong]:font-semibold [&_em]:italic">
+                  <TinaMarkdown content={d.aboutBody} />
+                </div>
                 <div className="flex flex-wrap gap-4">
                   <Link href="/about" className="btn-azure-outline font-semibold inline-block text-center">
                     Read More
@@ -273,52 +273,21 @@ export default function HomePageClient(props: Props) {
               </p>
             </div>
             <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12 mt-16">
-              {[
-                {
-                  icon: 'fa-lightbulb',
-                  title: 'Mindset Coaching',
-                  description: "My signature 12-week coaching programme for women ready to get clear on their goals, values, decision-making, and life's direction.",
-                  href: '/mindset-coaching',
-                  btnText: 'Start my mindset journey',
-                  gradient: 'brand-gradient-oxford',
-                  textClass: 'text-on-secondary',
-                  textSoftClass: 'text-on-secondary/90',
-                  btnColor: 'text-oxford',
-                },
-                {
-                  icon: 'fa-chart-line',
-                  title: 'Career Coaching',
-                  description: "The career edition of my mindset coaching. Whether you're a graduate, considering a career change, or feeling unsatisfied at work, you'll get clear and confident on your career path.",
-                  href: '/career-coaching',
-                  btnText: 'Realign my career',
-                  gradient: 'brand-gradient-orange',
-                  textClass: 'text-on-primary',
-                  textSoftClass: 'text-on-primary/90',
-                  btnColor: 'text-carrot',
-                },
-                {
-                  icon: 'fa-star',
-                  title: 'Numerology',
-                  description: 'Need answers now? My 1-hour Numerology session will help you glean crucial insight into your life path and relationships, giving you the tools and confidence to take action today.',
-                  href: '/numerology',
-                  btnText: 'Book my numerology session',
-                  gradient: 'brand-gradient-oxford',
-                  textClass: 'text-on-secondary',
-                  textSoftClass: 'text-on-secondary/90',
-                  btnColor: 'text-oxford',
-                },
-              ].map((service) => (
-                <div key={service.title} className="service-card group animate-on-scroll">
-                  <div className={`${service.gradient} ${service.textClass} p-8 rounded-2xl h-full transition-all duration-500 transform group-hover:scale-105 shadow-xl flex flex-col`}>
-                    <div className="text-4xl mb-6"><i className={`fas ${service.icon}`}></i></div>
-                    <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
-                    <p className={`${service.textSoftClass} mb-6 flex-grow`}>{service.description}</p>
-                    <Link href={service.href} className={`bg-white ${service.btnColor} hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold transition-all duration-300 mt-auto inline-block text-center`}>
-                      {service.btnText}
-                    </Link>
+              {(d.services || []).filter((s): s is NonNullable<typeof s> => Boolean(s)).map((service, i) => {
+                const bundle = SERVICE_COLOR_BUNDLES[(service.colorScheme as keyof typeof SERVICE_COLOR_BUNDLES)] || SERVICE_COLOR_BUNDLES.oxford
+                return (
+                  <div key={service.title || i} className="service-card group animate-on-scroll">
+                    <div className={`${bundle.gradient} ${bundle.textClass} p-8 rounded-2xl h-full transition-all duration-500 transform group-hover:scale-105 shadow-xl flex flex-col`}>
+                      <div className="text-4xl mb-6"><i className={`fas ${service.icon || ''}`}></i></div>
+                      <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
+                      <p className={`${bundle.textSoftClass} mb-6 flex-grow`}>{service.description}</p>
+                      <Link href={service.href || '#'} className={`bg-white ${bundle.btnColor} hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold transition-all duration-300 mt-auto inline-block text-center`}>
+                        {service.buttonLabel}
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
           </div>
         </section>

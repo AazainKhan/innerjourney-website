@@ -61,28 +61,52 @@ var config_default = defineConfig({
           { name: "heroImage", label: "Hero Background Image", type: "image" },
           { name: "heroHeading", label: "Hero Heading", type: "rich-text" },
           { name: "heroSubtext", label: "Hero Subtext", type: "rich-text" },
-          { name: "heroCTALabel", label: "Hero CTA Button Label", type: "string" },
-          { name: "heroBottomCTALabel", label: "Hero Secondary CTA Label", type: "string" },
+          { name: "heroCTALabel", label: 'Hero Primary Button Label ("Start Your Journey")', type: "string" },
+          { name: "heroBottomCTALabel", label: 'Bottom CTA Button Label ("Book a Consultation")', type: "string" },
           { name: "ctaHeading", label: "Mid-CTA Heading", type: "string" },
-          { name: "ctaLine1", label: "Mid-CTA Line 1", type: "string" },
-          { name: "ctaLine2", label: "Mid-CTA Line 2", type: "string" },
-          { name: "ctaLine3", label: "Mid-CTA Line 3", type: "string" },
-          { name: "ctaMessage1", label: "Mid-CTA Message 1", type: "string", ui: { component: "textarea" } },
-          { name: "ctaMessage2", label: "Mid-CTA Message 2", type: "string", ui: { component: "textarea" } },
+          { name: "ctaBody", label: "Mid-CTA Body", type: "rich-text" },
           { name: "aboutHeading", label: "About Section Heading", type: "string" },
           { name: "aboutImage", label: "About Section Image", type: "image" },
           { name: "aboutCredentialTitle", label: "About Credential Subtitle", type: "string" },
-          { name: "aboutParagraph1", label: "About Paragraph 1", type: "string", ui: { component: "textarea" } },
-          { name: "aboutParagraph2", label: "About Paragraph 2", type: "string", ui: { component: "textarea" } },
+          { name: "aboutBody", label: "About Body", type: "rich-text" },
           { name: "feelLikeYouHeading", label: '"Feel Like YOU Again" Heading', type: "string" },
           { name: "feelLikeYouTagline", label: '"Feel Like YOU Again" Tagline', type: "string" },
-          { name: "feelLikeYouQuestion1", label: '"Feel Like YOU" Question 1', type: "string" },
-          { name: "feelLikeYouQuestion2", label: '"Feel Like YOU" Question 2', type: "string" },
-          { name: "feelLikeYouQuestion3", label: '"Feel Like YOU" Question 3', type: "string" },
-          { name: "feelLikeYouQuestion4", label: '"Feel Like YOU" Question 4', type: "string" },
+          {
+            name: "feelLikeYouQuestions",
+            label: '"Feel Like YOU" Questions',
+            type: "string",
+            ui: { component: "textarea" }
+          },
           { name: "servicesHeading", label: "Services Section Heading", type: "string" },
           { name: "servicesSubtext", label: "Services Section Subtext", type: "string", ui: { component: "textarea" } },
-          { name: "bottomCTAText", label: "Bottom CTA Text", type: "string", ui: { component: "textarea" } }
+          {
+            name: "services",
+            label: "Service Cards",
+            type: "object",
+            list: true,
+            ui: {
+              itemProps: (item) => ({
+                label: typeof item === "object" && item && "title" in item ? String(item.title || "Service") : "Service"
+              })
+            },
+            fields: [
+              { name: "title", label: "Title", type: "string" },
+              { name: "description", label: "Description", type: "string", ui: { component: "textarea" } },
+              { name: "icon", label: "Icon (Font Awesome class, e.g. fa-lightbulb)", type: "string" },
+              { name: "href", label: "Link URL (e.g. /mindset-coaching)", type: "string" },
+              { name: "buttonLabel", label: "Button Label", type: "string" },
+              {
+                name: "colorScheme",
+                label: "Color Scheme",
+                type: "string",
+                options: [
+                  { value: "oxford", label: "Dark navy card (light text)" },
+                  { value: "orange", label: "Warm peach card (dark text)" }
+                ]
+              }
+            ]
+          },
+          { name: "bottomCTAText", label: "Bottom CTA Heading Text", type: "string", ui: { component: "textarea" } }
         ]
       },
       {
@@ -94,7 +118,37 @@ var config_default = defineConfig({
         ui: { router: () => "/services", allowedActions: { create: false, delete: false } },
         fields: [
           { name: "heroHeading", label: "Hero Heading", type: "string" },
-          { name: "heroSubtext", label: "Hero Subtext", type: "string", ui: { component: "textarea" } },
+          { name: "heroSubtext", label: "Hero Subtext", type: "rich-text" },
+          {
+            name: "services",
+            label: "Service Cards",
+            type: "object",
+            list: true,
+            ui: {
+              itemProps: (item) => ({
+                label: typeof item === "object" && item && "title" in item ? String(item.title || "Service") : "Service"
+              })
+            },
+            fields: [
+              { name: "title", label: "Title", type: "string" },
+              { name: "duration", label: 'Duration / Subtitle (e.g. "12-Week Programme")', type: "string" },
+              { name: "description", label: "Description", type: "string", ui: { component: "textarea" } },
+              { name: "icon", label: "Icon (Font Awesome class, e.g. fa-lightbulb)", type: "string" },
+              { name: "href", label: "Link URL (e.g. /mindset-coaching)", type: "string" },
+              { name: "buttonLabel", label: "Button Label", type: "string" },
+              { name: "highlights", label: "Highlights (one per line)", type: "string", ui: { component: "textarea" } },
+              { name: "isThisForYou", label: '"Is this for you?" Paragraph', type: "string", ui: { component: "textarea" } },
+              {
+                name: "colorScheme",
+                label: "Color Scheme",
+                type: "string",
+                options: [
+                  { value: "oxford", label: "Dark navy card (light text)" },
+                  { value: "orange", label: "Warm peach card (dark text)" }
+                ]
+              }
+            ]
+          },
           { name: "ctaHeading", label: "Bottom CTA Heading", type: "string" },
           { name: "ctaSubtext", label: "Bottom CTA Subtext", type: "string", ui: { component: "textarea" } },
           { name: "ctaButtonLabel", label: "Bottom CTA Button Label", type: "string" }
@@ -109,10 +163,9 @@ var config_default = defineConfig({
         ui: { router: () => "/about", allowedActions: { create: false, delete: false } },
         fields: [
           { name: "heroHeading", label: "Hero Heading", type: "string" },
-          { name: "heroSubtext", label: "Hero Subtext", type: "string", ui: { component: "textarea" } },
+          { name: "heroSubtext", label: "Hero Subtext", type: "rich-text" },
           { name: "storyHeading", label: "Story Section Heading", type: "string" },
-          { name: "storyParagraph1", label: "Story Paragraph 1", type: "string", ui: { component: "textarea" } },
-          { name: "storyParagraph2", label: "Story Paragraph 2", type: "string", ui: { component: "textarea" } },
+          { name: "storyBody", label: "Story Body", type: "rich-text" },
           { name: "credentialsHeading", label: "Credentials Heading", type: "string" },
           { name: "credentialsSubtext", label: "Credentials Subtext", type: "string", ui: { component: "textarea" } },
           {
@@ -139,10 +192,7 @@ var config_default = defineConfig({
               { name: "title", label: "Title", type: "string" },
               { name: "description", label: "Description", type: "string", ui: { component: "textarea" } }
             ]
-          },
-          { name: "ctaHeading", label: "CTA Section Heading", type: "string" },
-          { name: "ctaSubtext", label: "CTA Section Subtext", type: "string", ui: { component: "textarea" } },
-          { name: "ctaButtonLabel", label: "CTA Button Label", type: "string" }
+          }
         ]
       },
       {
@@ -155,7 +205,7 @@ var config_default = defineConfig({
         fields: [
           { name: "heroBadge", label: "Hero Badge", type: "string" },
           { name: "heroHeading", label: "Hero Heading", type: "string" },
-          { name: "heroSubtext", label: "Hero Subtext", type: "string", ui: { component: "textarea" } },
+          { name: "heroSubtext", label: "Hero Subtext", type: "rich-text" },
           { name: "heroCTALabel", label: "Hero CTA Button", type: "string" },
           { name: "heroSideEmoji", label: "Hero Side Emoji", type: "string" },
           { name: "heroSideWeeks", label: "Hero Side Weeks", type: "string" },
@@ -180,21 +230,15 @@ var config_default = defineConfig({
           { name: "missingPieceHeadingPrefix", label: "Missing Piece Heading", type: "string" },
           { name: "missingPieceHeadingHighlight", label: "Missing Piece Heading Highlight", type: "string" },
           { name: "problemTitle", label: "Problem Card Title", type: "string" },
-          { name: "problemParagraph1", label: "Problem Paragraph 1", type: "string", ui: { component: "textarea" } },
-          { name: "problemQuestion", label: 'Problem Question (e.g. "Why?")', type: "string" },
-          { name: "problemParagraph2", label: "Problem Paragraph 2", type: "string", ui: { component: "textarea" } },
-          { name: "problemParagraph3", label: "Problem Paragraph 3", type: "string", ui: { component: "textarea" } },
+          { name: "problemBody", label: "Problem Card Body", type: "rich-text" },
           { name: "solutionTitle", label: "Solution Card Title", type: "string" },
-          { name: "solutionParagraph1", label: "Solution Paragraph 1", type: "string", ui: { component: "textarea" } },
-          { name: "solutionEmphasis", label: "Solution Emphasis", type: "string" },
-          { name: "solutionParagraph2", label: "Solution Paragraph 2", type: "string", ui: { component: "textarea" } },
+          { name: "solutionBody", label: "Solution Card Body", type: "rich-text" },
           { name: "solutionWord", label: "Solution Big Word", type: "string" },
           { name: "philosophyLabel", label: "Philosophy Label", type: "string" },
           { name: "philosophyHeadingPrefix", label: "Philosophy Heading", type: "string" },
           { name: "philosophyHeadingHighlight", label: "Philosophy Heading Highlight", type: "string" },
           { name: "philosophyQuote", label: "Philosophy Quote", type: "string", ui: { component: "textarea" } },
-          { name: "philosophyParagraph1", label: "Philosophy Paragraph 1", type: "string", ui: { component: "textarea" } },
-          { name: "philosophyParagraph2", label: "Philosophy Paragraph 2", type: "string", ui: { component: "textarea" } },
+          { name: "philosophyBody", label: "Philosophy Body", type: "rich-text" },
           { name: "philosophyBannerPrefix", label: "Philosophy Banner", type: "string", ui: { component: "textarea" } },
           { name: "philosophyBannerHighlight", label: "Philosophy Banner Highlight", type: "string" },
           { name: "philosophyClosingPrefix", label: "Philosophy Closing", type: "string", ui: { component: "textarea" } },
@@ -238,8 +282,7 @@ var config_default = defineConfig({
           { name: "bonusText", label: "Bonus Text", type: "string" },
           { name: "ctaSectionHeadingPrefix", label: "Bottom CTA Heading", type: "string" },
           { name: "ctaSectionHeadingHighlight", label: "Bottom CTA Heading Highlight", type: "string" },
-          { name: "ctaSectionParagraph1", label: "Bottom CTA Paragraph 1", type: "string", ui: { component: "textarea" } },
-          { name: "ctaSectionParagraph2", label: "Bottom CTA Paragraph 2", type: "string" },
+          { name: "ctaSectionBody", label: "Bottom CTA Body", type: "rich-text" },
           { name: "ctaButtonLabel", label: "Bottom CTA Button", type: "string" }
         ]
       },
@@ -252,34 +295,22 @@ var config_default = defineConfig({
         ui: { router: () => "/career-coaching", allowedActions: { create: false, delete: false } },
         fields: [
           { name: "heroHeading", label: "Hero Heading", type: "string" },
-          { name: "heroSubtextPrefix", label: "Hero Subtext", type: "string" },
-          { name: "heroSubtextHighlight", label: "Hero Subtext Highlight", type: "string" },
+          { name: "heroSubtext", label: "Hero Subtext", type: "rich-text" },
           { name: "heroCTALabel", label: "Hero CTA Button", type: "string" },
           { name: "resultsHeadingPrefix", label: "Results Heading", type: "string" },
           { name: "resultsHeadingHighlight", label: "Results Heading Highlight", type: "string" },
           { name: "resultsSubtext", label: "Results Subtext", type: "string", ui: { component: "textarea" } },
           { name: "perhapsLabel", label: `"Perhaps you're\u2026" Label`, type: "string" },
-          { name: "situations", label: "Situations", type: "string", list: true },
+          { name: "situations", label: "Situations (one per line)", type: "string", ui: { component: "textarea" } },
           { name: "bannerPrefix", label: "Banner Prefix", type: "string" },
           { name: "bannerHighlight", label: "Banner Highlight", type: "string" },
           { name: "clarityHeadingPrefix", label: "Clarity Heading", type: "string" },
           { name: "clarityHeadingHighlight", label: "Clarity Heading Highlight", type: "string" },
-          { name: "clarityParagraph1", label: "Clarity Paragraph 1", type: "string", ui: { component: "textarea" } },
-          { name: "clarityQuestion", label: "Clarity Question", type: "string" },
-          { name: "clarityParagraph2", label: "Clarity Paragraph 2", type: "string" },
-          { name: "clarityParagraph3", label: "Clarity Paragraph 3", type: "string", ui: { component: "textarea" } },
-          { name: "clarityEmphasis", label: "Clarity Emphasis", type: "string" },
-          { name: "clarityParagraph4", label: "Clarity Paragraph 4", type: "string", ui: { component: "textarea" } },
-          { name: "clarityParagraph5", label: "Clarity Paragraph 5", type: "string", ui: { component: "textarea" } },
+          { name: "clarityBody", label: "Clarity Body", type: "rich-text" },
           { name: "clarityBigWord", label: "Clarity Big Word", type: "string" },
           { name: "philosophyHeadingPrefix", label: "Philosophy Heading", type: "string" },
           { name: "philosophyHeadingHighlight", label: "Philosophy Heading Highlight", type: "string" },
-          { name: "philosophyParagraph1", label: "Philosophy Paragraph 1", type: "string", ui: { component: "textarea" } },
-          { name: "philosophyParagraph2Prefix", label: "Philosophy Paragraph 2", type: "string", ui: { component: "textarea" } },
-          { name: "philosophyParagraph2Highlight", label: "Philosophy Paragraph 2 Highlight", type: "string" },
-          { name: "philosophyParagraph3", label: "Philosophy Paragraph 3", type: "string", ui: { component: "textarea" } },
-          { name: "philosophyEmphasis", label: "Philosophy Emphasis", type: "string" },
-          { name: "philosophyClosing", label: "Philosophy Closing", type: "string", ui: { component: "textarea" } },
+          { name: "philosophyBody", label: "Philosophy Body", type: "rich-text" },
           { name: "imagineHeadingHighlight", label: "Imagine Heading Highlight", type: "string" },
           {
             name: "imagineItems",
@@ -315,11 +346,10 @@ var config_default = defineConfig({
           { name: "experienceHeadingPrefix", label: "Experience Heading", type: "string" },
           { name: "experienceHeadingHighlight", label: "Experience Heading Highlight", type: "string" },
           { name: "experienceSubtext", label: "Experience Subtext", type: "string" },
-          { name: "experienceItems", label: "Experience Items", type: "string", list: true },
+          { name: "experienceItems", label: "Experience Items (one per line)", type: "string", ui: { component: "textarea" } },
           { name: "ctaSectionHeadingPrefix", label: "Bottom CTA Heading", type: "string" },
           { name: "ctaSectionHeadingHighlight", label: "Bottom CTA Heading Highlight", type: "string" },
-          { name: "ctaSectionParagraph1", label: "Bottom CTA Paragraph 1", type: "string", ui: { component: "textarea" } },
-          { name: "ctaSectionParagraph2", label: "Bottom CTA Paragraph 2", type: "string" },
+          { name: "ctaSectionBody", label: "Bottom CTA Body", type: "rich-text" },
           { name: "ctaButtonLabel", label: "Bottom CTA Button", type: "string" }
         ]
       },
@@ -334,7 +364,7 @@ var config_default = defineConfig({
           { name: "heroBadge", label: "Hero Badge", type: "string" },
           { name: "heroHeading", label: "Hero Heading", type: "string" },
           { name: "heroTagline", label: "Hero Tagline", type: "string" },
-          { name: "heroSubtext", label: "Hero Subtext", type: "string", ui: { component: "textarea" } },
+          { name: "heroSubtext", label: "Hero Subtext", type: "rich-text" },
           { name: "heroCTALabel", label: "Hero CTA Button", type: "string" },
           { name: "selfDiscoveryHeadingPrefix", label: "Self-Discovery Heading", type: "string" },
           { name: "selfDiscoveryHeadingHighlight", label: "Self-Discovery Heading Highlight", type: "string" },
@@ -356,8 +386,7 @@ var config_default = defineConfig({
           { name: "whatIsHeadingPrefix", label: '"What Is" Heading', type: "string" },
           { name: "whatIsHeadingHighlight", label: '"What Is" Heading Highlight', type: "string" },
           { name: "whatIsIsntParagraph", label: `"What It Isn't" Paragraph`, type: "string", ui: { component: "textarea" } },
-          { name: "whatIsIsParagraph1", label: '"What It Is" Paragraph 1', type: "string", ui: { component: "textarea" } },
-          { name: "whatIsIsParagraph2", label: '"What It Is" Paragraph 2', type: "string", ui: { component: "textarea" } },
+          { name: "whatIsIsBody", label: '"What It Is" Body', type: "rich-text" },
           { name: "processLabel", label: "Process Section Label", type: "string" },
           { name: "processHeadingPrefix", label: "Process Heading", type: "string" },
           { name: "processHeadingHighlight", label: "Process Heading Highlight", type: "string" },
@@ -392,8 +421,7 @@ var config_default = defineConfig({
           { name: "philosophyHeadingPrefix", label: "Philosophy Heading", type: "string" },
           { name: "philosophyHeadingHighlight", label: "Philosophy Heading Highlight", type: "string" },
           { name: "philosophyQuote", label: "Philosophy Quote", type: "string", ui: { component: "textarea" } },
-          { name: "philosophyParagraph1", label: "Philosophy Paragraph 1", type: "string", ui: { component: "textarea" } },
-          { name: "philosophyParagraph2", label: "Philosophy Paragraph 2", type: "string", ui: { component: "textarea" } },
+          { name: "philosophyBody", label: "Philosophy Body", type: "rich-text" },
           { name: "philosophyBanner", label: "Philosophy Banner Text", type: "string", ui: { component: "textarea" } },
           { name: "philosophyClosingPrefix", label: "Philosophy Closing Text", type: "string", ui: { component: "textarea" } },
           { name: "philosophyClosingHighlight", label: "Philosophy Closing Highlight", type: "string" },
@@ -530,8 +558,11 @@ var config_default = defineConfig({
         label: "Podcast Episodes",
         path: "content/podcasts",
         format: "md",
+        // Podcast episodes don't have an internal page — the listing cards on
+        // /resources link directly to the external Listen URL (Spotify / Apple
+        // / YouTube). Preview against /resources so edits show in the library.
         ui: {
-          router: ({ document }) => `/podcast/${document._sys.filename}`,
+          router: () => "/resources#podcast-library",
           filename: {
             readonly: false,
             slugify: (values) => {

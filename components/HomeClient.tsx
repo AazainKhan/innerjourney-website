@@ -35,7 +35,7 @@ export default function HomeClient({ buttonOnly, ctaLabel, variant = 'outline' }
   return (
     <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-end animate-on-scroll">
       <button onClick={openBooking} className="btn-azure text-sm px-6 py-2 button-text">
-        Start Your Journey
+        {ctaLabel ?? 'Start Your Journey'}
       </button>
       <button onClick={scrollToServices} className="btn-azure-outline text-sm px-6 py-2 button-text">
         Learn More

@@ -1,6 +1,7 @@
 'use client'
 
 import { useTina } from 'tinacms/dist/react'
+import { TinaMarkdown, type TinaMarkdownContent } from 'tinacms/dist/rich-text'
 import BookingButton from '@/components/BookingButton'
 
 interface NumerologyData {
@@ -8,7 +9,7 @@ interface NumerologyData {
     heroBadge: string
     heroHeading: string
     heroTagline: string
-    heroSubtext: string
+    heroSubtext: TinaMarkdownContent
     heroCTALabel: string
 
     selfDiscoveryHeadingPrefix: string
@@ -22,8 +23,7 @@ interface NumerologyData {
     whatIsHeadingPrefix: string
     whatIsHeadingHighlight: string
     whatIsIsntParagraph: string
-    whatIsIsParagraph1: string
-    whatIsIsParagraph2: string
+    whatIsIsBody: TinaMarkdownContent
 
     processLabel: string
     processHeadingPrefix: string
@@ -40,8 +40,7 @@ interface NumerologyData {
     philosophyHeadingPrefix: string
     philosophyHeadingHighlight: string
     philosophyQuote: string
-    philosophyParagraph1: string
-    philosophyParagraph2: string
+    philosophyBody: TinaMarkdownContent
     philosophyBanner: string
     philosophyClosingPrefix: string
     philosophyClosingHighlight: string
@@ -95,7 +94,9 @@ export default function NumerologyClient(props: Props) {
               {d.heroHeading}
             </h1>
             <p className="text-xl md:text-2xl text-carrot font-semibold mb-4">{d.heroTagline}</p>
-            <p className="text-lg md:text-xl text-on-secondary/80 mb-8 max-w-2xl mx-auto leading-relaxed">{d.heroSubtext}</p>
+            <div className="text-lg md:text-xl text-on-secondary/80 mb-8 max-w-2xl mx-auto leading-relaxed space-y-4 [&_strong]:text-carrot [&_strong]:font-semibold [&_em]:italic">
+              <TinaMarkdown content={d.heroSubtext} />
+            </div>
             <BookingButton label={d.heroCTALabel} />
           </div>
         </div>
@@ -161,9 +162,8 @@ export default function NumerologyClient(props: Props) {
                 <div className="bg-gradient-to-r from-azure/10 to-azure/5 rounded-2xl p-8 border border-azure/20 shadow-md">
                   <div className="flex items-start gap-4">
                     <span className="w-12 h-12 bg-azure/20 rounded-full flex items-center justify-center text-xl flex-shrink-0">✨</span>
-                    <div className="space-y-4">
-                      <p className="text-lg text-gray-700 leading-relaxed">{d.whatIsIsParagraph1}</p>
-                      <p className="text-lg text-gray-700 leading-relaxed">{d.whatIsIsParagraph2}</p>
+                    <div className="space-y-4 text-lg text-gray-700 leading-relaxed [&_strong]:text-azure [&_strong]:font-semibold [&_em]:italic">
+                      <TinaMarkdown content={d.whatIsIsBody} />
                     </div>
                   </div>
                 </div>
@@ -245,8 +245,9 @@ export default function NumerologyClient(props: Props) {
                   {d.philosophyQuote}
                   <span className="text-carrot text-3xl md:text-4xl">&rdquo;</span>
                 </blockquote>
-                <p className="text-lg text-gray-600 leading-relaxed">{d.philosophyParagraph1}</p>
-                <p className="text-lg text-gray-600 leading-relaxed">{d.philosophyParagraph2}</p>
+                <div className="space-y-6 text-lg text-gray-600 leading-relaxed [&_strong]:text-gray-900 [&_strong]:font-semibold [&_em]:italic">
+                  <TinaMarkdown content={d.philosophyBody} />
+                </div>
                 <div className="brand-gradient-oxford-deep rounded-2xl p-8 text-center">
                   <p className="text-xl md:text-2xl text-on-secondary font-semibold">{d.philosophyBanner}</p>
                 </div>

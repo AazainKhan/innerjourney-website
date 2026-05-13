@@ -3,7 +3,36 @@ import homeData from '@/content/pages/home.json'
 import client from '@/tina/__generated__/client'
 import HomePageClient from './HomePageClient'
 
-const inline = (s: string) => ({ type: 'root', children: [{ type: 'p', children: [{ type: 'text', text: s }] }] })
+// Tina stores rich-text fields as markdown strings on disk. When GraphQL is
+// available it parses them into AST objects; when we fall back to the static
+// JSON import we have to do the parse ourselves so <TinaMarkdown> doesn't
+// receive a raw string. Handles blank-line paragraph breaks and **bold** spans.
+function richText(s: string | null | undefined) {
+  const text = (s || '').trim()
+  if (!text) return { type: 'root', children: [] }
+  const paragraphs = text
+    .split(/\n{2,}/)
+    .map((p) => p.replace(/\n/g, ' ').trim())
+    .filter(Boolean)
+  return {
+    type: 'root',
+    children: paragraphs.map((para) => ({ type: 'p', children: parseInline(para) })),
+  }
+}
+
+function parseInline(s: string) {
+  const parts: { type: 'text'; text: string; bold?: boolean }[] = []
+  const regex = /\*\*([^*]+)\*\*/g
+  let last = 0
+  let m: RegExpExecArray | null
+  while ((m = regex.exec(s)) !== null) {
+    if (m.index > last) parts.push({ type: 'text', text: s.slice(last, m.index) })
+    parts.push({ type: 'text', text: m[1], bold: true })
+    last = m.index + m[0].length
+  }
+  if (last < s.length) parts.push({ type: 'text', text: s.slice(last) })
+  return parts.length > 0 ? parts : [{ type: 'text', text: s }]
+}
 
 export const metadata: Metadata = {
   title: 'Shanila - Confidence and Mindset Coach | Transform Your Journey',
@@ -31,8 +60,16 @@ export default async function HomePage() {
       <HomePageClient
         query=""
         variables={{ relativePath: 'home.json' }}
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        data={{ home: { ...homeData, heroHeading: inline(homeData.heroHeading), heroSubtext: inline(homeData.heroSubtext) } as any }}
+        data={{
+          home: {
+            ...homeData,
+            heroHeading: richText(homeData.heroHeading),
+            heroSubtext: richText(homeData.heroSubtext),
+            ctaBody: richText(homeData.ctaBody),
+            aboutBody: richText(homeData.aboutBody),
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          } as any,
+        }}
       />
     )
   }

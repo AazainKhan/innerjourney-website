@@ -1,13 +1,14 @@
 'use client'
 
 import { useTina } from 'tinacms/dist/react'
+import { TinaMarkdown, type TinaMarkdownContent } from 'tinacms/dist/rich-text'
 import BookingButton from '@/components/BookingButton'
 
 interface ClarityData {
   clarityCoaching: {
     heroBadge: string
     heroHeading: string
-    heroSubtext: string
+    heroSubtext: TinaMarkdownContent
     heroCTALabel: string
     heroSideEmoji: string
     heroSideWeeks: string
@@ -24,22 +25,16 @@ interface ClarityData {
     missingPieceHeadingPrefix: string
     missingPieceHeadingHighlight: string
     problemTitle: string
-    problemParagraph1: string
-    problemQuestion: string
-    problemParagraph2: string
-    problemParagraph3: string
+    problemBody: TinaMarkdownContent
     solutionTitle: string
-    solutionParagraph1: string
-    solutionEmphasis: string
-    solutionParagraph2: string
+    solutionBody: TinaMarkdownContent
     solutionWord: string
 
     philosophyLabel: string
     philosophyHeadingPrefix: string
     philosophyHeadingHighlight: string
     philosophyQuote: string
-    philosophyParagraph1: string
-    philosophyParagraph2: string
+    philosophyBody: TinaMarkdownContent
     philosophyBannerPrefix: string
     philosophyBannerHighlight: string
     philosophyClosingPrefix: string
@@ -69,8 +64,7 @@ interface ClarityData {
 
     ctaSectionHeadingPrefix: string
     ctaSectionHeadingHighlight: string
-    ctaSectionParagraph1: string
-    ctaSectionParagraph2: string
+    ctaSectionBody: TinaMarkdownContent
     ctaButtonLabel: string
   }
 }
@@ -128,9 +122,9 @@ export default function MindsetCoachingClient(props: Props) {
                 <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-on-secondary font-dancing font-bold mb-6 leading-tight">
                   {d.heroHeading}
                 </h1>
-                <p className="text-lg md:text-xl body-text text-on-secondary/90 mb-8 leading-relaxed">
-                  {d.heroSubtext}
-                </p>
+                <div className="text-lg md:text-xl body-text text-on-secondary/90 mb-8 leading-relaxed space-y-4 [&_strong]:font-semibold [&_em]:italic">
+                  <TinaMarkdown content={d.heroSubtext} />
+                </div>
                 <BookingButton label={d.heroCTALabel} />
               </div>
               <div className="hidden lg:flex items-center justify-center order-1 lg:order-2">
@@ -194,11 +188,8 @@ export default function MindsetCoachingClient(props: Props) {
                     <span className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center text-xl">❌</span>
                     <h3 className="text-xl font-bold text-gray-800">{d.problemTitle}</h3>
                   </div>
-                  <div className="space-y-5 text-gray-600">
-                    <p className="text-lg leading-relaxed">{d.problemParagraph1}</p>
-                    <p className="text-lg font-semibold text-gray-800">{d.problemQuestion}</p>
-                    <p className="text-lg leading-relaxed">{d.problemParagraph2}</p>
-                    <p className="text-lg leading-relaxed">{d.problemParagraph3}</p>
+                  <div className="space-y-5 text-lg leading-relaxed text-gray-600 [&_strong]:text-gray-800 [&_strong]:font-semibold [&_em]:italic">
+                    <TinaMarkdown content={d.problemBody} />
                   </div>
                 </div>
                 <div className="bg-white rounded-3xl p-8 md:p-10 border border-azure/20 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
@@ -206,12 +197,10 @@ export default function MindsetCoachingClient(props: Props) {
                     <span className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-xl">✨</span>
                     <h3 className="text-xl font-bold text-gray-800">{d.solutionTitle}</h3>
                   </div>
-                  <div className="space-y-5 text-gray-600">
-                    <p className="text-lg leading-relaxed">{d.solutionParagraph1}</p>
-                    <p className="text-xl text-carrot font-bold">{d.solutionEmphasis}</p>
-                    <p className="text-lg leading-relaxed">{d.solutionParagraph2}</p>
-                    <p className="text-4xl heading-secondary text-azure font-bold text-center py-4">{d.solutionWord}</p>
+                  <div className="space-y-5 text-lg leading-relaxed text-gray-600 [&_strong]:text-carrot [&_strong]:text-xl [&_strong]:font-bold [&_em]:italic">
+                    <TinaMarkdown content={d.solutionBody} />
                   </div>
+                  <p className="text-4xl heading-secondary text-azure font-bold text-center py-4 mt-5">{d.solutionWord}</p>
                 </div>
               </div>
             </div>
@@ -234,8 +223,9 @@ export default function MindsetCoachingClient(props: Props) {
                   {d.philosophyQuote}
                   <span className="text-carrot text-3xl md:text-4xl">&rdquo;</span>
                 </blockquote>
-                <p className="text-lg text-gray-600 leading-relaxed">{d.philosophyParagraph1}</p>
-                <p className="text-lg text-gray-600 leading-relaxed">{d.philosophyParagraph2}</p>
+                <div className="space-y-6 text-lg text-gray-600 leading-relaxed [&_strong]:text-gray-900 [&_strong]:font-semibold [&_em]:italic">
+                  <TinaMarkdown content={d.philosophyBody} />
+                </div>
                 <div className="brand-gradient-oxford-deep rounded-2xl p-8 text-center">
                   <p className="text-xl md:text-2xl text-on-secondary font-semibold">
                     {d.philosophyBannerPrefix} <span className="text-carrot">{d.philosophyBannerHighlight}</span>
@@ -350,8 +340,9 @@ export default function MindsetCoachingClient(props: Props) {
           <h2 className="text-3xl md:text-4xl font-bold text-on-accent mb-6">
             {d.ctaSectionHeadingPrefix} <span className="text-carrot font-bold">{d.ctaSectionHeadingHighlight}</span>
           </h2>
-          <p className="text-lg md:text-xl text-on-accent/90 mb-4 max-w-2xl mx-auto">{d.ctaSectionParagraph1}</p>
-          <p className="text-xl md:text-2xl text-on-accent font-semibold mb-10 max-w-2xl mx-auto">{d.ctaSectionParagraph2}</p>
+          <div className="text-lg md:text-xl text-on-accent/90 mb-10 max-w-2xl mx-auto space-y-4 [&_strong]:text-on-accent [&_strong]:text-xl [&_strong]:md:text-2xl [&_strong]:font-semibold [&_em]:italic">
+            <TinaMarkdown content={d.ctaSectionBody} />
+          </div>
           <BookingButton label={d.ctaButtonLabel} variant="primaryOnDark" />
         </div>
       </section>

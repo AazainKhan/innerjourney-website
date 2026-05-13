@@ -129,6 +129,15 @@ type Collection {
 
 union DocumentNode = Home | Services | About | ClarityCoaching | CareerCoaching | Numerology | Resources | Contact | Post | Podcast | Navbar | BookingForm | Footer | Typography | Testimonials | Folder
 
+type HomeServices {
+  title: String
+  description: String
+  icon: String
+  href: String
+  buttonLabel: String
+  colorScheme: String
+}
+
 type Home implements Node & Document {
   heroImage: String
   heroHeading: JSON
@@ -136,24 +145,17 @@ type Home implements Node & Document {
   heroCTALabel: String
   heroBottomCTALabel: String
   ctaHeading: String
-  ctaLine1: String
-  ctaLine2: String
-  ctaLine3: String
-  ctaMessage1: String
-  ctaMessage2: String
+  ctaBody: JSON
   aboutHeading: String
   aboutImage: String
   aboutCredentialTitle: String
-  aboutParagraph1: String
-  aboutParagraph2: String
+  aboutBody: JSON
   feelLikeYouHeading: String
   feelLikeYouTagline: String
-  feelLikeYouQuestion1: String
-  feelLikeYouQuestion2: String
-  feelLikeYouQuestion3: String
-  feelLikeYouQuestion4: String
+  feelLikeYouQuestions: String
   servicesHeading: String
   servicesSubtext: String
+  services: [HomeServices]
   bottomCTAText: String
   id: ID!
   _sys: SystemInfo!
@@ -180,6 +182,15 @@ input StringFilter {
   in: [String]
 }
 
+input HomeServicesFilter {
+  title: StringFilter
+  description: StringFilter
+  icon: StringFilter
+  href: StringFilter
+  buttonLabel: StringFilter
+  colorScheme: StringFilter
+}
+
 input HomeFilter {
   heroImage: ImageFilter
   heroHeading: RichTextFilter
@@ -187,24 +198,17 @@ input HomeFilter {
   heroCTALabel: StringFilter
   heroBottomCTALabel: StringFilter
   ctaHeading: StringFilter
-  ctaLine1: StringFilter
-  ctaLine2: StringFilter
-  ctaLine3: StringFilter
-  ctaMessage1: StringFilter
-  ctaMessage2: StringFilter
+  ctaBody: RichTextFilter
   aboutHeading: StringFilter
   aboutImage: ImageFilter
   aboutCredentialTitle: StringFilter
-  aboutParagraph1: StringFilter
-  aboutParagraph2: StringFilter
+  aboutBody: RichTextFilter
   feelLikeYouHeading: StringFilter
   feelLikeYouTagline: StringFilter
-  feelLikeYouQuestion1: StringFilter
-  feelLikeYouQuestion2: StringFilter
-  feelLikeYouQuestion3: StringFilter
-  feelLikeYouQuestion4: StringFilter
+  feelLikeYouQuestions: StringFilter
   servicesHeading: StringFilter
   servicesSubtext: StringFilter
+  services: HomeServicesFilter
   bottomCTAText: StringFilter
 }
 
@@ -219,9 +223,22 @@ type HomeConnection implements Connection {
   edges: [HomeConnectionEdges]
 }
 
+type ServicesServices {
+  title: String
+  duration: String
+  description: String
+  icon: String
+  href: String
+  buttonLabel: String
+  highlights: String
+  isThisForYou: String
+  colorScheme: String
+}
+
 type Services implements Node & Document {
   heroHeading: String
-  heroSubtext: String
+  heroSubtext: JSON
+  services: [ServicesServices]
   ctaHeading: String
   ctaSubtext: String
   ctaButtonLabel: String
@@ -230,9 +247,22 @@ type Services implements Node & Document {
   _values: JSON!
 }
 
+input ServicesServicesFilter {
+  title: StringFilter
+  duration: StringFilter
+  description: StringFilter
+  icon: StringFilter
+  href: StringFilter
+  buttonLabel: StringFilter
+  highlights: StringFilter
+  isThisForYou: StringFilter
+  colorScheme: StringFilter
+}
+
 input ServicesFilter {
   heroHeading: StringFilter
-  heroSubtext: StringFilter
+  heroSubtext: RichTextFilter
+  services: ServicesServicesFilter
   ctaHeading: StringFilter
   ctaSubtext: StringFilter
   ctaButtonLabel: StringFilter
@@ -264,19 +294,15 @@ type AboutValues {
 
 type About implements Node & Document {
   heroHeading: String
-  heroSubtext: String
+  heroSubtext: JSON
   storyHeading: String
-  storyParagraph1: String
-  storyParagraph2: String
+  storyBody: JSON
   credentialsHeading: String
   credentialsSubtext: String
   credentials: [AboutCredentials]
   valuesHeading: String
   valuesSubtext: String
   values: [AboutValues]
-  ctaHeading: String
-  ctaSubtext: String
-  ctaButtonLabel: String
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -297,19 +323,15 @@ input AboutValuesFilter {
 
 input AboutFilter {
   heroHeading: StringFilter
-  heroSubtext: StringFilter
+  heroSubtext: RichTextFilter
   storyHeading: StringFilter
-  storyParagraph1: StringFilter
-  storyParagraph2: StringFilter
+  storyBody: RichTextFilter
   credentialsHeading: StringFilter
   credentialsSubtext: StringFilter
   credentials: AboutCredentialsFilter
   valuesHeading: StringFilter
   valuesSubtext: StringFilter
   values: AboutValuesFilter
-  ctaHeading: StringFilter
-  ctaSubtext: StringFilter
-  ctaButtonLabel: StringFilter
 }
 
 type AboutConnectionEdges {
@@ -348,7 +370,7 @@ type ClarityCoachingExperienceItems {
 type ClarityCoaching implements Node & Document {
   heroBadge: String
   heroHeading: String
-  heroSubtext: String
+  heroSubtext: JSON
   heroCTALabel: String
   heroSideEmoji: String
   heroSideWeeks: String
@@ -363,21 +385,15 @@ type ClarityCoaching implements Node & Document {
   missingPieceHeadingPrefix: String
   missingPieceHeadingHighlight: String
   problemTitle: String
-  problemParagraph1: String
-  problemQuestion: String
-  problemParagraph2: String
-  problemParagraph3: String
+  problemBody: JSON
   solutionTitle: String
-  solutionParagraph1: String
-  solutionEmphasis: String
-  solutionParagraph2: String
+  solutionBody: JSON
   solutionWord: String
   philosophyLabel: String
   philosophyHeadingPrefix: String
   philosophyHeadingHighlight: String
   philosophyQuote: String
-  philosophyParagraph1: String
-  philosophyParagraph2: String
+  philosophyBody: JSON
   philosophyBannerPrefix: String
   philosophyBannerHighlight: String
   philosophyClosingPrefix: String
@@ -397,8 +413,7 @@ type ClarityCoaching implements Node & Document {
   bonusText: String
   ctaSectionHeadingPrefix: String
   ctaSectionHeadingHighlight: String
-  ctaSectionParagraph1: String
-  ctaSectionParagraph2: String
+  ctaSectionBody: JSON
   ctaButtonLabel: String
   id: ID!
   _sys: SystemInfo!
@@ -430,7 +445,7 @@ input ClarityCoachingExperienceItemsFilter {
 input ClarityCoachingFilter {
   heroBadge: StringFilter
   heroHeading: StringFilter
-  heroSubtext: StringFilter
+  heroSubtext: RichTextFilter
   heroCTALabel: StringFilter
   heroSideEmoji: StringFilter
   heroSideWeeks: StringFilter
@@ -445,21 +460,15 @@ input ClarityCoachingFilter {
   missingPieceHeadingPrefix: StringFilter
   missingPieceHeadingHighlight: StringFilter
   problemTitle: StringFilter
-  problemParagraph1: StringFilter
-  problemQuestion: StringFilter
-  problemParagraph2: StringFilter
-  problemParagraph3: StringFilter
+  problemBody: RichTextFilter
   solutionTitle: StringFilter
-  solutionParagraph1: StringFilter
-  solutionEmphasis: StringFilter
-  solutionParagraph2: StringFilter
+  solutionBody: RichTextFilter
   solutionWord: StringFilter
   philosophyLabel: StringFilter
   philosophyHeadingPrefix: StringFilter
   philosophyHeadingHighlight: StringFilter
   philosophyQuote: StringFilter
-  philosophyParagraph1: StringFilter
-  philosophyParagraph2: StringFilter
+  philosophyBody: RichTextFilter
   philosophyBannerPrefix: StringFilter
   philosophyBannerHighlight: StringFilter
   philosophyClosingPrefix: StringFilter
@@ -479,8 +488,7 @@ input ClarityCoachingFilter {
   bonusText: StringFilter
   ctaSectionHeadingPrefix: StringFilter
   ctaSectionHeadingHighlight: StringFilter
-  ctaSectionParagraph1: StringFilter
-  ctaSectionParagraph2: StringFilter
+  ctaSectionBody: RichTextFilter
   ctaButtonLabel: StringFilter
 }
 
@@ -513,34 +521,22 @@ type CareerCoachingRoadmapSteps {
 
 type CareerCoaching implements Node & Document {
   heroHeading: String
-  heroSubtextPrefix: String
-  heroSubtextHighlight: String
+  heroSubtext: JSON
   heroCTALabel: String
   resultsHeadingPrefix: String
   resultsHeadingHighlight: String
   resultsSubtext: String
   perhapsLabel: String
-  situations: [String]
+  situations: String
   bannerPrefix: String
   bannerHighlight: String
   clarityHeadingPrefix: String
   clarityHeadingHighlight: String
-  clarityParagraph1: String
-  clarityQuestion: String
-  clarityParagraph2: String
-  clarityParagraph3: String
-  clarityEmphasis: String
-  clarityParagraph4: String
-  clarityParagraph5: String
+  clarityBody: JSON
   clarityBigWord: String
   philosophyHeadingPrefix: String
   philosophyHeadingHighlight: String
-  philosophyParagraph1: String
-  philosophyParagraph2Prefix: String
-  philosophyParagraph2Highlight: String
-  philosophyParagraph3: String
-  philosophyEmphasis: String
-  philosophyClosing: String
+  philosophyBody: JSON
   imagineHeadingHighlight: String
   imagineItems: [CareerCoachingImagineItems]
   roadmapHeadingPrefix: String
@@ -552,11 +548,10 @@ type CareerCoaching implements Node & Document {
   experienceHeadingPrefix: String
   experienceHeadingHighlight: String
   experienceSubtext: String
-  experienceItems: [String]
+  experienceItems: String
   ctaSectionHeadingPrefix: String
   ctaSectionHeadingHighlight: String
-  ctaSectionParagraph1: String
-  ctaSectionParagraph2: String
+  ctaSectionBody: JSON
   ctaButtonLabel: String
   id: ID!
   _sys: SystemInfo!
@@ -581,8 +576,7 @@ input CareerCoachingRoadmapStepsFilter {
 
 input CareerCoachingFilter {
   heroHeading: StringFilter
-  heroSubtextPrefix: StringFilter
-  heroSubtextHighlight: StringFilter
+  heroSubtext: RichTextFilter
   heroCTALabel: StringFilter
   resultsHeadingPrefix: StringFilter
   resultsHeadingHighlight: StringFilter
@@ -593,22 +587,11 @@ input CareerCoachingFilter {
   bannerHighlight: StringFilter
   clarityHeadingPrefix: StringFilter
   clarityHeadingHighlight: StringFilter
-  clarityParagraph1: StringFilter
-  clarityQuestion: StringFilter
-  clarityParagraph2: StringFilter
-  clarityParagraph3: StringFilter
-  clarityEmphasis: StringFilter
-  clarityParagraph4: StringFilter
-  clarityParagraph5: StringFilter
+  clarityBody: RichTextFilter
   clarityBigWord: StringFilter
   philosophyHeadingPrefix: StringFilter
   philosophyHeadingHighlight: StringFilter
-  philosophyParagraph1: StringFilter
-  philosophyParagraph2Prefix: StringFilter
-  philosophyParagraph2Highlight: StringFilter
-  philosophyParagraph3: StringFilter
-  philosophyEmphasis: StringFilter
-  philosophyClosing: StringFilter
+  philosophyBody: RichTextFilter
   imagineHeadingHighlight: StringFilter
   imagineItems: CareerCoachingImagineItemsFilter
   roadmapHeadingPrefix: StringFilter
@@ -623,8 +606,7 @@ input CareerCoachingFilter {
   experienceItems: StringFilter
   ctaSectionHeadingPrefix: StringFilter
   ctaSectionHeadingHighlight: StringFilter
-  ctaSectionParagraph1: StringFilter
-  ctaSectionParagraph2: StringFilter
+  ctaSectionBody: RichTextFilter
   ctaButtonLabel: StringFilter
 }
 
@@ -662,7 +644,7 @@ type Numerology implements Node & Document {
   heroBadge: String
   heroHeading: String
   heroTagline: String
-  heroSubtext: String
+  heroSubtext: JSON
   heroCTALabel: String
   selfDiscoveryHeadingPrefix: String
   selfDiscoveryHeadingHighlight: String
@@ -674,8 +656,7 @@ type Numerology implements Node & Document {
   whatIsHeadingPrefix: String
   whatIsHeadingHighlight: String
   whatIsIsntParagraph: String
-  whatIsIsParagraph1: String
-  whatIsIsParagraph2: String
+  whatIsIsBody: JSON
   processLabel: String
   processHeadingPrefix: String
   processHeadingHighlight: String
@@ -689,8 +670,7 @@ type Numerology implements Node & Document {
   philosophyHeadingPrefix: String
   philosophyHeadingHighlight: String
   philosophyQuote: String
-  philosophyParagraph1: String
-  philosophyParagraph2: String
+  philosophyBody: JSON
   philosophyBanner: String
   philosophyClosingPrefix: String
   philosophyClosingHighlight: String
@@ -724,7 +704,7 @@ input NumerologyFilter {
   heroBadge: StringFilter
   heroHeading: StringFilter
   heroTagline: StringFilter
-  heroSubtext: StringFilter
+  heroSubtext: RichTextFilter
   heroCTALabel: StringFilter
   selfDiscoveryHeadingPrefix: StringFilter
   selfDiscoveryHeadingHighlight: StringFilter
@@ -736,8 +716,7 @@ input NumerologyFilter {
   whatIsHeadingPrefix: StringFilter
   whatIsHeadingHighlight: StringFilter
   whatIsIsntParagraph: StringFilter
-  whatIsIsParagraph1: StringFilter
-  whatIsIsParagraph2: StringFilter
+  whatIsIsBody: RichTextFilter
   processLabel: StringFilter
   processHeadingPrefix: StringFilter
   processHeadingHighlight: StringFilter
@@ -751,8 +730,7 @@ input NumerologyFilter {
   philosophyHeadingPrefix: StringFilter
   philosophyHeadingHighlight: StringFilter
   philosophyQuote: StringFilter
-  philosophyParagraph1: StringFilter
-  philosophyParagraph2: StringFilter
+  philosophyBody: RichTextFilter
   philosophyBanner: StringFilter
   philosophyClosingPrefix: StringFilter
   philosophyClosingHighlight: StringFilter
@@ -1315,6 +1293,15 @@ input DocumentMutation {
   testimonials: TestimonialsMutation
 }
 
+input HomeServicesMutation {
+  title: String
+  description: String
+  icon: String
+  href: String
+  buttonLabel: String
+  colorScheme: String
+}
+
 input HomeMutation {
   heroImage: String
   heroHeading: JSON
@@ -1322,30 +1309,36 @@ input HomeMutation {
   heroCTALabel: String
   heroBottomCTALabel: String
   ctaHeading: String
-  ctaLine1: String
-  ctaLine2: String
-  ctaLine3: String
-  ctaMessage1: String
-  ctaMessage2: String
+  ctaBody: JSON
   aboutHeading: String
   aboutImage: String
   aboutCredentialTitle: String
-  aboutParagraph1: String
-  aboutParagraph2: String
+  aboutBody: JSON
   feelLikeYouHeading: String
   feelLikeYouTagline: String
-  feelLikeYouQuestion1: String
-  feelLikeYouQuestion2: String
-  feelLikeYouQuestion3: String
-  feelLikeYouQuestion4: String
+  feelLikeYouQuestions: String
   servicesHeading: String
   servicesSubtext: String
+  services: [HomeServicesMutation]
   bottomCTAText: String
+}
+
+input ServicesServicesMutation {
+  title: String
+  duration: String
+  description: String
+  icon: String
+  href: String
+  buttonLabel: String
+  highlights: String
+  isThisForYou: String
+  colorScheme: String
 }
 
 input ServicesMutation {
   heroHeading: String
-  heroSubtext: String
+  heroSubtext: JSON
+  services: [ServicesServicesMutation]
   ctaHeading: String
   ctaSubtext: String
   ctaButtonLabel: String
@@ -1366,19 +1359,15 @@ input AboutValuesMutation {
 
 input AboutMutation {
   heroHeading: String
-  heroSubtext: String
+  heroSubtext: JSON
   storyHeading: String
-  storyParagraph1: String
-  storyParagraph2: String
+  storyBody: JSON
   credentialsHeading: String
   credentialsSubtext: String
   credentials: [AboutCredentialsMutation]
   valuesHeading: String
   valuesSubtext: String
   values: [AboutValuesMutation]
-  ctaHeading: String
-  ctaSubtext: String
-  ctaButtonLabel: String
 }
 
 input ClarityCoachingPerhapsItemsMutation {
@@ -1406,7 +1395,7 @@ input ClarityCoachingExperienceItemsMutation {
 input ClarityCoachingMutation {
   heroBadge: String
   heroHeading: String
-  heroSubtext: String
+  heroSubtext: JSON
   heroCTALabel: String
   heroSideEmoji: String
   heroSideWeeks: String
@@ -1421,21 +1410,15 @@ input ClarityCoachingMutation {
   missingPieceHeadingPrefix: String
   missingPieceHeadingHighlight: String
   problemTitle: String
-  problemParagraph1: String
-  problemQuestion: String
-  problemParagraph2: String
-  problemParagraph3: String
+  problemBody: JSON
   solutionTitle: String
-  solutionParagraph1: String
-  solutionEmphasis: String
-  solutionParagraph2: String
+  solutionBody: JSON
   solutionWord: String
   philosophyLabel: String
   philosophyHeadingPrefix: String
   philosophyHeadingHighlight: String
   philosophyQuote: String
-  philosophyParagraph1: String
-  philosophyParagraph2: String
+  philosophyBody: JSON
   philosophyBannerPrefix: String
   philosophyBannerHighlight: String
   philosophyClosingPrefix: String
@@ -1455,8 +1438,7 @@ input ClarityCoachingMutation {
   bonusText: String
   ctaSectionHeadingPrefix: String
   ctaSectionHeadingHighlight: String
-  ctaSectionParagraph1: String
-  ctaSectionParagraph2: String
+  ctaSectionBody: JSON
   ctaButtonLabel: String
 }
 
@@ -1478,34 +1460,22 @@ input CareerCoachingRoadmapStepsMutation {
 
 input CareerCoachingMutation {
   heroHeading: String
-  heroSubtextPrefix: String
-  heroSubtextHighlight: String
+  heroSubtext: JSON
   heroCTALabel: String
   resultsHeadingPrefix: String
   resultsHeadingHighlight: String
   resultsSubtext: String
   perhapsLabel: String
-  situations: [String]
+  situations: String
   bannerPrefix: String
   bannerHighlight: String
   clarityHeadingPrefix: String
   clarityHeadingHighlight: String
-  clarityParagraph1: String
-  clarityQuestion: String
-  clarityParagraph2: String
-  clarityParagraph3: String
-  clarityEmphasis: String
-  clarityParagraph4: String
-  clarityParagraph5: String
+  clarityBody: JSON
   clarityBigWord: String
   philosophyHeadingPrefix: String
   philosophyHeadingHighlight: String
-  philosophyParagraph1: String
-  philosophyParagraph2Prefix: String
-  philosophyParagraph2Highlight: String
-  philosophyParagraph3: String
-  philosophyEmphasis: String
-  philosophyClosing: String
+  philosophyBody: JSON
   imagineHeadingHighlight: String
   imagineItems: [CareerCoachingImagineItemsMutation]
   roadmapHeadingPrefix: String
@@ -1517,11 +1487,10 @@ input CareerCoachingMutation {
   experienceHeadingPrefix: String
   experienceHeadingHighlight: String
   experienceSubtext: String
-  experienceItems: [String]
+  experienceItems: String
   ctaSectionHeadingPrefix: String
   ctaSectionHeadingHighlight: String
-  ctaSectionParagraph1: String
-  ctaSectionParagraph2: String
+  ctaSectionBody: JSON
   ctaButtonLabel: String
 }
 
@@ -1548,7 +1517,7 @@ input NumerologyMutation {
   heroBadge: String
   heroHeading: String
   heroTagline: String
-  heroSubtext: String
+  heroSubtext: JSON
   heroCTALabel: String
   selfDiscoveryHeadingPrefix: String
   selfDiscoveryHeadingHighlight: String
@@ -1560,8 +1529,7 @@ input NumerologyMutation {
   whatIsHeadingPrefix: String
   whatIsHeadingHighlight: String
   whatIsIsntParagraph: String
-  whatIsIsParagraph1: String
-  whatIsIsParagraph2: String
+  whatIsIsBody: JSON
   processLabel: String
   processHeadingPrefix: String
   processHeadingHighlight: String
@@ -1575,8 +1543,7 @@ input NumerologyMutation {
   philosophyHeadingPrefix: String
   philosophyHeadingHighlight: String
   philosophyQuote: String
-  philosophyParagraph1: String
-  philosophyParagraph2: String
+  philosophyBody: JSON
   philosophyBanner: String
   philosophyClosingPrefix: String
   philosophyClosingHighlight: String

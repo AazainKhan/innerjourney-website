@@ -6,24 +6,25 @@ fragment HomeParts on Home {
   heroCTALabel
   heroBottomCTALabel
   ctaHeading
-  ctaLine1
-  ctaLine2
-  ctaLine3
-  ctaMessage1
-  ctaMessage2
+  ctaBody
   aboutHeading
   aboutImage
   aboutCredentialTitle
-  aboutParagraph1
-  aboutParagraph2
+  aboutBody
   feelLikeYouHeading
   feelLikeYouTagline
-  feelLikeYouQuestion1
-  feelLikeYouQuestion2
-  feelLikeYouQuestion3
-  feelLikeYouQuestion4
+  feelLikeYouQuestions
   servicesHeading
   servicesSubtext
+  services {
+    __typename
+    title
+    description
+    icon
+    href
+    buttonLabel
+    colorScheme
+  }
   bottomCTAText
 }
 
@@ -31,6 +32,18 @@ fragment ServicesParts on Services {
   __typename
   heroHeading
   heroSubtext
+  services {
+    __typename
+    title
+    duration
+    description
+    icon
+    href
+    buttonLabel
+    highlights
+    isThisForYou
+    colorScheme
+  }
   ctaHeading
   ctaSubtext
   ctaButtonLabel
@@ -41,8 +54,7 @@ fragment AboutParts on About {
   heroHeading
   heroSubtext
   storyHeading
-  storyParagraph1
-  storyParagraph2
+  storyBody
   credentialsHeading
   credentialsSubtext
   credentials {
@@ -60,9 +72,6 @@ fragment AboutParts on About {
     title
     description
   }
-  ctaHeading
-  ctaSubtext
-  ctaButtonLabel
 }
 
 fragment ClarityCoachingParts on ClarityCoaching {
@@ -89,21 +98,15 @@ fragment ClarityCoachingParts on ClarityCoaching {
   missingPieceHeadingPrefix
   missingPieceHeadingHighlight
   problemTitle
-  problemParagraph1
-  problemQuestion
-  problemParagraph2
-  problemParagraph3
+  problemBody
   solutionTitle
-  solutionParagraph1
-  solutionEmphasis
-  solutionParagraph2
+  solutionBody
   solutionWord
   philosophyLabel
   philosophyHeadingPrefix
   philosophyHeadingHighlight
   philosophyQuote
-  philosophyParagraph1
-  philosophyParagraph2
+  philosophyBody
   philosophyBannerPrefix
   philosophyBannerHighlight
   philosophyClosingPrefix
@@ -137,16 +140,14 @@ fragment ClarityCoachingParts on ClarityCoaching {
   bonusText
   ctaSectionHeadingPrefix
   ctaSectionHeadingHighlight
-  ctaSectionParagraph1
-  ctaSectionParagraph2
+  ctaSectionBody
   ctaButtonLabel
 }
 
 fragment CareerCoachingParts on CareerCoaching {
   __typename
   heroHeading
-  heroSubtextPrefix
-  heroSubtextHighlight
+  heroSubtext
   heroCTALabel
   resultsHeadingPrefix
   resultsHeadingHighlight
@@ -157,22 +158,11 @@ fragment CareerCoachingParts on CareerCoaching {
   bannerHighlight
   clarityHeadingPrefix
   clarityHeadingHighlight
-  clarityParagraph1
-  clarityQuestion
-  clarityParagraph2
-  clarityParagraph3
-  clarityEmphasis
-  clarityParagraph4
-  clarityParagraph5
+  clarityBody
   clarityBigWord
   philosophyHeadingPrefix
   philosophyHeadingHighlight
-  philosophyParagraph1
-  philosophyParagraph2Prefix
-  philosophyParagraph2Highlight
-  philosophyParagraph3
-  philosophyEmphasis
-  philosophyClosing
+  philosophyBody
   imagineHeadingHighlight
   imagineItems {
     __typename
@@ -201,8 +191,7 @@ fragment CareerCoachingParts on CareerCoaching {
   experienceItems
   ctaSectionHeadingPrefix
   ctaSectionHeadingHighlight
-  ctaSectionParagraph1
-  ctaSectionParagraph2
+  ctaSectionBody
   ctaButtonLabel
 }
 
@@ -228,8 +217,7 @@ fragment NumerologyParts on Numerology {
   whatIsHeadingPrefix
   whatIsHeadingHighlight
   whatIsIsntParagraph
-  whatIsIsParagraph1
-  whatIsIsParagraph2
+  whatIsIsBody
   processLabel
   processHeadingPrefix
   processHeadingHighlight
@@ -254,8 +242,7 @@ fragment NumerologyParts on Numerology {
   philosophyHeadingPrefix
   philosophyHeadingHighlight
   philosophyQuote
-  philosophyParagraph1
-  philosophyParagraph2
+  philosophyBody
   philosophyBanner
   philosophyClosingPrefix
   philosophyClosingHighlight

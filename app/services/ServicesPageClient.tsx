@@ -2,13 +2,25 @@
 
 import Link from 'next/link'
 import { useTina } from 'tinacms/dist/react'
+import { TinaMarkdown, type TinaMarkdownContent } from 'tinacms/dist/rich-text'
 import BookingButton from '@/components/BookingButton'
 import RichText from '@/components/RichText'
 
 interface ServicesData {
   services: {
     heroHeading: string
-    heroSubtext: string
+    heroSubtext: TinaMarkdownContent
+    services: ({
+      title?: string | null
+      duration?: string | null
+      description?: string | null
+      icon?: string | null
+      href?: string | null
+      buttonLabel?: string | null
+      highlights?: string | null
+      isThisForYou?: string | null
+      colorScheme?: string | null
+    } | null)[] | null
     ctaHeading: string
     ctaSubtext: string
     ctaButtonLabel: string
@@ -21,53 +33,22 @@ interface Props {
   data: ServicesData
 }
 
-const cards = [
-  {
-    icon: 'fa-lightbulb',
-    title: 'Mindset Coaching',
-    duration: '12-Week Programme',
-    description: 'My signature programme for women ready to get clear on their goals, values, decision-making, and life\'s direction. Through weekly one-to-one sessions, we\'ll uncover what\'s holding you back and build the confidence to move forward.',
-    href: '/mindset-coaching',
-    btnText: 'Start my mindset journey',
+const SERVICE_COLOR_BUNDLES = {
+  oxford: {
     gradient: 'brand-gradient-oxford',
     textClass: 'text-on-secondary',
     textSoftClass: 'text-on-secondary/90',
     textMutedClass: 'text-on-secondary/60',
     btnColor: 'text-oxford',
-    highlights: ['12 one-to-one sessions', 'Personalised coaching plan', 'Practical tools & exercises', 'Email support between sessions'],
-    isThisForYou: "If you feel stuck, lost, or like you're going through the motions — this programme is for you. We'll work together to uncover what you truly want and build the courage to go after it.",
   },
-  {
-    icon: 'fa-chart-line',
-    title: 'Career Coaching',
-    duration: '12-Week Programme',
-    description: 'The career edition of my mindset coaching. Whether you\'re a graduate, considering a career change, feeling unsatisfied at work, or experiencing redundancy, you\'ll get clear and confident on your career path.',
-    href: '/career-coaching',
-    btnText: 'Realign my career',
+  orange: {
     gradient: 'brand-gradient-orange',
     textClass: 'text-on-primary',
     textSoftClass: 'text-on-primary/90',
     textMutedClass: 'text-on-primary/60',
     btnColor: 'text-carrot',
-    highlights: ['12 personalised sessions', 'Career roadmap', 'CV & interview support', 'Mindset & confidence coaching'],
-    isThisForYou: "If your career isn't lighting you up or you're at a crossroads professionally — this programme is for you. We'll get you clear, confident, and ready to take decisive action.",
   },
-  {
-    icon: 'fa-star',
-    title: 'Numerology',
-    duration: '1-Hour Session',
-    description: 'Need answers now? My 1-hour numerology session will help you glean crucial insight into your life path, relationships, and timing. Backed by ancient vedic practices for fast, focused answers.',
-    href: '/numerology',
-    btnText: 'Book my numerology session',
-    gradient: 'brand-gradient-oxford',
-    textClass: 'text-on-secondary',
-    textSoftClass: 'text-on-secondary/90',
-    textMutedClass: 'text-on-secondary/60',
-    btnColor: 'text-oxford',
-    highlights: ['1-hour personalised session', 'Life path & expression numbers', 'Personal year cycle reading', 'Detailed follow-up notes'],
-    isThisForYou: "If you need fast, focused insight and want a different perspective on your life's questions — this session is for you. Perfect when you need answers but aren't ready for a longer coaching commitment.",
-  },
-]
+} as const
 
 export default function ServicesPageClient(props: Props) {
   const { data } = useTina<ServicesData>({
@@ -77,6 +58,7 @@ export default function ServicesPageClient(props: Props) {
     },
   })
   const d = data.services
+  const cards = (d.services || []).filter((s): s is NonNullable<typeof s> => Boolean(s))
 
   return (
     <>
@@ -86,7 +68,9 @@ export default function ServicesPageClient(props: Props) {
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
             <RichText as="h1" className="text-4xl md:text-5xl lg:text-6xl heading-primary text-on-secondary font-dancing font-bold mb-6 leading-tight">{d.heroHeading}</RichText>
-            <RichText as="p" className="text-lg md:text-xl body-text-light text-on-secondary/90 leading-relaxed max-w-3xl mx-auto">{d.heroSubtext}</RichText>
+            <div className="text-lg md:text-xl body-text-light text-on-secondary/90 leading-relaxed max-w-3xl mx-auto space-y-4 [&_strong]:font-semibold [&_em]:italic">
+              <TinaMarkdown content={d.heroSubtext} />
+            </div>
           </div>
         </div>
       </section>
@@ -99,34 +83,38 @@ export default function ServicesPageClient(props: Props) {
         <section className="py-20 relative">
           <div className="container mx-auto px-6 relative z-10">
             <div className="space-y-16 max-w-5xl mx-auto">
-              {cards.map((s, i) => (
-                <div key={s.title} className={`grid lg:grid-cols-2 gap-12 items-center ${i % 2 === 1 ? 'lg:flex-row-reverse' : ''} animate-on-scroll`}>
-                  <div className={`${s.gradient} ${s.textClass} p-10 rounded-2xl shadow-2xl ${i % 2 === 1 ? 'lg:order-2' : ''}`}>
-                    <div className="text-5xl mb-6"><i className={`fas ${s.icon}`}></i></div>
-                    <span className={`inline-block ${s.textMutedClass} text-sm uppercase tracking-widest mb-2`}>{s.duration}</span>
-                    <h2 className="text-3xl font-bold mb-4">{s.title}</h2>
-                    <p className={`${s.textSoftClass} mb-6 text-lg leading-relaxed`}>{s.description}</p>
-                    <ul className="space-y-2 mb-8">
-                      {s.highlights.map((h) => (
-                        <li key={h} className="flex items-center gap-3">
-                          <i className={`fas fa-check ${s.textClass} flex-shrink-0`}></i>
-                          <span className={s.textSoftClass}>{h}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <Link href={s.href} className={`bg-white ${s.btnColor} hover:bg-gray-100 px-8 py-3 rounded-lg font-semibold transition-all duration-300 inline-block text-center`}>
-                      {s.btnText}
-                    </Link>
+              {cards.map((s, i) => {
+                const bundle = SERVICE_COLOR_BUNDLES[(s.colorScheme as keyof typeof SERVICE_COLOR_BUNDLES)] || SERVICE_COLOR_BUNDLES.oxford
+                const highlights = (s.highlights || '').split('\n').map((h) => h.trim()).filter(Boolean)
+                return (
+                  <div key={s.title || i} className={`grid lg:grid-cols-2 gap-12 items-center ${i % 2 === 1 ? 'lg:flex-row-reverse' : ''} animate-on-scroll`}>
+                    <div className={`${bundle.gradient} ${bundle.textClass} p-10 rounded-2xl shadow-2xl ${i % 2 === 1 ? 'lg:order-2' : ''}`}>
+                      <div className="text-5xl mb-6"><i className={`fas ${s.icon || ''}`}></i></div>
+                      <span className={`inline-block ${bundle.textMutedClass} text-sm uppercase tracking-widest mb-2`}>{s.duration}</span>
+                      <h2 className="text-3xl font-bold mb-4">{s.title}</h2>
+                      <p className={`${bundle.textSoftClass} mb-6 text-lg leading-relaxed`}>{s.description}</p>
+                      <ul className="space-y-2 mb-8">
+                        {highlights.map((h) => (
+                          <li key={h} className="flex items-center gap-3">
+                            <i className={`fas fa-check ${bundle.textClass} flex-shrink-0`}></i>
+                            <span className={bundle.textSoftClass}>{h}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      <Link href={s.href || '#'} className={`bg-white ${bundle.btnColor} hover:bg-gray-100 px-8 py-3 rounded-lg font-semibold transition-all duration-300 inline-block text-center`}>
+                        {s.buttonLabel}
+                      </Link>
+                    </div>
+                    <div className={`space-y-6 ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
+                      <h3 className="text-2xl font-bold text-gray-900">Is this for you?</h3>
+                      <p className="text-gray-600 text-lg leading-relaxed">{s.isThisForYou}</p>
+                      <Link href={s.href || '#'} className="inline-flex items-center gap-2 text-azure font-semibold hover:underline">
+                        Learn more about {(s.title || '').toLowerCase()} <span aria-hidden="true">→</span>
+                      </Link>
+                    </div>
                   </div>
-                  <div className={`space-y-6 ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
-                    <h3 className="text-2xl font-bold text-gray-900">Is this for you?</h3>
-                    <p className="text-gray-600 text-lg leading-relaxed">{s.isThisForYou}</p>
-                    <Link href={s.href} className="inline-flex items-center gap-2 text-azure font-semibold hover:underline">
-                      Learn more about {s.title.toLowerCase()} <span aria-hidden="true">→</span>
-                    </Link>
-                  </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
           </div>
         </section>

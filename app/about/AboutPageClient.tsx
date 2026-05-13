@@ -1,16 +1,15 @@
 'use client'
 
 import { useTina } from 'tinacms/dist/react'
-import BookingButton from '@/components/BookingButton'
+import { TinaMarkdown, type TinaMarkdownContent } from 'tinacms/dist/rich-text'
 import RichText from '@/components/RichText'
 
 interface AboutData {
   about: {
     heroHeading: string
-    heroSubtext: string
+    heroSubtext: TinaMarkdownContent
     storyHeading: string
-    storyParagraph1: string
-    storyParagraph2: string
+    storyBody: TinaMarkdownContent
     credentialsHeading: string
     credentialsSubtext: string
     credentials: Array<{
@@ -26,9 +25,6 @@ interface AboutData {
       title: string
       description: string
     }>
-    ctaHeading: string
-    ctaSubtext: string
-    ctaButtonLabel: string
   }
 }
 
@@ -55,7 +51,9 @@ export default function AboutPageClient(props: Props) {
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
             <RichText as="h1" className="text-4xl md:text-5xl lg:text-6xl heading-primary text-on-secondary font-dancing font-bold mb-6 leading-tight drop-shadow-2xl">{d.heroHeading}</RichText>
-            <RichText as="p" className="text-lg md:text-xl body-text-light text-on-secondary/90 leading-relaxed max-w-3xl mx-auto">{d.heroSubtext}</RichText>
+            <div className="text-lg md:text-xl body-text-light text-on-secondary/90 leading-relaxed max-w-3xl mx-auto space-y-4 [&_strong]:font-semibold [&_em]:italic">
+              <TinaMarkdown content={d.heroSubtext} />
+            </div>
           </div>
         </div>
       </section>
@@ -68,12 +66,9 @@ export default function AboutPageClient(props: Props) {
               <h2 className="text-4xl md:text-5xl heading-secondary text-gray-900 mb-6">
                 {d.storyHeading}
               </h2>
-              <p className="text-lg text-gray-700 leading-relaxed">
-                {d.storyParagraph1}
-              </p>
-              <p className="text-lg text-gray-700 leading-relaxed">
-                {d.storyParagraph2}
-              </p>
+              <div className="space-y-6 text-lg text-gray-700 leading-relaxed [&_strong]:text-gray-900 [&_strong]:font-semibold [&_em]:italic">
+                <TinaMarkdown content={d.storyBody} />
+              </div>
               <div className="flex items-center space-x-2">
                 <i className="fas fa-check-circle text-carrot text-xl"></i>
                 <span className="text-gray-700 font-medium">Certified Coach</span>
@@ -153,18 +148,6 @@ export default function AboutPageClient(props: Props) {
                 </div>
               ))}
             </div>
-          </div>
-        </section>
-
-        <section className="py-20 relative">
-          <div className="container mx-auto px-6 relative z-10 text-center">
-            <h2 className="text-4xl md:text-5xl heading-secondary text-gray-900 mb-6 animate-on-scroll">
-              {d.ctaHeading}
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8 animate-on-scroll">
-              {d.ctaSubtext}
-            </p>
-            <BookingButton label={d.ctaButtonLabel} className="animate-on-scroll" />
           </div>
         </section>
       </div>

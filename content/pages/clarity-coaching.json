@@ -1,7 +1,7 @@
 {
   "heroBadge": "12-Week Transformation Programme",
   "heroHeading": "Get answers and transform your life",
-  "heroSubtext": "Discover the missing piece to achieving lasting change, and the life you deserve",
+  "heroSubtext": "Discover the missing piece to achieving lasting change, and the life you deserve\n",
   "heroCTALabel": "Take the first step",
   "heroSideEmoji": "✨",
   "heroSideWeeks": "12 Weeks",
@@ -24,22 +24,16 @@
   "missingPieceHeadingPrefix": "Clarity: your",
   "missingPieceHeadingHighlight": "missing piece",
   "problemTitle": "The Problem",
-  "problemParagraph1": "Friends, family, and online courses might have your best interest at heart, but they're not getting you where you want to be.",
-  "problemQuestion": "Why?",
-  "problemParagraph2": "Because they're asking the wrong questions.",
-  "problemParagraph3": "Too often, we find ourselves deferring to others for the answer, switching to autopilot, or hustling even more when things get hard.",
+  "problemBody": "Friends, family, and online courses might have your best interest at heart, but they're not getting you where you want to be.\n\n**Why?**\n\nBecause they're asking the wrong questions.\n\nToo often, we find ourselves deferring to others for the answer, switching to autopilot, or hustling even more when things get hard.\n",
   "solutionTitle": "The Solution",
-  "solutionParagraph1": "You need a guiding light with the right roadmap, tools, and qualifications to help you truly look within.",
-  "solutionEmphasis": "That's where real transformation begins.",
-  "solutionParagraph2": "There's a missing piece that can make things so much simpler, if you just know how to access it:",
+  "solutionBody": "You need a guiding light with the right roadmap, tools, and qualifications to help you truly look within.\n\n**That's where real transformation begins.**\n\nThere's a missing piece that can make things so much simpler, if you just know how to access it:\n",
   "solutionWord": "Clarity.",
 
   "philosophyLabel": "My Approach",
   "philosophyHeadingPrefix": "Coaching",
   "philosophyHeadingHighlight": "Philosophy",
   "philosophyQuote": "Success in your outer journey starts with your inner journey.",
-  "philosophyParagraph1": "My own experience over ten years ago taught me this profound truth.",
-  "philosophyParagraph2": "Traditional coaching or advice doesn't properly teach us how to get curious, develop self-compassion, or gently grow our confidence as we find the answer, because we're too focussed on the external. Our judgement stays clouded.",
+  "philosophyBody": "My own experience over ten years ago taught me this profound truth.\n\nTraditional coaching or advice doesn't properly teach us how to get curious, develop self-compassion, or gently grow our confidence as we find the answer, because we're too focussed on the external. Our judgement stays clouded.\n",
   "philosophyBannerPrefix": "But when you know the first step is looking inward,",
   "philosophyBannerHighlight": "everything changes.",
   "philosophyClosingPrefix": "If you're ready to make some real decisions, let go of old habits, and bring purpose into your life again,",
@@ -94,7 +88,6 @@
 
   "ctaSectionHeadingPrefix": "Unclear if Mindset Coaching is",
   "ctaSectionHeadingHighlight": "right for you?",
-  "ctaSectionParagraph1": "Decisions might feel hard right now. Start with a free discovery call to find out if my coaching can help you.",
-  "ctaSectionParagraph2": "We'll do the figuring out together.",
+  "ctaSectionBody": "Decisions might feel hard right now. Start with a free discovery call to find out if my coaching can help you.\n\n**We'll do the figuring out together.**\n",
   "ctaButtonLabel": "Book my free discovery call"
 }
