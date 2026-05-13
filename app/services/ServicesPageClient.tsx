@@ -121,7 +121,9 @@ export default function ServicesPageClient(props: Props) {
                   <div className={`space-y-6 ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
                     <h3 className="text-2xl font-bold text-gray-900">Is this for you?</h3>
                     <p className="text-gray-600 text-lg leading-relaxed">{s.isThisForYou}</p>
-                    <BookingButton variant="secondary" size="md" />
+                    <Link href={s.href} className="inline-flex items-center gap-2 text-azure font-semibold hover:underline">
+                      Learn more about {s.title.toLowerCase()} <span aria-hidden="true">→</span>
+                    </Link>
                   </div>
                 </div>
               ))}

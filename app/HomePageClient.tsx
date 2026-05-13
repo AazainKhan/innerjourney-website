@@ -163,8 +163,22 @@ export default function HomePageClient(props: Props) {
                   {d.ctaMessage2}
                 </p>
               </div>
-              <div className="pt-4 animate-on-scroll">
-                <HomeClient buttonOnly ctaLabel={d.heroCTALabel} />
+              {/* Softer mid-page link rather than a third "Book a call" button —
+               * scrolls the user to the services section so they can see what
+               * the path looks like before they're asked to convert. The
+               * primary booking CTAs live in the hero and bottom of the page. */}
+              <div className="pt-2 animate-on-scroll">
+                <a
+                  href="#services"
+                  className="inline-flex items-center gap-2 text-azure font-semibold hover:gap-3 transition-all"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    const el = document.getElementById('services')
+                    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 60, behavior: 'smooth' })
+                  }}
+                >
+                  See how I can help <span aria-hidden="true">↓</span>
+                </a>
               </div>
             </div>
           </div>

@@ -284,15 +284,16 @@ html { scroll-behavior: smooth; }
 #mobile-menu.show { opacity: 1; pointer-events: auto; }
 .mobile-menu-overlay {
     position: relative; width: 100vw; height: 100vh;
-    display: flex; align-items: center; justify-content: center;
+    display: flex; align-items: stretch; justify-content: center;
     background-image: radial-gradient(ellipse at center, rgba(0,0,0,0.35), rgba(0,0,0,0.6));
 }
-.mobile-menu-content { background: transparent; width: 100%; max-width: 400px; margin: 0 auto; position: relative; z-index: 2; text-align: center; }
+.mobile-menu-content { background: transparent; position: relative; z-index: 2; }
 .mobile-menu-close { position: absolute; top: 24px; right: 24px; background: none; border: none; color: var(--white); font-size: 2.5rem; z-index: 10; cursor: pointer; transition: color 0.2s; }
 .mobile-menu-close:hover { color: var(--carrot-orange); }
 .close-icon { font-size: 2.5rem; line-height: 1; }
-#mobile-menu a { display: block; padding: 0.75rem 1rem; font-size: 1.125rem; letter-spacing: 0.05em; text-transform: uppercase; transition: all 0.3s ease; }
-#mobile-menu .btn-azure { margin: 1.5rem auto 0; max-width: 200px; text-align: center; }
+/* The menu's CTA button gets full width within its parent so it reads as the
+ * primary action of the footer block. */
+#mobile-menu .booking-btn { display: block; width: 100%; text-align: center; }
 
 /* Booking Overlay */
 @media (max-height: 800px) {

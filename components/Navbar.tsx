@@ -47,13 +47,13 @@ export default function Navbar({ data }: { data: NavbarData }) {
             <Link href="/" className="flex items-center space-x-2 hover:opacity-90 transition-opacity">
               <Image
                 src="/images/logo_transparent-480.png"
-                alt="Shanila Khan Clarity and Mindset Coaching Logo"
+                alt="Shanila Khan Mindset Coaching Logo"
                 width={240}
                 height={60}
                 className="h-14 w-auto"
                 priority
               />
-              <div className="text-2xl heading-primary text-on-secondary">{data.brandLabel}</div>
+              <div className="text-2xl heading-primary text-on-secondary whitespace-nowrap">{data.brandLabel}</div>
             </Link>
 
             {/* Desktop nav */}
@@ -74,18 +74,26 @@ export default function Navbar({ data }: { data: NavbarData }) {
               ))}
             </div>
 
-            <button
-              id="booking-btn"
-              onClick={openBooking}
-              className="booking-btn btn-azure btn-sm button-text hidden md:inline-flex"
-            >
-              {data.ctaLabel}
-            </button>
+            {/* Desktop-only booking CTA. We wrap in a div with the hidden/inline
+             * toggle so .btn-azure's inherent `display: inline-block` doesn't
+             * override Tailwind's `hidden` utility (source order conflict that
+             * was causing the button to appear on mobile). */}
+            <div className="hidden md:inline-flex">
+              <button
+                id="booking-btn"
+                onClick={openBooking}
+                className="booking-btn btn-azure btn-sm button-text"
+              >
+                {data.ctaLabel}
+              </button>
+            </div>
 
             <div className="md:hidden mr-2">
               <button
                 onClick={() => setMobileOpen(true)}
                 aria-label="Toggle navigation menu"
+                aria-expanded={mobileOpen}
+                aria-controls="mobile-menu"
                 className="text-on-secondary text-2xl"
               >
                 <i className="fas fa-bars" aria-hidden="true"></i>
@@ -95,7 +103,13 @@ export default function Navbar({ data }: { data: NavbarData }) {
         </div>
       </nav>
 
-      {/* Mobile menu */}
+      {/* Mobile menu — full-screen sheet with a clear hierarchy:
+       *   header  : close button (top-right)
+       *   primary : centered nav links
+       *   footer  : divider, single CTA, social row
+       * The footer sits at the bottom of the sheet so the CTA feels like
+       * the obvious next action, not a floating link mid-page.
+       */}
       <div
         id="mobile-menu"
         className={`${mobileOpen ? 'show' : ''}`}
@@ -109,45 +123,55 @@ export default function Navbar({ data }: { data: NavbarData }) {
           >
             <span className="close-icon">&times;</span>
           </button>
-          <div className="px-6 py-4 space-y-4 mobile-menu-content">
-            {data.links.map((link) => link.showDropdown ? (
-              <div key={link.href} className="mobile-nav-dropdown">
-                <button
-                  className="mobile-dropdown-toggle block text-white hover:text-carrot transition-colors uppercase w-full text-left"
-                  onClick={() => setWorkDropdownOpen(!workDropdownOpen)}
-                >
-                  {link.label} <i className={`fas fa-chevron-down ml-1 text-xs transition-transform ${workDropdownOpen ? 'rotate-180' : ''}`}></i>
-                </button>
-                {workDropdownOpen && (
-                  <div className="pl-4 space-y-2 mt-2">
-                    {data.workWithMeDropdown.map((d) => (
-                      <Link key={d.href} href={d.href} className="block text-white hover:text-carrot transition-colors" onClick={() => setMobileOpen(false)}>{d.label}</Link>
-                    ))}
-                  </div>
-                )}
+
+          <div className="mobile-menu-content flex flex-col items-stretch w-full max-w-sm px-6 pt-16 pb-8 h-full">
+            <nav className="flex-1 flex flex-col items-center justify-center gap-5">
+              {data.links.map((link) => link.showDropdown ? (
+                <div key={link.href} className="w-full text-center">
+                  <button
+                    className="inline-flex items-center gap-2 text-white hover:text-carrot transition-colors uppercase tracking-widest text-lg font-semibold"
+                    onClick={() => setWorkDropdownOpen(!workDropdownOpen)}
+                    aria-expanded={workDropdownOpen}
+                  >
+                    {link.label}
+                    <i className={`fas fa-chevron-down text-xs transition-transform ${workDropdownOpen ? 'rotate-180' : ''}`}></i>
+                  </button>
+                  {workDropdownOpen && (
+                    <div className="space-y-2 mt-3">
+                      {data.workWithMeDropdown.map((d) => (
+                        <Link key={d.href} href={d.href} className="block text-white/80 hover:text-carrot transition-colors text-sm" onClick={() => setMobileOpen(false)}>{d.label}</Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <Link key={link.href} href={link.href} className="block text-white hover:text-carrot transition-colors uppercase tracking-widest text-lg font-semibold" onClick={() => setMobileOpen(false)}>{link.label}</Link>
+              ))}
+            </nav>
+
+            {/* Footer block of the menu — hairline divider, CTA, social row */}
+            <div className="flex-shrink-0 mt-8">
+              <div className="border-t border-white/15 mb-6" aria-hidden="true" />
+              <button
+                onClick={() => { setMobileOpen(false); openBooking() }}
+                className="booking-btn w-full btn-azure button-text mb-6"
+              >
+                {data.ctaLabel}
+              </button>
+              <div className="flex justify-center space-x-6">
+                <a href="https://www.facebook.com/innerjourneywithshanila/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-white/80 text-2xl hover:text-carrot">
+                  <i className="fab fa-facebook"></i>
+                </a>
+                <a href="https://www.instagram.com/_.innerjourney_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-white/80 text-2xl hover:text-carrot">
+                  <i className="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.youtube.com/channel/UCJbRrCiY4zXfojPTa17EKMg" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="text-white/80 text-2xl hover:text-carrot">
+                  <i className="fab fa-youtube"></i>
+                </a>
+                <a href="https://api.whatsapp.com/send?phone=447387973382&" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="text-white/80 text-2xl hover:text-carrot">
+                  <i className="fab fa-whatsapp"></i>
+                </a>
               </div>
-            ) : (
-              <Link key={link.href} href={link.href} className="block text-white hover:text-carrot transition-colors uppercase" onClick={() => setMobileOpen(false)}>{link.label}</Link>
-            ))}
-            <button
-              onClick={() => { setMobileOpen(false); openBooking() }}
-              className="booking-btn w-full btn-azure button-text"
-            >
-              {data.ctaLabel}
-            </button>
-            <div className="flex justify-center mt-4 space-x-6">
-              <a href="https://www.facebook.com/innerjourneywithshanila/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-white text-2xl hover:text-carrot">
-                <i className="fab fa-facebook"></i>
-              </a>
-              <a href="https://www.instagram.com/_.innerjourney_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-white text-2xl hover:text-carrot">
-                <i className="fab fa-instagram"></i>
-              </a>
-              <a href="https://www.youtube.com/channel/UCJbRrCiY4zXfojPTa17EKMg" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="text-white text-2xl hover:text-carrot">
-                <i className="fab fa-youtube"></i>
-              </a>
-              <a href="https://api.whatsapp.com/send?phone=447387973382&" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="text-white text-2xl hover:text-carrot">
-                <i className="fab fa-whatsapp"></i>
-              </a>
             </div>
           </div>
         </div>
