@@ -279,6 +279,7 @@ fragment ResourcesParts on Resources {
         publishedAt
         status
         excerpt
+        image
         icon
         iconColor
         gradient
@@ -310,6 +311,7 @@ fragment ResourcesParts on Resources {
         status
         audioUrl
         excerpt
+        image
         icon
         gradient
         badgeColor
@@ -362,6 +364,7 @@ fragment PostParts on Post {
   publishedAt
   status
   excerpt
+  image
   icon
   iconColor
   gradient
@@ -377,6 +380,7 @@ fragment PodcastParts on Podcast {
   status
   audioUrl
   excerpt
+  image
   icon
   gradient
   badgeColor

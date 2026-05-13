@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { useMemo, useState } from 'react'
 import { useTina } from 'tinacms/dist/react'
@@ -45,6 +46,7 @@ interface BlogPost {
   title: string
   excerpt: string
   status: string
+  image: string
   icon: string
   iconColor: string
   gradient: string
@@ -58,6 +60,7 @@ interface Podcast {
   excerpt: string
   status: string
   audioUrl: string
+  image: string
   icon: string
   gradient: string
   badgeColor: string
@@ -107,6 +110,7 @@ function FeaturedCard({
   title,
   excerpt,
   status,
+  image,
   icon,
   iconColor,
   gradient,
@@ -117,6 +121,7 @@ function FeaturedCard({
   title: string
   excerpt: string
   status: string
+  image?: string
   icon: string
   iconColor: string
   gradient: string
@@ -127,16 +132,26 @@ function FeaturedCard({
       href={href}
       className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 flex flex-col"
     >
-      <div className={`relative h-48 bg-gradient-to-br ${gradient}`}>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <i className={`fas ${icon} text-5xl ${iconColor}`}></i>
-        </div>
-        <span className={`absolute top-4 left-4 px-3 py-1 ${tagClass} text-xs rounded-full font-semibold inline-flex items-center gap-1`}>
+      <div className={`relative h-48 ${image ? '' : `bg-gradient-to-br ${gradient}`}`}>
+        {image ? (
+          <Image
+            src={image}
+            alt={title}
+            fill
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <i className={`fas ${icon} text-5xl ${iconColor}`}></i>
+          </div>
+        )}
+        <span className={`absolute top-4 left-4 px-3 py-1 ${tagClass} text-xs rounded-full font-semibold inline-flex items-center gap-1 z-10`}>
           {kind === 'Podcast' && <i className="fas fa-podcast"></i>}
           {kind}
         </span>
         {meta && (
-          <span className="absolute top-4 right-4 px-3 py-1 bg-black/40 text-white text-xs rounded-full font-semibold backdrop-blur-sm">
+          <span className="absolute top-4 right-4 px-3 py-1 bg-black/40 text-white text-xs rounded-full font-semibold backdrop-blur-sm z-10">
             {meta}
           </span>
         )}
@@ -159,11 +174,21 @@ function BlogCard({ post }: { post: BlogPost }) {
       href={`/blog/${post.slug}`}
       className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 flex flex-col"
     >
-      <div className={`relative h-48 bg-gradient-to-br ${post.gradient}`}>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <i className={`fas ${post.icon} text-5xl ${post.iconColor}`}></i>
-        </div>
-        <span className={`absolute top-4 left-4 px-3 py-1 ${BLOG_TAG_CLASS} text-xs rounded-full font-semibold`}>
+      <div className={`relative h-48 ${post.image ? '' : `bg-gradient-to-br ${post.gradient}`}`}>
+        {post.image ? (
+          <Image
+            src={post.image}
+            alt={post.title}
+            fill
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <i className={`fas ${post.icon} text-5xl ${post.iconColor}`}></i>
+          </div>
+        )}
+        <span className={`absolute top-4 left-4 px-3 py-1 ${BLOG_TAG_CLASS} text-xs rounded-full font-semibold z-10`}>
           Blog
         </span>
       </div>
@@ -186,8 +211,18 @@ function PodcastCard({ episode }: { episode: Podcast }) {
       className="group block rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl brand-gradient-oxford-deep"
     >
       <div className="grid md:grid-cols-3 gap-0">
-        <div className={`relative h-48 md:h-auto bg-gradient-to-br ${episode.gradient} flex items-center justify-center`}>
-          <i className={`fas ${episode.icon} text-6xl text-on-secondary/60 group-hover:scale-110 transition-transform`}></i>
+        <div className={`relative h-48 md:h-auto ${episode.image ? '' : `bg-gradient-to-br ${episode.gradient}`} flex items-center justify-center overflow-hidden`}>
+          {episode.image ? (
+            <Image
+              src={episode.image}
+              alt={episode.title}
+              fill
+              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              sizes="(max-width: 768px) 100vw, 33vw"
+            />
+          ) : (
+            <i className={`fas ${episode.icon} text-6xl text-on-secondary/60 group-hover:scale-110 transition-transform`}></i>
+          )}
         </div>
         <div className="md:col-span-2 p-8">
           <div className="flex items-center gap-3 mb-4">
@@ -322,6 +357,7 @@ export default function ResourcesClient(props: Props) {
                       title={post.title}
                       excerpt={post.excerpt}
                       status={post.status}
+                      image={post.image}
                       icon={post.icon}
                       iconColor={post.iconColor}
                       gradient={post.gradient}
@@ -336,6 +372,7 @@ export default function ResourcesClient(props: Props) {
                       title={episode.title}
                       excerpt={episode.excerpt}
                       status={episode.status}
+                      image={episode.image}
                       icon={episode.icon}
                       iconColor="text-white/60"
                       gradient={episode.gradient}

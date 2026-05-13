@@ -900,6 +900,7 @@ type Post implements Node & Document {
   publishedAt: String
   status: String
   excerpt: String
+  image: String
   icon: String
   iconColor: String
   gradient: String
@@ -923,6 +924,7 @@ input PostFilter {
   publishedAt: DatetimeFilter
   status: StringFilter
   excerpt: StringFilter
+  image: ImageFilter
   icon: StringFilter
   iconColor: StringFilter
   gradient: StringFilter
@@ -948,6 +950,7 @@ type Podcast implements Node & Document {
   status: String
   audioUrl: String
   excerpt: String
+  image: String
   icon: String
   gradient: String
   badgeColor: String
@@ -964,6 +967,7 @@ input PodcastFilter {
   status: StringFilter
   audioUrl: StringFilter
   excerpt: StringFilter
+  image: ImageFilter
   icon: StringFilter
   gradient: StringFilter
   badgeColor: StringFilter
@@ -1627,6 +1631,7 @@ input PostMutation {
   publishedAt: String
   status: String
   excerpt: String
+  image: String
   icon: String
   iconColor: String
   gradient: String
@@ -1641,6 +1646,7 @@ input PodcastMutation {
   status: String
   audioUrl: String
   excerpt: String
+  image: String
   icon: String
   gradient: String
   badgeColor: String

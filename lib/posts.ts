@@ -7,6 +7,7 @@ export interface PostFrontmatter {
   publishedAt?: string
   status?: string
   excerpt?: string
+  image?: string
   icon?: string
   iconColor?: string
   gradient?: string
@@ -25,6 +26,7 @@ export interface PodcastFrontmatter {
   status?: string
   audioUrl?: string
   excerpt?: string
+  image?: string
   icon?: string
   gradient?: string
   badgeColor?: string

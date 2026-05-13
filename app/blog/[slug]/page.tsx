@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import ReactMarkdown from 'react-markdown'
@@ -47,6 +48,21 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       <section className="page-hero brand-gradient-oxford-azure">
         <div className="absolute top-20 right-20 w-72 h-72 bg-carrot/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 left-20 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
+        {/* Cover image fills the hero with a dark overlay so the text stays
+         * legible. Falls back to the gradient hero when no image is set. */}
+        {post.image && (
+          <>
+            <Image
+              src={post.image}
+              alt={post.title}
+              fill
+              priority
+              className="object-cover opacity-30"
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50" aria-hidden="true" />
+          </>
+        )}
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-3xl mx-auto">
             <Link href="/blog" className="inline-flex items-center gap-2 text-on-secondary/70 hover:text-on-secondary text-sm uppercase tracking-widest mb-6">

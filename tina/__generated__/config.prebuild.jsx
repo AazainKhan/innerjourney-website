@@ -517,9 +517,10 @@ var config_default = defineConfig({
           { name: "publishedAt", label: "Published Date", type: "datetime" },
           { name: "status", label: "Status", type: "string", options: ["Coming Soon", "Published", "Draft"] },
           { name: "excerpt", label: "Excerpt (shown on card)", type: "string", ui: { component: "textarea" } },
-          { name: "icon", label: "Card Icon (fa-class)", type: "string" },
-          { name: "iconColor", label: "Card Icon Color Class", type: "string" },
-          { name: "gradient", label: "Card Gradient Class", type: "string" },
+          { name: "image", label: "Cover Image (shown on the card + post hero \u2014 leave blank to use the icon below)", type: "image" },
+          { name: "icon", label: "Fallback Icon (fa-class) \u2014 only used when no Cover Image is set", type: "string" },
+          { name: "iconColor", label: "Fallback Icon Color Class", type: "string" },
+          { name: "gradient", label: "Fallback Card Gradient Class", type: "string" },
           { name: "badgeColor", label: "Card Badge Color Class", type: "string" },
           { name: "body", label: "Body", type: "rich-text", isBody: true }
         ]
@@ -556,9 +557,10 @@ var config_default = defineConfig({
           { name: "status", label: "Status", type: "string", options: ["Coming Soon", "Published", "Draft"] },
           { name: "audioUrl", label: "Listen URL (Spotify / Apple / YouTube)", type: "string" },
           { name: "excerpt", label: "Excerpt (shown on card)", type: "string", ui: { component: "textarea" } },
-          { name: "icon", label: "Card Icon (fa-class)", type: "string" },
-          { name: "gradient", label: "Background Gradient Class", type: "string" },
-          { name: "badgeColor", label: "Badge Color Class", type: "string" },
+          { name: "image", label: "Cover Image (shown on the card + episode hero \u2014 leave blank to use the icon below)", type: "image" },
+          { name: "icon", label: "Fallback Icon (fa-class) \u2014 only used when no Cover Image is set", type: "string" },
+          { name: "gradient", label: "Fallback Background Gradient Class", type: "string" },
+          { name: "badgeColor", label: "Card Badge Color Class", type: "string" },
           { name: "body", label: "Show Notes / Description", type: "rich-text", isBody: true }
         ]
       },
