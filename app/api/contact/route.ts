@@ -51,7 +51,15 @@ export async function POST(req: NextRequest) {
       },
     })
 
-    const adminEmail = process.env.ADMIN_EMAIL || 'innerjourneywithshanila@gmail.com'
+    // Contact form notifications always go to the Gmail inbox. We still let
+    // ADMIN_EMAIL override (e.g. for staging) but ignore the legacy
+    // info@innerjourney-with-shanila.com value in case Vercel's env still has
+    // it set from before the migration.
+    const ADMIN_RECIPIENT = 'innerjourneywithshanila@gmail.com'
+    const envEmail = (process.env.ADMIN_EMAIL || '').trim().toLowerCase()
+    const adminEmail = envEmail && envEmail !== 'info@innerjourney-with-shanila.com'
+      ? envEmail
+      : ADMIN_RECIPIENT
 
     const adminSubject = isBooking
       ? `New Booking Request from ${name}`
