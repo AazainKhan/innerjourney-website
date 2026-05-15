@@ -106,7 +106,6 @@ function FeaturedCard({
   href,
   external,
   kind,
-  meta,
   title,
   excerpt,
   status,
@@ -118,7 +117,6 @@ function FeaturedCard({
   href: string
   external?: boolean
   kind: 'Blog' | 'Podcast'
-  meta?: string
   title: string
   excerpt: string
   status: string
@@ -168,11 +166,6 @@ function FeaturedCard({
           {kind === 'Podcast' && <i className="fas fa-podcast"></i>}
           {kind}
         </span>
-        {meta && (
-          <span className="absolute top-4 right-4 px-3 py-1 bg-black/40 text-white text-xs rounded-full font-semibold backdrop-blur-sm z-10">
-            {meta}
-          </span>
-        )}
       </div>
       <div className="p-6 flex flex-col flex-grow">
         <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-azure transition-colors">{title}</h3>
@@ -257,7 +250,6 @@ function PodcastCard({ episode }: { episode: Podcast }) {
             <span className={`px-4 py-1 ${PODCAST_TAG_CLASS} text-xs rounded-full font-semibold inline-flex items-center gap-1`}>
               <i className="fas fa-podcast"></i> Podcast
             </span>
-            <span className="text-on-secondary/70 text-sm">{episode.episode}</span>
           </div>
           <h3 className="text-2xl font-bold text-on-secondary mb-3 group-hover:text-carrot transition-colors">{episode.title}</h3>
           <p className="text-on-secondary/80 mb-6 leading-relaxed line-clamp-3">{episode.excerpt}</p>
@@ -289,6 +281,7 @@ export default function ResourcesClient(props: Props) {
   const d = data.resources
   const [newsletterStatus, setNewsletterStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
   const [newsletterError, setNewsletterError] = useState<string>('')
+  const [newsletterAlreadySubscribed, setNewsletterAlreadySubscribed] = useState(false)
   const [blogSort, setBlogSort] = useState<SortKey>('newest')
   const [podcastSort, setPodcastSort] = useState<SortKey>('newest')
   const [blogShowAll, setBlogShowAll] = useState(false)
@@ -402,7 +395,6 @@ export default function ResourcesClient(props: Props) {
                       href={episode.audioUrl || '#'}
                       external
                       kind="Podcast"
-                      meta={episode.episode}
                       title={episode.title}
                       excerpt={episode.excerpt}
                       status={episode.status}
@@ -520,7 +512,9 @@ export default function ResourcesClient(props: Props) {
                 <p className="text-xl text-on-secondary/90 mb-8">{d.newsletterSubtext}</p>
                 {newsletterStatus === 'success' ? (
                   <p className="text-on-secondary text-lg bg-on-secondary/10 rounded-lg px-6 py-3 inline-block">
-                    {d.newsletterSuccessMessage}
+                    {newsletterAlreadySubscribed
+                      ? "You're already on the list. Stay tuned!"
+                      : d.newsletterSuccessMessage}
                   </p>
                 ) : (
                   <form
@@ -538,8 +532,9 @@ export default function ResourcesClient(props: Props) {
                           headers: { 'Content-Type': 'application/json' },
                           body: JSON.stringify({ email, website }),
                         })
-                        const data = await res.json().catch(() => ({} as { error?: string }))
+                        const data = await res.json().catch(() => ({} as { error?: string; alreadySubscribed?: boolean }))
                         if (res.ok && data && (data as { success?: boolean }).success !== false) {
+                          setNewsletterAlreadySubscribed(Boolean((data as { alreadySubscribed?: boolean }).alreadySubscribed))
                           setNewsletterStatus('success')
                           form.reset()
                         } else {

@@ -147,7 +147,10 @@ export default function ContactPageClient(props: Props) {
 
                 <div className="flex space-x-6 mt-8 justify-start">
                   {[
-                    { href: 'https://www.facebook.com/innerjourneywithshanila/', icon: 'fa-facebook', gradient: 'from-azure to-azure/40', label: 'Facebook' },
+                    // Facebook brand blue (#1877F2) — the gradient previously used the
+                    // theme's azure token, which is currently a peach/pink in the
+                    // brand palette and made the FB icon look wrong.
+                    { href: 'https://www.facebook.com/innerjourneywithshanila/', icon: 'fa-facebook', gradient: 'from-[#1877F2] to-[#0d65d9]', label: 'Facebook' },
                     { href: 'https://www.instagram.com/_.innerjourney_/', icon: 'fa-instagram', gradient: 'from-pink-500 to-yellow-400', label: 'Instagram' },
                     { href: 'https://www.youtube.com/channel/UCJbRrCiY4zXfojPTa17EKMg', icon: 'fa-youtube', gradient: 'from-red-600 to-red-400', label: 'YouTube' },
                     { href: 'https://api.whatsapp.com/send?phone=447387973382&', icon: 'fa-whatsapp', gradient: 'from-green-500 to-green-400', label: 'WhatsApp' },

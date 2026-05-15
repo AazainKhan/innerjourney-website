@@ -60,18 +60,23 @@ export async function POST(req: NextRequest) {
       body: JSON.stringify(payload),
     })
 
-    // 200 (existing subscriber updated) or 201 (new subscriber) — both succeed.
+    // MailerLite Connect API status codes:
+    //   201 → new subscriber created
+    //   200 → existing subscriber updated (already on the list)
+    // We surface that distinction so the frontend can show a different
+    // message ("You're already on the list" vs "Welcome aboard").
     if (upstream.ok) {
-      return NextResponse.json({ success: true })
+      const alreadySubscribed = upstream.status === 200
+      return NextResponse.json({ success: true, alreadySubscribed })
     }
 
-    // 422 typically means the address is blocklisted, bounced, or already
-    // unsubscribed. From the visitor's perspective we still want a friendly
-    // message — log the body for debugging but tell the user it worked.
+    // 422 typically means the address is blocklisted, bounced, or was
+    // previously unsubscribed. Treat that as "already known" from the
+    // visitor's POV so they don't see a confusing error.
     if (upstream.status === 422) {
       const detail = await upstream.text().catch(() => '')
       console.warn('MailerLite 422 for newsletter signup:', detail)
-      return NextResponse.json({ success: true })
+      return NextResponse.json({ success: true, alreadySubscribed: true })
     }
 
     const detail = await upstream.text().catch(() => '')

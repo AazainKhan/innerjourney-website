@@ -48,6 +48,7 @@ export default function NewsletterPopup() {
   // demote to 'hidden' (already subscribed) or schedule the auto-open.
   const [mode, setMode] = useState<Mode>('minimized')
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
+  const [alreadySubscribed, setAlreadySubscribed] = useState(false)
   const [error, setError] = useState('')
   // Timer ref so manual interaction (open/minimize/subscribe) can cancel the
   // pending auto-open and avoid reopening a panel the user just closed.
@@ -121,9 +122,10 @@ export default function NewsletterPopup() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, website }),
       })
-      const data = await res.json().catch(() => ({} as { error?: string }))
+      const data = await res.json().catch(() => ({} as { error?: string; alreadySubscribed?: boolean }))
       if (res.ok && (data as { success?: boolean }).success !== false) {
         clearAutoOpenTimer()
+        setAlreadySubscribed(Boolean((data as { alreadySubscribed?: boolean }).alreadySubscribed))
         setStatus('success')
         writeState({ kind: 'subscribed' })
       } else {
@@ -185,10 +187,19 @@ export default function NewsletterPopup() {
           {status === 'success' ? (
             <div className="text-center py-2">
               <i className="fas fa-check-circle text-carrot text-2xl mb-2"></i>
-              <p className="text-gray-800 font-semibold mb-1">You&apos;re on the list</p>
-              <p className="text-gray-600 text-sm">
-                Watch your inbox for new resources, blog posts, and podcast drops.
-              </p>
+              {alreadySubscribed ? (
+                <>
+                  <p className="text-gray-800 font-semibold mb-1">You&apos;re already on the list</p>
+                  <p className="text-gray-600 text-sm">Stay tuned — new resources are on the way.</p>
+                </>
+              ) : (
+                <>
+                  <p className="text-gray-800 font-semibold mb-1">You&apos;re on the list</p>
+                  <p className="text-gray-600 text-sm">
+                    Watch your inbox for new resources, blog posts, and podcast drops.
+                  </p>
+                </>
+              )}
             </div>
           ) : (
             <>
