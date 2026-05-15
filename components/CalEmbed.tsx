@@ -24,9 +24,22 @@ import Cal from '@calcom/embed-react'
  * the legacy email form in BookingOverlay continues to handle bookings.
  */
 const DEFAULT_EVENT_SLUG = 'discovery-call'
-// Mirrors the current theme's accent (peach/pink) so the Cal widget visually
-// matches the rest of the site. Update if the brand palette changes.
-const CAL_BRAND = '#e89ab8'
+// Fallback colour used if the CSS variable somehow isn't readable at mount
+// (SSR, the layout style block hasn't been applied yet, etc.). Mirrors the
+// current default accent.
+const CAL_BRAND_FALLBACK = '#e89ab8'
+
+// Read the current accent colour off the live `<html>` element. This is set
+// by layout.tsx from `content/theme.json` AND updated in real-time by
+// ThemePreviewListener when an editor is dragging colours around in Theme
+// Studio, so the Cal widget colour will always track the rest of the site.
+function readBrandColor(): string {
+  if (typeof window === 'undefined') return CAL_BRAND_FALLBACK
+  const raw = getComputedStyle(document.documentElement)
+    .getPropertyValue('--azure-blue')
+    .trim()
+  return raw || CAL_BRAND_FALLBACK
+}
 
 export default function CalEmbed() {
   const username = process.env.NEXT_PUBLIC_CAL_USERNAME
@@ -39,10 +52,11 @@ export default function CalEmbed() {
     if (!username) return
     ;(async () => {
       const cal = await getCalApi({ namespace })
+      const brand = readBrandColor()
       cal('ui', {
         cssVarsPerTheme: {
-          light: { 'cal-brand': CAL_BRAND },
-          dark: { 'cal-brand': CAL_BRAND },
+          light: { 'cal-brand': brand },
+          dark: { 'cal-brand': brand },
         },
         hideEventTypeDetails: false,
         layout: 'month_view',
