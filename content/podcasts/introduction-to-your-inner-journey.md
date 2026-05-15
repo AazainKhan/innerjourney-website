@@ -1,10 +1,11 @@
 ---
 title: Introduction to Your Inner Journey
 episode: Episode 01
-publishedAt: 2026-04-24T00:00:00.000Z
-status: Coming Soon
-audioUrl: ''
+publishedAt: 2024-05-15T00:00:00.000Z
+status: Published
+audioUrl: https://youtu.be/l-9i_aFrrI8?si=F0AfIlNL_NPboueW
 excerpt: Join me as we explore what it means to embark on an inner journey, and why it's the foundation for lasting transformation in your life.
+image: https://i.ytimg.com/vi/l-9i_aFrrI8/hqdefault.jpg
 icon: fa-microphone-alt
 gradient: from-carrot/30 to-orange-500/30
 badgeColor: bg-carrot
@@ -23,7 +24,5 @@ In this first episode, we set the scene for what the Inner Journey podcast is re
 
 ## Mentioned in this episode
 
-- Clarity Coaching 12-week programme
-- Free Clarity Call
-
-*Full episode notes coming soon.*
+- Mindset Coaching 12-week programme
+- Free Discovery Call

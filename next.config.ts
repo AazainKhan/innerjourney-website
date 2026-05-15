@@ -23,6 +23,13 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'assets.tina.io',
       },
+      // YouTube auto-generated thumbnails — used when a podcast episode's
+      // audioUrl points to YouTube and the editor doesn't upload a custom
+      // cover. Pattern: https://i.ytimg.com/vi/{videoId}/hqdefault.jpg
+      {
+        protocol: 'https',
+        hostname: 'i.ytimg.com',
+      },
     ],
   },
 }
