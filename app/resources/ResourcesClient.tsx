@@ -8,7 +8,7 @@ import RichText from '@/components/RichText'
 
 type SortKey = 'newest' | 'oldest' | 'title' | 'status'
 
-const INITIAL_VISIBLE = 6
+const INITIAL_VISIBLE = 3
 
 // Shared "kind" tag style — theme-aware, consistent across every card so the
 // per-item badgeColor doesn't introduce contrast issues. Blog uses azure
@@ -287,7 +287,8 @@ export default function ResourcesClient(props: Props) {
     },
   })
   const d = data.resources
-  const [newsletterStatus, setNewsletterStatus] = useState<'idle' | 'success'>('idle')
+  const [newsletterStatus, setNewsletterStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
+  const [newsletterError, setNewsletterError] = useState<string>('')
   const [blogSort, setBlogSort] = useState<SortKey>('newest')
   const [podcastSort, setPodcastSort] = useState<SortKey>('newest')
   const [blogShowAll, setBlogShowAll] = useState(false)
@@ -527,34 +528,59 @@ export default function ResourcesClient(props: Props) {
                       e.preventDefault()
                       const form = e.currentTarget
                       const email = (form.elements.namedItem('email') as HTMLInputElement)?.value
+                      const website = (form.elements.namedItem('website') as HTMLInputElement)?.value
                       if (!email) return
+                      setNewsletterStatus('submitting')
+                      setNewsletterError('')
                       try {
-                        await fetch('/api/contact', {
+                        const res = await fetch('/api/newsletter', {
                           method: 'POST',
                           headers: { 'Content-Type': 'application/json' },
-                          body: JSON.stringify({ email, name: 'Newsletter signup', message: 'Newsletter subscription request', form_type: 'newsletter' }),
+                          body: JSON.stringify({ email, website }),
                         })
+                        const data = await res.json().catch(() => ({} as { error?: string }))
+                        if (res.ok && data && (data as { success?: boolean }).success !== false) {
+                          setNewsletterStatus('success')
+                          form.reset()
+                        } else {
+                          setNewsletterStatus('error')
+                          setNewsletterError((data as { error?: string }).error || 'Something went wrong. Please try again.')
+                        }
                       } catch {
-                        // non-fatal
+                        setNewsletterStatus('error')
+                        setNewsletterError('Something went wrong. Please try again.')
                       }
-                      setNewsletterStatus('success')
-                      form.reset()
                     }}
-                    className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto"
+                    className="flex flex-col gap-3 justify-center max-w-md mx-auto"
                   >
-                    <input
-                      type="email"
-                      name="email"
-                      required
-                      placeholder={d.newsletterPlaceholder}
-                      className="flex-1 px-6 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-carrot"
-                    />
-                    <button
-                      type="submit"
-                      className="bg-carrot hover:bg-carrot text-on-primary px-8 py-3 rounded-lg font-semibold transition-all"
-                    >
-                      {d.newsletterButton}
-                    </button>
+                    <div className="flex flex-col sm:flex-row gap-4">
+                      <input
+                        type="email"
+                        name="email"
+                        required
+                        placeholder={d.newsletterPlaceholder}
+                        className="flex-1 px-6 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-carrot"
+                      />
+                      {/* Honeypot — hidden from humans, bots fill it. */}
+                      <input
+                        type="text"
+                        name="website"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        className="hidden"
+                        aria-hidden="true"
+                      />
+                      <button
+                        type="submit"
+                        disabled={newsletterStatus === 'submitting'}
+                        className="bg-carrot hover:bg-carrot text-on-primary px-8 py-3 rounded-lg font-semibold transition-all disabled:opacity-70 disabled:cursor-not-allowed"
+                      >
+                        {newsletterStatus === 'submitting' ? 'Subscribing…' : d.newsletterButton}
+                      </button>
+                    </div>
+                    {newsletterStatus === 'error' && newsletterError && (
+                      <p className="text-on-secondary/90 text-sm bg-red-500/20 rounded-md px-4 py-2">{newsletterError}</p>
+                    )}
                   </form>
                 )}
               </div>

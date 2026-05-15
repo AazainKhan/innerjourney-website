@@ -7,6 +7,7 @@ import { TinaMarkdown, type TinaMarkdownContent } from 'tinacms/dist/rich-text'
 import type { ComponentProps } from 'react'
 import Testimonials from '@/components/Testimonials'
 import HomeClient from '@/components/HomeClient'
+import NewsletterPopup from '@/components/NewsletterPopup'
 
 // Render hero rich-text inline — strip the wrapping <p> so the surrounding
 // <h1>/<p> in the JSX is the only block element. The `as any` is unavoidable:
@@ -302,6 +303,8 @@ export default function HomePageClient(props: Props) {
           <HomeClient buttonOnly variant="onAzure" ctaLabel={d.heroBottomCTALabel} />
         </div>
       </section>
+
+      <NewsletterPopup />
     </>
   )
 }
