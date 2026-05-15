@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
       },
     })
 
-    const adminEmail = process.env.ADMIN_EMAIL || 'info@innerjourney-with-shanila.com'
+    const adminEmail = process.env.ADMIN_EMAIL || 'innerjourneywithshanila@gmail.com'
 
     const adminSubject = isBooking
       ? `New Booking Request from ${name}`
