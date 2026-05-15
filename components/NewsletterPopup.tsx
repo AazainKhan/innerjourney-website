@@ -2,13 +2,19 @@
 
 import { useEffect, useState } from 'react'
 
-const STORAGE_KEY = 'newsletter_popup_state_v1'
-const DISMISS_DURATION_MS = 14 * 24 * 60 * 60 * 1000 // 14 days
+// Storage key bumped from v1 → v2 because the state shape changed: v1 stored
+// `dismissed` with a 14-day window; v2 stores `minimized` (no expiry — visitor
+// can re-open from the sticky button any time) or `subscribed` (permanent
+// silence). Old v1 values are left in storage harmlessly; they no longer drive
+// any logic.
+const STORAGE_KEY = 'newsletter_popup_state_v2'
 const APPEAR_DELAY_MS = 8000
 
 type PopupState =
-  | { kind: 'subscribed'; at: number }
-  | { kind: 'dismissed'; at: number }
+  | { kind: 'subscribed' }
+  | { kind: 'minimized' }
+
+type Mode = 'hidden' | 'open' | 'minimized'
 
 function readState(): PopupState | null {
   if (typeof window === 'undefined') return null
@@ -16,7 +22,7 @@ function readState(): PopupState | null {
     const raw = window.localStorage.getItem(STORAGE_KEY)
     if (!raw) return null
     const parsed = JSON.parse(raw) as PopupState
-    if (parsed && typeof parsed.at === 'number') return parsed
+    if (parsed && (parsed.kind === 'subscribed' || parsed.kind === 'minimized')) return parsed
     return null
   } catch {
     return null
@@ -34,39 +40,44 @@ function writeState(state: PopupState) {
 }
 
 export default function NewsletterPopup() {
-  const [visible, setVisible] = useState(false)
-  const [closing, setClosing] = useState(false)
+  const [mode, setMode] = useState<Mode>('hidden')
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
   const [error, setError] = useState('')
 
+  // Decide initial mode on mount:
+  // - subscribed → stay hidden forever
+  // - minimized  → show the sticky button immediately
+  // - first visit → wait 8s, then open the panel
   useEffect(() => {
     const state = readState()
-    // Subscribers are silenced forever; dismissals expire after the window.
     if (state?.kind === 'subscribed') return
-    if (state?.kind === 'dismissed' && Date.now() - state.at < DISMISS_DURATION_MS) return
-
-    const timer = window.setTimeout(() => setVisible(true), APPEAR_DELAY_MS)
+    if (state?.kind === 'minimized') {
+      setMode('minimized')
+      return
+    }
+    const timer = window.setTimeout(() => setMode('open'), APPEAR_DELAY_MS)
     return () => window.clearTimeout(timer)
   }, [])
 
-  // Escape key closes the popup.
+  // Escape minimises the open panel (rather than dismissing outright — the
+  // sticky button is still there for re-entry).
   useEffect(() => {
-    if (!visible) return
+    if (mode !== 'open') return
     function onKey(e: KeyboardEvent) {
-      if (e.key === 'Escape') close()
+      if (e.key === 'Escape') minimize()
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [visible])
+  }, [mode])
 
-  function close() {
-    setClosing(true)
-    writeState({ kind: 'dismissed', at: Date.now() })
-    window.setTimeout(() => {
-      setVisible(false)
-      setClosing(false)
-    }, 250)
+  function minimize() {
+    writeState({ kind: 'minimized' })
+    setMode('minimized')
+  }
+
+  function open() {
+    setMode('open')
   }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -86,7 +97,7 @@ export default function NewsletterPopup() {
       const data = await res.json().catch(() => ({} as { error?: string }))
       if (res.ok && (data as { success?: boolean }).success !== false) {
         setStatus('success')
-        writeState({ kind: 'subscribed', at: Date.now() })
+        writeState({ kind: 'subscribed' })
       } else {
         setStatus('error')
         setError((data as { error?: string }).error || 'Something went wrong. Please try again.')
@@ -97,13 +108,29 @@ export default function NewsletterPopup() {
     }
   }
 
-  if (!visible) return null
+  if (mode === 'hidden') return null
 
+  if (mode === 'minimized') {
+    return (
+      <button
+        type="button"
+        onClick={open}
+        aria-label="Open newsletter signup"
+        title="Stay in the loop"
+        className="group fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex items-center gap-2 bg-carrot text-on-primary rounded-full shadow-2xl ring-1 ring-black/10 px-4 py-3 sm:px-5 sm:py-3 transition-all duration-200 hover:scale-105 hover:shadow-[0_15px_40px_-10px_rgba(0,0,0,0.4)]"
+      >
+        <span className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center text-base">
+          <i className="fas fa-envelope-open-text"></i>
+        </span>
+        <span className="text-sm font-semibold tracking-tight">Subscribe</span>
+      </button>
+    )
+  }
+
+  // mode === 'open'
   return (
     <div
-      className={`fixed bottom-4 right-4 left-4 sm:left-auto sm:bottom-6 sm:right-6 z-50 max-w-sm w-auto sm:w-[22rem] transition-all duration-300 ease-out ${
-        closing ? 'opacity-0 translate-y-3' : 'opacity-100 translate-y-0'
-      }`}
+      className="fixed bottom-4 right-4 left-4 sm:left-auto sm:bottom-6 sm:right-6 z-50 max-w-sm w-auto sm:w-[22rem] transition-all duration-300 ease-out"
       role="dialog"
       aria-labelledby="newsletter-popup-title"
     >
@@ -118,11 +145,11 @@ export default function NewsletterPopup() {
             </h2>
           </div>
           <button
-            onClick={close}
-            aria-label="Close newsletter popup"
+            onClick={minimize}
+            aria-label="Minimise newsletter popup"
             className="text-on-secondary/70 hover:text-on-secondary text-lg leading-none -mt-1 -mr-1 px-2 py-1"
           >
-            <i className="fas fa-times"></i>
+            <i className="fas fa-minus"></i>
           </button>
         </div>
 
