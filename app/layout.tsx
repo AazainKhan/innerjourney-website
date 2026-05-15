@@ -9,6 +9,7 @@ import BookingOverlay from '@/components/BookingOverlay'
 import ScrollAnimator from '@/components/ScrollAnimator'
 import ThemePreviewListener from '@/components/ThemePreviewListener'
 import TypographyApplier from '@/components/TypographyApplier'
+import NewsletterPopupGate from '@/components/NewsletterPopupGate'
 import { BookingProvider } from '@/context/BookingContext'
 import themeData from '@/content/theme.json'
 import navbarData from '@/content/navbar.json'
@@ -170,6 +171,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <Footer />
           <BookingOverlay copy={bookingFormData} />
           <ScrollAnimator />
+          <NewsletterPopupGate />
         </BookingProvider>
         <Analytics />
         <SpeedInsights />

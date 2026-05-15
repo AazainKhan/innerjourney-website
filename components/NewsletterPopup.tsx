@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 // Storage key bumped from v1 → v2 because the state shape changed: v1 stored
 // `dismissed` with a 14-day window; v2 stores `minimized` (no expiry — visitor
@@ -8,12 +8,15 @@ import { useEffect, useState } from 'react'
 // silence). Old v1 values are left in storage harmlessly; they no longer drive
 // any logic.
 const STORAGE_KEY = 'newsletter_popup_state_v2'
-const APPEAR_DELAY_MS = 8000
+const AUTO_OPEN_DELAY_MS = 8000
 
 type PopupState =
   | { kind: 'subscribed' }
   | { kind: 'minimized' }
 
+// The sticky pill is visible from the first frame so visitors aren't staring
+// at a blank corner during the auto-open delay. After AUTO_OPEN_DELAY_MS the
+// full panel auto-opens (once per browser, then 'minimized' is persisted).
 type Mode = 'hidden' | 'open' | 'minimized'
 
 function readState(): PopupState | null {
@@ -40,23 +43,45 @@ function writeState(state: PopupState) {
 }
 
 export default function NewsletterPopup() {
-  const [mode, setMode] = useState<Mode>('hidden')
+  // Default to 'minimized' so the sticky pill is visible from the first
+  // render — no flash-of-nothing during the auto-open delay. On mount we may
+  // demote to 'hidden' (already subscribed) or schedule the auto-open.
+  const [mode, setMode] = useState<Mode>('minimized')
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
   const [error, setError] = useState('')
+  // Timer ref so manual interaction (open/minimize/subscribe) can cancel the
+  // pending auto-open and avoid reopening a panel the user just closed.
+  const autoOpenTimer = useRef<number | null>(null)
+
+  function clearAutoOpenTimer() {
+    if (autoOpenTimer.current !== null) {
+      window.clearTimeout(autoOpenTimer.current)
+      autoOpenTimer.current = null
+    }
+  }
 
   // Decide initial mode on mount:
   // - subscribed → stay hidden forever
-  // - minimized  → show the sticky button immediately
-  // - first visit → wait 8s, then open the panel
+  // - minimized  → already showing as the sticky button; no auto-open
+  // - first visit → keep the sticky button, schedule auto-open after the delay
   useEffect(() => {
     const state = readState()
-    if (state?.kind === 'subscribed') return
-    if (state?.kind === 'minimized') {
-      setMode('minimized')
+    if (state?.kind === 'subscribed') {
+      setMode('hidden')
       return
     }
-    const timer = window.setTimeout(() => setMode('open'), APPEAR_DELAY_MS)
-    return () => window.clearTimeout(timer)
+    if (state?.kind === 'minimized') {
+      // Sticky pill stays — already the default state, nothing to schedule.
+      return
+    }
+    autoOpenTimer.current = window.setTimeout(() => {
+      // Record the "we've used our auto-open chance" persistently so a
+      // returning visitor doesn't get another surprise pop-open.
+      writeState({ kind: 'minimized' })
+      setMode('open')
+      autoOpenTimer.current = null
+    }, AUTO_OPEN_DELAY_MS)
+    return () => clearAutoOpenTimer()
   }, [])
 
   // Escape minimises the open panel (rather than dismissing outright — the
@@ -72,11 +97,13 @@ export default function NewsletterPopup() {
   }, [mode])
 
   function minimize() {
+    clearAutoOpenTimer()
     writeState({ kind: 'minimized' })
     setMode('minimized')
   }
 
   function open() {
+    clearAutoOpenTimer()
     setMode('open')
   }
 
@@ -96,6 +123,7 @@ export default function NewsletterPopup() {
       })
       const data = await res.json().catch(() => ({} as { error?: string }))
       if (res.ok && (data as { success?: boolean }).success !== false) {
+        clearAutoOpenTimer()
         setStatus('success')
         writeState({ kind: 'subscribed' })
       } else {
