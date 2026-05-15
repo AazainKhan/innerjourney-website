@@ -10,6 +10,7 @@ import ScrollAnimator from '@/components/ScrollAnimator'
 import ThemePreviewListener from '@/components/ThemePreviewListener'
 import TypographyApplier from '@/components/TypographyApplier'
 import NewsletterPopupGate from '@/components/NewsletterPopupGate'
+import CalPreloader from '@/components/CalPreloader'
 import { BookingProvider } from '@/context/BookingContext'
 import themeData from '@/content/theme.json'
 import navbarData from '@/content/navbar.json'
@@ -151,6 +152,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         />
+        {/* Warm the TLS connection to Cal.com so the booking iframe loads
+         * noticeably faster on first open. dns-prefetch is the fallback for
+         * browsers that don't speak preconnect. */}
+        <link rel="preconnect" href="https://app.cal.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://app.cal.com" />
         <style dangerouslySetInnerHTML={{ __html: themeStyle }} />
         <style dangerouslySetInnerHTML={{ __html: typographyStyle }} />
       </head>
@@ -172,6 +178,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <BookingOverlay copy={bookingFormData} />
           <ScrollAnimator />
           <NewsletterPopupGate />
+          <CalPreloader />
         </BookingProvider>
         <Analytics />
         <SpeedInsights />

@@ -2,9 +2,12 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { useBooking } from '@/context/BookingContext'
-import CalEmbed from './CalEmbed'
 
-const CAL_ENABLED = Boolean(process.env.NEXT_PUBLIC_CAL_USERNAME)
+// NOTE: This component is the legacy email-only booking form. It only ever
+// renders when NEXT_PUBLIC_CAL_USERNAME is unset OR when the Cal embed fails
+// to load. In Cal mode, BookingContext.openBooking() opens Cal's native modal
+// directly (see CalPreloader.tsx + BookingContext.tsx), so `isOpen` stays
+// false and this component returns null.
 
 interface BookingFormCopy {
   overlayTitle: string
@@ -113,9 +116,6 @@ export default function BookingOverlay({ copy }: { copy: BookingFormCopy }) {
         </div>
 
         <div className="p-3 md:p-4 space-y-2">
-          {CAL_ENABLED ? (
-            <CalEmbed />
-          ) : (<>
           <div role="status" aria-live="polite" aria-atomic="true" className={status ? '' : 'sr-only'}>
             {status && (
               <div className={`p-4 mb-4 rounded-lg ${status.type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
@@ -203,7 +203,6 @@ export default function BookingOverlay({ copy }: { copy: BookingFormCopy }) {
               ) : copy.submitLabel}
             </button>
           </form>
-          </>)}
         </div>
       </div>
     </div>
