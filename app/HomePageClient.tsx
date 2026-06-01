@@ -86,6 +86,29 @@ export default function HomePageClient(props: Props) {
     .map((q) => q.trim())
     .filter(Boolean)
 
+  // The Tina editor can clear the hero heading entirely (e.g. when they want
+  // the subtext alone to carry the hero). Detect that case so we don't render
+  // an empty <h1> taking up vertical space.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const heroHeadingText = (() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const content: any = d.heroHeading
+    if (!content) return ''
+    if (typeof content === 'string') return content.trim()
+    // TinaMarkdown AST: { type: 'root', children: [{ type:'p', children:[{type:'text', text:'...'}] }] }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const children = (content?.children || []) as any[]
+    const text = children
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .flatMap((b: any) => (b?.children || []) as any[])
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .map((n: any) => (typeof n?.text === 'string' ? n.text : ''))
+      .join('')
+      .trim()
+    return text
+  })()
+  const hasHeroHeading = heroHeadingText.length > 0
+
   return (
     <>
       {/* Hero Section */}
@@ -109,9 +132,11 @@ export default function HomePageClient(props: Props) {
 
         <div className="container mx-auto px-6 relative z-20 h-full flex items-end pb-32 md:pb-20 md:items-end">
           <div className="max-w-2xl w-full md:ml-auto text-center md:text-right">
-            <h1 className="text-5xl md:text-7xl heading-primary text-white mb-6 leading-tight drop-shadow-2xl font-dancing font-bold animate-on-scroll">
-              <TinaMarkdown content={d.heroHeading} components={inlineComponents} />
-            </h1>
+            {hasHeroHeading && (
+              <h1 className="text-5xl md:text-7xl heading-primary text-white mb-6 leading-tight drop-shadow-2xl font-dancing font-bold animate-on-scroll">
+                <TinaMarkdown content={d.heroHeading} components={inlineComponents} />
+              </h1>
+            )}
             <div className="text-xl md:text-2xl body-text-light text-white/90 mb-8 leading-relaxed animate-on-scroll space-y-4 [&_strong]:font-semibold [&_em]:italic">
               <TinaMarkdown content={d.heroSubtext} />
             </div>
