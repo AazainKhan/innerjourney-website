@@ -3,7 +3,7 @@ title: 'Fear is not a problem, Your relationship with it!'
 publishedAt: 2026-05-26T11:29:33.701Z
 status: Draft
 excerpt: 'Fear is not a problem. It is an information provider. Listen to it and have a better view of what matters most in its entirety. '
-image: ''
+image: /images/WALKING%20FORWARD.jpg
 icon: fa-pen-fancy
 iconColor: text-carrot/40
 gradient: from-orange-100 to-orange-200
@@ -70,7 +70,7 @@ They do not take turns. They show up together. Every single time. The people who
 
 **The edge is uncomfortable. But it is also where transformation lives.**
 
-When Curiosity Steps In. 
+When Curiosity Steps In.
 
 Fear is not the only voice in the room. There is another one. Quieter, more patient, and far more interesting. It is Curiosity.
 
@@ -80,7 +80,7 @@ What if this goes better than I expect? What might I discover about myself by tr
 
 A 2014 study published in the Journal of Experimental Psychology found that reappraising anxiety as excitement shifting the narrative around an identical physiological state significantly improved performance in high-pressure situations. Participants who told themselves "I am excited" before a stressful task consistently outperformed those who tried to calm themselves down. The body was doing the same thing. The meaning had changed.
 
-That is what Curiosity does. It does not remove the feeling. It reframes what the feeling is for. 
+That is what Curiosity does. It does not remove the feeling. It reframes what the feeling is for.
 
 Fear contracts. Curiosity expands. Fear closes options. Curiosity opens them. And here is the most important thing: you do not have to wait for Fear to leave before Curiosity can arrive. They can coexist. And when they do, the question shifts from "What if this goes wrong?" to "What might this become?"
 
@@ -128,7 +128,7 @@ They did not wait for the fear to go away. They learned to walk forward with it 
 
 If you are reading this and something in you recognises that feeling  the tightening, the hesitation, the voice that says maybe not yet, I want you to hear this clearly.
 
-You are not at the wrong door. You are at the right edge. 
+You are not at the wrong door. You are at the right edge.
 
 The discomfort is not evidence you should turn back. It is evidence that what is on the other side genuinely matters. That this moment has weight. That you are closer to something real than you might think.
 
