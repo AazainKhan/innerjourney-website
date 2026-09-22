@@ -2,7 +2,7 @@
 title: 'Confidence is not what you wait to feel! '
 publishedAt: 2026-09-22T21:55:45.144Z
 status: Draft
-excerpt: 'Confidence is built moment by moment, day by day! You have it what you need to be confident. '
+excerpt: 'Confidence is built moment by moment, day by day! You have it all what it takes to be confident. '
 image: /images/Confidence Frame .jpg
 icon: fa-pen-fancy
 iconColor: text-carrot/40
