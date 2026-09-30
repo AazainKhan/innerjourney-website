@@ -1,7 +1,7 @@
 ---
 title: 'Feeling lost in your 40s. How to find your way back. '
 publishedAt: 2026-09-30T14:27:23.198Z
-status: Draft
+status: Published
 excerpt: 'Someone asks what you enjoy and you go blank. If you are feeling lost in 40s even if your life is perfect, you are not alone. Here''s why it happens and gentle ways to find your way back to yourself. '
 image: /images/boardwalk-through-marsh-under-bright-purple-sky.jpg
 icon: fa-pen-fancy
@@ -56,7 +56,7 @@ You have the home.  You are placed in a desired career position. The holidays. T
 
 So when the lost feeling arrives, it brings guilt with it. What right do I have to feel this way? Other people have real problems.
 
-A client once sat across from me and said it simply. "Everything is perfect. So why do I feel like this?" “Am I being ungrateful?” 
+A client once sat across from me and said it simply. "Everything is perfect. So why do I feel like this?" “Am I being ungrateful?”
 
 She couldn't find a reason. That worried her more than the feeling itself. She kept looking for something that had gone wrong. There was nothing.
 
@@ -70,11 +70,11 @@ Finding yourself again rarely happens in one big breakthrough. It comes to the s
 
 **Pay attention to envy**
 
-Envy has a bad reputation. But, trust me;  it can be an honest guide sometime. 
+Envy has a bad reputation. But, trust me;  it can be an honest guide sometime.
 
-Notice who you feel a little envious of. The friend who went back to study? The colleague who took a year out to travel? The cousin who started a book club? The friend who started a business of cooked meal from home? 
+Notice who you feel a little envious of. The friend who went back to study? The colleague who took a year out to travel? The cousin who started a book club? The friend who started a business of cooked meal from home?
 
-Envy often points to something you want for yourself. You don't have to copy anyone. Just ask what it is about their life that tugs at you.  
+Envy often points to something you want for yourself. You don't have to copy anyone. Just ask what it is about their life that tugs at you.
 
 **Notice where time disappears**
 
@@ -98,7 +98,7 @@ Call a friend who knew you back then. Ask what they remember about you. You may 
 
 **You can experiment rather than decide**
 
-When you feel lost, it's tempting to wait until you know exactly what you want. That day rarely comes on its own. Step up. No more waiting. 
+When you feel lost, it's tempting to wait until you know exactly what you want. That day rarely comes on its own. Step up. No more waiting.
 
 Try small experiments instead. Take a one-day course. Go to an event alone. Say yes to something you'd usually turn down. Some will fall flat. That's a useful piece of information.  Each one shows you a little more about what fits.
 
@@ -112,13 +112,13 @@ Act on it this month. Before it feels clear. Before you feel ready.
 
 I know that may sound heavy. When you feel lost, a small step can feel pointless. What's the use if I don't know where I'm going? And that doubt and unwillingness is okay to hear but to sit with it.  Clarity rarely comes first. It follows the step.
 
-Some fear may show up too. That's normal. I've written a blog on fear and relationship with it.  You will find it helpful to unravel the approach. 
+Some fear may show up too. That's normal. I've written a blog on fear and relationship with it.  You will find it helpful to unravel the approach.
 
 **The good news about your 40s**
 
 You arrive here with something you didn't have in your 20s. You know how to get through hard things. You know what matters to you and what doesn't. That knowledge helps you choose well now.
 
-Feeling lost in your 40s can be unsettling. It can also be the moment you stop living by old plans and start choosing on purpose. 
+Feeling lost in your 40s can be unsettling. It can also be the moment you stop living by old plans and start choosing on purpose.
 
 If you'd like some company on the way
 
