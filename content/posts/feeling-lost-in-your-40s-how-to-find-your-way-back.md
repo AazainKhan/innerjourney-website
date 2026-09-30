@@ -1,7 +1,7 @@
 ---
 title: 'Feeling lost in your 40s. How to find your way back. '
 publishedAt: 2026-09-30T14:27:23.198Z
-status: Draft
+status: Published
 excerpt: 'Someone asks what you enjoy and you go blank. If you are feeling lost in 40s even if your life is perfect, you are not alone. Here''s why it happens and gentle ways to find your way back to yourself. '
 image: /images/boardwalk-through-marsh-under-bright-purple-sky.jpg
 icon: fa-pen-fancy
