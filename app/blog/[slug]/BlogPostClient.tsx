@@ -7,6 +7,7 @@ import remarkGfm from 'remark-gfm'
 import { tinaField } from 'tinacms/dist/react'
 import { TinaMarkdown, type TinaMarkdownContent } from 'tinacms/dist/rich-text'
 import { postCardLook } from '@/lib/design-tokens'
+import { cleanImageUrl } from '@/lib/media'
 import { SERVICE_PAGES, type ServiceKey } from '@/lib/routes'
 import { usePageDoc, type TinaDocProps } from '@/lib/use-tina-doc'
 import type { PostQuery } from '@/tina/__generated__/types'
@@ -60,7 +61,7 @@ export default function BlogPostClient({ labels, related, ...props }: Props) {
          * legible. Falls back to the gradient hero when no image is set. */}
         {post.image && (
           <>
-            <Image src={post.image} alt="" fill priority className="object-cover opacity-30" sizes="100vw" />
+            <Image src={cleanImageUrl(post.image)} alt="" fill priority className="object-cover opacity-30" sizes="100vw" />
             <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50" aria-hidden="true" />
           </>
         )}

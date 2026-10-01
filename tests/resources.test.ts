@@ -28,6 +28,13 @@ describe('toCard', () => {
     expect(toCard({ _sys: { filename: 'b' }, cardStyle: { icon: 'fa-not-real' } }, 'podcast').icon).toBe('fa-microphone-alt')
   })
 
+  it('repairs external images that Tina Cloud prefixed with its CDN', () => {
+    const c = toCard({ _sys: { filename: 'ep' }, image: 'https://assets.tina.io/88bc3f44-ecdf-4f23-bb2a-117721f2da57https://i.ytimg.com/vi/x/hqdefault.jpg' }, 'podcast')
+    expect(c.image).toBe('https://i.ytimg.com/vi/x/hqdefault.jpg')
+    expect(toCard({ _sys: { filename: 'p' }, image: 'https://assets.tina.io/abc/images/blog/a.jpg' }, 'post').image).toBe('https://assets.tina.io/abc/images/blog/a.jpg')
+    expect(toCard({ _sys: { filename: 'p' }, image: '/images/a.jpg' }, 'post').image).toBe('/images/a.jpg')
+  })
+
   it('uses the podcast glow for episodes and trims the listen link', () => {
     const c = toCard({ _sys: { filename: 'ep' }, audioUrl: '  https://youtu.be/x ', cardStyle: { tone: 'primary' } }, 'podcast')
     expect(c.gradient).toBe('from-carrot/30 to-orange-500/30')

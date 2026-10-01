@@ -3,6 +3,7 @@
  * Pure functions — shared by the page and its tests.
  */
 import { getIcon } from '@/lib/icons'
+import { cleanImageUrl } from '@/lib/media'
 import { podcastGlow, postCardLook } from '@/lib/design-tokens'
 
 export function parseDate(iso?: string | Date | null): number {
@@ -59,7 +60,7 @@ export function toCard(node: EntryNode, kind: 'post' | 'podcast'): ResourceCard 
     status: node.status ?? '',
     publishedAt: node.publishedAt ?? '',
     featured: Boolean(node.featured),
-    image: node.image ?? '',
+    image: cleanImageUrl(node.image),
     icon: getIcon(node.cardStyle?.icon)?.id ?? (kind === 'post' ? 'fa-pen-fancy' : 'fa-microphone-alt'),
     gradient: kind === 'post' ? look.gradient : podcastGlow(tone),
     iconColor: kind === 'post' ? look.iconColor : 'text-white/60',
