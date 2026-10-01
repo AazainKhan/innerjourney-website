@@ -1,7 +1,10 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
+import { useTina } from 'tinacms/dist/react'
 import { useBooking } from '@/context/BookingContext'
+import { present, type TinaDocProps } from '@/lib/use-tina-doc'
+import type { BookingFormQuery } from '@/tina/__generated__/types'
 
 // NOTE: This component is the legacy email-only booking form. It only ever
 // renders when NEXT_PUBLIC_CAL_USERNAME is unset OR when the Cal embed fails
@@ -23,7 +26,28 @@ interface BookingFormCopy {
   submittingLabel: string
   successMessage: string
   errorMessage: string
+  servicePlaceholder: string
   services: string[]
+}
+
+function toCopy(f: BookingFormQuery['bookingForm'] | null | undefined): BookingFormCopy {
+  return {
+    overlayTitle: f?.overlayTitle ?? '',
+    firstNameLabel: f?.firstNameLabel ?? '',
+    lastNameLabel: f?.lastNameLabel ?? '',
+    emailLabel: f?.emailLabel ?? '',
+    countryCodeLabel: f?.countryCodeLabel ?? '',
+    phoneLabel: f?.phoneLabel ?? '',
+    serviceLabel: f?.serviceLabel ?? '',
+    messageLabel: f?.messageLabel ?? '',
+    messagePlaceholder: f?.messagePlaceholder ?? '',
+    submitLabel: f?.submitLabel ?? '',
+    submittingLabel: f?.submittingLabel ?? '',
+    successMessage: f?.successMessage ?? '',
+    errorMessage: f?.errorMessage ?? '',
+    servicePlaceholder: f?.servicePlaceholder || 'Select a service…',
+    services: present(f?.services),
+  }
 }
 
 const COUNTRY_CODES = [
@@ -46,7 +70,9 @@ const COUNTRY_CODES = [
   { value: '81', label: 'Japan (+81)' },
 ]
 
-export default function BookingOverlay({ copy }: { copy: BookingFormCopy }) {
+export default function BookingOverlay(props: TinaDocProps<BookingFormQuery>) {
+  const { data } = useTina<BookingFormQuery>(props)
+  const copy = toCopy(data.bookingForm)
   const { isOpen, closeBooking } = useBooking()
   const [submitting, setSubmitting] = useState(false)
   const [status, setStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
@@ -173,7 +199,7 @@ export default function BookingOverlay({ copy }: { copy: BookingFormCopy }) {
               <label htmlFor="b-service" className="block text-xs font-medium text-gray-700 mb-0.5">{copy.serviceLabel} *</label>
               <select id="b-service" name="service" required aria-required="true"
                 className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-azure focus:border-transparent">
-                <option value="">Select a service…</option>
+                <option value="">{copy.servicePlaceholder}</option>
                 {copy.services.map((s) => (
                   <option key={s} value={s}>{s}</option>
                 ))}

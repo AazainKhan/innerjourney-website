@@ -1,20 +1,57 @@
 {
-  "heroBadge": "Free Resources",
-  "heroHeading": "Resources for Your",
-  "heroHeadingHighlight": "Inner Journey",
-  "heroSubtext": "Explore insights, stories, and tools to help you cultivate clarity, confidence, and purpose",
-  "featuredHeading": "Featured",
-  "featuredPosts": [
-    { "post": "content/posts/numbers-are-story-tellers.md" }
+  "hero": {
+    "eyebrow": "Free Resources",
+    "heading": "Resources for Your Inner Journey",
+    "highlight": "Inner Journey",
+    "subtext": "Explore insights, stories, and tools to help you cultivate clarity, confidence, and purpose"
+  },
+  "sectionNav": [
+    {
+      "label": "Featured",
+      "icon": "fa-star",
+      "target": "featured"
+    },
+    {
+      "label": "Blog Library",
+      "icon": "fa-pen-fancy",
+      "target": "blog"
+    },
+    {
+      "label": "Podcast Library",
+      "icon": "fa-podcast",
+      "target": "podcast"
+    }
   ],
-  "featuredPodcasts": [
-    { "podcast": "content/podcasts/introduction-to-your-inner-journey.md" }
-  ],
-  "blogLibraryHeading": "Blog Library",
-  "podcastLibraryHeading": "Podcast Library",
-  "newsletterHeading": "Stay Updated on New Resources",
-  "newsletterSubtext": "Get notified when new blog posts and podcast episodes are published",
-  "newsletterPlaceholder": "Enter your email",
-  "newsletterButton": "Subscribe",
-  "newsletterSuccessMessage": "Thanks — I'll be in touch soon!"
+  "featured": {
+    "heading": "Featured"
+  },
+  "blogLibrary": {
+    "heading": "Blog Library",
+    "readMoreLabel": "Read more",
+    "backLinkLabel": "Back to all posts",
+    "emptyPostMessage": "This post is still being written — check back soon.",
+    "postEnding": {
+      "serviceEyebrow": "Work with Shanila",
+      "serviceHeading": "Ready to go further with {service}?",
+      "serviceText": "Sessions in person in Leeds or online, wherever you are. Start with a free discovery call.",
+      "serviceButton": "Explore {service}",
+      "relatedHeading": "Keep reading"
+    }
+  },
+  "podcastLibrary": {
+    "heading": "Podcast Library",
+    "listenLabel": "Listen now",
+    "comingSoonLabel": "Coming soon"
+  },
+  "newsletter": {
+    "heading": "Stay Updated on New Resources",
+    "subtext": "Get notified when new blog posts and podcast episodes are published",
+    "placeholder": "Enter your email",
+    "buttonLabel": "Subscribe",
+    "successMessage": "Thanks — I'll be in touch soon!"
+  },
+  "seo": {
+    "title": "Confidence & Mindset Blog and Podcast | Shanila Khan",
+    "description": "Free articles and podcast episodes on confidence, mindset, career change and numerology from Leeds-based coach Shanila Khan."
+  }
 }

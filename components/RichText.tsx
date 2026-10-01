@@ -75,11 +75,13 @@ interface RichTextProps {
   children: string | null | undefined
   as?: AllowedTag
   className?: string
+  /** Tina click-to-edit target (tinaField(...)). */
+  field?: string
 }
 
-export default function RichText({ children, as: Tag = 'span', className }: RichTextProps) {
+export default function RichText({ children, as: Tag = 'span', className, field }: RichTextProps) {
   if (!children) return null
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const Component = Tag as any
-  return <Component className={className}>{render(parse(children))}</Component>
+  return <Component className={className} data-tina-field={field || undefined}>{render(parse(children))}</Component>
 }

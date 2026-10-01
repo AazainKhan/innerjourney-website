@@ -4,10 +4,11 @@ publishedAt: 2024-06-28T00:00:00.000Z
 status: Published
 excerpt: The right question at the right time can unlock the vast possibilities of growth. Why "What" questions outperform "Why" questions in coaching — and how to ask them.
 image: /images/blog/employ-powerful-questioning.jpg
-icon: fa-comments
-iconColor: text-azure/40
-gradient: from-blue-100 to-indigo-200
-badgeColor: bg-azure
+featured: false
+cardStyle:
+  icon: fa-comments
+  tone: accent
+relatedService: mindset
 ---
 
 As a school teacher, I came to realize the immense power of asking the right questions at the right time. I learned by simplifying questions and avoiding simple "yes" or "no" responses, we can unlock the vast possibilities and encourage deeper reflection. The "yes and no" answer hides a multitude of complexities. This practice with awareness sealed my belief when I walked into my journey to become an ICF coach. A simple and open-ended question fosters curiosity without judgment, they are profound and effective.

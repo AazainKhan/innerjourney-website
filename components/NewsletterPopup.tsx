@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { BOOKING_OPEN_EVENT } from '@/context/BookingContext'
 
 // Storage key bumped from v1 → v2 because the state shape changed: v1 stored
 // `dismissed` with a 14-day window; v2 stores `minimized` (no expiry — visitor
@@ -83,6 +84,18 @@ export default function NewsletterPopup() {
       autoOpenTimer.current = null
     }, AUTO_OPEN_DELAY_MS)
     return () => clearAutoOpenTimer()
+  }, [])
+
+  // Step aside when someone opens the booking modal: minimise if open and
+  // cancel a pending auto-open so it can't pop up over the calendar.
+  useEffect(() => {
+    function onBookingOpen() {
+      clearAutoOpenTimer()
+      setMode((m) => (m === 'open' ? 'minimized' : m))
+    }
+    window.addEventListener(BOOKING_OPEN_EVENT, onBookingOpen)
+    return () => window.removeEventListener(BOOKING_OPEN_EVENT, onBookingOpen)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // Escape minimises the open panel (rather than dismissing outright — the

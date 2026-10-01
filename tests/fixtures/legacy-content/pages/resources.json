@@ -1,0 +1,20 @@
+{
+  "heroBadge": "Free Resources",
+  "heroHeading": "Resources for Your",
+  "heroHeadingHighlight": "Inner Journey",
+  "heroSubtext": "Explore insights, stories, and tools to help you cultivate clarity, confidence, and purpose",
+  "featuredHeading": "Featured",
+  "featuredPosts": [
+    { "post": "content/posts/numbers-are-story-tellers.md" }
+  ],
+  "featuredPodcasts": [
+    { "podcast": "content/podcasts/introduction-to-your-inner-journey.md" }
+  ],
+  "blogLibraryHeading": "Blog Library",
+  "podcastLibraryHeading": "Podcast Library",
+  "newsletterHeading": "Stay Updated on New Resources",
+  "newsletterSubtext": "Get notified when new blog posts and podcast episodes are published",
+  "newsletterPlaceholder": "Enter your email",
+  "newsletterButton": "Subscribe",
+  "newsletterSuccessMessage": "Thanks — I'll be in touch soon!"
+}

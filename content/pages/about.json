@@ -1,58 +1,72 @@
 {
-  "heroHeading": " Shanila Khan, Confidence And  Mindset Coach ",
-  "heroSubtext": "Supporting you in reconnecting with your inner strength, shifting the narratives that hold you back, and growing into the life and leadership that already exists within you.\n",
-  "storyHeading": "Confidence, Mindset, and Transformation – My Story",
-  "storyBody": "I'm Shanila,  a certified confidence and mindset coach with over a decade of experience working with women navigating change at home and work,  who are done playing small. \n\nMy work is about one thing: strengthening the inner narrative that shapes every decision you make, every room you walk into, and every opportunity you claim or let pass.\n\nTrained by globally recognised coach Vikram Dhar, I bring proven mindset methodologies alongside deep, intuitive coaching helping women move from self-doubt to self-authority, from invisible to unmissable.\n\nBecause the world doesn't need you to work harder. It needs you to believe what you're worth.\n",
-  "credentialsHeading": "Professional Qualifications",
-  "credentialsSubtext": "I'm committed to continuous learning and professional development to provide you with the best coaching experience.",
-  "credentials": [
-    {
-      "icon": "fa-brain",
-      "title": "Master Practitioner in NLP",
-      "description": "Advanced certification in Neuro-Linguistic Programming techniques for personal transformation and behavioral change.",
-      "gradient": "from-orange-500 to-orange-600"
-    },
-    {
-      "icon": "fa-heart",
-      "title": "Certified Emotional Intelligence Practitioner",
-      "description": "Specialized training in understanding and applying emotional intelligence for personal and professional growth.",
-      "gradient": "from-blue-500 to-blue-600"
-    },
-    {
-      "icon": "fa-certificate",
-      "title": "ICF Associate Certified Coach",
-      "description": "Accredited by the International Coach Federation, demonstrating commitment to professional coaching standards and ethics.",
-      "gradient": "from-purple-500 to-purple-600"
-    },
-    {
-      "icon": "fa-chart-line",
-      "title": "Vedic Numerologist",
-      "description": "Trained in science of Vedic Numerology to provide insights into life paths, challenges, and opportunities.",
-      "gradient": "from-amber-500 to-amber-600"
-    }
-  ],
-  "valuesHeading": "What Drives Me",
-  "valuesSubtext": "These core values guide every coaching session and relationship I build with my clients.",
-  "values": [
-    {
-      "icon": "fa-heart",
-      "title": "Compassion",
-      "description": "Compassion is the foundation of meaningful coaching. It creates a safe and non-judgmental space where you are truly heard, supported and empowered to explore challenges."
-    },
-    {
-      "icon": "fa-lightbulb",
-      "title": "Curiosity",
-      "description": "Curiosity is the key to deeper insight. By asking thoughtful questions and exploring without judgement, it helps you connect with what truly drives your decisions and directions."
-    },
-    {
-      "icon": "fa-bullseye",
-      "title": "Clarity",
-      "description": "Clarity transforms awareness into actionable direction. It helps you cut through confusion, identify priorities, and make decisions with confidence and purpose."
-    },
-    {
-      "icon": "fa-graduation-cap",
-      "title": "Confidence",
-      "description": "Confidence empowers to trust oneself. It encourages to embrace your strength, and take bold, purposeful steps toward your goals. It turns intention into meaningful action."
-    }
-  ]
+  "hero": {
+    "heading": " Shanila Khan, Confidence And  Mindset Coach ",
+    "subtext": "Supporting you in reconnecting with your inner strength, shifting the narratives that hold you back, and growing into the life and leadership that already exists within you.\n"
+  },
+  "story": {
+    "heading": "Confidence, Mindset, and Transformation – My Story",
+    "body": "I'm Shanila,  a certified confidence and mindset coach with over a decade of experience working with women navigating change at home and work,  who are done playing small. \n\nMy work is about one thing: strengthening the inner narrative that shapes every decision you make, every room you walk into, and every opportunity you claim or let pass.\n\nTrained by globally recognised coach Vikram Dhar, I bring proven mindset methodologies alongside deep, intuitive coaching helping women move from self-doubt to self-authority, from invisible to unmissable.\n\nBecause the world doesn't need you to work harder. It needs you to believe what you're worth.\n",
+    "badge": "Certified Coach",
+    "videoUrl": "https://www.youtube.com/embed/l-9i_aFrrI8?si=jYmGhpYZwKLPh5ZB&clip=UgkxIU9JKRh9xHPvGE-iocWYYbXnYUMpYuts&clipt=EIq5ERjb1xQ"
+  },
+  "credentials": {
+    "heading": "Professional Qualifications",
+    "subtext": "I'm committed to continuous learning and professional development to provide you with the best coaching experience.",
+    "items": [
+      {
+        "title": "Master Practitioner in NLP",
+        "description": "Advanced certification in Neuro-Linguistic Programming techniques for personal transformation and behavioral change.",
+        "icon": "fa-brain",
+        "gradient": "orange"
+      },
+      {
+        "title": "Certified Emotional Intelligence Practitioner",
+        "description": "Specialized training in understanding and applying emotional intelligence for personal and professional growth.",
+        "icon": "fa-heart",
+        "gradient": "blue"
+      },
+      {
+        "title": "ICF Associate Certified Coach",
+        "description": "Accredited by the International Coach Federation, demonstrating commitment to professional coaching standards and ethics.",
+        "icon": "fa-certificate",
+        "gradient": "purple"
+      },
+      {
+        "title": "Vedic Numerologist",
+        "description": "Trained in science of Vedic Numerology to provide insights into life paths, challenges, and opportunities.",
+        "icon": "fa-chart-line",
+        "gradient": "amber"
+      }
+    ]
+  },
+  "values": {
+    "heading": "What Drives Me",
+    "subtext": "These core values guide every coaching session and relationship I build with my clients.",
+    "items": [
+      {
+        "title": "Compassion",
+        "description": "Compassion is the foundation of meaningful coaching. It creates a safe and non-judgmental space where you are truly heard, supported and empowered to explore challenges.",
+        "icon": "fa-heart"
+      },
+      {
+        "title": "Curiosity",
+        "description": "Curiosity is the key to deeper insight. By asking thoughtful questions and exploring without judgement, it helps you connect with what truly drives your decisions and directions.",
+        "icon": "fa-lightbulb"
+      },
+      {
+        "title": "Clarity",
+        "description": "Clarity transforms awareness into actionable direction. It helps you cut through confusion, identify priorities, and make decisions with confidence and purpose.",
+        "icon": "fa-bullseye"
+      },
+      {
+        "title": "Confidence",
+        "description": "Confidence empowers to trust oneself. It encourages to embrace your strength, and take bold, purposeful steps toward your goals. It turns intention into meaningful action.",
+        "icon": "fa-graduation-cap"
+      }
+    ]
+  },
+  "seo": {
+    "title": "About Shanila Khan | Confidence & Mindset Coach, Leeds",
+    "description": "Meet Shanila Khan, an ICF-accredited confidence and mindset coach based in Leeds with over ten years' experience, coaching women in person and online."
+  }
 }

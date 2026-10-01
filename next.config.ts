@@ -14,6 +14,8 @@ const nextConfig: NextConfig = {
       { source: '/contact.html', destination: '/contact', permanent: true },
       { source: '/blog', destination: '/resources', permanent: true },
       { source: '/podcast', destination: '/resources', permanent: true },
+      // Episodes used to have their own pages; they now live in the Resources library.
+      { source: '/podcast/:slug*', destination: '/resources#podcast-library', permanent: true },
     ]
   },
   images: {

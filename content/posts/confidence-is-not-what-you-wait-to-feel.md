@@ -4,10 +4,11 @@ publishedAt: 2026-09-22T21:55:45.144Z
 status: Published
 excerpt: 'Confidence is built moment by moment, day by day! You have it all what it takes to be confident. '
 image: /images/Confidence Frame .jpg
-icon: fa-pen-fancy
-iconColor: text-carrot/40
-gradient: from-orange-100 to-orange-200
-badgeColor: bg-carrot
+featured: false
+cardStyle:
+  icon: fa-pen-fancy
+  tone: primary
+relatedService: mindset
 ---
 
 **Confidence Is Not Something You Wait to Feel**

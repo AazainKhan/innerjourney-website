@@ -1,13 +1,40 @@
 {
-  "heroImage": "/images/contact-img-1200.webp",
-  "heroHeading": "Let's Connect",
-  "heroSubtext": "Ready to start? I'm here to support you every step of the way. Let's discuss how we can work together.",
-  "sectionHeading": "Start Your Journey Today",
-  "sectionSubtext": "I'm excited to learn about your goals and explore how we can work together to create the transformation you're seeking.",
-  "email": "innerjourneywithshanila@gmail.com",
-  "phone": "+44 7387 973 382",
-  "videoText": "Zoom, Google Meet, or your preferred platform",
-  "location": "Leeds, United Kingdom",
-  "bookingCTALabel": "Book A Free Discovery Call",
-  "formHeading": "Send me a message"
+  "hero": {
+    "image": "/images/contact-img-1200.webp",
+    "heading": "Let's Connect",
+    "subtext": "Ready to start? I'm here to support you every step of the way. Let's discuss how we can work together."
+  },
+  "intro": {
+    "heading": "Start Your Journey Today",
+    "subtext": "I'm excited to learn about your goals and explore how we can work together to create the transformation you're seeking."
+  },
+  "details": {
+    "emailTitle": "Email",
+    "email": "innerjourneywithshanila@gmail.com",
+    "phoneTitle": "Phone",
+    "phone": "+44 7387 973 382",
+    "videoTitle": "Video Sessions",
+    "video": "Zoom, Google Meet, or your preferred platform",
+    "locationTitle": "Location",
+    "location": "Leeds, United Kingdom",
+    "bookingButtonLabel": "Book A Free Discovery Call"
+  },
+  "form": {
+    "heading": "Send me a message",
+    "nameLabel": "Full Name",
+    "namePlaceholder": "Your full name",
+    "emailLabel": "Email Address",
+    "emailPlaceholder": "your@email.com",
+    "phoneLabel": "Phone Number",
+    "phonePlaceholder": "07xxx xxxxxx",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Tell me about your goals, challenges, or questions...",
+    "submitLabel": "Send!",
+    "submittingLabel": "Sending...",
+    "privacyNote": "By submitting this form, you agree to our privacy policy and terms of service."
+  },
+  "seo": {
+    "title": "Contact Shanila Khan | Confidence Coach in Leeds & Online",
+    "description": "Get in touch or book a free discovery call with Shanila Khan, confidence and mindset coach based in Leeds, coaching women in person and online."
+  }
 }

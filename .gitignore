@@ -46,3 +46,8 @@ live-home.*
 # Workspace screenshots
 vercel-*.png
 
+*.tsbuildinfo
+
+# Impeccable per-developer state
+.impeccable/config.local.json
+.impeccable/hook.cache.json

@@ -19,6 +19,9 @@ const CAL_USERNAME = process.env.NEXT_PUBLIC_CAL_USERNAME
 const CAL_EVENT_SLUG = process.env.NEXT_PUBLIC_CAL_EVENT_SLUG || 'discovery-call'
 const CAL_ENABLED = Boolean(CAL_USERNAME)
 
+/** Fired on window whenever the booking modal (Cal or the fallback form) opens. */
+export const BOOKING_OPEN_EVENT = 'innerjourney:booking-open'
+
 export function BookingProvider({ children }: { children: React.ReactNode }) {
   // Only used by the legacy email-only booking form. When CAL_ENABLED is
   // true `openBooking` triggers Cal's native modal directly and `isOpen`
@@ -26,6 +29,8 @@ export function BookingProvider({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false)
 
   function openBooking() {
+    // Lets other floating UI (the newsletter popup) step aside while booking.
+    window.dispatchEvent(new Event(BOOKING_OPEN_EVENT))
     if (CAL_ENABLED) {
       // Fire-and-forget — getCalApi resolves once the global Cal script
       // is loaded (already preloaded by <CalPreloader/> on mount).
@@ -51,13 +56,13 @@ export function BookingProvider({ children }: { children: React.ReactNode }) {
     document.body.style.overflow = ''
   }
 
-  // Auto-open the modal when ?previewBooking=1 is in the URL — used by Tina
-  // admin to render the booking form alongside the editor for side-by-side
-  // preview of bookingForm.json edits. In Cal mode this opens Cal's modal.
+  // Auto-open the modal on the Tina preview route for the booking form
+  // (/preview/booking-form.json) so edits show side-by-side. ?previewBooking=1
+  // still works for manual checks. In Cal mode this opens Cal's modal.
   useEffect(() => {
     if (typeof window === 'undefined') return
     const params = new URLSearchParams(window.location.search)
-    if (params.get('previewBooking') === '1') {
+    if (params.get('previewBooking') === '1' || window.location.pathname === '/preview/booking-form.json') {
       openBooking()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

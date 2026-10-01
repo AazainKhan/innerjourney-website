@@ -1,19 +1,15 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import testimonialsData from '@/content/testimonials.json'
+import { tinaField, useTina } from 'tinacms/dist/react'
+import { present, type TinaDocProps } from '@/lib/use-tina-doc'
+import type { TestimonialsQuery } from '@/tina/__generated__/types'
 
-interface TestimonialItem {
-  quote: string
-  author: string
-}
-
-interface TestimonialsProps {
-  items?: TestimonialItem[]
-}
-
-export default function Testimonials({ items }: TestimonialsProps = {}) {
-  const testimonials = items ?? testimonialsData.items
+/** Rotating client quotes. Edited in Tina under "Testimonials"; updates live in the preview. */
+export default function Testimonials(props: TinaDocProps<TestimonialsQuery>) {
+  const { data } = useTina<TestimonialsQuery>(props)
+  const doc = data.testimonials
+  const testimonials = present(doc?.items)
 
   const [current, setCurrent] = useState(0)
   const [, setDirection] = useState<'next' | 'prev'>('next')
@@ -43,14 +39,15 @@ export default function Testimonials({ items }: TestimonialsProps = {}) {
     <div className="testimonials-section-wrapper py-12 relative">
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-10">
-          <h2 className="text-4xl md:text-5xl heading-secondary text-gray-900 mb-4">
-            Client Transformations
+          <h2 data-tina-field={tinaField(doc, 'heading')} className="text-4xl md:text-5xl heading-secondary text-gray-900 mb-4">
+            {doc?.heading}
           </h2>
         </div>
         <div className="testimonials-container">
           {testimonials.map((t, i) => (
             <div
               key={i}
+              data-tina-field={tinaField(t)}
               className={`testimonial ${i === current ? 'active' : i === (current - 1 + testimonials.length) % testimonials.length ? 'prev' : 'next'}`}
             >
               <div className="max-w-3xl mx-auto text-center">

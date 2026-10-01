@@ -66,24 +66,26 @@ type Query {
   careerCoachingConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: CareerCoachingFilter): CareerCoachingConnection!
   numerology(relativePath: String): Numerology!
   numerologyConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: NumerologyFilter): NumerologyConnection!
+  leeds(relativePath: String): Leeds!
+  leedsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: LeedsFilter): LeedsConnection!
   resources(relativePath: String): Resources!
   resourcesConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ResourcesFilter): ResourcesConnection!
-  contact(relativePath: String): Contact!
-  contactConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ContactFilter): ContactConnection!
   post(relativePath: String): Post!
   postConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PostFilter): PostConnection!
   podcast(relativePath: String): Podcast!
   podcastConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PodcastFilter): PodcastConnection!
+  contact(relativePath: String): Contact!
+  contactConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ContactFilter): ContactConnection!
   navbar(relativePath: String): Navbar!
   navbarConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: NavbarFilter): NavbarConnection!
-  bookingForm(relativePath: String): BookingForm!
-  bookingFormConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: BookingFormFilter): BookingFormConnection!
   footer(relativePath: String): Footer!
   footerConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: FooterFilter): FooterConnection!
-  typography(relativePath: String): Typography!
-  typographyConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: TypographyFilter): TypographyConnection!
   testimonials(relativePath: String): Testimonials!
   testimonialsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: TestimonialsFilter): TestimonialsConnection!
+  bookingForm(relativePath: String): BookingForm!
+  bookingFormConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: BookingFormFilter): BookingFormConnection!
+  typography(relativePath: String): Typography!
+  typographyConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: TypographyFilter): TypographyConnection!
 }
 
 input DocumentFilter {
@@ -93,15 +95,16 @@ input DocumentFilter {
   clarityCoaching: ClarityCoachingFilter
   careerCoaching: CareerCoachingFilter
   numerology: NumerologyFilter
+  leeds: LeedsFilter
   resources: ResourcesFilter
-  contact: ContactFilter
   post: PostFilter
   podcast: PodcastFilter
+  contact: ContactFilter
   navbar: NavbarFilter
-  bookingForm: BookingFormFilter
   footer: FooterFilter
-  typography: TypographyFilter
   testimonials: TestimonialsFilter
+  bookingForm: BookingFormFilter
+  typography: TypographyFilter
 }
 
 type DocumentConnectionEdges {
@@ -127,36 +130,76 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Home | Services | About | ClarityCoaching | CareerCoaching | Numerology | Resources | Contact | Post | Podcast | Navbar | BookingForm | Footer | Typography | Testimonials | Folder
+union DocumentNode = Home | Services | About | ClarityCoaching | CareerCoaching | Numerology | Leeds | Resources | Post | Podcast | Contact | Navbar | Footer | Testimonials | BookingForm | Typography | Folder
 
-type HomeServices {
+type HomeHero {
+  image: String
+  heading: JSON
+  subtext: JSON
+  buttonLabel: String
+  secondaryButtonLabel: String
+}
+
+type HomeLocations {
+  inPerson: String
+  online: String
+  linkLabel: String
+}
+
+type HomeIntro {
+  heading: String
+  body: JSON
+  linkLabel: String
+}
+
+type HomeAbout {
+  heading: String
+  image: String
+  credential: String
+  body: JSON
+  buttonLabel: String
+}
+
+type HomeReflection {
+  heading: String
+  tagline: String
+  questions: String
+}
+
+type HomeServicesCards {
   title: String
   description: String
   icon: String
   href: String
   buttonLabel: String
-  colorScheme: String
+  tone: String
+}
+
+type HomeServices {
+  heading: String
+  subtext: String
+  cards: [HomeServicesCards]
+}
+
+type HomeClosingCta {
+  text: String
+  buttonLabel: String
+}
+
+type HomeSeo {
+  title: String
+  description: String
 }
 
 type Home implements Node & Document {
-  heroImage: String
-  heroHeading: JSON
-  heroSubtext: JSON
-  heroCTALabel: String
-  heroBottomCTALabel: String
-  ctaHeading: String
-  ctaBody: JSON
-  aboutHeading: String
-  aboutImage: String
-  aboutCredentialTitle: String
-  aboutBody: JSON
-  feelLikeYouHeading: String
-  feelLikeYouTagline: String
-  feelLikeYouQuestions: String
-  servicesHeading: String
-  servicesSubtext: String
-  services: [HomeServices]
-  bottomCTAText: String
+  hero: HomeHero
+  locations: HomeLocations
+  intro: HomeIntro
+  about: HomeAbout
+  reflection: HomeReflection
+  services: HomeServices
+  closingCta: HomeClosingCta
+  seo: HomeSeo
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -182,34 +225,74 @@ input StringFilter {
   in: [String]
 }
 
-input HomeServicesFilter {
+input HomeHeroFilter {
+  image: ImageFilter
+  heading: RichTextFilter
+  subtext: RichTextFilter
+  buttonLabel: StringFilter
+  secondaryButtonLabel: StringFilter
+}
+
+input HomeLocationsFilter {
+  inPerson: StringFilter
+  online: StringFilter
+  linkLabel: StringFilter
+}
+
+input HomeIntroFilter {
+  heading: StringFilter
+  body: RichTextFilter
+  linkLabel: StringFilter
+}
+
+input HomeAboutFilter {
+  heading: StringFilter
+  image: ImageFilter
+  credential: StringFilter
+  body: RichTextFilter
+  buttonLabel: StringFilter
+}
+
+input HomeReflectionFilter {
+  heading: StringFilter
+  tagline: StringFilter
+  questions: StringFilter
+}
+
+input HomeServicesCardsFilter {
   title: StringFilter
   description: StringFilter
   icon: StringFilter
   href: StringFilter
   buttonLabel: StringFilter
-  colorScheme: StringFilter
+  tone: StringFilter
+}
+
+input HomeServicesFilter {
+  heading: StringFilter
+  subtext: StringFilter
+  cards: HomeServicesCardsFilter
+}
+
+input HomeClosingCtaFilter {
+  text: StringFilter
+  buttonLabel: StringFilter
+}
+
+input HomeSeoFilter {
+  title: StringFilter
+  description: StringFilter
 }
 
 input HomeFilter {
-  heroImage: ImageFilter
-  heroHeading: RichTextFilter
-  heroSubtext: RichTextFilter
-  heroCTALabel: StringFilter
-  heroBottomCTALabel: StringFilter
-  ctaHeading: StringFilter
-  ctaBody: RichTextFilter
-  aboutHeading: StringFilter
-  aboutImage: ImageFilter
-  aboutCredentialTitle: StringFilter
-  aboutBody: RichTextFilter
-  feelLikeYouHeading: StringFilter
-  feelLikeYouTagline: StringFilter
-  feelLikeYouQuestions: StringFilter
-  servicesHeading: StringFilter
-  servicesSubtext: StringFilter
+  hero: HomeHeroFilter
+  locations: HomeLocationsFilter
+  intro: HomeIntroFilter
+  about: HomeAboutFilter
+  reflection: HomeReflectionFilter
   services: HomeServicesFilter
-  bottomCTAText: StringFilter
+  closingCta: HomeClosingCtaFilter
+  seo: HomeSeoFilter
 }
 
 type HomeConnectionEdges {
@@ -223,49 +306,81 @@ type HomeConnection implements Connection {
   edges: [HomeConnectionEdges]
 }
 
-type ServicesServices {
+type ServicesHero {
+  heading: String
+  subtext: JSON
+}
+
+type ServicesCards {
   title: String
   duration: String
   description: String
   icon: String
+  highlights: String
   href: String
   buttonLabel: String
-  highlights: String
-  isThisForYou: String
-  colorScheme: String
+  tone: String
+  fitHeading: String
+  fitBody: String
+  learnMoreLabel: String
+}
+
+type ServicesClosingCta {
+  heading: String
+  subtext: String
+  buttonLabel: String
+}
+
+type ServicesSeo {
+  title: String
+  description: String
 }
 
 type Services implements Node & Document {
-  heroHeading: String
-  heroSubtext: JSON
-  services: [ServicesServices]
-  ctaHeading: String
-  ctaSubtext: String
-  ctaButtonLabel: String
+  hero: ServicesHero
+  cards: [ServicesCards]
+  closingCta: ServicesClosingCta
+  seo: ServicesSeo
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
 }
 
-input ServicesServicesFilter {
+input ServicesHeroFilter {
+  heading: StringFilter
+  subtext: RichTextFilter
+}
+
+input ServicesCardsFilter {
   title: StringFilter
   duration: StringFilter
   description: StringFilter
   icon: StringFilter
+  highlights: StringFilter
   href: StringFilter
   buttonLabel: StringFilter
-  highlights: StringFilter
-  isThisForYou: StringFilter
-  colorScheme: StringFilter
+  tone: StringFilter
+  fitHeading: StringFilter
+  fitBody: StringFilter
+  learnMoreLabel: StringFilter
+}
+
+input ServicesClosingCtaFilter {
+  heading: StringFilter
+  subtext: StringFilter
+  buttonLabel: StringFilter
+}
+
+input ServicesSeoFilter {
+  title: StringFilter
+  description: StringFilter
 }
 
 input ServicesFilter {
-  heroHeading: StringFilter
-  heroSubtext: RichTextFilter
-  services: ServicesServicesFilter
-  ctaHeading: StringFilter
-  ctaSubtext: StringFilter
-  ctaButtonLabel: StringFilter
+  hero: ServicesHeroFilter
+  cards: ServicesCardsFilter
+  closingCta: ServicesClosingCtaFilter
+  seo: ServicesSeoFilter
 }
 
 type ServicesConnectionEdges {
@@ -279,59 +394,107 @@ type ServicesConnection implements Connection {
   edges: [ServicesConnectionEdges]
 }
 
-type AboutCredentials {
-  icon: String
+type AboutHero {
+  heading: String
+  subtext: JSON
+}
+
+type AboutStory {
+  heading: String
+  body: JSON
+  badge: String
+  videoUrl: String
+}
+
+type AboutCredentialsItems {
   title: String
   description: String
+  icon: String
   gradient: String
 }
 
-type AboutValues {
+type AboutCredentials {
+  heading: String
+  subtext: String
+  items: [AboutCredentialsItems]
+}
+
+type AboutValuesItems {
+  title: String
+  description: String
   icon: String
+}
+
+type AboutValues {
+  heading: String
+  subtext: String
+  items: [AboutValuesItems]
+}
+
+type AboutSeo {
   title: String
   description: String
 }
 
 type About implements Node & Document {
-  heroHeading: String
-  heroSubtext: JSON
-  storyHeading: String
-  storyBody: JSON
-  credentialsHeading: String
-  credentialsSubtext: String
-  credentials: [AboutCredentials]
-  valuesHeading: String
-  valuesSubtext: String
-  values: [AboutValues]
+  hero: AboutHero
+  story: AboutStory
+  credentials: AboutCredentials
+  values: AboutValues
+  seo: AboutSeo
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
 }
 
-input AboutCredentialsFilter {
-  icon: StringFilter
+input AboutHeroFilter {
+  heading: StringFilter
+  subtext: RichTextFilter
+}
+
+input AboutStoryFilter {
+  heading: StringFilter
+  body: RichTextFilter
+  badge: StringFilter
+  videoUrl: StringFilter
+}
+
+input AboutCredentialsItemsFilter {
   title: StringFilter
   description: StringFilter
+  icon: StringFilter
   gradient: StringFilter
 }
 
-input AboutValuesFilter {
+input AboutCredentialsFilter {
+  heading: StringFilter
+  subtext: StringFilter
+  items: AboutCredentialsItemsFilter
+}
+
+input AboutValuesItemsFilter {
+  title: StringFilter
+  description: StringFilter
   icon: StringFilter
+}
+
+input AboutValuesFilter {
+  heading: StringFilter
+  subtext: StringFilter
+  items: AboutValuesItemsFilter
+}
+
+input AboutSeoFilter {
   title: StringFilter
   description: StringFilter
 }
 
 input AboutFilter {
-  heroHeading: StringFilter
-  heroSubtext: RichTextFilter
-  storyHeading: StringFilter
-  storyBody: RichTextFilter
-  credentialsHeading: StringFilter
-  credentialsSubtext: StringFilter
+  hero: AboutHeroFilter
+  story: AboutStoryFilter
   credentials: AboutCredentialsFilter
-  valuesHeading: StringFilter
-  valuesSubtext: StringFilter
   values: AboutValuesFilter
+  seo: AboutSeoFilter
 }
 
 type AboutConnectionEdges {
@@ -345,151 +508,267 @@ type AboutConnection implements Connection {
   edges: [AboutConnectionEdges]
 }
 
-type ClarityCoachingPerhapsItems {
-  emoji: String
-  text: String
-  borderColor: String
+type ClarityCoachingHero {
+  eyebrow: String
+  heading: String
+  subtext: JSON
+  buttonLabel: String
+  sideEmoji: String
+  sideHeading: String
+  sideSubtext: String
 }
 
-type ClarityCoachingTimelineSteps {
+type ClarityCoachingWhoItsForItems {
+  emoji: String
+  text: String
+  tone: String
+}
+
+type ClarityCoachingWhoItsForBanner {
+  text: String
+  highlight: String
+}
+
+type ClarityCoachingWhoItsFor {
+  heading: String
+  highlight: String
+  subtext: String
+  listIntro: String
+  items: [ClarityCoachingWhoItsForItems]
+  banner: ClarityCoachingWhoItsForBanner
+}
+
+type ClarityCoachingProblemSolutionProblem {
+  title: String
+  body: JSON
+}
+
+type ClarityCoachingProblemSolutionSolution {
+  title: String
+  body: JSON
+  keyword: String
+}
+
+type ClarityCoachingProblemSolution {
+  heading: String
+  highlight: String
+  problem: ClarityCoachingProblemSolutionProblem
+  solution: ClarityCoachingProblemSolutionSolution
+}
+
+type ClarityCoachingPhilosophyBanner {
+  text: String
+  highlight: String
+}
+
+type ClarityCoachingPhilosophyClosing {
+  text: String
+  highlight: String
+}
+
+type ClarityCoachingPhilosophy {
+  eyebrow: String
+  heading: String
+  highlight: String
+  quote: String
+  body: JSON
+  banner: ClarityCoachingPhilosophyBanner
+  closing: ClarityCoachingPhilosophyClosing
+}
+
+type ClarityCoachingJourneySteps {
   number: String
   weeks: String
   title: String
   subtitle: String
   description: String
-  accent: String
+  tone: String
 }
 
-type ClarityCoachingExperienceItems {
+type ClarityCoachingJourney {
+  eyebrow: String
+  heading: String
+  highlight: String
+  subtext: String
+  steps: [ClarityCoachingJourneySteps]
+  buttonLabel: String
+}
+
+type ClarityCoachingIncludedItems {
   emoji: String
   title: String
   subtitle: String
-  bg: String
+  tone: String
+}
+
+type ClarityCoachingIncludedBonus {
+  emoji: String
+  label: String
+  text: String
+}
+
+type ClarityCoachingIncluded {
+  eyebrow: String
+  heading: String
+  highlight: String
+  items: [ClarityCoachingIncludedItems]
+  bonus: ClarityCoachingIncludedBonus
+}
+
+type ClarityCoachingClosingCta {
+  heading: String
+  highlight: String
+  body: JSON
+  buttonLabel: String
+}
+
+type ClarityCoachingSeo {
+  title: String
+  description: String
 }
 
 type ClarityCoaching implements Node & Document {
-  heroBadge: String
-  heroHeading: String
-  heroSubtext: JSON
-  heroCTALabel: String
-  heroSideEmoji: String
-  heroSideWeeks: String
-  heroSideSubtext: String
-  resultsHeadingPrefix: String
-  resultsHeadingHighlight: String
-  resultsSubtext: String
-  perhapsLabel: String
-  perhapsItems: [ClarityCoachingPerhapsItems]
-  bannerText: String
-  bannerHighlight: String
-  missingPieceHeadingPrefix: String
-  missingPieceHeadingHighlight: String
-  problemTitle: String
-  problemBody: JSON
-  solutionTitle: String
-  solutionBody: JSON
-  solutionWord: String
-  philosophyLabel: String
-  philosophyHeadingPrefix: String
-  philosophyHeadingHighlight: String
-  philosophyQuote: String
-  philosophyBody: JSON
-  philosophyBannerPrefix: String
-  philosophyBannerHighlight: String
-  philosophyClosingPrefix: String
-  philosophyClosingHighlight: String
-  timelineLabel: String
-  timelineHeadingPrefix: String
-  timelineHeadingHighlight: String
-  timelineSubtext: String
-  timelineSteps: [ClarityCoachingTimelineSteps]
-  timelineCTALabel: String
-  experienceLabel: String
-  experienceHeadingPrefix: String
-  experienceHeadingHighlight: String
-  experienceItems: [ClarityCoachingExperienceItems]
-  bonusEmoji: String
-  bonusPrefix: String
-  bonusText: String
-  ctaSectionHeadingPrefix: String
-  ctaSectionHeadingHighlight: String
-  ctaSectionBody: JSON
-  ctaButtonLabel: String
+  hero: ClarityCoachingHero
+  whoItsFor: ClarityCoachingWhoItsFor
+  problemSolution: ClarityCoachingProblemSolution
+  philosophy: ClarityCoachingPhilosophy
+  journey: ClarityCoachingJourney
+  included: ClarityCoachingIncluded
+  closingCta: ClarityCoachingClosingCta
+  seo: ClarityCoachingSeo
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
 }
 
-input ClarityCoachingPerhapsItemsFilter {
-  emoji: StringFilter
-  text: StringFilter
-  borderColor: StringFilter
+input ClarityCoachingHeroFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
+  subtext: RichTextFilter
+  buttonLabel: StringFilter
+  sideEmoji: StringFilter
+  sideHeading: StringFilter
+  sideSubtext: StringFilter
 }
 
-input ClarityCoachingTimelineStepsFilter {
+input ClarityCoachingWhoItsForItemsFilter {
+  emoji: StringFilter
+  text: StringFilter
+  tone: StringFilter
+}
+
+input ClarityCoachingWhoItsForBannerFilter {
+  text: StringFilter
+  highlight: StringFilter
+}
+
+input ClarityCoachingWhoItsForFilter {
+  heading: StringFilter
+  highlight: StringFilter
+  subtext: StringFilter
+  listIntro: StringFilter
+  items: ClarityCoachingWhoItsForItemsFilter
+  banner: ClarityCoachingWhoItsForBannerFilter
+}
+
+input ClarityCoachingProblemSolutionProblemFilter {
+  title: StringFilter
+  body: RichTextFilter
+}
+
+input ClarityCoachingProblemSolutionSolutionFilter {
+  title: StringFilter
+  body: RichTextFilter
+  keyword: StringFilter
+}
+
+input ClarityCoachingProblemSolutionFilter {
+  heading: StringFilter
+  highlight: StringFilter
+  problem: ClarityCoachingProblemSolutionProblemFilter
+  solution: ClarityCoachingProblemSolutionSolutionFilter
+}
+
+input ClarityCoachingPhilosophyBannerFilter {
+  text: StringFilter
+  highlight: StringFilter
+}
+
+input ClarityCoachingPhilosophyClosingFilter {
+  text: StringFilter
+  highlight: StringFilter
+}
+
+input ClarityCoachingPhilosophyFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
+  highlight: StringFilter
+  quote: StringFilter
+  body: RichTextFilter
+  banner: ClarityCoachingPhilosophyBannerFilter
+  closing: ClarityCoachingPhilosophyClosingFilter
+}
+
+input ClarityCoachingJourneyStepsFilter {
   number: StringFilter
   weeks: StringFilter
   title: StringFilter
   subtitle: StringFilter
   description: StringFilter
-  accent: StringFilter
+  tone: StringFilter
 }
 
-input ClarityCoachingExperienceItemsFilter {
+input ClarityCoachingJourneyFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
+  highlight: StringFilter
+  subtext: StringFilter
+  steps: ClarityCoachingJourneyStepsFilter
+  buttonLabel: StringFilter
+}
+
+input ClarityCoachingIncludedItemsFilter {
   emoji: StringFilter
   title: StringFilter
   subtitle: StringFilter
-  bg: StringFilter
+  tone: StringFilter
+}
+
+input ClarityCoachingIncludedBonusFilter {
+  emoji: StringFilter
+  label: StringFilter
+  text: StringFilter
+}
+
+input ClarityCoachingIncludedFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
+  highlight: StringFilter
+  items: ClarityCoachingIncludedItemsFilter
+  bonus: ClarityCoachingIncludedBonusFilter
+}
+
+input ClarityCoachingClosingCtaFilter {
+  heading: StringFilter
+  highlight: StringFilter
+  body: RichTextFilter
+  buttonLabel: StringFilter
+}
+
+input ClarityCoachingSeoFilter {
+  title: StringFilter
+  description: StringFilter
 }
 
 input ClarityCoachingFilter {
-  heroBadge: StringFilter
-  heroHeading: StringFilter
-  heroSubtext: RichTextFilter
-  heroCTALabel: StringFilter
-  heroSideEmoji: StringFilter
-  heroSideWeeks: StringFilter
-  heroSideSubtext: StringFilter
-  resultsHeadingPrefix: StringFilter
-  resultsHeadingHighlight: StringFilter
-  resultsSubtext: StringFilter
-  perhapsLabel: StringFilter
-  perhapsItems: ClarityCoachingPerhapsItemsFilter
-  bannerText: StringFilter
-  bannerHighlight: StringFilter
-  missingPieceHeadingPrefix: StringFilter
-  missingPieceHeadingHighlight: StringFilter
-  problemTitle: StringFilter
-  problemBody: RichTextFilter
-  solutionTitle: StringFilter
-  solutionBody: RichTextFilter
-  solutionWord: StringFilter
-  philosophyLabel: StringFilter
-  philosophyHeadingPrefix: StringFilter
-  philosophyHeadingHighlight: StringFilter
-  philosophyQuote: StringFilter
-  philosophyBody: RichTextFilter
-  philosophyBannerPrefix: StringFilter
-  philosophyBannerHighlight: StringFilter
-  philosophyClosingPrefix: StringFilter
-  philosophyClosingHighlight: StringFilter
-  timelineLabel: StringFilter
-  timelineHeadingPrefix: StringFilter
-  timelineHeadingHighlight: StringFilter
-  timelineSubtext: StringFilter
-  timelineSteps: ClarityCoachingTimelineStepsFilter
-  timelineCTALabel: StringFilter
-  experienceLabel: StringFilter
-  experienceHeadingPrefix: StringFilter
-  experienceHeadingHighlight: StringFilter
-  experienceItems: ClarityCoachingExperienceItemsFilter
-  bonusEmoji: StringFilter
-  bonusPrefix: StringFilter
-  bonusText: StringFilter
-  ctaSectionHeadingPrefix: StringFilter
-  ctaSectionHeadingHighlight: StringFilter
-  ctaSectionBody: RichTextFilter
-  ctaButtonLabel: StringFilter
+  hero: ClarityCoachingHeroFilter
+  whoItsFor: ClarityCoachingWhoItsForFilter
+  problemSolution: ClarityCoachingProblemSolutionFilter
+  philosophy: ClarityCoachingPhilosophyFilter
+  journey: ClarityCoachingJourneyFilter
+  included: ClarityCoachingIncludedFilter
+  closingCta: ClarityCoachingClosingCtaFilter
+  seo: ClarityCoachingSeoFilter
 }
 
 type ClarityCoachingConnectionEdges {
@@ -503,111 +782,195 @@ type ClarityCoachingConnection implements Connection {
   edges: [ClarityCoachingConnectionEdges]
 }
 
+type CareerCoachingHero {
+  heading: String
+  subtext: JSON
+  buttonLabel: String
+}
+
+type CareerCoachingWhoItsForBanner {
+  text: String
+  highlight: String
+}
+
+type CareerCoachingWhoItsFor {
+  heading: String
+  highlight: String
+  subtext: String
+  listIntro: String
+  situations: String
+  banner: CareerCoachingWhoItsForBanner
+}
+
+type CareerCoachingApproach {
+  heading: String
+  highlight: String
+  body: JSON
+  keyword: String
+}
+
+type CareerCoachingPhilosophy {
+  heading: String
+  highlight: String
+  body: JSON
+}
+
 type CareerCoachingImagineItems {
   emoji: String
   text: String
-  borderColor: String
-  bg: String
+  tone: String
 }
 
-type CareerCoachingRoadmapSteps {
+type CareerCoachingImagine {
+  heading: String
+  highlight: String
+  items: [CareerCoachingImagineItems]
+}
+
+type CareerCoachingJourneySteps {
   number: String
   weeks: String
   title: String
   subtitle: String
-  subtitleColor: String
+  tone: String
+  description: String
+}
+
+type CareerCoachingJourney {
+  heading: String
+  highlight: String
+  lead: String
+  intro: String
+  steps: [CareerCoachingJourneySteps]
+  buttonLabel: String
+}
+
+type CareerCoachingIncluded {
+  heading: String
+  highlight: String
+  subtext: String
+  items: String
+}
+
+type CareerCoachingClosingCta {
+  heading: String
+  highlight: String
+  body: JSON
+  buttonLabel: String
+}
+
+type CareerCoachingSeo {
+  title: String
   description: String
 }
 
 type CareerCoaching implements Node & Document {
-  heroHeading: String
-  heroSubtext: JSON
-  heroCTALabel: String
-  resultsHeadingPrefix: String
-  resultsHeadingHighlight: String
-  resultsSubtext: String
-  perhapsLabel: String
-  situations: String
-  bannerPrefix: String
-  bannerHighlight: String
-  clarityHeadingPrefix: String
-  clarityHeadingHighlight: String
-  clarityBody: JSON
-  clarityBigWord: String
-  philosophyHeadingPrefix: String
-  philosophyHeadingHighlight: String
-  philosophyBody: JSON
-  imagineHeadingHighlight: String
-  imagineItems: [CareerCoachingImagineItems]
-  roadmapHeadingPrefix: String
-  roadmapHeadingHighlight: String
-  roadmapSubtext1: String
-  roadmapSubtext2: String
-  roadmapSteps: [CareerCoachingRoadmapSteps]
-  roadmapCTALabel: String
-  experienceHeadingPrefix: String
-  experienceHeadingHighlight: String
-  experienceSubtext: String
-  experienceItems: String
-  ctaSectionHeadingPrefix: String
-  ctaSectionHeadingHighlight: String
-  ctaSectionBody: JSON
-  ctaButtonLabel: String
+  hero: CareerCoachingHero
+  whoItsFor: CareerCoachingWhoItsFor
+  approach: CareerCoachingApproach
+  philosophy: CareerCoachingPhilosophy
+  imagine: CareerCoachingImagine
+  journey: CareerCoachingJourney
+  included: CareerCoachingIncluded
+  closingCta: CareerCoachingClosingCta
+  seo: CareerCoachingSeo
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
 }
 
+input CareerCoachingHeroFilter {
+  heading: StringFilter
+  subtext: RichTextFilter
+  buttonLabel: StringFilter
+}
+
+input CareerCoachingWhoItsForBannerFilter {
+  text: StringFilter
+  highlight: StringFilter
+}
+
+input CareerCoachingWhoItsForFilter {
+  heading: StringFilter
+  highlight: StringFilter
+  subtext: StringFilter
+  listIntro: StringFilter
+  situations: StringFilter
+  banner: CareerCoachingWhoItsForBannerFilter
+}
+
+input CareerCoachingApproachFilter {
+  heading: StringFilter
+  highlight: StringFilter
+  body: RichTextFilter
+  keyword: StringFilter
+}
+
+input CareerCoachingPhilosophyFilter {
+  heading: StringFilter
+  highlight: StringFilter
+  body: RichTextFilter
+}
+
 input CareerCoachingImagineItemsFilter {
   emoji: StringFilter
   text: StringFilter
-  borderColor: StringFilter
-  bg: StringFilter
+  tone: StringFilter
 }
 
-input CareerCoachingRoadmapStepsFilter {
+input CareerCoachingImagineFilter {
+  heading: StringFilter
+  highlight: StringFilter
+  items: CareerCoachingImagineItemsFilter
+}
+
+input CareerCoachingJourneyStepsFilter {
   number: StringFilter
   weeks: StringFilter
   title: StringFilter
   subtitle: StringFilter
-  subtitleColor: StringFilter
+  tone: StringFilter
+  description: StringFilter
+}
+
+input CareerCoachingJourneyFilter {
+  heading: StringFilter
+  highlight: StringFilter
+  lead: StringFilter
+  intro: StringFilter
+  steps: CareerCoachingJourneyStepsFilter
+  buttonLabel: StringFilter
+}
+
+input CareerCoachingIncludedFilter {
+  heading: StringFilter
+  highlight: StringFilter
+  subtext: StringFilter
+  items: StringFilter
+}
+
+input CareerCoachingClosingCtaFilter {
+  heading: StringFilter
+  highlight: StringFilter
+  body: RichTextFilter
+  buttonLabel: StringFilter
+}
+
+input CareerCoachingSeoFilter {
+  title: StringFilter
   description: StringFilter
 }
 
 input CareerCoachingFilter {
-  heroHeading: StringFilter
-  heroSubtext: RichTextFilter
-  heroCTALabel: StringFilter
-  resultsHeadingPrefix: StringFilter
-  resultsHeadingHighlight: StringFilter
-  resultsSubtext: StringFilter
-  perhapsLabel: StringFilter
-  situations: StringFilter
-  bannerPrefix: StringFilter
-  bannerHighlight: StringFilter
-  clarityHeadingPrefix: StringFilter
-  clarityHeadingHighlight: StringFilter
-  clarityBody: RichTextFilter
-  clarityBigWord: StringFilter
-  philosophyHeadingPrefix: StringFilter
-  philosophyHeadingHighlight: StringFilter
-  philosophyBody: RichTextFilter
-  imagineHeadingHighlight: StringFilter
-  imagineItems: CareerCoachingImagineItemsFilter
-  roadmapHeadingPrefix: StringFilter
-  roadmapHeadingHighlight: StringFilter
-  roadmapSubtext1: StringFilter
-  roadmapSubtext2: StringFilter
-  roadmapSteps: CareerCoachingRoadmapStepsFilter
-  roadmapCTALabel: StringFilter
-  experienceHeadingPrefix: StringFilter
-  experienceHeadingHighlight: StringFilter
-  experienceSubtext: StringFilter
-  experienceItems: StringFilter
-  ctaSectionHeadingPrefix: StringFilter
-  ctaSectionHeadingHighlight: StringFilter
-  ctaSectionBody: RichTextFilter
-  ctaButtonLabel: StringFilter
+  hero: CareerCoachingHeroFilter
+  whoItsFor: CareerCoachingWhoItsForFilter
+  approach: CareerCoachingApproachFilter
+  philosophy: CareerCoachingPhilosophyFilter
+  imagine: CareerCoachingImagineFilter
+  journey: CareerCoachingJourneyFilter
+  included: CareerCoachingIncludedFilter
+  closingCta: CareerCoachingClosingCtaFilter
+  seo: CareerCoachingSeoFilter
 }
 
 type CareerCoachingConnectionEdges {
@@ -621,121 +984,215 @@ type CareerCoachingConnection implements Connection {
   edges: [CareerCoachingConnectionEdges]
 }
 
-type NumerologySelfDiscoveryItems {
+type NumerologyHero {
+  eyebrow: String
+  heading: String
+  tagline: String
+  subtext: JSON
+  buttonLabel: String
+}
+
+type NumerologyWhoItsForItems {
   emoji: String
   text: String
-  borderColor: String
+  tone: String
+}
+
+type NumerologyWhoItsForStatement {
+  text: String
+  highlight: String
+}
+
+type NumerologyWhoItsFor {
+  heading: String
+  highlight: String
+  subtext: String
+  items: [NumerologyWhoItsForItems]
+  statement: NumerologyWhoItsForStatement
+}
+
+type NumerologyWhatItIs {
+  eyebrow: String
+  heading: String
+  highlight: String
+  isNot: String
+  isText: JSON
 }
 
 type NumerologyProcessSteps {
   emoji: String
-  stepLabel: String
+  label: String
   title: String
   description: String
 }
 
-type NumerologyIncludes {
+type NumerologyProcess {
+  eyebrow: String
+  heading: String
+  highlight: String
+  steps: [NumerologyProcessSteps]
+}
+
+type NumerologyIncludedItems {
   emoji: String
+  title: String
+  description: String
+}
+
+type NumerologyIncluded {
+  eyebrow: String
+  heading: String
+  highlight: String
+  subtext: String
+  items: [NumerologyIncludedItems]
+}
+
+type NumerologyPhilosophyBanner {
+  text: String
+  highlight: String
+}
+
+type NumerologyPhilosophyClosing {
+  text: String
+  highlight: String
+}
+
+type NumerologyPhilosophy {
+  eyebrow: String
+  heading: String
+  highlight: String
+  quote: String
+  body: JSON
+  banner: NumerologyPhilosophyBanner
+  closing: NumerologyPhilosophyClosing
+}
+
+type NumerologyClosingCta {
+  heading: String
+  buttonLabel: String
+}
+
+type NumerologySeo {
   title: String
   description: String
 }
 
 type Numerology implements Node & Document {
-  heroBadge: String
-  heroHeading: String
-  heroTagline: String
-  heroSubtext: JSON
-  heroCTALabel: String
-  selfDiscoveryHeadingPrefix: String
-  selfDiscoveryHeadingHighlight: String
-  selfDiscoverySubtext: String
-  selfDiscoveryItems: [NumerologySelfDiscoveryItems]
-  selfDiscoveryStatementPrefix: String
-  selfDiscoveryStatementHighlight: String
-  whatIsLabel: String
-  whatIsHeadingPrefix: String
-  whatIsHeadingHighlight: String
-  whatIsIsntParagraph: String
-  whatIsIsBody: JSON
-  processLabel: String
-  processHeadingPrefix: String
-  processHeadingHighlight: String
-  processSteps: [NumerologyProcessSteps]
-  includesLabel: String
-  includesHeadingPrefix: String
-  includesHeadingHighlight: String
-  includesSubtext: String
-  includes: [NumerologyIncludes]
-  philosophyLabel: String
-  philosophyHeadingPrefix: String
-  philosophyHeadingHighlight: String
-  philosophyQuote: String
-  philosophyBody: JSON
-  philosophyBanner: String
-  philosophyClosingPrefix: String
-  philosophyClosingHighlight: String
-  ctaSectionHeading: String
-  ctaButtonLabel: String
+  hero: NumerologyHero
+  whoItsFor: NumerologyWhoItsFor
+  whatItIs: NumerologyWhatItIs
+  process: NumerologyProcess
+  included: NumerologyIncluded
+  philosophy: NumerologyPhilosophy
+  closingCta: NumerologyClosingCta
+  seo: NumerologySeo
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
 }
 
-input NumerologySelfDiscoveryItemsFilter {
+input NumerologyHeroFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
+  tagline: StringFilter
+  subtext: RichTextFilter
+  buttonLabel: StringFilter
+}
+
+input NumerologyWhoItsForItemsFilter {
   emoji: StringFilter
   text: StringFilter
-  borderColor: StringFilter
+  tone: StringFilter
+}
+
+input NumerologyWhoItsForStatementFilter {
+  text: StringFilter
+  highlight: StringFilter
+}
+
+input NumerologyWhoItsForFilter {
+  heading: StringFilter
+  highlight: StringFilter
+  subtext: StringFilter
+  items: NumerologyWhoItsForItemsFilter
+  statement: NumerologyWhoItsForStatementFilter
+}
+
+input NumerologyWhatItIsFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
+  highlight: StringFilter
+  isNot: StringFilter
+  isText: RichTextFilter
 }
 
 input NumerologyProcessStepsFilter {
   emoji: StringFilter
-  stepLabel: StringFilter
+  label: StringFilter
   title: StringFilter
   description: StringFilter
 }
 
-input NumerologyIncludesFilter {
+input NumerologyProcessFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
+  highlight: StringFilter
+  steps: NumerologyProcessStepsFilter
+}
+
+input NumerologyIncludedItemsFilter {
   emoji: StringFilter
+  title: StringFilter
+  description: StringFilter
+}
+
+input NumerologyIncludedFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
+  highlight: StringFilter
+  subtext: StringFilter
+  items: NumerologyIncludedItemsFilter
+}
+
+input NumerologyPhilosophyBannerFilter {
+  text: StringFilter
+  highlight: StringFilter
+}
+
+input NumerologyPhilosophyClosingFilter {
+  text: StringFilter
+  highlight: StringFilter
+}
+
+input NumerologyPhilosophyFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
+  highlight: StringFilter
+  quote: StringFilter
+  body: RichTextFilter
+  banner: NumerologyPhilosophyBannerFilter
+  closing: NumerologyPhilosophyClosingFilter
+}
+
+input NumerologyClosingCtaFilter {
+  heading: StringFilter
+  buttonLabel: StringFilter
+}
+
+input NumerologySeoFilter {
   title: StringFilter
   description: StringFilter
 }
 
 input NumerologyFilter {
-  heroBadge: StringFilter
-  heroHeading: StringFilter
-  heroTagline: StringFilter
-  heroSubtext: RichTextFilter
-  heroCTALabel: StringFilter
-  selfDiscoveryHeadingPrefix: StringFilter
-  selfDiscoveryHeadingHighlight: StringFilter
-  selfDiscoverySubtext: StringFilter
-  selfDiscoveryItems: NumerologySelfDiscoveryItemsFilter
-  selfDiscoveryStatementPrefix: StringFilter
-  selfDiscoveryStatementHighlight: StringFilter
-  whatIsLabel: StringFilter
-  whatIsHeadingPrefix: StringFilter
-  whatIsHeadingHighlight: StringFilter
-  whatIsIsntParagraph: StringFilter
-  whatIsIsBody: RichTextFilter
-  processLabel: StringFilter
-  processHeadingPrefix: StringFilter
-  processHeadingHighlight: StringFilter
-  processSteps: NumerologyProcessStepsFilter
-  includesLabel: StringFilter
-  includesHeadingPrefix: StringFilter
-  includesHeadingHighlight: StringFilter
-  includesSubtext: StringFilter
-  includes: NumerologyIncludesFilter
-  philosophyLabel: StringFilter
-  philosophyHeadingPrefix: StringFilter
-  philosophyHeadingHighlight: StringFilter
-  philosophyQuote: StringFilter
-  philosophyBody: RichTextFilter
-  philosophyBanner: StringFilter
-  philosophyClosingPrefix: StringFilter
-  philosophyClosingHighlight: StringFilter
-  ctaSectionHeading: StringFilter
-  ctaButtonLabel: StringFilter
+  hero: NumerologyHeroFilter
+  whoItsFor: NumerologyWhoItsForFilter
+  whatItIs: NumerologyWhatItIsFilter
+  process: NumerologyProcessFilter
+  included: NumerologyIncludedFilter
+  philosophy: NumerologyPhilosophyFilter
+  closingCta: NumerologyClosingCtaFilter
+  seo: NumerologySeoFilter
 }
 
 type NumerologyConnectionEdges {
@@ -749,69 +1206,325 @@ type NumerologyConnection implements Connection {
   edges: [NumerologyConnectionEdges]
 }
 
-union ResourcesFeaturedPostsPost = Post
-
-type ResourcesFeaturedPosts {
-  post: ResourcesFeaturedPostsPost
+type LeedsHero {
+  eyebrow: String
+  heading: String
+  subtext: JSON
+  buttonLabel: String
 }
 
-union ResourcesFeaturedPodcastsPodcast = Podcast
-
-type ResourcesFeaturedPodcasts {
-  podcast: ResourcesFeaturedPodcastsPodcast
+type LeedsIntro {
+  heading: String
+  highlight: String
+  body: JSON
 }
 
-type Resources implements Node & Document {
-  heroBadge: String
-  heroHeading: String
-  heroHeadingHighlight: String
-  heroSubtext: String
-  featuredHeading: String
-  featuredPosts: [ResourcesFeaturedPosts]
-  featuredPodcasts: [ResourcesFeaturedPodcasts]
-  blogLibraryHeading: String
-  podcastLibraryHeading: String
-  newsletterHeading: String
-  newsletterSubtext: String
-  newsletterPlaceholder: String
-  newsletterButton: String
-  newsletterSuccessMessage: String
+type LeedsOfferingsItems {
+  icon: String
+  title: String
+  description: String
+  href: String
+  linkLabel: String
+}
+
+type LeedsOfferings {
+  heading: String
+  subtext: String
+  items: [LeedsOfferingsItems]
+}
+
+type LeedsWhoIHelp {
+  heading: String
+  items: String
+}
+
+type LeedsHowItWorksInPerson {
+  title: String
+  body: String
+}
+
+type LeedsHowItWorksOnline {
+  title: String
+  body: String
+}
+
+type LeedsHowItWorks {
+  heading: String
+  inPerson: LeedsHowItWorksInPerson
+  online: LeedsHowItWorksOnline
+}
+
+type LeedsWhyShanila {
+  heading: String
+  points: String
+  linkLabel: String
+}
+
+type LeedsFaqItems {
+  question: String
+  answer: String
+}
+
+type LeedsFaq {
+  heading: String
+  items: [LeedsFaqItems]
+}
+
+type LeedsClosingCta {
+  heading: String
+  highlight: String
+  body: JSON
+  buttonLabel: String
+}
+
+type LeedsSeo {
+  title: String
+  description: String
+}
+
+type Leeds implements Node & Document {
+  hero: LeedsHero
+  intro: LeedsIntro
+  offerings: LeedsOfferings
+  whoIHelp: LeedsWhoIHelp
+  howItWorks: LeedsHowItWorks
+  whyShanila: LeedsWhyShanila
+  faq: LeedsFaq
+  closingCta: LeedsClosingCta
+  seo: LeedsSeo
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
 }
 
-input ResourcesFeaturedPostsPostFilter {
-  post: PostFilter
+input LeedsHeroFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
+  subtext: RichTextFilter
+  buttonLabel: StringFilter
 }
 
-input ResourcesFeaturedPostsFilter {
-  post: ResourcesFeaturedPostsPostFilter
+input LeedsIntroFilter {
+  heading: StringFilter
+  highlight: StringFilter
+  body: RichTextFilter
 }
 
-input ResourcesFeaturedPodcastsPodcastFilter {
-  podcast: PodcastFilter
+input LeedsOfferingsItemsFilter {
+  icon: StringFilter
+  title: StringFilter
+  description: StringFilter
+  href: StringFilter
+  linkLabel: StringFilter
 }
 
-input ResourcesFeaturedPodcastsFilter {
-  podcast: ResourcesFeaturedPodcastsPodcastFilter
+input LeedsOfferingsFilter {
+  heading: StringFilter
+  subtext: StringFilter
+  items: LeedsOfferingsItemsFilter
+}
+
+input LeedsWhoIHelpFilter {
+  heading: StringFilter
+  items: StringFilter
+}
+
+input LeedsHowItWorksInPersonFilter {
+  title: StringFilter
+  body: StringFilter
+}
+
+input LeedsHowItWorksOnlineFilter {
+  title: StringFilter
+  body: StringFilter
+}
+
+input LeedsHowItWorksFilter {
+  heading: StringFilter
+  inPerson: LeedsHowItWorksInPersonFilter
+  online: LeedsHowItWorksOnlineFilter
+}
+
+input LeedsWhyShanilaFilter {
+  heading: StringFilter
+  points: StringFilter
+  linkLabel: StringFilter
+}
+
+input LeedsFaqItemsFilter {
+  question: StringFilter
+  answer: StringFilter
+}
+
+input LeedsFaqFilter {
+  heading: StringFilter
+  items: LeedsFaqItemsFilter
+}
+
+input LeedsClosingCtaFilter {
+  heading: StringFilter
+  highlight: StringFilter
+  body: RichTextFilter
+  buttonLabel: StringFilter
+}
+
+input LeedsSeoFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input LeedsFilter {
+  hero: LeedsHeroFilter
+  intro: LeedsIntroFilter
+  offerings: LeedsOfferingsFilter
+  whoIHelp: LeedsWhoIHelpFilter
+  howItWorks: LeedsHowItWorksFilter
+  whyShanila: LeedsWhyShanilaFilter
+  faq: LeedsFaqFilter
+  closingCta: LeedsClosingCtaFilter
+  seo: LeedsSeoFilter
+}
+
+type LeedsConnectionEdges {
+  cursor: String!
+  node: Leeds
+}
+
+type LeedsConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [LeedsConnectionEdges]
+}
+
+type ResourcesHero {
+  eyebrow: String
+  heading: String
+  highlight: String
+  subtext: String
+}
+
+type ResourcesSectionNav {
+  label: String
+  icon: String
+  target: String
+}
+
+type ResourcesFeatured {
+  heading: String
+}
+
+type ResourcesBlogLibraryPostEnding {
+  serviceEyebrow: String
+  serviceHeading: String
+  serviceText: String
+  serviceButton: String
+  relatedHeading: String
+}
+
+type ResourcesBlogLibrary {
+  heading: String
+  manage: String
+  readMoreLabel: String
+  backLinkLabel: String
+  emptyPostMessage: String
+  postEnding: ResourcesBlogLibraryPostEnding
+}
+
+type ResourcesPodcastLibrary {
+  heading: String
+  manage: String
+  listenLabel: String
+  comingSoonLabel: String
+}
+
+type ResourcesNewsletter {
+  heading: String
+  subtext: String
+  placeholder: String
+  buttonLabel: String
+  successMessage: String
+}
+
+type ResourcesSeo {
+  title: String
+  description: String
+}
+
+type Resources implements Node & Document {
+  hero: ResourcesHero
+  sectionNav: [ResourcesSectionNav]
+  featured: ResourcesFeatured
+  blogLibrary: ResourcesBlogLibrary
+  podcastLibrary: ResourcesPodcastLibrary
+  newsletter: ResourcesNewsletter
+  seo: ResourcesSeo
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input ResourcesHeroFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
+  highlight: StringFilter
+  subtext: StringFilter
+}
+
+input ResourcesSectionNavFilter {
+  label: StringFilter
+  icon: StringFilter
+  target: StringFilter
+}
+
+input ResourcesFeaturedFilter {
+  heading: StringFilter
+}
+
+input ResourcesBlogLibraryPostEndingFilter {
+  serviceEyebrow: StringFilter
+  serviceHeading: StringFilter
+  serviceText: StringFilter
+  serviceButton: StringFilter
+  relatedHeading: StringFilter
+}
+
+input ResourcesBlogLibraryFilter {
+  heading: StringFilter
+  manage: StringFilter
+  readMoreLabel: StringFilter
+  backLinkLabel: StringFilter
+  emptyPostMessage: StringFilter
+  postEnding: ResourcesBlogLibraryPostEndingFilter
+}
+
+input ResourcesPodcastLibraryFilter {
+  heading: StringFilter
+  manage: StringFilter
+  listenLabel: StringFilter
+  comingSoonLabel: StringFilter
+}
+
+input ResourcesNewsletterFilter {
+  heading: StringFilter
+  subtext: StringFilter
+  placeholder: StringFilter
+  buttonLabel: StringFilter
+  successMessage: StringFilter
+}
+
+input ResourcesSeoFilter {
+  title: StringFilter
+  description: StringFilter
 }
 
 input ResourcesFilter {
-  heroBadge: StringFilter
-  heroHeading: StringFilter
-  heroHeadingHighlight: StringFilter
-  heroSubtext: StringFilter
-  featuredHeading: StringFilter
-  featuredPosts: ResourcesFeaturedPostsFilter
-  featuredPodcasts: ResourcesFeaturedPodcastsFilter
-  blogLibraryHeading: StringFilter
-  podcastLibraryHeading: StringFilter
-  newsletterHeading: StringFilter
-  newsletterSubtext: StringFilter
-  newsletterPlaceholder: StringFilter
-  newsletterButton: StringFilter
-  newsletterSuccessMessage: StringFilter
+  hero: ResourcesHeroFilter
+  sectionNav: ResourcesSectionNavFilter
+  featured: ResourcesFeaturedFilter
+  blogLibrary: ResourcesBlogLibraryFilter
+  podcastLibrary: ResourcesPodcastLibraryFilter
+  newsletter: ResourcesNewsletterFilter
+  seo: ResourcesSeoFilter
 }
 
 type ResourcesConnectionEdges {
@@ -825,58 +1538,26 @@ type ResourcesConnection implements Connection {
   edges: [ResourcesConnectionEdges]
 }
 
-type Contact implements Node & Document {
-  heroImage: String
-  heroHeading: JSON
-  heroSubtext: JSON
-  sectionHeading: String
-  sectionSubtext: String
-  email: String
-  phone: String
-  videoText: String
-  location: String
-  bookingCTALabel: String
-  formHeading: String
-  id: ID!
-  _sys: SystemInfo!
-  _values: JSON!
+type PostCardStyle {
+  icon: String
+  tone: String
 }
 
-input ContactFilter {
-  heroImage: ImageFilter
-  heroHeading: RichTextFilter
-  heroSubtext: RichTextFilter
-  sectionHeading: StringFilter
-  sectionSubtext: StringFilter
-  email: StringFilter
-  phone: StringFilter
-  videoText: StringFilter
-  location: StringFilter
-  bookingCTALabel: StringFilter
-  formHeading: StringFilter
-}
-
-type ContactConnectionEdges {
-  cursor: String!
-  node: Contact
-}
-
-type ContactConnection implements Connection {
-  pageInfo: PageInfo!
-  totalCount: Float!
-  edges: [ContactConnectionEdges]
+type PostSeo {
+  title: String
+  description: String
 }
 
 type Post implements Node & Document {
   title: String!
   publishedAt: String
   status: String
+  featured: Boolean
   excerpt: String
   image: String
-  icon: String
-  iconColor: String
-  gradient: String
-  badgeColor: String
+  cardStyle: PostCardStyle
+  relatedService: String
+  seo: PostSeo
   body: JSON
   id: ID!
   _sys: SystemInfo!
@@ -891,16 +1572,31 @@ input DatetimeFilter {
   in: [String]
 }
 
+input BooleanFilter {
+  eq: Boolean
+  exists: Boolean
+}
+
+input PostCardStyleFilter {
+  icon: StringFilter
+  tone: StringFilter
+}
+
+input PostSeoFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
 input PostFilter {
   title: StringFilter
   publishedAt: DatetimeFilter
   status: StringFilter
+  featured: BooleanFilter
   excerpt: StringFilter
   image: ImageFilter
-  icon: StringFilter
-  iconColor: StringFilter
-  gradient: StringFilter
-  badgeColor: StringFilter
+  cardStyle: PostCardStyleFilter
+  relatedService: StringFilter
+  seo: PostSeoFilter
   body: RichTextFilter
 }
 
@@ -915,21 +1611,30 @@ type PostConnection implements Connection {
   edges: [PostConnectionEdges]
 }
 
+type PodcastCardStyle {
+  icon: String
+  tone: String
+}
+
 type Podcast implements Node & Document {
   title: String!
   episode: String
   publishedAt: String
   status: String
+  featured: Boolean
   audioUrl: String
   excerpt: String
   image: String
-  icon: String
-  gradient: String
-  badgeColor: String
+  cardStyle: PodcastCardStyle
   body: JSON
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
+}
+
+input PodcastCardStyleFilter {
+  icon: StringFilter
+  tone: StringFilter
 }
 
 input PodcastFilter {
@@ -937,12 +1642,11 @@ input PodcastFilter {
   episode: StringFilter
   publishedAt: DatetimeFilter
   status: StringFilter
+  featured: BooleanFilter
   audioUrl: StringFilter
   excerpt: StringFilter
   image: ImageFilter
-  icon: StringFilter
-  gradient: StringFilter
-  badgeColor: StringFilter
+  cardStyle: PodcastCardStyleFilter
   body: RichTextFilter
 }
 
@@ -955,6 +1659,122 @@ type PodcastConnection implements Connection {
   pageInfo: PageInfo!
   totalCount: Float!
   edges: [PodcastConnectionEdges]
+}
+
+type ContactHero {
+  image: String
+  heading: JSON
+  subtext: JSON
+}
+
+type ContactIntro {
+  heading: String
+  subtext: String
+}
+
+type ContactDetails {
+  emailTitle: String
+  email: String
+  phoneTitle: String
+  phone: String
+  videoTitle: String
+  video: String
+  locationTitle: String
+  location: String
+  bookingButtonLabel: String
+}
+
+type ContactForm {
+  heading: String
+  nameLabel: String
+  namePlaceholder: String
+  emailLabel: String
+  emailPlaceholder: String
+  phoneLabel: String
+  phonePlaceholder: String
+  messageLabel: String
+  messagePlaceholder: String
+  submitLabel: String
+  submittingLabel: String
+  privacyNote: String
+}
+
+type ContactSeo {
+  title: String
+  description: String
+}
+
+type Contact implements Node & Document {
+  hero: ContactHero
+  intro: ContactIntro
+  details: ContactDetails
+  form: ContactForm
+  seo: ContactSeo
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input ContactHeroFilter {
+  image: ImageFilter
+  heading: RichTextFilter
+  subtext: RichTextFilter
+}
+
+input ContactIntroFilter {
+  heading: StringFilter
+  subtext: StringFilter
+}
+
+input ContactDetailsFilter {
+  emailTitle: StringFilter
+  email: StringFilter
+  phoneTitle: StringFilter
+  phone: StringFilter
+  videoTitle: StringFilter
+  video: StringFilter
+  locationTitle: StringFilter
+  location: StringFilter
+  bookingButtonLabel: StringFilter
+}
+
+input ContactFormFilter {
+  heading: StringFilter
+  nameLabel: StringFilter
+  namePlaceholder: StringFilter
+  emailLabel: StringFilter
+  emailPlaceholder: StringFilter
+  phoneLabel: StringFilter
+  phonePlaceholder: StringFilter
+  messageLabel: StringFilter
+  messagePlaceholder: StringFilter
+  submitLabel: StringFilter
+  submittingLabel: StringFilter
+  privacyNote: StringFilter
+}
+
+input ContactSeoFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input ContactFilter {
+  hero: ContactHeroFilter
+  intro: ContactIntroFilter
+  details: ContactDetailsFilter
+  form: ContactFormFilter
+  seo: ContactSeoFilter
+}
+
+type ContactConnectionEdges {
+  cursor: String!
+  node: Contact
+}
+
+type ContactConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [ContactConnectionEdges]
 }
 
 type NavbarLinks {
@@ -976,11 +1796,6 @@ type Navbar implements Node & Document {
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
-}
-
-input BooleanFilter {
-  eq: Boolean
-  exists: Boolean
 }
 
 input NavbarLinksFilter {
@@ -1012,54 +1827,6 @@ type NavbarConnection implements Connection {
   edges: [NavbarConnectionEdges]
 }
 
-type BookingForm implements Node & Document {
-  overlayTitle: String
-  firstNameLabel: String
-  lastNameLabel: String
-  emailLabel: String
-  countryCodeLabel: String
-  phoneLabel: String
-  serviceLabel: String
-  messageLabel: String
-  messagePlaceholder: String
-  submitLabel: String
-  submittingLabel: String
-  successMessage: String
-  errorMessage: String
-  services: [String]
-  id: ID!
-  _sys: SystemInfo!
-  _values: JSON!
-}
-
-input BookingFormFilter {
-  overlayTitle: StringFilter
-  firstNameLabel: StringFilter
-  lastNameLabel: StringFilter
-  emailLabel: StringFilter
-  countryCodeLabel: StringFilter
-  phoneLabel: StringFilter
-  serviceLabel: StringFilter
-  messageLabel: StringFilter
-  messagePlaceholder: StringFilter
-  submitLabel: StringFilter
-  submittingLabel: StringFilter
-  successMessage: StringFilter
-  errorMessage: StringFilter
-  services: StringFilter
-}
-
-type BookingFormConnectionEdges {
-  cursor: String!
-  node: BookingForm
-}
-
-type BookingFormConnection implements Connection {
-  pageInfo: PageInfo!
-  totalCount: Float!
-  edges: [BookingFormConnectionEdges]
-}
-
 type FooterQuickLinks {
   label: String
   href: String
@@ -1079,6 +1846,7 @@ type FooterSocialLinks {
 type Footer implements Node & Document {
   brandHeading: String
   brandDescription: String
+  location: String
   quickLinksHeading: String
   quickLinks: [FooterQuickLinks]
   servicesHeading: String
@@ -1114,6 +1882,7 @@ input FooterSocialLinksFilter {
 input FooterFilter {
   brandHeading: StringFilter
   brandDescription: StringFilter
+  location: StringFilter
   quickLinksHeading: StringFilter
   quickLinks: FooterQuickLinksFilter
   servicesHeading: StringFilter
@@ -1136,6 +1905,90 @@ type FooterConnection implements Connection {
   pageInfo: PageInfo!
   totalCount: Float!
   edges: [FooterConnectionEdges]
+}
+
+type TestimonialsItems {
+  quote: String
+  author: String
+}
+
+type Testimonials implements Node & Document {
+  heading: String
+  items: [TestimonialsItems]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input TestimonialsItemsFilter {
+  quote: StringFilter
+  author: StringFilter
+}
+
+input TestimonialsFilter {
+  heading: StringFilter
+  items: TestimonialsItemsFilter
+}
+
+type TestimonialsConnectionEdges {
+  cursor: String!
+  node: Testimonials
+}
+
+type TestimonialsConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [TestimonialsConnectionEdges]
+}
+
+type BookingForm implements Node & Document {
+  overlayTitle: String
+  firstNameLabel: String
+  lastNameLabel: String
+  emailLabel: String
+  countryCodeLabel: String
+  phoneLabel: String
+  serviceLabel: String
+  servicePlaceholder: String
+  services: [String]
+  messageLabel: String
+  messagePlaceholder: String
+  submitLabel: String
+  submittingLabel: String
+  successMessage: String
+  errorMessage: String
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input BookingFormFilter {
+  overlayTitle: StringFilter
+  firstNameLabel: StringFilter
+  lastNameLabel: StringFilter
+  emailLabel: StringFilter
+  countryCodeLabel: StringFilter
+  phoneLabel: StringFilter
+  serviceLabel: StringFilter
+  servicePlaceholder: StringFilter
+  services: StringFilter
+  messageLabel: StringFilter
+  messagePlaceholder: StringFilter
+  submitLabel: StringFilter
+  submittingLabel: StringFilter
+  successMessage: StringFilter
+  errorMessage: StringFilter
+}
+
+type BookingFormConnectionEdges {
+  cursor: String!
+  node: BookingForm
+}
+
+type BookingFormConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [BookingFormConnectionEdges]
 }
 
 type Typography implements Node & Document {
@@ -1180,38 +2033,6 @@ type TypographyConnection implements Connection {
   edges: [TypographyConnectionEdges]
 }
 
-type TestimonialsItems {
-  quote: String
-  author: String
-}
-
-type Testimonials implements Node & Document {
-  items: [TestimonialsItems]
-  id: ID!
-  _sys: SystemInfo!
-  _values: JSON!
-}
-
-input TestimonialsItemsFilter {
-  quote: StringFilter
-  author: StringFilter
-}
-
-input TestimonialsFilter {
-  items: TestimonialsItemsFilter
-}
-
-type TestimonialsConnectionEdges {
-  cursor: String!
-  node: Testimonials
-}
-
-type TestimonialsConnection implements Connection {
-  pageInfo: PageInfo!
-  totalCount: Float!
-  edges: [TestimonialsConnectionEdges]
-}
-
 type Mutation {
   addPendingDocument(collection: String!, relativePath: String!, template: String): DocumentNode!
   updateDocument(collection: String, relativePath: String!, params: DocumentUpdateMutation!): DocumentNode!
@@ -1230,24 +2051,26 @@ type Mutation {
   createCareerCoaching(relativePath: String!, params: CareerCoachingMutation!): CareerCoaching!
   updateNumerology(relativePath: String!, params: NumerologyMutation!): Numerology!
   createNumerology(relativePath: String!, params: NumerologyMutation!): Numerology!
+  updateLeeds(relativePath: String!, params: LeedsMutation!): Leeds!
+  createLeeds(relativePath: String!, params: LeedsMutation!): Leeds!
   updateResources(relativePath: String!, params: ResourcesMutation!): Resources!
   createResources(relativePath: String!, params: ResourcesMutation!): Resources!
-  updateContact(relativePath: String!, params: ContactMutation!): Contact!
-  createContact(relativePath: String!, params: ContactMutation!): Contact!
   updatePost(relativePath: String!, params: PostMutation!): Post!
   createPost(relativePath: String!, params: PostMutation!): Post!
   updatePodcast(relativePath: String!, params: PodcastMutation!): Podcast!
   createPodcast(relativePath: String!, params: PodcastMutation!): Podcast!
+  updateContact(relativePath: String!, params: ContactMutation!): Contact!
+  createContact(relativePath: String!, params: ContactMutation!): Contact!
   updateNavbar(relativePath: String!, params: NavbarMutation!): Navbar!
   createNavbar(relativePath: String!, params: NavbarMutation!): Navbar!
-  updateBookingForm(relativePath: String!, params: BookingFormMutation!): BookingForm!
-  createBookingForm(relativePath: String!, params: BookingFormMutation!): BookingForm!
   updateFooter(relativePath: String!, params: FooterMutation!): Footer!
   createFooter(relativePath: String!, params: FooterMutation!): Footer!
-  updateTypography(relativePath: String!, params: TypographyMutation!): Typography!
-  createTypography(relativePath: String!, params: TypographyMutation!): Typography!
   updateTestimonials(relativePath: String!, params: TestimonialsMutation!): Testimonials!
   createTestimonials(relativePath: String!, params: TestimonialsMutation!): Testimonials!
+  updateBookingForm(relativePath: String!, params: BookingFormMutation!): BookingForm!
+  createBookingForm(relativePath: String!, params: BookingFormMutation!): BookingForm!
+  updateTypography(relativePath: String!, params: TypographyMutation!): Typography!
+  createTypography(relativePath: String!, params: TypographyMutation!): Typography!
 }
 
 input DocumentUpdateMutation {
@@ -1257,15 +2080,16 @@ input DocumentUpdateMutation {
   clarityCoaching: ClarityCoachingMutation
   careerCoaching: CareerCoachingMutation
   numerology: NumerologyMutation
+  leeds: LeedsMutation
   resources: ResourcesMutation
-  contact: ContactMutation
   post: PostMutation
   podcast: PodcastMutation
+  contact: ContactMutation
   navbar: NavbarMutation
-  bookingForm: BookingFormMutation
   footer: FooterMutation
-  typography: TypographyMutation
   testimonials: TestimonialsMutation
+  bookingForm: BookingFormMutation
+  typography: TypographyMutation
   relativePath: String
 }
 
@@ -1276,325 +2100,681 @@ input DocumentMutation {
   clarityCoaching: ClarityCoachingMutation
   careerCoaching: CareerCoachingMutation
   numerology: NumerologyMutation
+  leeds: LeedsMutation
   resources: ResourcesMutation
-  contact: ContactMutation
   post: PostMutation
   podcast: PodcastMutation
+  contact: ContactMutation
   navbar: NavbarMutation
-  bookingForm: BookingFormMutation
   footer: FooterMutation
-  typography: TypographyMutation
   testimonials: TestimonialsMutation
+  bookingForm: BookingFormMutation
+  typography: TypographyMutation
 }
 
-input HomeServicesMutation {
+input HomeHeroMutation {
+  image: String
+  heading: JSON
+  subtext: JSON
+  buttonLabel: String
+  secondaryButtonLabel: String
+}
+
+input HomeLocationsMutation {
+  inPerson: String
+  online: String
+  linkLabel: String
+}
+
+input HomeIntroMutation {
+  heading: String
+  body: JSON
+  linkLabel: String
+}
+
+input HomeAboutMutation {
+  heading: String
+  image: String
+  credential: String
+  body: JSON
+  buttonLabel: String
+}
+
+input HomeReflectionMutation {
+  heading: String
+  tagline: String
+  questions: String
+}
+
+input HomeServicesCardsMutation {
   title: String
   description: String
   icon: String
   href: String
   buttonLabel: String
-  colorScheme: String
+  tone: String
+}
+
+input HomeServicesMutation {
+  heading: String
+  subtext: String
+  cards: [HomeServicesCardsMutation]
+}
+
+input HomeClosingCtaMutation {
+  text: String
+  buttonLabel: String
+}
+
+input HomeSeoMutation {
+  title: String
+  description: String
 }
 
 input HomeMutation {
-  heroImage: String
-  heroHeading: JSON
-  heroSubtext: JSON
-  heroCTALabel: String
-  heroBottomCTALabel: String
-  ctaHeading: String
-  ctaBody: JSON
-  aboutHeading: String
-  aboutImage: String
-  aboutCredentialTitle: String
-  aboutBody: JSON
-  feelLikeYouHeading: String
-  feelLikeYouTagline: String
-  feelLikeYouQuestions: String
-  servicesHeading: String
-  servicesSubtext: String
-  services: [HomeServicesMutation]
-  bottomCTAText: String
+  hero: HomeHeroMutation
+  locations: HomeLocationsMutation
+  intro: HomeIntroMutation
+  about: HomeAboutMutation
+  reflection: HomeReflectionMutation
+  services: HomeServicesMutation
+  closingCta: HomeClosingCtaMutation
+  seo: HomeSeoMutation
 }
 
-input ServicesServicesMutation {
+input ServicesHeroMutation {
+  heading: String
+  subtext: JSON
+}
+
+input ServicesCardsMutation {
   title: String
   duration: String
   description: String
   icon: String
+  highlights: String
   href: String
   buttonLabel: String
-  highlights: String
-  isThisForYou: String
-  colorScheme: String
+  tone: String
+  fitHeading: String
+  fitBody: String
+  learnMoreLabel: String
+}
+
+input ServicesClosingCtaMutation {
+  heading: String
+  subtext: String
+  buttonLabel: String
+}
+
+input ServicesSeoMutation {
+  title: String
+  description: String
 }
 
 input ServicesMutation {
-  heroHeading: String
-  heroSubtext: JSON
-  services: [ServicesServicesMutation]
-  ctaHeading: String
-  ctaSubtext: String
-  ctaButtonLabel: String
+  hero: ServicesHeroMutation
+  cards: [ServicesCardsMutation]
+  closingCta: ServicesClosingCtaMutation
+  seo: ServicesSeoMutation
 }
 
-input AboutCredentialsMutation {
-  icon: String
+input AboutHeroMutation {
+  heading: String
+  subtext: JSON
+}
+
+input AboutStoryMutation {
+  heading: String
+  body: JSON
+  badge: String
+  videoUrl: String
+}
+
+input AboutCredentialsItemsMutation {
   title: String
   description: String
+  icon: String
   gradient: String
 }
 
-input AboutValuesMutation {
+input AboutCredentialsMutation {
+  heading: String
+  subtext: String
+  items: [AboutCredentialsItemsMutation]
+}
+
+input AboutValuesItemsMutation {
+  title: String
+  description: String
   icon: String
+}
+
+input AboutValuesMutation {
+  heading: String
+  subtext: String
+  items: [AboutValuesItemsMutation]
+}
+
+input AboutSeoMutation {
   title: String
   description: String
 }
 
 input AboutMutation {
-  heroHeading: String
-  heroSubtext: JSON
-  storyHeading: String
-  storyBody: JSON
-  credentialsHeading: String
-  credentialsSubtext: String
-  credentials: [AboutCredentialsMutation]
-  valuesHeading: String
-  valuesSubtext: String
-  values: [AboutValuesMutation]
+  hero: AboutHeroMutation
+  story: AboutStoryMutation
+  credentials: AboutCredentialsMutation
+  values: AboutValuesMutation
+  seo: AboutSeoMutation
 }
 
-input ClarityCoachingPerhapsItemsMutation {
+input ClarityCoachingHeroMutation {
+  eyebrow: String
+  heading: String
+  subtext: JSON
+  buttonLabel: String
+  sideEmoji: String
+  sideHeading: String
+  sideSubtext: String
+}
+
+input ClarityCoachingWhoItsForItemsMutation {
   emoji: String
   text: String
-  borderColor: String
+  tone: String
 }
 
-input ClarityCoachingTimelineStepsMutation {
+input ClarityCoachingWhoItsForBannerMutation {
+  text: String
+  highlight: String
+}
+
+input ClarityCoachingWhoItsForMutation {
+  heading: String
+  highlight: String
+  subtext: String
+  listIntro: String
+  items: [ClarityCoachingWhoItsForItemsMutation]
+  banner: ClarityCoachingWhoItsForBannerMutation
+}
+
+input ClarityCoachingProblemSolutionProblemMutation {
+  title: String
+  body: JSON
+}
+
+input ClarityCoachingProblemSolutionSolutionMutation {
+  title: String
+  body: JSON
+  keyword: String
+}
+
+input ClarityCoachingProblemSolutionMutation {
+  heading: String
+  highlight: String
+  problem: ClarityCoachingProblemSolutionProblemMutation
+  solution: ClarityCoachingProblemSolutionSolutionMutation
+}
+
+input ClarityCoachingPhilosophyBannerMutation {
+  text: String
+  highlight: String
+}
+
+input ClarityCoachingPhilosophyClosingMutation {
+  text: String
+  highlight: String
+}
+
+input ClarityCoachingPhilosophyMutation {
+  eyebrow: String
+  heading: String
+  highlight: String
+  quote: String
+  body: JSON
+  banner: ClarityCoachingPhilosophyBannerMutation
+  closing: ClarityCoachingPhilosophyClosingMutation
+}
+
+input ClarityCoachingJourneyStepsMutation {
   number: String
   weeks: String
   title: String
   subtitle: String
   description: String
-  accent: String
+  tone: String
 }
 
-input ClarityCoachingExperienceItemsMutation {
+input ClarityCoachingJourneyMutation {
+  eyebrow: String
+  heading: String
+  highlight: String
+  subtext: String
+  steps: [ClarityCoachingJourneyStepsMutation]
+  buttonLabel: String
+}
+
+input ClarityCoachingIncludedItemsMutation {
   emoji: String
   title: String
   subtitle: String
-  bg: String
+  tone: String
+}
+
+input ClarityCoachingIncludedBonusMutation {
+  emoji: String
+  label: String
+  text: String
+}
+
+input ClarityCoachingIncludedMutation {
+  eyebrow: String
+  heading: String
+  highlight: String
+  items: [ClarityCoachingIncludedItemsMutation]
+  bonus: ClarityCoachingIncludedBonusMutation
+}
+
+input ClarityCoachingClosingCtaMutation {
+  heading: String
+  highlight: String
+  body: JSON
+  buttonLabel: String
+}
+
+input ClarityCoachingSeoMutation {
+  title: String
+  description: String
 }
 
 input ClarityCoachingMutation {
-  heroBadge: String
-  heroHeading: String
-  heroSubtext: JSON
-  heroCTALabel: String
-  heroSideEmoji: String
-  heroSideWeeks: String
-  heroSideSubtext: String
-  resultsHeadingPrefix: String
-  resultsHeadingHighlight: String
-  resultsSubtext: String
-  perhapsLabel: String
-  perhapsItems: [ClarityCoachingPerhapsItemsMutation]
-  bannerText: String
-  bannerHighlight: String
-  missingPieceHeadingPrefix: String
-  missingPieceHeadingHighlight: String
-  problemTitle: String
-  problemBody: JSON
-  solutionTitle: String
-  solutionBody: JSON
-  solutionWord: String
-  philosophyLabel: String
-  philosophyHeadingPrefix: String
-  philosophyHeadingHighlight: String
-  philosophyQuote: String
-  philosophyBody: JSON
-  philosophyBannerPrefix: String
-  philosophyBannerHighlight: String
-  philosophyClosingPrefix: String
-  philosophyClosingHighlight: String
-  timelineLabel: String
-  timelineHeadingPrefix: String
-  timelineHeadingHighlight: String
-  timelineSubtext: String
-  timelineSteps: [ClarityCoachingTimelineStepsMutation]
-  timelineCTALabel: String
-  experienceLabel: String
-  experienceHeadingPrefix: String
-  experienceHeadingHighlight: String
-  experienceItems: [ClarityCoachingExperienceItemsMutation]
-  bonusEmoji: String
-  bonusPrefix: String
-  bonusText: String
-  ctaSectionHeadingPrefix: String
-  ctaSectionHeadingHighlight: String
-  ctaSectionBody: JSON
-  ctaButtonLabel: String
+  hero: ClarityCoachingHeroMutation
+  whoItsFor: ClarityCoachingWhoItsForMutation
+  problemSolution: ClarityCoachingProblemSolutionMutation
+  philosophy: ClarityCoachingPhilosophyMutation
+  journey: ClarityCoachingJourneyMutation
+  included: ClarityCoachingIncludedMutation
+  closingCta: ClarityCoachingClosingCtaMutation
+  seo: ClarityCoachingSeoMutation
+}
+
+input CareerCoachingHeroMutation {
+  heading: String
+  subtext: JSON
+  buttonLabel: String
+}
+
+input CareerCoachingWhoItsForBannerMutation {
+  text: String
+  highlight: String
+}
+
+input CareerCoachingWhoItsForMutation {
+  heading: String
+  highlight: String
+  subtext: String
+  listIntro: String
+  situations: String
+  banner: CareerCoachingWhoItsForBannerMutation
+}
+
+input CareerCoachingApproachMutation {
+  heading: String
+  highlight: String
+  body: JSON
+  keyword: String
+}
+
+input CareerCoachingPhilosophyMutation {
+  heading: String
+  highlight: String
+  body: JSON
 }
 
 input CareerCoachingImagineItemsMutation {
   emoji: String
   text: String
-  borderColor: String
-  bg: String
+  tone: String
 }
 
-input CareerCoachingRoadmapStepsMutation {
+input CareerCoachingImagineMutation {
+  heading: String
+  highlight: String
+  items: [CareerCoachingImagineItemsMutation]
+}
+
+input CareerCoachingJourneyStepsMutation {
   number: String
   weeks: String
   title: String
   subtitle: String
-  subtitleColor: String
+  tone: String
   description: String
 }
 
-input CareerCoachingMutation {
-  heroHeading: String
-  heroSubtext: JSON
-  heroCTALabel: String
-  resultsHeadingPrefix: String
-  resultsHeadingHighlight: String
-  resultsSubtext: String
-  perhapsLabel: String
-  situations: String
-  bannerPrefix: String
-  bannerHighlight: String
-  clarityHeadingPrefix: String
-  clarityHeadingHighlight: String
-  clarityBody: JSON
-  clarityBigWord: String
-  philosophyHeadingPrefix: String
-  philosophyHeadingHighlight: String
-  philosophyBody: JSON
-  imagineHeadingHighlight: String
-  imagineItems: [CareerCoachingImagineItemsMutation]
-  roadmapHeadingPrefix: String
-  roadmapHeadingHighlight: String
-  roadmapSubtext1: String
-  roadmapSubtext2: String
-  roadmapSteps: [CareerCoachingRoadmapStepsMutation]
-  roadmapCTALabel: String
-  experienceHeadingPrefix: String
-  experienceHeadingHighlight: String
-  experienceSubtext: String
-  experienceItems: String
-  ctaSectionHeadingPrefix: String
-  ctaSectionHeadingHighlight: String
-  ctaSectionBody: JSON
-  ctaButtonLabel: String
+input CareerCoachingJourneyMutation {
+  heading: String
+  highlight: String
+  lead: String
+  intro: String
+  steps: [CareerCoachingJourneyStepsMutation]
+  buttonLabel: String
 }
 
-input NumerologySelfDiscoveryItemsMutation {
-  emoji: String
-  text: String
-  borderColor: String
+input CareerCoachingIncludedMutation {
+  heading: String
+  highlight: String
+  subtext: String
+  items: String
 }
 
-input NumerologyProcessStepsMutation {
-  emoji: String
-  stepLabel: String
+input CareerCoachingClosingCtaMutation {
+  heading: String
+  highlight: String
+  body: JSON
+  buttonLabel: String
+}
+
+input CareerCoachingSeoMutation {
   title: String
   description: String
 }
 
-input NumerologyIncludesMutation {
+input CareerCoachingMutation {
+  hero: CareerCoachingHeroMutation
+  whoItsFor: CareerCoachingWhoItsForMutation
+  approach: CareerCoachingApproachMutation
+  philosophy: CareerCoachingPhilosophyMutation
+  imagine: CareerCoachingImagineMutation
+  journey: CareerCoachingJourneyMutation
+  included: CareerCoachingIncludedMutation
+  closingCta: CareerCoachingClosingCtaMutation
+  seo: CareerCoachingSeoMutation
+}
+
+input NumerologyHeroMutation {
+  eyebrow: String
+  heading: String
+  tagline: String
+  subtext: JSON
+  buttonLabel: String
+}
+
+input NumerologyWhoItsForItemsMutation {
   emoji: String
+  text: String
+  tone: String
+}
+
+input NumerologyWhoItsForStatementMutation {
+  text: String
+  highlight: String
+}
+
+input NumerologyWhoItsForMutation {
+  heading: String
+  highlight: String
+  subtext: String
+  items: [NumerologyWhoItsForItemsMutation]
+  statement: NumerologyWhoItsForStatementMutation
+}
+
+input NumerologyWhatItIsMutation {
+  eyebrow: String
+  heading: String
+  highlight: String
+  isNot: String
+  isText: JSON
+}
+
+input NumerologyProcessStepsMutation {
+  emoji: String
+  label: String
+  title: String
+  description: String
+}
+
+input NumerologyProcessMutation {
+  eyebrow: String
+  heading: String
+  highlight: String
+  steps: [NumerologyProcessStepsMutation]
+}
+
+input NumerologyIncludedItemsMutation {
+  emoji: String
+  title: String
+  description: String
+}
+
+input NumerologyIncludedMutation {
+  eyebrow: String
+  heading: String
+  highlight: String
+  subtext: String
+  items: [NumerologyIncludedItemsMutation]
+}
+
+input NumerologyPhilosophyBannerMutation {
+  text: String
+  highlight: String
+}
+
+input NumerologyPhilosophyClosingMutation {
+  text: String
+  highlight: String
+}
+
+input NumerologyPhilosophyMutation {
+  eyebrow: String
+  heading: String
+  highlight: String
+  quote: String
+  body: JSON
+  banner: NumerologyPhilosophyBannerMutation
+  closing: NumerologyPhilosophyClosingMutation
+}
+
+input NumerologyClosingCtaMutation {
+  heading: String
+  buttonLabel: String
+}
+
+input NumerologySeoMutation {
   title: String
   description: String
 }
 
 input NumerologyMutation {
-  heroBadge: String
-  heroHeading: String
-  heroTagline: String
-  heroSubtext: JSON
-  heroCTALabel: String
-  selfDiscoveryHeadingPrefix: String
-  selfDiscoveryHeadingHighlight: String
-  selfDiscoverySubtext: String
-  selfDiscoveryItems: [NumerologySelfDiscoveryItemsMutation]
-  selfDiscoveryStatementPrefix: String
-  selfDiscoveryStatementHighlight: String
-  whatIsLabel: String
-  whatIsHeadingPrefix: String
-  whatIsHeadingHighlight: String
-  whatIsIsntParagraph: String
-  whatIsIsBody: JSON
-  processLabel: String
-  processHeadingPrefix: String
-  processHeadingHighlight: String
-  processSteps: [NumerologyProcessStepsMutation]
-  includesLabel: String
-  includesHeadingPrefix: String
-  includesHeadingHighlight: String
-  includesSubtext: String
-  includes: [NumerologyIncludesMutation]
-  philosophyLabel: String
-  philosophyHeadingPrefix: String
-  philosophyHeadingHighlight: String
-  philosophyQuote: String
-  philosophyBody: JSON
-  philosophyBanner: String
-  philosophyClosingPrefix: String
-  philosophyClosingHighlight: String
-  ctaSectionHeading: String
-  ctaButtonLabel: String
+  hero: NumerologyHeroMutation
+  whoItsFor: NumerologyWhoItsForMutation
+  whatItIs: NumerologyWhatItIsMutation
+  process: NumerologyProcessMutation
+  included: NumerologyIncludedMutation
+  philosophy: NumerologyPhilosophyMutation
+  closingCta: NumerologyClosingCtaMutation
+  seo: NumerologySeoMutation
 }
 
-input ResourcesFeaturedPostsMutation {
-  post: String
+input LeedsHeroMutation {
+  eyebrow: String
+  heading: String
+  subtext: JSON
+  buttonLabel: String
 }
 
-input ResourcesFeaturedPodcastsMutation {
-  podcast: String
+input LeedsIntroMutation {
+  heading: String
+  highlight: String
+  body: JSON
+}
+
+input LeedsOfferingsItemsMutation {
+  icon: String
+  title: String
+  description: String
+  href: String
+  linkLabel: String
+}
+
+input LeedsOfferingsMutation {
+  heading: String
+  subtext: String
+  items: [LeedsOfferingsItemsMutation]
+}
+
+input LeedsWhoIHelpMutation {
+  heading: String
+  items: String
+}
+
+input LeedsHowItWorksInPersonMutation {
+  title: String
+  body: String
+}
+
+input LeedsHowItWorksOnlineMutation {
+  title: String
+  body: String
+}
+
+input LeedsHowItWorksMutation {
+  heading: String
+  inPerson: LeedsHowItWorksInPersonMutation
+  online: LeedsHowItWorksOnlineMutation
+}
+
+input LeedsWhyShanilaMutation {
+  heading: String
+  points: String
+  linkLabel: String
+}
+
+input LeedsFaqItemsMutation {
+  question: String
+  answer: String
+}
+
+input LeedsFaqMutation {
+  heading: String
+  items: [LeedsFaqItemsMutation]
+}
+
+input LeedsClosingCtaMutation {
+  heading: String
+  highlight: String
+  body: JSON
+  buttonLabel: String
+}
+
+input LeedsSeoMutation {
+  title: String
+  description: String
+}
+
+input LeedsMutation {
+  hero: LeedsHeroMutation
+  intro: LeedsIntroMutation
+  offerings: LeedsOfferingsMutation
+  whoIHelp: LeedsWhoIHelpMutation
+  howItWorks: LeedsHowItWorksMutation
+  whyShanila: LeedsWhyShanilaMutation
+  faq: LeedsFaqMutation
+  closingCta: LeedsClosingCtaMutation
+  seo: LeedsSeoMutation
+}
+
+input ResourcesHeroMutation {
+  eyebrow: String
+  heading: String
+  highlight: String
+  subtext: String
+}
+
+input ResourcesSectionNavMutation {
+  label: String
+  icon: String
+  target: String
+}
+
+input ResourcesFeaturedMutation {
+  heading: String
+}
+
+input ResourcesBlogLibraryPostEndingMutation {
+  serviceEyebrow: String
+  serviceHeading: String
+  serviceText: String
+  serviceButton: String
+  relatedHeading: String
+}
+
+input ResourcesBlogLibraryMutation {
+  heading: String
+  manage: String
+  readMoreLabel: String
+  backLinkLabel: String
+  emptyPostMessage: String
+  postEnding: ResourcesBlogLibraryPostEndingMutation
+}
+
+input ResourcesPodcastLibraryMutation {
+  heading: String
+  manage: String
+  listenLabel: String
+  comingSoonLabel: String
+}
+
+input ResourcesNewsletterMutation {
+  heading: String
+  subtext: String
+  placeholder: String
+  buttonLabel: String
+  successMessage: String
+}
+
+input ResourcesSeoMutation {
+  title: String
+  description: String
 }
 
 input ResourcesMutation {
-  heroBadge: String
-  heroHeading: String
-  heroHeadingHighlight: String
-  heroSubtext: String
-  featuredHeading: String
-  featuredPosts: [ResourcesFeaturedPostsMutation]
-  featuredPodcasts: [ResourcesFeaturedPodcastsMutation]
-  blogLibraryHeading: String
-  podcastLibraryHeading: String
-  newsletterHeading: String
-  newsletterSubtext: String
-  newsletterPlaceholder: String
-  newsletterButton: String
-  newsletterSuccessMessage: String
+  hero: ResourcesHeroMutation
+  sectionNav: [ResourcesSectionNavMutation]
+  featured: ResourcesFeaturedMutation
+  blogLibrary: ResourcesBlogLibraryMutation
+  podcastLibrary: ResourcesPodcastLibraryMutation
+  newsletter: ResourcesNewsletterMutation
+  seo: ResourcesSeoMutation
 }
 
-input ContactMutation {
-  heroImage: String
-  heroHeading: JSON
-  heroSubtext: JSON
-  sectionHeading: String
-  sectionSubtext: String
-  email: String
-  phone: String
-  videoText: String
-  location: String
-  bookingCTALabel: String
-  formHeading: String
+input PostCardStyleMutation {
+  icon: String
+  tone: String
+}
+
+input PostSeoMutation {
+  title: String
+  description: String
 }
 
 input PostMutation {
   title: String
   publishedAt: String
   status: String
+  featured: Boolean
   excerpt: String
   image: String
-  icon: String
-  iconColor: String
-  gradient: String
-  badgeColor: String
+  cardStyle: PostCardStyleMutation
+  relatedService: String
+  seo: PostSeoMutation
   body: JSON
+}
+
+input PodcastCardStyleMutation {
+  icon: String
+  tone: String
 }
 
 input PodcastMutation {
@@ -1602,13 +2782,63 @@ input PodcastMutation {
   episode: String
   publishedAt: String
   status: String
+  featured: Boolean
   audioUrl: String
   excerpt: String
   image: String
-  icon: String
-  gradient: String
-  badgeColor: String
+  cardStyle: PodcastCardStyleMutation
   body: JSON
+}
+
+input ContactHeroMutation {
+  image: String
+  heading: JSON
+  subtext: JSON
+}
+
+input ContactIntroMutation {
+  heading: String
+  subtext: String
+}
+
+input ContactDetailsMutation {
+  emailTitle: String
+  email: String
+  phoneTitle: String
+  phone: String
+  videoTitle: String
+  video: String
+  locationTitle: String
+  location: String
+  bookingButtonLabel: String
+}
+
+input ContactFormMutation {
+  heading: String
+  nameLabel: String
+  namePlaceholder: String
+  emailLabel: String
+  emailPlaceholder: String
+  phoneLabel: String
+  phonePlaceholder: String
+  messageLabel: String
+  messagePlaceholder: String
+  submitLabel: String
+  submittingLabel: String
+  privacyNote: String
+}
+
+input ContactSeoMutation {
+  title: String
+  description: String
+}
+
+input ContactMutation {
+  hero: ContactHeroMutation
+  intro: ContactIntroMutation
+  details: ContactDetailsMutation
+  form: ContactFormMutation
+  seo: ContactSeoMutation
 }
 
 input NavbarLinksMutation {
@@ -1627,23 +2857,6 @@ input NavbarMutation {
   ctaLabel: String
   links: [NavbarLinksMutation]
   workWithMeDropdown: [NavbarWorkWithMeDropdownMutation]
-}
-
-input BookingFormMutation {
-  overlayTitle: String
-  firstNameLabel: String
-  lastNameLabel: String
-  emailLabel: String
-  countryCodeLabel: String
-  phoneLabel: String
-  serviceLabel: String
-  messageLabel: String
-  messagePlaceholder: String
-  submitLabel: String
-  submittingLabel: String
-  successMessage: String
-  errorMessage: String
-  services: [String]
 }
 
 input FooterQuickLinksMutation {
@@ -1665,6 +2878,7 @@ input FooterSocialLinksMutation {
 input FooterMutation {
   brandHeading: String
   brandDescription: String
+  location: String
   quickLinksHeading: String
   quickLinks: [FooterQuickLinksMutation]
   servicesHeading: String
@@ -1678,6 +2892,34 @@ input FooterMutation {
   copyright: String
 }
 
+input TestimonialsItemsMutation {
+  quote: String
+  author: String
+}
+
+input TestimonialsMutation {
+  heading: String
+  items: [TestimonialsItemsMutation]
+}
+
+input BookingFormMutation {
+  overlayTitle: String
+  firstNameLabel: String
+  lastNameLabel: String
+  emailLabel: String
+  countryCodeLabel: String
+  phoneLabel: String
+  serviceLabel: String
+  servicePlaceholder: String
+  services: [String]
+  messageLabel: String
+  messagePlaceholder: String
+  submitLabel: String
+  submittingLabel: String
+  successMessage: String
+  errorMessage: String
+}
+
 input TypographyMutation {
   headingFont: String
   headingWeight: String
@@ -1685,15 +2927,6 @@ input TypographyMutation {
   bodyFont: String
   bodyWeight: String
   baseFontSize: Float
-}
-
-input TestimonialsItemsMutation {
-  quote: String
-  author: String
-}
-
-input TestimonialsMutation {
-  items: [TestimonialsItemsMutation]
 }
 
 schema {

@@ -1,0 +1,99 @@
+{
+  "hero": {
+    "eyebrow": "In person in Leeds · Online worldwide",
+    "heading": "Sessions in Leeds",
+    "subtext": "Mindset coaching, career coaching and Vedic numerology for women ready to move beyond self-doubt and make confident decisions at work and at home. Meet in person, or online from wherever you are.\n",
+    "buttonLabel": "Book a free discovery call"
+  },
+  "intro": {
+    "heading": "Change that starts from the inside out",
+    "highlight": "from the inside out",
+    "body": "I'm Shanila Khan, a certified confidence and mindset coach and Vedic numerologist based in Leeds. For more than a decade I have helped women through career changes, big life transitions and the quiet sense that they are meant for more.\n\nMy work starts with your inner journey: the beliefs and stories that shape every decision you make. When those shift, confidence follows, and so does action.\n"
+  },
+  "offerings": {
+    "heading": "How I can help",
+    "subtext": "All available in person or online.",
+    "items": [
+      {
+        "icon": "fa-lightbulb",
+        "title": "Mindset Coaching",
+        "description": "My signature 12-week, one-to-one programme for women ready to get clear on their goals, values, decisions and direction.",
+        "href": "/mindset-coaching",
+        "linkLabel": "Explore mindset coaching"
+      },
+      {
+        "icon": "fa-chart-line",
+        "title": "Career Coaching",
+        "description": "The career edition of my mindset coaching, for career change, redundancy, burnout or feeling stuck at work.",
+        "href": "/career-coaching",
+        "linkLabel": "Explore career coaching"
+      },
+      {
+        "icon": "fa-star",
+        "title": "Numerology",
+        "description": "A one-hour Vedic numerology session for focused insight into a decision, relationship or life transition.",
+        "href": "/numerology",
+        "linkLabel": "Explore numerology"
+      }
+    ]
+  },
+  "whoIHelp": {
+    "heading": "Who I help",
+    "items": "Women at a crossroads, struggling to make a decision\nProfessionals feeling stuck, uninspired or burnt out at work\nWomen going through a big life change, from becoming a parent to moving home\nWomen ready to stop playing small and trust themselves again"
+  },
+  "howItWorks": {
+    "heading": "In person or online",
+    "inPerson": {
+      "title": "In person",
+      "body": "Prefer to meet face to face? We can meet in Leeds and agree the details when you book."
+    },
+    "online": {
+      "title": "Online",
+      "body": "We meet over Zoom, Google Meet or your preferred platform, wherever you are in the world, at a time that suits your time zone."
+    }
+  },
+  "whyShanila": {
+    "heading": "Why work with me",
+    "points": "ICF Associate Certified Coach\nMaster Practitioner in NLP\nCertified Emotional Intelligence Practitioner\nVedic Numerologist\nMore than ten years helping people create lasting change",
+    "linkLabel": "Read my story"
+  },
+  "faq": {
+    "heading": "Frequently asked questions",
+    "items": [
+      {
+        "question": "Where do your sessions take place?",
+        "answer": "I'm based in Leeds and meet clients in person there. I also work online, so you can book from anywhere in the world."
+      },
+      {
+        "question": "Can I work with you if I don't live in Leeds?",
+        "answer": "Yes. Many of my clients work with me online from across the UK and abroad. Online sessions follow the same programme as in-person ones."
+      },
+      {
+        "question": "How do online sessions work across time zones?",
+        "answer": "Sessions take place over Zoom, Google Meet or your preferred platform. When you book, we'll find a time that works for your time zone."
+      },
+      {
+        "question": "Who do you work with?",
+        "answer": "Women navigating change at work or at home who feel stuck, doubt themselves or sense they're meant for more, and who are ready to make confident decisions."
+      },
+      {
+        "question": "How long are the sessions?",
+        "answer": "Mindset Coaching and Career Coaching are 12-week, one-to-one programmes. Numerology is a single one-hour session."
+      },
+      {
+        "question": "How do I get started?",
+        "answer": "Book a free discovery call. We'll talk about where you are now and which kind of support would help most, with no obligation."
+      }
+    ]
+  },
+  "closingCta": {
+    "heading": "Ready to take the first step?",
+    "highlight": "first step",
+    "body": "Book a free discovery call.\n\n**We'll find the right fit together.**\n",
+    "buttonLabel": "Book my free discovery call"
+  },
+  "seo": {
+    "title": "Confidence & Mindset Coach in Leeds | Shanila Khan",
+    "description": "Mindset coaching, career coaching and Vedic numerology in Leeds, in person or online, with certified coach Shanila Khan. Book a free discovery call."
+  }
+}

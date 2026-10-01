@@ -9,7 +9,7 @@ export const contentType = 'image/png'
 export default async function OG({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const post = await getPost(slug)
-  const title = post?.title ?? 'Blog'
+  const title = post?.title?.trim() || 'Blog'
   const excerpt = post?.excerpt ?? ''
 
   const primary = themeData.primaryColor

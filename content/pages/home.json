@@ -1,45 +1,69 @@
 {
-  "heroImage": "/images/hero_img-1200.webp",
-  "heroHeading": "Confidence and Mindset Coaching\n",
-  "heroSubtext": "I help women navigating change, at home and at work, show up with the confidence, influence and impact they have always been capable of.\n",
-  "heroCTALabel": "Book a consultation",
-  "heroBottomCTALabel": "Book A Consultation",
-  "ctaHeading": "You've felt lost now for long enough",
-  "ctaBody": "Do you 'have it all' on paper, but deep down this isn't lighting you up?\n\nAre you ignoring the quiet nag that you're meant for more?\n\nDoes your spark feel dimmed?\n\nI'm here to tell you that it's still there, inside you.\n\n**You just need to look within, and take that first step.**\n",
-  "aboutHeading": "Hi, I'm Shanila",
-  "aboutImage": "/images/about-image-1200.webp",
-  "aboutCredentialTitle": "Certified Confidence and Mindset Coach",
-  "aboutBody": "Hi, I'm Shanila, a confidence and mindset coach based in Leeds, working with women across the UK and online.\n\nFor more than a decade I have helped people create meaningful and lasting change in their personal lives and their careers. Clients usually come to me when they feel stuck, when a decision won't settle, or when the life they have built no longer fits who they are becoming. Together we break through the barriers, rebuild the beliefs sitting underneath them, and find the clarity to lead with intention.\n\nI trained and was mentored by globally recognsied coach Vikram Dhar, whose guidance gave me a global perspective and proven methods I weave into every coaching conversation.\n\nWhether you are looking for mindset coaching, career coaching, or a numerology reading, the starting point is the same. Your outer journey begins with your inner one.\n",
-  "feelLikeYouHeading": "Feel like YOU again",
-  "feelLikeYouTagline": "That's what clarity coaching can give you.",
-  "feelLikeYouQuestions": "What if you could rewrite your story?\nTo feel fired up, instead of fed up, at the start of the day?\nTo remember what YOU felt like, before work, family, and responsibilities took over?\nTo get back in the driver's seat of your life, clear and confident about the road ahead?",
-  "servicesHeading": "Your Inner Journey starts here",
-  "servicesSubtext": "With over ten years' of experience helping individuals break through barriers in work and at home, let me take that first step with you.",
-  "services": [
-    {
-      "title": "Mindset Coaching",
-      "description": "My signature 12-week coaching programme for women ready to get clear on their goals, values, decision-making, and life's direction.",
-      "icon": "fa-lightbulb",
-      "href": "/mindset-coaching",
-      "buttonLabel": "Start my mindset journey",
-      "colorScheme": "oxford"
-    },
-    {
-      "title": "Career Coaching",
-      "description": "The career edition of my mindset coaching. Whether you're a graduate, considering a career change, or feeling unsatisfied at work, you'll get clear and confident on your career path.",
-      "icon": "fa-chart-line",
-      "href": "/career-coaching",
-      "buttonLabel": "Realign my career",
-      "colorScheme": "orange"
-    },
-    {
-      "title": "Numerology",
-      "description": "Need answers now? My 1-hour Numerology session will help you glean crucial insight into your life path and relationships, giving you the tools and confidence to take action today.",
-      "icon": "fa-star",
-      "href": "/numerology",
-      "buttonLabel": "Book my numerology session",
-      "colorScheme": "oxford"
-    }
-  ],
-  "bottomCTAText": "Not sure what service is right for you? Book your free Discovery Call, and we'll find the right fit."
+  "hero": {
+    "image": "/images/hero_img-1200.webp",
+    "heading": "Confidence and Mindset Coaching\n",
+    "subtext": "I help women navigating change, at home and at work, show up with the confidence, influence and impact they have always been capable of.\n",
+    "buttonLabel": "Book a consultation",
+    "secondaryButtonLabel": "Learn More"
+  },
+  "locations": {
+    "inPerson": "In person in Leeds",
+    "online": "Online, wherever you are in the world",
+    "linkLabel": "Sessions in Leeds"
+  },
+  "intro": {
+    "heading": "You've felt lost now for long enough",
+    "body": "Do you 'have it all' on paper, but deep down this isn't lighting you up?\n\nAre you ignoring the quiet nag that you're meant for more?\n\nDoes your spark feel dimmed?\n\nI'm here to tell you that it's still there, inside you.\n\n**You just need to look within, and take that first step.**\n",
+    "linkLabel": "See how I can help"
+  },
+  "about": {
+    "heading": "Hi, I'm Shanila",
+    "image": "/images/about-image-1200.webp",
+    "credential": "Certified Confidence and Mindset Coach",
+    "body": "Hi, I'm Shanila, a confidence and mindset coach based in Leeds, working with women across the UK and online.\n\nFor more than a decade I have helped people create meaningful and lasting change in their personal lives and their careers. Clients usually come to me when they feel stuck, when a decision won't settle, or when the life they have built no longer fits who they are becoming. Together we break through the barriers, rebuild the beliefs sitting underneath them, and find the clarity to lead with intention.\n\nI trained and was mentored by globally recognsied coach Vikram Dhar, whose guidance gave me a global perspective and proven methods I weave into every coaching conversation.\n\nWhether you are looking for mindset coaching, career coaching, or a numerology reading, the starting point is the same. Your outer journey begins with your inner one.\n",
+    "buttonLabel": "Read More"
+  },
+  "reflection": {
+    "heading": "Feel like YOU again",
+    "tagline": "That's what clarity coaching can give you.",
+    "questions": "What if you could rewrite your story?\nTo feel fired up, instead of fed up, at the start of the day?\nTo remember what YOU felt like, before work, family, and responsibilities took over?\nTo get back in the driver's seat of your life, clear and confident about the road ahead?"
+  },
+  "services": {
+    "heading": "Your Inner Journey starts here",
+    "subtext": "With over ten years' of experience helping individuals break through barriers in work and at home, let me take that first step with you.",
+    "cards": [
+      {
+        "title": "Mindset Coaching",
+        "description": "My signature 12-week coaching programme for women ready to get clear on their goals, values, decision-making, and life's direction.",
+        "icon": "fa-lightbulb",
+        "href": "/mindset-coaching",
+        "buttonLabel": "Start my mindset journey",
+        "tone": "secondary"
+      },
+      {
+        "title": "Career Coaching",
+        "description": "The career edition of my mindset coaching. Whether you're a graduate, considering a career change, or feeling unsatisfied at work, you'll get clear and confident on your career path.",
+        "icon": "fa-chart-line",
+        "href": "/career-coaching",
+        "buttonLabel": "Realign my career",
+        "tone": "primary"
+      },
+      {
+        "title": "Numerology",
+        "description": "Need answers now? My 1-hour Numerology session will help you glean crucial insight into your life path and relationships, giving you the tools and confidence to take action today.",
+        "icon": "fa-star",
+        "href": "/numerology",
+        "buttonLabel": "Book my numerology session",
+        "tone": "secondary"
+      }
+    ]
+  },
+  "closingCta": {
+    "text": "Not sure what service is right for you? Book your free Discovery Call, and we'll find the right fit.",
+    "buttonLabel": "Book A Consultation"
+  },
+  "seo": {
+    "title": "Confidence & Mindset Coach in Leeds & Online | Shanila Khan",
+    "description": "Confidence, mindset and career coaching for women navigating change — in person in Leeds and online worldwide. Book a free discovery call with Shanila."
+  }
 }

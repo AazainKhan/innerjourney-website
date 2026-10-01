@@ -2,10 +2,14 @@
 
 import Image from 'next/image'
 import { useState } from 'react'
-import { useTina } from 'tinacms/dist/react'
-import { TinaMarkdown, type TinaMarkdownContent } from 'tinacms/dist/rich-text'
+import { tinaField } from 'tinacms/dist/react'
+import { TinaMarkdown } from 'tinacms/dist/rich-text'
 import type { ComponentProps } from 'react'
 import BookingButton from '@/components/BookingButton'
+import Icon from '@/components/Icon'
+import footerData from '@/content/footer.json'
+import { present, usePageDoc, type TinaDocProps } from '@/lib/use-tina-doc'
+import type { ContactQuery } from '@/tina/__generated__/types'
 
 // Render hero rich-text inline — strip the wrapping <p> so the surrounding
 // <h1>/<p> in the JSX is the only block element. The `as any` works around
@@ -15,37 +19,17 @@ const inlineComponents: ComponentProps<typeof TinaMarkdown>['components'] = {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 } as any
 
-interface ContactData {
-  contact: {
-    heroImage?: string | null
-    heroHeading: TinaMarkdownContent
-    heroSubtext: TinaMarkdownContent
-    sectionHeading: string
-    sectionSubtext: string
-    email: string
-    phone: string
-    videoText: string
-    location: string
-    bookingCTALabel: string
-    formHeading: string
-  }
+// Brand colours for the social tiles, keyed by icon. Unknown icons get the site's dark tile.
+const SOCIAL_TILE: Record<string, string> = {
+  'fa-facebook': 'from-[#1877F2] to-[#0d65d9]',
+  'fa-instagram': 'from-pink-500 to-yellow-400',
+  'fa-youtube': 'from-red-600 to-red-400',
+  'fa-whatsapp': 'from-green-500 to-green-400',
 }
 
-interface Props {
-  query: string
-  variables: { relativePath: string }
-  data: ContactData
-}
-
-export default function ContactPageClient(props: Props) {
-  const { data } = useTina<ContactData>({
-    ...props,
-    experimental___selectFormByFormId() {
-      return `content/pages/${props.variables.relativePath}`
-    },
-  })
-  const d = data.contact
-
+export default function ContactPageClient(props: TinaDocProps<ContactQuery>) {
+  const { contact: d } = usePageDoc<ContactQuery>(props)
+  const { hero, intro, details, form } = d
   const [submitting, setSubmitting] = useState(false)
   const [status, setStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
 
@@ -78,13 +62,14 @@ export default function ContactPageClient(props: Props) {
     }
   }
 
-  const telDigits = (d.phone ?? '').replace(/[^+\d]/g, '')
-  const contactItems: Array<{ icon: string; title: string; text: string; href?: string }> = [
-    { icon: 'fa-envelope', title: 'Email', text: d.email, href: d.email ? `mailto:${d.email}` : undefined },
-    { icon: 'fa-phone', title: 'Phone', text: d.phone, href: telDigits ? `tel:${telDigits}` : undefined },
-    { icon: 'fa-video', title: 'Video Sessions', text: d.videoText },
-    { icon: 'fa-map-marker-alt', title: 'Location', text: d.location },
+  const telDigits = (details?.phone ?? '').replace(/[^+\d]/g, '')
+  const contactItems: Array<{ icon: string; title?: string | null; text?: string | null; href?: string; field: string; titleField: string }> = [
+    { icon: 'fa-envelope', title: details?.emailTitle, text: details?.email, href: details?.email ? `mailto:${details.email}` : undefined, field: tinaField(details, 'email'), titleField: tinaField(details, 'emailTitle') },
+    { icon: 'fa-phone', title: details?.phoneTitle, text: details?.phone, href: telDigits ? `tel:${telDigits}` : undefined, field: tinaField(details, 'phone'), titleField: tinaField(details, 'phoneTitle') },
+    { icon: 'fa-video', title: details?.videoTitle, text: details?.video, field: tinaField(details, 'video'), titleField: tinaField(details, 'videoTitle') },
+    { icon: 'fa-map-marker-alt', title: details?.locationTitle, text: details?.location, field: tinaField(details, 'location'), titleField: tinaField(details, 'locationTitle') },
   ]
+  const socialLinks = present(footerData.socialLinks)
 
   return (
     <>
@@ -92,8 +77,8 @@ export default function ContactPageClient(props: Props) {
       <section className="page-hero bg-black">
         <div className="absolute inset-0">
           <Image
-            src={d.heroImage || '/images/contact-img-1200.webp'}
-            alt="Contact background"
+            src={hero?.image || '/images/contact-img-1200.webp'}
+            alt=""
             fill
             className="object-cover object-center opacity-70"
             priority
@@ -103,11 +88,11 @@ export default function ContactPageClient(props: Props) {
         </div>
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white font-dancing font-bold mb-6 leading-tight drop-shadow-2xl">
-              <TinaMarkdown content={d.heroHeading} components={inlineComponents} />
+            <h1 data-tina-field={tinaField(hero, 'heading')} className="text-4xl md:text-5xl lg:text-6xl heading-primary text-white font-dancing font-bold mb-6 leading-tight drop-shadow-2xl">
+              <TinaMarkdown content={hero?.heading} components={inlineComponents} />
             </h1>
-            <p className="text-lg md:text-xl body-text-light text-white/90 leading-relaxed max-w-3xl mx-auto">
-              <TinaMarkdown content={d.heroSubtext} components={inlineComponents} />
+            <p data-tina-field={tinaField(hero, 'subtext')} className="text-lg md:text-xl body-text-light text-white/90 leading-relaxed max-w-3xl mx-auto">
+              <TinaMarkdown content={hero?.subtext} components={inlineComponents} />
             </p>
           </div>
         </div>
@@ -120,44 +105,36 @@ export default function ContactPageClient(props: Props) {
             {/* Contact Info */}
             <div className="space-y-8">
               <div>
-                <h2 className="text-4xl md:text-5xl heading-secondary text-gray-900 mb-6">
-                  {d.sectionHeading}
+                <h2 data-tina-field={tinaField(intro, 'heading')} className="text-4xl md:text-5xl heading-secondary text-gray-900 mb-6">
+                  {intro?.heading}
                 </h2>
-                <p className="text-xl text-gray-600 leading-relaxed mb-8">
-                  {d.sectionSubtext}
+                <p data-tina-field={tinaField(intro, 'subtext')} className="text-xl text-gray-600 leading-relaxed mb-8">
+                  {intro?.subtext}
                 </p>
               </div>
 
               <div className="space-y-6">
                 {contactItems.map((item) => (
-                  <div key={item.title} className="flex items-center space-x-4">
+                  <div key={item.icon} className="flex items-center space-x-4">
                     <div className="w-12 h-12 bg-gradient-to-br from-oxford to-black rounded-lg flex items-center justify-center">
-                      <i className={`fas ${item.icon} text-white text-xl`}></i>
+                      <Icon name={item.icon} className="text-white text-xl" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900">{item.title}</h3>
+                      <h3 data-tina-field={item.titleField} className="text-lg font-semibold text-gray-900">{item.title}</h3>
                       {item.href ? (
-                        <a href={item.href} className="text-gray-600 hover:text-azure transition-colors">{item.text}</a>
+                        <a href={item.href} data-tina-field={item.field} className="text-gray-600 hover:text-azure transition-colors">{item.text}</a>
                       ) : (
-                        <p className="text-gray-600">{item.text}</p>
+                        <p data-tina-field={item.field} className="text-gray-600">{item.text}</p>
                       )}
                     </div>
                   </div>
                 ))}
 
                 <div className="flex space-x-6 mt-8 justify-start">
-                  {[
-                    // Facebook brand blue (#1877F2) — the gradient previously used the
-                    // theme's azure token, which is currently a peach/pink in the
-                    // brand palette and made the FB icon look wrong.
-                    { href: 'https://www.facebook.com/innerjourneywithshanila/', icon: 'fa-facebook', gradient: 'from-[#1877F2] to-[#0d65d9]', label: 'Facebook' },
-                    { href: 'https://www.instagram.com/_.innerjourney_/', icon: 'fa-instagram', gradient: 'from-pink-500 to-yellow-400', label: 'Instagram' },
-                    { href: 'https://www.youtube.com/channel/UCJbRrCiY4zXfojPTa17EKMg', icon: 'fa-youtube', gradient: 'from-red-600 to-red-400', label: 'YouTube' },
-                    { href: 'https://api.whatsapp.com/send?phone=447387973382&', icon: 'fa-whatsapp', gradient: 'from-green-500 to-green-400', label: 'WhatsApp' },
-                  ].map((s) => (
+                  {socialLinks.map((s) => (
                     <a key={s.label} href={s.href} className="transition-transform transform hover:scale-110" target="_blank" rel="noopener noreferrer" aria-label={s.label}>
-                      <span className={`inline-flex w-16 h-16 bg-gradient-to-br ${s.gradient} rounded-lg items-center justify-center shadow-lg`}>
-                        <i className={`fab ${s.icon} text-white text-4xl`}></i>
+                      <span className={`inline-flex w-16 h-16 bg-gradient-to-br ${SOCIAL_TILE[s.icon] ?? 'from-oxford to-black'} rounded-lg items-center justify-center shadow-lg`}>
+                        <Icon name={s.icon} className="text-white text-4xl" />
                       </span>
                     </a>
                   ))}
@@ -165,7 +142,7 @@ export default function ContactPageClient(props: Props) {
               </div>
 
               <div className="mt-8">
-                <BookingButton label={d.bookingCTALabel} />
+                <BookingButton label={details?.bookingButtonLabel || undefined} field={tinaField(details, 'bookingButtonLabel')} />
               </div>
             </div>
 
@@ -177,24 +154,24 @@ export default function ContactPageClient(props: Props) {
                     {status.message}
                   </div>
                 )}
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">{d.formHeading}</h3>
+                <h3 data-tina-field={tinaField(form, 'heading')} className="text-2xl font-bold text-gray-900 mb-6">{form?.heading}</h3>
 
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+                  <label htmlFor="name" data-tina-field={tinaField(form, 'nameLabel')} className="block text-sm font-medium text-gray-700 mb-2">{form?.nameLabel} *</label>
                   <input type="text" id="name" name="name" required
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-azure focus:border-transparent transition-all duration-200"
-                    placeholder="Your full name" />
+                    placeholder={form?.namePlaceholder ?? ''} />
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                  <label htmlFor="email" data-tina-field={tinaField(form, 'emailLabel')} className="block text-sm font-medium text-gray-700 mb-2">{form?.emailLabel} *</label>
                   <input type="email" id="email" name="email" required
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-azure focus:border-transparent transition-all duration-200"
-                    placeholder="your@email.com" />
+                    placeholder={form?.emailPlaceholder ?? ''} />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-700">Phone Number</label>
+                  <label htmlFor="phone" data-tina-field={tinaField(form, 'phoneLabel')} className="block text-sm font-medium text-gray-700">{form?.phoneLabel}</label>
                   <div className="flex space-x-2">
                     <select name="country_code" aria-label="Country code" className="w-1/4 px-3 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-azure focus:border-transparent">
                       <option value="44">+44 (UK)</option>
@@ -206,15 +183,15 @@ export default function ContactPageClient(props: Props) {
                     </select>
                     <input type="tel" id="phone" name="phone"
                       className="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-azure focus:border-transparent"
-                      placeholder="07xxx xxxxxx" />
+                      placeholder={form?.phonePlaceholder ?? ''} />
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">Message *</label>
+                  <label htmlFor="message" data-tina-field={tinaField(form, 'messageLabel')} className="block text-sm font-medium text-gray-700 mb-2">{form?.messageLabel} *</label>
                   <textarea id="message" name="message" required rows={5}
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-azure focus:border-transparent transition-all duration-200 resize-none"
-                    placeholder="Tell me about your goals, challenges, or questions..." />
+                    placeholder={form?.messagePlaceholder ?? ''} />
                 </div>
 
                 <button type="submit" disabled={submitting}
@@ -225,13 +202,15 @@ export default function ContactPageClient(props: Props) {
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                       </svg>
-                      Sending...
+                      {form?.submittingLabel}
                     </>
-                  ) : 'Send!'}
+                  ) : form?.submitLabel}
                 </button>
-                <p className="text-sm text-gray-600 text-center mt-4">
-                  By submitting this form, you agree to our privacy policy and terms of service.
-                </p>
+                {form?.privacyNote && (
+                  <p data-tina-field={tinaField(form, 'privacyNote')} className="text-sm text-gray-600 text-center mt-4">
+                    {form.privacyNote}
+                  </p>
+                )}
               </form>
             </div>
           </div>

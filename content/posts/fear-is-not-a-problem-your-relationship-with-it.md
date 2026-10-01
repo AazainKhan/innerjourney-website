@@ -4,10 +4,11 @@ publishedAt: 2026-06-03T11:29:33.701Z
 status: Published
 excerpt: 'Fear is not a problem. It is an information provider. Listen to it and have a better view of what matters most in its entirety. '
 image: /images/WALKING%20FORWARD.jpg
-icon: fa-pen-fancy
-iconColor: text-carrot/40
-gradient: from-orange-100 to-orange-200
-badgeColor: bg-carrot
+featured: false
+cardStyle:
+  icon: fa-pen-fancy
+  tone: primary
+relatedService: mindset
 ---
 
 **Fear Is Not the Enemy. It Is the Beginning.**

@@ -1,10 +1,14 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
-import { getPost, listPosts } from '@/lib/posts'
+import resourcesData from '@/content/pages/resources.json'
+import client from '@/tina/__generated__/client'
+import JsonLd from '@/components/JsonLd'
+import { getPost, isIndexable, isSlug, listPosts, relatedPosts } from '@/lib/posts'
+import { pageMetadata } from '@/lib/seo/metadata'
+import { blogPostGraph } from '@/lib/seo/schema'
+import { PERSON_NAME } from '@/lib/seo/site'
+import type { PostQuery } from '@/tina/__generated__/types'
+import BlogPostClient, { type RelatedPost } from './BlogPostClient'
 
 export async function generateStaticParams() {
   const posts = await listPosts()
@@ -15,88 +19,53 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const post = await getPost(slug)
   if (!post) return { title: 'Post Not Found' }
-  return {
-    title: post.title,
-    description: post.excerpt ?? undefined,
-    alternates: { canonical: `https://innerjourney-with-shanila.com/blog/${slug}` },
-    openGraph: {
-      title: post.title,
-      description: post.excerpt ?? undefined,
-      url: `https://innerjourney-with-shanila.com/blog/${slug}`,
-    },
-  }
+  return pageMetadata(post.seo, {
+    path: `/blog/${slug}`,
+    fallbackTitle: `${post.title} | ${PERSON_NAME}`,
+    fallbackDescription: post.excerpt ?? '',
+    // The share image is generated per post by ./opengraph-image.tsx.
+    image: 'generated',
+    noindex: !isIndexable(post.status),
+    article: { publishedTime: post.publishedAt, authors: [PERSON_NAME] },
+  })
 }
 
-function formatDate(iso?: string) {
-  if (!iso) return null
-  try {
-    return new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
-  } catch {
-    return null
-  }
-}
-
+/**
+ * Posts load through Tina so the editor can open the post it is looking at
+ * (the sidebar shows this post's form). If Tina is unreachable, fall back to
+ * the markdown file; the body then renders from raw markdown.
+ */
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const post = await getPost(slug)
+  if (!isSlug(slug)) notFound()
+  const [post, all] = await Promise.all([getPost(slug), listPosts()])
   if (!post) notFound()
 
+  const labels = {
+    backLink: resourcesData.blogLibrary?.backLinkLabel || 'Back to all posts',
+    empty: resourcesData.blogLibrary?.emptyPostMessage || 'This post is still being written — check back soon.',
+    readMore: resourcesData.blogLibrary?.readMoreLabel || 'Read more',
+    ending: resourcesData.blogLibrary?.postEnding ?? {},
+  }
+  const related: RelatedPost[] = relatedPosts(all, post).map((p) => ({ slug: p.slug, title: p.title, excerpt: p.excerpt ?? '', image: p.image ?? '' }))
+  const schema = <JsonLd data={blogPostGraph({ slug, title: post.title, description: post.seo?.description || post.excerpt, image: post.image, publishedAt: post.publishedAt })} />
+
+  const res = await client.queries.post({ relativePath: `${slug}.md` }).catch(() => null)
+  if (res) {
+    return (
+      <>
+        {schema}
+        <BlogPostClient query={res.query} variables={res.variables} data={res.data} labels={labels} related={related} />
+      </>
+    )
+  }
+
+  const { body, slug: _slug, ...fields } = post
+  const data = { post: { ...fields, body, _sys: { filename: slug } } } as unknown as PostQuery
   return (
     <>
-      {/* Hero */}
-      <section className="page-hero brand-gradient-oxford-azure">
-        <div className="absolute top-20 right-20 w-72 h-72 bg-carrot/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-20 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
-        {/* Cover image fills the hero with a dark overlay so the text stays
-         * legible. Falls back to the gradient hero when no image is set. */}
-        {post.image && (
-          <>
-            <Image
-              src={post.image}
-              alt={post.title}
-              fill
-              priority
-              className="object-cover opacity-30"
-              sizes="100vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50" aria-hidden="true" />
-          </>
-        )}
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-3xl mx-auto">
-            <Link href="/blog" className="inline-flex items-center gap-2 text-on-secondary/70 hover:text-on-secondary text-sm uppercase tracking-widest mb-6">
-              <i className="fas fa-arrow-left"></i> Back to all posts
-            </Link>
-            <div className="flex flex-wrap items-center gap-3 mb-4">
-              {post.status && (
-                <span className={`px-3 py-1 ${post.badgeColor || 'bg-carrot'} text-on-primary text-xs rounded-full font-semibold uppercase tracking-wider`}>
-                  {post.status}
-                </span>
-              )}
-              {formatDate(post.publishedAt) && (
-                <span className="text-on-secondary/60 text-sm">{formatDate(post.publishedAt)}</span>
-              )}
-            </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl heading-primary text-on-secondary mb-4 leading-tight font-dancing font-bold">
-              {post.title}
-            </h1>
-            {post.excerpt && <p className="text-xl text-on-secondary/90 leading-relaxed">{post.excerpt}</p>}
-          </div>
-        </div>
-      </section>
-
-      {/* Body */}
-      <article className="relative py-20 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="max-w-3xl mx-auto prose prose-lg prose-headings:heading-secondary prose-headings:text-gray-900 prose-p:text-gray-700 prose-p:leading-relaxed prose-a:text-azure prose-a:no-underline hover:prose-a:underline prose-strong:text-oxford prose-li:text-gray-700">
-            {post.body.trim() ? (
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.body}</ReactMarkdown>
-            ) : (
-              <p className="text-gray-500 italic">This post is still being written — check back soon.</p>
-            )}
-          </div>
-        </div>
-      </article>
+      {schema}
+      <BlogPostClient query="" variables={{ relativePath: `${slug}.md` }} data={data} labels={labels} related={related} />
     </>
   )
 }

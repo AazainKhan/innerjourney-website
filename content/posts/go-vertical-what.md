@@ -4,10 +4,11 @@ publishedAt: 2024-04-29T00:00:00.000Z
 status: Published
 excerpt: Stop touching the base. The questions you ask determine the depths you can reach. A short reflection on the power of "What" over "Why" in coaching conversations.
 image: /images/blog/go-vertical-what.jpg
-icon: fa-arrow-down
-iconColor: text-carrot/40
-gradient: from-orange-100 to-orange-200
-badgeColor: bg-carrot
+featured: false
+cardStyle:
+  icon: fa-arrow-down
+  tone: primary
+relatedService: mindset
 ---
 
 As a school teacher, I came to realize the immense power of asking the right questions at the right time. I learned by simplifying questions and avoiding simple "yes" or "no" responses, we can unlock the vast possibilities and encourage deeper reflection. The "yes and no" answer hides a multitude of complexities. This practice with awareness sealed my belief when I walked into my journey to become an ICF coach. A simple and open-ended question fosters curiosity without judgment, they are profound and effective.

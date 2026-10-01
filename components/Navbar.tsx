@@ -3,7 +3,10 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { tinaField, useTina } from 'tinacms/dist/react'
 import { useBooking } from '@/context/BookingContext'
+import { present, type TinaDocProps } from '@/lib/use-tina-doc'
+import type { NavbarQuery } from '@/tina/__generated__/types'
 
 interface NavLink { label: string; href: string; showDropdown?: boolean }
 interface NavbarData {
@@ -13,7 +16,19 @@ interface NavbarData {
   workWithMeDropdown: Array<{ label: string; href: string }>
 }
 
-export default function Navbar({ data }: { data: NavbarData }) {
+function toNavbarData(nav: NavbarQuery['navbar'] | null | undefined): NavbarData {
+  return {
+    brandLabel: nav?.brandLabel ?? '',
+    ctaLabel: nav?.ctaLabel ?? '',
+    links: present(nav?.links).map((l) => ({ label: l.label ?? '', href: l.href ?? '#', showDropdown: Boolean(l.showDropdown) })),
+    workWithMeDropdown: present(nav?.workWithMeDropdown).map((l) => ({ label: l.label ?? '', href: l.href ?? '#' })),
+  }
+}
+
+/** Site-wide navigation. Edited in Tina under "Site › Navigation bar"; updates live in the preview. */
+export default function Navbar(props: TinaDocProps<NavbarQuery>) {
+  const { data: live } = useTina<NavbarQuery>(props)
+  const data = toNavbarData(live.navbar)
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [workDropdownOpen, setWorkDropdownOpen] = useState(false)
@@ -53,7 +68,7 @@ export default function Navbar({ data }: { data: NavbarData }) {
                 className="h-14 w-auto"
                 priority
               />
-              <div className="text-2xl heading-primary text-on-secondary whitespace-nowrap">{data.brandLabel}</div>
+              <div data-tina-field={tinaField(live.navbar, 'brandLabel')} className="text-2xl heading-primary text-on-secondary whitespace-nowrap">{data.brandLabel}</div>
             </Link>
 
             {/* Desktop nav — only shows from lg up. At md (768-1023) the

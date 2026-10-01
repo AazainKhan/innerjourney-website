@@ -328,6 +328,61 @@ query numerologyConnection($before: String, $after: String, $first: Float, $last
   }
 }
 
+query leeds($relativePath: String!) {
+  leeds(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...LeedsParts
+  }
+}
+
+query leedsConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: LeedsFilter) {
+  leedsConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...LeedsParts
+      }
+    }
+  }
+}
+
 query resources($relativePath: String!) {
   resources(relativePath: $relativePath) {
     ... on Document {
@@ -378,61 +433,6 @@ query resourcesConnection($before: String, $after: String, $first: Float, $last:
           id
         }
         ...ResourcesParts
-      }
-    }
-  }
-}
-
-query contact($relativePath: String!) {
-  contact(relativePath: $relativePath) {
-    ... on Document {
-      _sys {
-        filename
-        basename
-        hasReferences
-        breadcrumbs
-        path
-        relativePath
-        extension
-      }
-      id
-    }
-    ...ContactParts
-  }
-}
-
-query contactConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: ContactFilter) {
-  contactConnection(
-    before: $before
-    after: $after
-    first: $first
-    last: $last
-    sort: $sort
-    filter: $filter
-  ) {
-    pageInfo {
-      hasPreviousPage
-      hasNextPage
-      startCursor
-      endCursor
-    }
-    totalCount
-    edges {
-      cursor
-      node {
-        ... on Document {
-          _sys {
-            filename
-            basename
-            hasReferences
-            breadcrumbs
-            path
-            relativePath
-            extension
-          }
-          id
-        }
-        ...ContactParts
       }
     }
   }
@@ -548,6 +548,61 @@ query podcastConnection($before: String, $after: String, $first: Float, $last: F
   }
 }
 
+query contact($relativePath: String!) {
+  contact(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...ContactParts
+  }
+}
+
+query contactConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: ContactFilter) {
+  contactConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...ContactParts
+      }
+    }
+  }
+}
+
 query navbar($relativePath: String!) {
   navbar(relativePath: $relativePath) {
     ... on Document {
@@ -598,61 +653,6 @@ query navbarConnection($before: String, $after: String, $first: Float, $last: Fl
           id
         }
         ...NavbarParts
-      }
-    }
-  }
-}
-
-query bookingForm($relativePath: String!) {
-  bookingForm(relativePath: $relativePath) {
-    ... on Document {
-      _sys {
-        filename
-        basename
-        hasReferences
-        breadcrumbs
-        path
-        relativePath
-        extension
-      }
-      id
-    }
-    ...BookingFormParts
-  }
-}
-
-query bookingFormConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: BookingFormFilter) {
-  bookingFormConnection(
-    before: $before
-    after: $after
-    first: $first
-    last: $last
-    sort: $sort
-    filter: $filter
-  ) {
-    pageInfo {
-      hasPreviousPage
-      hasNextPage
-      startCursor
-      endCursor
-    }
-    totalCount
-    edges {
-      cursor
-      node {
-        ... on Document {
-          _sys {
-            filename
-            basename
-            hasReferences
-            breadcrumbs
-            path
-            relativePath
-            extension
-          }
-          id
-        }
-        ...BookingFormParts
       }
     }
   }
@@ -713,61 +713,6 @@ query footerConnection($before: String, $after: String, $first: Float, $last: Fl
   }
 }
 
-query typography($relativePath: String!) {
-  typography(relativePath: $relativePath) {
-    ... on Document {
-      _sys {
-        filename
-        basename
-        hasReferences
-        breadcrumbs
-        path
-        relativePath
-        extension
-      }
-      id
-    }
-    ...TypographyParts
-  }
-}
-
-query typographyConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: TypographyFilter) {
-  typographyConnection(
-    before: $before
-    after: $after
-    first: $first
-    last: $last
-    sort: $sort
-    filter: $filter
-  ) {
-    pageInfo {
-      hasPreviousPage
-      hasNextPage
-      startCursor
-      endCursor
-    }
-    totalCount
-    edges {
-      cursor
-      node {
-        ... on Document {
-          _sys {
-            filename
-            basename
-            hasReferences
-            breadcrumbs
-            path
-            relativePath
-            extension
-          }
-          id
-        }
-        ...TypographyParts
-      }
-    }
-  }
-}
-
 query testimonials($relativePath: String!) {
   testimonials(relativePath: $relativePath) {
     ... on Document {
@@ -818,6 +763,116 @@ query testimonialsConnection($before: String, $after: String, $first: Float, $la
           id
         }
         ...TestimonialsParts
+      }
+    }
+  }
+}
+
+query bookingForm($relativePath: String!) {
+  bookingForm(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...BookingFormParts
+  }
+}
+
+query bookingFormConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: BookingFormFilter) {
+  bookingFormConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...BookingFormParts
+      }
+    }
+  }
+}
+
+query typography($relativePath: String!) {
+  typography(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...TypographyParts
+  }
+}
+
+query typographyConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: TypographyFilter) {
+  typographyConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...TypographyParts
       }
     }
   }

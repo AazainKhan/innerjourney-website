@@ -5,7 +5,11 @@
     "dev": "tinacms dev -c \"next dev\"",
     "build": "tinacms build --skip-cloud-checks && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "migrate-content": "tsx scripts/migrate-content.ts"
   },
   "dependencies": {
     "@calcom/embed-react": "^1.5.3",
@@ -23,14 +27,19 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.19",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/react": "^16.3.3",
     "@types/node": "^20.0.0",
     "@types/nodemailer": "^6.4.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "autoprefixer": "^10.4.0",
+    "jsdom": "^25.0.1",
     "postcss": "^8.4.0",
     "tailwindcss": "^3.4.0",
-    "typescript": "^5.0.0"
+    "tsx": "^4.23.15",
+    "typescript": "^5.0.0",
+    "vitest": "^3.2.7"
   },
   "repository": {
     "type": "git",

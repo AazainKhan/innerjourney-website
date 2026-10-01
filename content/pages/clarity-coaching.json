@@ -1,93 +1,167 @@
 {
-  "heroBadge": "12-Week Transformation Programme",
-  "heroHeading": "Get answers and transform your life",
-  "heroSubtext": "Discover the missing piece to achieving lasting change, and the life you deserve\n",
-  "heroCTALabel": "Take the first step",
-  "heroSideEmoji": "✨",
-  "heroSideWeeks": "12 Weeks",
-  "heroSideSubtext": "To lasting development",
-
-  "resultsHeadingPrefix": "Mindset Coaching that",
-  "resultsHeadingHighlight": "gets results",
-  "resultsSubtext": "There comes a time in life when you find yourself on a challenging path, but can't find a clear way through.",
-  "perhapsLabel": "Perhaps you're…",
-  "perhapsItems": [
-    { "emoji": "🔀", "text": "At a crossroads, struggling to make a decision", "borderColor": "border-carrot" },
-    { "emoji": "🏠", "text": "Experiencing a big life change, like becoming a parent, or a house move", "borderColor": "border-azure" },
-    { "emoji": "💔", "text": "In a relationship dynamic that no longer serves you", "borderColor": "border-carrot" },
-    { "emoji": "🎭", "text": "Fed up of being the supporting role in everyone else's life", "borderColor": "border-azure" },
-    { "emoji": "⏸️", "text": "Bored of putting your own goals on pause, but struggling to make progress", "borderColor": "border-carrot" }
-  ],
-  "bannerText": "You're done going through the motions —",
-  "bannerHighlight": "it's time to get answers.",
-
-  "missingPieceHeadingPrefix": "Clarity: your",
-  "missingPieceHeadingHighlight": "missing piece",
-  "problemTitle": "The Problem",
-  "problemBody": "Friends, family, and online courses might have your best interest at heart, but they're not getting you where you want to be.\n\n**Why?**\n\nBecause they're asking the wrong questions.\n\nToo often, we find ourselves deferring to others for the answer, switching to autopilot, or hustling even more when things get hard.\n",
-  "solutionTitle": "The Solution",
-  "solutionBody": "You need a guiding light with the right roadmap, tools, and qualifications to help you truly look within.\n\n**That's where real transformation begins.**\n\nThere's a missing piece that can make things so much simpler, if you just know how to access it:\n",
-  "solutionWord": "Clarity.",
-
-  "philosophyLabel": "My Approach",
-  "philosophyHeadingPrefix": "Coaching",
-  "philosophyHeadingHighlight": "Philosophy",
-  "philosophyQuote": "Success in your outer journey starts with your inner journey.",
-  "philosophyBody": "My own experience over ten years ago taught me this profound truth.\n\nTraditional coaching or advice doesn't properly teach us how to get curious, develop self-compassion, or gently grow our confidence as we find the answer, because we're too focussed on the external. Our judgement stays clouded.\n",
-  "philosophyBannerPrefix": "But when you know the first step is looking inward,",
-  "philosophyBannerHighlight": "everything changes.",
-  "philosophyClosingPrefix": "If you're ready to make some real decisions, let go of old habits, and bring purpose into your life again,",
-  "philosophyClosingHighlight": "let me be your guide.",
-
-  "timelineLabel": "Your Transformation Journey",
-  "timelineHeadingPrefix": "What Mindset Coaching",
-  "timelineHeadingHighlight": "looks like",
-  "timelineSubtext": "This roadmap helps you move from overthinking to clear, confident action, so that you can build a life you're proud of.",
-  "timelineSteps": [
-    {
-      "number": "1",
-      "weeks": "Weeks 1-4",
-      "title": "Awareness Breakthrough",
-      "subtitle": "The Self-Audit",
-      "description": "Get curious about your story. We'll audit your self‑beliefs, map where you feel stuck, and uncover repeating patterns. By week 4, you'll have a new perspective.",
-      "accent": "carrot"
-    },
-    {
-      "number": "2",
-      "weeks": "Weeks 5-8",
-      "title": "Refocusing Method",
-      "subtitle": "Refocus & Reframe",
-      "description": "Work on emotions underpinning your stories. Learn emotional intelligence scripts, speak with self-compassion, and let go of limiting beliefs through gentle accountability.",
-      "accent": "azure"
-    },
-    {
-      "number": "3",
-      "weeks": "Weeks 9-12",
-      "title": "Integration",
-      "subtitle": "Clarity to Confidence",
-      "description": "Integrate insights into everyday life. Practise new habits, set boundaries, and step out of your comfort zone. Your clarity translates into decisive action.",
-      "accent": "carrot"
+  "hero": {
+    "eyebrow": "12-Week Transformation Programme",
+    "heading": "Get answers and transform your life",
+    "subtext": "Discover the missing piece to achieving lasting change, and the life you deserve\n",
+    "buttonLabel": "Take the first step",
+    "sideEmoji": "✨",
+    "sideHeading": "12 Weeks",
+    "sideSubtext": "To lasting development"
+  },
+  "whoItsFor": {
+    "heading": "Mindset Coaching that gets results",
+    "highlight": "gets results",
+    "subtext": "There comes a time in life when you find yourself on a challenging path, but can't find a clear way through.",
+    "listIntro": "Perhaps you're…",
+    "items": [
+      {
+        "emoji": "🔀",
+        "text": "At a crossroads, struggling to make a decision",
+        "tone": "primary"
+      },
+      {
+        "emoji": "🏠",
+        "text": "Experiencing a big life change, like becoming a parent, or a house move",
+        "tone": "accent"
+      },
+      {
+        "emoji": "💔",
+        "text": "In a relationship dynamic that no longer serves you",
+        "tone": "primary"
+      },
+      {
+        "emoji": "🎭",
+        "text": "Fed up of being the supporting role in everyone else's life",
+        "tone": "accent"
+      },
+      {
+        "emoji": "⏸️",
+        "text": "Bored of putting your own goals on pause, but struggling to make progress",
+        "tone": "primary"
+      }
+    ],
+    "banner": {
+      "text": "You're done going through the motions — it's time to get answers.",
+      "highlight": "it's time to get answers."
     }
-  ],
-  "timelineCTALabel": "Start my mindset journey",
-
-  "experienceLabel": "What's Included",
-  "experienceHeadingPrefix": "A Compassionate Coaching",
-  "experienceHeadingHighlight": "Experience",
-  "experienceItems": [
-    { "emoji": "📅", "title": "12 Weekly Sessions", "subtitle": "One-to-one sessions (45-60 minutes)", "bg": "bg-carrot/10" },
-    { "emoji": "🔍", "title": "Self-Concept Audit", "subtitle": "Personalised diagnostic tools", "bg": "bg-azure/10" },
-    { "emoji": "💭", "title": "Emotional Intelligence", "subtitle": "Coaching and reframing scripts", "bg": "bg-carrot/10" },
-    { "emoji": "📝", "title": "Weekly Assignments", "subtitle": "Journaling prompts for new habits", "bg": "bg-azure/10" },
-    { "emoji": "🤝", "title": "Gentle Accountability", "subtitle": "Check-ins between sessions", "bg": "bg-carrot/10" },
-    { "emoji": "🌱", "title": "Integration Exercises", "subtitle": "Apply insights in real-life", "bg": "bg-azure/10" }
-  ],
-  "bonusEmoji": "📚",
-  "bonusPrefix": "Plus:",
-  "bonusText": "Resources for continued growth beyond the programme",
-
-  "ctaSectionHeadingPrefix": "Unclear if Mindset Coaching is",
-  "ctaSectionHeadingHighlight": "right for you?",
-  "ctaSectionBody": "Decisions might feel hard right now. Start with a free discovery call to find out if my coaching can help you.\n\n**We'll do the figuring out together.**\n",
-  "ctaButtonLabel": "Book my free discovery call"
+  },
+  "problemSolution": {
+    "heading": "Clarity: your missing piece",
+    "highlight": "missing piece",
+    "problem": {
+      "title": "The Problem",
+      "body": "Friends, family, and online courses might have your best interest at heart, but they're not getting you where you want to be.\n\n**Why?**\n\nBecause they're asking the wrong questions.\n\nToo often, we find ourselves deferring to others for the answer, switching to autopilot, or hustling even more when things get hard.\n"
+    },
+    "solution": {
+      "title": "The Solution",
+      "body": "You need a guiding light with the right roadmap, tools, and qualifications to help you truly look within.\n\n**That's where real transformation begins.**\n\nThere's a missing piece that can make things so much simpler, if you just know how to access it:\n",
+      "keyword": "Clarity."
+    }
+  },
+  "philosophy": {
+    "eyebrow": "My Approach",
+    "heading": "Coaching Philosophy",
+    "highlight": "Philosophy",
+    "quote": "Success in your outer journey starts with your inner journey.",
+    "body": "My own experience over ten years ago taught me this profound truth.\n\nTraditional coaching or advice doesn't properly teach us how to get curious, develop self-compassion, or gently grow our confidence as we find the answer, because we're too focussed on the external. Our judgement stays clouded.\n",
+    "banner": {
+      "text": "But when you know the first step is looking inward, everything changes.",
+      "highlight": "everything changes."
+    },
+    "closing": {
+      "text": "If you're ready to make some real decisions, let go of old habits, and bring purpose into your life again, let me be your guide.",
+      "highlight": "let me be your guide."
+    }
+  },
+  "journey": {
+    "eyebrow": "Your Transformation Journey",
+    "heading": "What Mindset Coaching looks like",
+    "highlight": "looks like",
+    "subtext": "This roadmap helps you move from overthinking to clear, confident action, so that you can build a life you're proud of.",
+    "steps": [
+      {
+        "number": "1",
+        "weeks": "Weeks 1-4",
+        "title": "Awareness Breakthrough",
+        "subtitle": "The Self-Audit",
+        "description": "Get curious about your story. We'll audit your self‑beliefs, map where you feel stuck, and uncover repeating patterns. By week 4, you'll have a new perspective.",
+        "tone": "primary"
+      },
+      {
+        "number": "2",
+        "weeks": "Weeks 5-8",
+        "title": "Refocusing Method",
+        "subtitle": "Refocus & Reframe",
+        "description": "Work on emotions underpinning your stories. Learn emotional intelligence scripts, speak with self-compassion, and let go of limiting beliefs through gentle accountability.",
+        "tone": "accent"
+      },
+      {
+        "number": "3",
+        "weeks": "Weeks 9-12",
+        "title": "Integration",
+        "subtitle": "Clarity to Confidence",
+        "description": "Integrate insights into everyday life. Practise new habits, set boundaries, and step out of your comfort zone. Your clarity translates into decisive action.",
+        "tone": "primary"
+      }
+    ],
+    "buttonLabel": "Start my mindset journey"
+  },
+  "included": {
+    "eyebrow": "What's Included",
+    "heading": "A Compassionate Coaching Experience",
+    "highlight": "Experience",
+    "items": [
+      {
+        "emoji": "📅",
+        "title": "12 Weekly Sessions",
+        "subtitle": "One-to-one sessions (45-60 minutes)",
+        "tone": "primary"
+      },
+      {
+        "emoji": "🔍",
+        "title": "Self-Concept Audit",
+        "subtitle": "Personalised diagnostic tools",
+        "tone": "accent"
+      },
+      {
+        "emoji": "💭",
+        "title": "Emotional Intelligence",
+        "subtitle": "Coaching and reframing scripts",
+        "tone": "primary"
+      },
+      {
+        "emoji": "📝",
+        "title": "Weekly Assignments",
+        "subtitle": "Journaling prompts for new habits",
+        "tone": "accent"
+      },
+      {
+        "emoji": "🤝",
+        "title": "Gentle Accountability",
+        "subtitle": "Check-ins between sessions",
+        "tone": "primary"
+      },
+      {
+        "emoji": "🌱",
+        "title": "Integration Exercises",
+        "subtitle": "Apply insights in real-life",
+        "tone": "accent"
+      }
+    ],
+    "bonus": {
+      "emoji": "📚",
+      "label": "Plus:",
+      "text": "Resources for continued growth beyond the programme"
+    }
+  },
+  "closingCta": {
+    "heading": "Unclear if Mindset Coaching is right for you?",
+    "highlight": "right for you?",
+    "body": "Decisions might feel hard right now. Start with a free discovery call to find out if my coaching can help you.\n\n**We'll do the figuring out together.**\n",
+    "buttonLabel": "Book my free discovery call"
+  },
+  "seo": {
+    "title": "Mindset Coaching for Women | Leeds & Online | Shanila Khan",
+    "description": "A 12-week, one-to-one mindset coaching programme for women ready to make clear, confident decisions. In person in Leeds or online worldwide."
+  }
 }

@@ -11,12 +11,17 @@ import ThemePreviewListener from '@/components/ThemePreviewListener'
 import TypographyApplier from '@/components/TypographyApplier'
 import NewsletterPopupGate from '@/components/NewsletterPopupGate'
 import CalPreloader from '@/components/CalPreloader'
+import JsonLd from '@/components/JsonLd'
+import { siteGraph } from '@/lib/seo/schema'
 import { BookingProvider } from '@/context/BookingContext'
 import themeData from '@/content/theme.json'
 import navbarData from '@/content/navbar.json'
+import footerData from '@/content/footer.json'
 import bookingFormData from '@/content/booking-form.json'
 import typographyData from '@/content/typography.json'
 import client from '@/tina/__generated__/client'
+import { loadTinaDoc } from '@/lib/tina-page'
+import type { BookingFormQuery, FooterQuery, NavbarQuery } from '@/tina/__generated__/types'
 import { pickForeground, hexToRgbTriplet } from '@/lib/color-utils'
 
 const caslonDisplay = Libre_Caslon_Display({
@@ -27,14 +32,16 @@ const caslonDisplay = Libre_Caslon_Display({
 })
 
 const titilliumWeb = Titillium_Web({
-  weight: ['200', '300', '400', '600', '700', '900'],
+  // 300 = light body text, 400/600/700 = regular/semibold/bold. 200 and 900 were never used.
+  weight: ['300', '400', '600', '700'],
   subsets: ['latin'],
   variable: '--font-titillium',
   display: 'swap',
 })
 
 const dancingScript = Dancing_Script({
-  weight: ['400', '500', '600', '700'],
+  // Matches the Tina "Heading weight" options (Regular / Semibold / Bold).
+  weight: ['400', '600', '700'],
   subsets: ['latin'],
   variable: '--font-dancing',
   display: 'swap',
@@ -49,6 +56,7 @@ export const metadata: Metadata = {
   description: 'Transform your life with Shanila\'s expert Confidence and Mindset Coaching. Book A Consultation today and start your journey to success.',
   openGraph: {
     type: 'website',
+    locale: 'en_GB',
     siteName: 'Inner Journey with Shanila',
     images: [{ url: '/images/og-default.jpg', width: 1200, height: 630, alt: 'Inner Journey with Shanila' }],
   },
@@ -143,11 +151,18 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   // Website Theme collection was removed in favour of the Theme Studio screen,
   // which writes to the same file via /api/theme.
   const themeStyle = buildThemeStyle(themeData)
-  const typographyRes = await loadTypography()
+  const [typographyRes, navbar, footer, bookingForm] = await Promise.all([
+    loadTypography(),
+    loadTinaDoc<NavbarQuery>('navbar', 'navbar.json', navbarData),
+    loadTinaDoc<FooterQuery>('footer', 'footer.json', footerData),
+    loadTinaDoc<BookingFormQuery>('bookingForm', 'booking-form.json', bookingFormData),
+  ])
   const typographyStyle = buildTypographyStyle(typographyRes?.data?.typography ?? typographyData)
   return (
     <html lang="en" className={`${caslonDisplay.variable} ${titilliumWeb.variable} ${dancingScript.variable}`} suppressHydrationWarning>
       <head>
+        {/* Icon font CSS comes from cdnjs — open the connection early. */}
+        <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossOrigin="anonymous" />
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -159,6 +174,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link rel="dns-prefetch" href="https://app.cal.com" />
         <style dangerouslySetInnerHTML={{ __html: themeStyle }} />
         <style dangerouslySetInnerHTML={{ __html: typographyStyle }} />
+        {/* Who Shanila is, where she works and what the site is — for search engines. */}
+        <JsonLd data={siteGraph()} />
       </head>
       <body>
         <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[10000] focus:bg-azure focus:text-white focus:px-4 focus:py-2 focus:rounded">Skip to content</a>
@@ -172,10 +189,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         )}
         <ThemePreviewListener />
         <BookingProvider>
-          <Navbar data={navbarData} />
+          <Navbar {...navbar} />
           <main id="main">{children}</main>
-          <Footer />
-          <BookingOverlay copy={bookingFormData} />
+          <Footer {...footer} />
+          <BookingOverlay {...bookingForm} />
           <ScrollAnimator />
           <NewsletterPopupGate />
           <CalPreloader />

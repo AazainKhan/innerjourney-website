@@ -2,12 +2,13 @@
 title: Numbers are story tellers
 publishedAt: 2024-05-09T00:00:00.000Z
 status: Published
-excerpt: Numerology is a language. Numbers reveal the narratives of who we are — our strengths, weaknesses, opportunities, and challenges. Here's a brief look at the archetypes behind numbers 1 through 9.
+excerpt: 'Numerology is a language. Numbers reveal the narratives of who we are — our strengths, weaknesses, opportunities, and challenges. Here''s a brief look at the archetypes behind numbers 1 through 9.'
 image: /images/blog/numbers-are-story-tellers.jpg
-icon: fa-star
-iconColor: text-carrot/40
-gradient: from-orange-100 to-orange-200
-badgeColor: bg-carrot
+featured: true
+cardStyle:
+  icon: fa-star
+  tone: primary
+relatedService: numerology
 ---
 
 Language evolved through human communication needs, gradually developing from basic sounds and gestures into complex systems of symbols and grammar.

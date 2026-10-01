@@ -8,6 +8,8 @@ interface BookingButtonProps {
   variant?: 'primary' | 'primaryOnDark' | 'secondary' | 'ghostOnDark'
   size?: 'sm' | 'md' | 'lg'
   className?: string
+  /** Tina click-to-edit target (tinaField(...)) for the label. */
+  field?: string
 }
 
 export default function BookingButton({
@@ -15,10 +17,11 @@ export default function BookingButton({
   variant = 'primary',
   size = 'lg',
   className,
+  field,
 }: BookingButtonProps) {
   const { openBooking } = useBooking()
   return (
-    <Button onClick={openBooking} variant={variant} size={size} className={className}>
+    <Button onClick={openBooking} variant={variant} size={size} className={className} data-tina-field={field || undefined}>
       {label}
     </Button>
   )
