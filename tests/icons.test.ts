@@ -41,3 +41,19 @@ describe('icon registry', () => {
     expect(iconClass(null)).toBe('')
   })
 })
+
+describe('cut-down icon font', () => {
+  it('has a rule for every icon the site can show', async () => {
+    const { usedIconNames } = await import('../scripts/build-icon-font')
+    const css = fs.readFileSync(path.join(__dirname, '../styles/icons.css'), 'utf8')
+    const missing = usedIconNames().filter((name) => !css.includes(`.${name}:before`))
+    // Fix: run `npm run build-icons`.
+    expect(missing).toEqual([])
+  })
+
+  it('serves its fonts from the site', () => {
+    for (const font of ['fa-solid-900', 'fa-brands-400']) {
+      expect(fs.existsSync(path.join(__dirname, `../public/fonts/fa/${font}.woff2`))).toBe(true)
+    }
+  })
+})

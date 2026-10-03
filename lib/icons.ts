@@ -5,8 +5,9 @@
  * these with friendly names, and <Icon> uses `brand` to pick the right
  * Font Awesome style prefix (solid "fas" vs brands "fab").
  *
- * To offer a new icon: add a row here. Ids must exist in Font Awesome 6.0 free
- * (the version loaded in app/layout.tsx).
+ * To offer a new icon: add a row here (the id must exist in Font Awesome 6.0
+ * free), then run `npm run build-icons` so the site's cut-down icon font
+ * includes it. tests/icons.test.ts fails until you do.
  */
 
 export type IconCategory = 'Mindset' | 'Growth' | 'Work' | 'Connection' | 'Content' | 'Contact' | 'Social'
