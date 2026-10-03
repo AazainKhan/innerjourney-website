@@ -15,7 +15,9 @@ import type { PostQuery } from '@/tina/__generated__/types'
 function formatDate(iso?: string | null) {
   if (!iso) return null
   const d = new Date(iso)
-  return Number.isNaN(d.getTime()) ? null : d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
+  // Fixed to UK time: otherwise server (UTC) and a visitor's browser in another
+  // time zone can disagree on the day, showing the wrong date and breaking hydration.
+  return Number.isNaN(d.getTime()) ? null : d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/London' })
 }
 
 /** True when a Tina rich-text AST (or raw markdown fallback) has any content. */

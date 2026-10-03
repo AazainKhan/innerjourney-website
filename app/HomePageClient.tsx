@@ -215,6 +215,8 @@ export default function HomePageClient(props: Props) {
                   <div className="flex flex-wrap gap-4">
                     <Link href="/about" data-tina-field={tinaField(about, 'buttonLabel')} className="btn-azure-outline font-semibold inline-block text-center">
                       {about.buttonLabel}
+                      {/* Gives "Read More" a destination for screen readers and search engines. */}
+                      <span className="sr-only"> about Shanila</span>
                     </Link>
                   </div>
                 )}

@@ -39,24 +39,51 @@ export default function CalPreloader() {
     const username = process.env.NEXT_PUBLIC_CAL_USERNAME
     const eventSlug = process.env.NEXT_PUBLIC_CAL_EVENT_SLUG || DEFAULT_EVENT_SLUG
     if (!username) return
-    ;(async () => {
-      try {
-        const cal = await getCalApi({ namespace: eventSlug })
-        const brand = readBrandColor()
-        cal('ui', {
-          cssVarsPerTheme: {
-            light: { 'cal-brand': brand },
-            dark: { 'cal-brand': brand },
-          },
-          hideEventTypeDetails: false,
-          layout: 'month_view',
-        })
-        cal('preload', { calLink: `${username}/${eventSlug}` })
-      } catch {
-        // Best-effort. The actual booking flow still works on cold load.
-      }
-    })()
+    // Cal's preload pulls ~1.9 MB of scripts and fonts. Starting it during
+    // page load competed with the hero heading/image on slow phones (LCP of
+    // 14 s on mobile). Warm it on the visitor's first interaction instead, or
+    // a few seconds after the page has finished loading.
+    const INTERACTIONS = ['pointerdown', 'touchstart', 'keydown', 'scroll', 'mousemove'] as const
+    let started = false
+    let timer: number | undefined
+    const run = () => {
+      if (started) return
+      started = true
+      INTERACTIONS.forEach((e) => window.removeEventListener(e, run))
+      window.removeEventListener('load', scheduleAfterLoad)
+      window.clearTimeout(timer)
+      warmCal(username, eventSlug)
+    }
+    const scheduleAfterLoad = () => { timer = window.setTimeout(run, 8000) }
+    INTERACTIONS.forEach((e) => window.addEventListener(e, run, { once: true, passive: true }))
+    if (document.readyState === 'complete') scheduleAfterLoad()
+    else window.addEventListener('load', scheduleAfterLoad, { once: true })
+    return () => {
+      INTERACTIONS.forEach((e) => window.removeEventListener(e, run))
+      window.removeEventListener('load', scheduleAfterLoad)
+      window.clearTimeout(timer)
+    }
   }, [])
 
   return null
+}
+
+function warmCal(username: string, eventSlug: string) {
+  ;(async () => {
+    try {
+      const cal = await getCalApi({ namespace: eventSlug })
+      const brand = readBrandColor()
+      cal('ui', {
+        cssVarsPerTheme: {
+          light: { 'cal-brand': brand },
+          dark: { 'cal-brand': brand },
+        },
+        hideEventTypeDetails: false,
+        layout: 'month_view',
+      })
+      cal('preload', { calLink: `${username}/${eventSlug}` })
+    } catch {
+      // Best-effort. The actual booking flow still works on cold load.
+    }
+  })()
 }

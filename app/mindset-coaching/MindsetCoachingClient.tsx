@@ -241,7 +241,7 @@ export default function MindsetCoachingClient(props: TinaDocProps<ClarityCoachin
                     <div data-tina-field={tinaField(item, 'emoji')} className={`w-14 h-14 ${toneClasses(item.tone).bgSoft} rounded-full flex items-center justify-center mx-auto mb-4`}>
                       <span className="text-2xl">{item.emoji}</span>
                     </div>
-                    <h4 data-tina-field={tinaField(item, 'title')} className="font-bold text-gray-900 mb-2">{item.title}</h4>
+                    <h3 data-tina-field={tinaField(item, 'title')} className="text-base font-bold text-gray-900 mb-2">{item.title}</h3>
                     <p data-tina-field={tinaField(item, 'subtitle')} className="text-gray-600 text-sm">{item.subtitle}</p>
                   </div>
                 ))}

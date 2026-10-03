@@ -24,6 +24,8 @@ import { loadTinaDoc } from '@/lib/tina-page'
 import type { BookingFormQuery, FooterQuery, NavbarQuery } from '@/tina/__generated__/types'
 import { pickForeground, hexToRgbTriplet } from '@/lib/color-utils'
 
+const FONT_AWESOME_CSS = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css'
+
 const caslonDisplay = Libre_Caslon_Display({
   weight: '400',
   subsets: ['latin'],
@@ -163,10 +165,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <head>
         {/* Icon font CSS comes from cdnjs — open the connection early. */}
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossOrigin="anonymous" />
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-        />
+        {/* Icons are decorative, so their stylesheet must not block the first
+         * paint: load it as "print" (non-blocking) and switch it on once it
+         * arrives. <noscript> keeps icons for visitors without JavaScript. */}
+        <link id="fa-css" rel="stylesheet" media="print" href={FONT_AWESOME_CSS} />
+        <script dangerouslySetInnerHTML={{ __html: "(function(){var l=document.getElementById('fa-css');if(!l)return;var on=function(){l.media='all'};if(l.sheet)on();else l.addEventListener('load',on)})()" }} />
+        <noscript><link rel="stylesheet" href={FONT_AWESOME_CSS} /></noscript>
         {/* Warm the TLS connection to Cal.com so the booking iframe loads
          * noticeably faster on first open. dns-prefetch is the fallback for
          * browsers that don't speak preconnect. */}

@@ -158,7 +158,7 @@ export default function NewsletterPopup() {
       <button
         type="button"
         onClick={open}
-        aria-label="Open newsletter signup"
+        aria-label="Subscribe to the newsletter"
         title="Stay in the loop"
         className="group fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex items-center gap-2 bg-carrot text-on-primary rounded-full shadow-2xl ring-1 ring-black/10 px-4 py-3 sm:px-5 sm:py-3 transition-all duration-200 hover:scale-105 hover:shadow-[0_15px_40px_-10px_rgba(0,0,0,0.4)]"
       >
