@@ -1,7 +1,7 @@
 ---
 title: 'How to Rebuild your Confidence After a Career Break '
 publishedAt: 2026-11-03T12:45:55.028Z
-status: Draft
+status: Published
 featured: true
 excerpt: 'Thinking about returning to work after a break, but feeling unsure of yourself? Here''s how to Rebuild your Confidence, one samll step at a time. '
 image: /images/Picture - Journal .jpg
